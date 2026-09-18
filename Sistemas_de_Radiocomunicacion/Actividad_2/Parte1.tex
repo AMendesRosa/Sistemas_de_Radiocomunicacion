@@ -1,0 +1,275 @@
+
+
+\section{Introducción}
+\label{sec_1}
+...
+
+
+
+\section{Parte 1 - Diseño y simulación de un enlace radioeléctrico punto a punto}
+\label{sec_2}
+\subsection{Introducción Teórica}
+\label{sec_2.1}
+Un radioenlace es un sistema de interconexión entre terminales de telecomunicación que utiliza la propagación de ondas electromagnéticas a través del espectro radioeléctrico, operando por lo general en frecuencias entre $800 \, [MHz]$ y $50 \, [GHz]$. \cite{b1}
+
+
+\subsubsection{Principales componentes de un enlace radioeléctrico punto a punto}
+\label{sec_2.1.1}
+De acuerdo a los lineamientos de diseño de radioenlaces y la infraestructura necesaria, los principales componentes son:
+\begin{enumerate}
+    \item \underline{Transceptor (Equipos de radio):} Son los terminales de telecomunicación encargados de procesar, modular y transmitir la señal, así como de recibirla y de-modularla en el extremo opuesto.
+    \item \underline{Antena:} Es el elemento que extrae potencia del frente de onda electromagnético incidente o irradia la señal al espacio. En enlaces de microondas se suelen utilizar reflectores parabólicos y antenas bocina (\textit{horns}).
+    \item \underline{Torre o mástil:} Es la estructura necesaria para elevar las antenas y asegurar el despeje de la trayectoria. Deben estar preparadas para soportar físicamente el peso y la carga al viento que presentan las antenas y las líneas de transmisión.
+    \item \underline{Cableado de datos y de \textit{RF} (líneas de transmisión y guías de onda):} Se utilizan cables coaxiales (flexibles, semirígidos o rígidos) y guías de onda para transportar la señal de radiofrecuencia entre los equipos y las antenas.
+    \item \underline{Conectores y bridas:} Permiten la vinculación mecánica y eléctrica de los cables o guías de ondas. Las uniones (como las bridas \textit{EIA} flanges) deben ser precisas para evitar discontinuidades de impedancia y picos de ondas estacionarias (\textit{ROE}).
+    \item \underline{Otros componentes de infraestructura:} Para el correcto funcionamiento e interconexión a la red, el sistema incluye típicamente soportes de montaje, sistemas de alimentación y PoE (\textit{Power over Ethernet}) para energizar equipos de exteriores, protecciones contra sobretensiones y sistemas de puesta a tierra para salvaguardar el equipamiento, y cableado de datos o fibra óptica para la vinculación final con la red local.  \cite{b1}
+\end{enumerate}
+
+
+\subsubsection{Principales parámetros que influyen en el comportamiento del enlace}
+\label{sec_2.1.2}
+Para el correcto diseño y balance de potencias del radioenlace, se deben considerar los siguientes parámetros:
+\begin{itemize}
+    \item \underline{Frecuencia de operación:} Determina la banda de trabajo (típicamente entre $800 \, [MHz]$ y $50 \, [GHz]$) y afecta directamente cómo se comportará la propagación de la onda, el tamaño de las antenas y guías de onda, y los límites regulatorios.
+    \item \underline{Ganancia de antena:} Es la relación entre la máxima intensidad de radiación de la antena y la intensidad de una antena isotrópica teórica. Depende de la directividad y de la eficiencia (apertura efectiva) de la antena.
+    \item \underline{Pérdidas en cables y conectores (Atenuación):} Es el decremento gradual de la señal a medida que viaja por la línea de transmisión debido a pérdidas en los conductores y en el dieléctrico. También se incluyen las pérdidas generadas por reflexiones en los conectores.
+    \item \underline{Pérdidas de propagación:} Son las atenuaciones sufridas por la señal en el trayecto espacial. Incluyen las pérdidas del espacio libre y pueden agravarse si hay obstrucciones en las \textit{Zonas de Fresnel} de la trayectoria.
+    \item \underline{Sensibilidad del receptor:} Es la potencia mínima necesaria en la antena receptora para obtener una relación señal/ruido (\textit{SNR}) suficiente que permita recibir y procesar la señal correctamente (umbral de ruido).
+    \item \underline{Nivel de ruido:} Es la potencia de ruido presente en el sistema, generada internamente por el movimiento estocástico de portadores de carga (ruido térmico) en los conductores, o captada por la antena desde fuentes externas.
+    \item \underline{Relación señal/ruido (\textit{SNR}):} Es la medida que compara la potencia de la señal recibida frente a la potencia del ruido. Una mejor \textit{SNR} determina la viabilidad del enlace. En los enlaces digitales, la \textit{SNR} impacta en la tasa de errores de bit (\textit{BER}).
+    \item \underline{Interferencias:} Son señales provenientes de otros servicios en frecuencias adyacentes o dentro de la misma banda que afectan negativamente la recepción de nuestra señal. Se pueden mitigar mejorando las características de la antena (por ejemplo, utilizando reflectores profundos o ``\textit{deep reflectors}'') o mediante filtros.
+    \item \underline{Margen de enlace (Balance de potencias):} Es el análisis completo de la trayectoria del haz que contabiliza la potencia transmitida, las ganancias de las antenas y todas las atenuaciones del camino.
+    \item \underline{Ancho de canal, Modulación y \textit{MCS}, Nivel de señal recibida, Capacidad esperada:} Son los parámetros operativos de las radios de telecomunicación. El esquema de modulación y ancho de banda determinan el ``\textit{throughput}'' o capacidad de transporte de datos del enlace, lo cual requiere que el nivel de señal recibida sea lo suficientemente alto respecto a la sensibilidad de ese modo específico. \cite{b1}
+\end{itemize}
+
+
+
+\subsection{Definición del enlace}
+\label{sec_2.2}
+El desarrollo y diseño del radioenlace para este trabajo práctico, se basa en el \textbf{Enlace A} propuesto por los docentes de esta asignatura el cual consiste de los siguientes dos puntos:
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.48\linewidth}
+        \centering
+        \includegraphics[width=0.86\linewidth]{Figura 1.1.png}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.48\linewidth}
+        \centering
+        \includegraphics[width=1\linewidth]{Figura 1.2.png}
+    \end{minipage}
+    \caption{A la izquierda se observa el mástil de Canal 10, mientras que a la derecha se observa el avión instalado en la FCEFyN.}
+    \label{fig:fig_1}
+\end{figure}
+
+Este radioenlace punto a punto será la base práctica sobre la cual se aplicarán los conceptos teóricos descritos, llevando a cabo el dimensionamiento, la selección de equipamiento, el cálculo del balance de potencias y la evaluación de viabilidad física y radioeléctrica, con el objetivo primordial de garantizar los requerimientos de capacidad, confiabilidad y disponibilidad exigidos para su correcta operación.
+
+
+
+\subsection{Herramientas de diseño}
+\label{sec_2.3}
+Para la planificación, simulación y evaluación del \textbf{Enlace A} se utilizarán las siguientes herramientas de software:
+\begin{itemize}
+    \item \underline{UISP Design Center:} Utilizado para modelar la propagación de las ondas, obtener el perfil de elevación, calcular el despeje de la primera zona de Fresnel, determinar la atenuación del trayecto y estimar el nivel de señal recibida (RSSI), la disponibilidad del enlace y demás detalles técnicos sobre el radioenlace.
+    \item \underline{Google Earth Pro:} Empleado para la geolocalización exacta de las estaciones, análisis topográfico preliminar del terreno y verificación visual de la línea de vista (LoS).
+    \item \underline{Python / Excel:} Utilizados para el procesamiento analítico del balance de potencia (Link Budget), cálculo sintético de parámetros y generación de tablas comparativas de resultados.
+\end{itemize}
+
+
+
+\subsection{Relevamiento geográfico y perfil del enlace}
+\label{sec_2.4}
+Partiremos ubicando los dos puntos del radioenlace definido en la \autoref{sec_2.2} en el \textit{UISP Design Center}, donde podemos obtener los siguientes detalles:
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{Figura 2.png}
+    \caption{Detalles de la Aplicación de \textit{Ubiquity} para el Radioenlace.}
+    \label{fig:fig_2}
+\end{figure}
+
+Los parámetros geométricos y de configuración de la aplicación mencionada son los que se listan a continuación:
+\begingroup
+\footnotesize
+\begin{longtable}
+    {|>{\centering\arraybackslash}m{4.5cm}
+     |>{\centering\arraybackslash}m{4.5cm}
+     |>{\centering\arraybackslash}m{4.5cm}|} \hline
+    \textbf{Parámetro} & \textbf{Estación A} & \textbf{Estación B} \\ \hline
+    \endfirsthead
+    
+    \multicolumn{3}{c}{\textit{Continuación de la página anterior}} \\ \hline
+    \textbf{Parámetro} & \textbf{Estación A} & \textbf{Estación B} \\ \hline
+    \endhead
+    
+    \hline 
+    \multicolumn{3}{c}{\textit{Continúa en la página siguiente...}} \\
+    \endfoot
+    
+    \hline
+    \caption{Definición de parámetros de las estaciones.}
+    \label{tab:tab_1} \\
+    \endlastfoot
+        \textbf{Denominación} & \textit{FCEFyN} & \textit{Canal 10} \\ \hline
+        
+        \textbf{Ubicación} & Av. Vélez Sarsfield 1611, X5016GCA Córdoba & Fray Miguel de Mojica 1600, X5008 Córdoba \\ \hline
+        
+        \textbf{Latitud}  & $-31.435053$ & $-31.356785$ \\ \hline
+        
+        \textbf{Longitud} & $-64.194021$ & $-64.197177$ \\ \hline
+        
+        \textbf{Altura sobre el nivel del terreno} & - & - \\ \hline
+        
+        \textbf{Altura de instalación propuesta para las antenas} & $19 \, [m]$ & $27 \, [m]$ \\ \hline
+        
+        \textbf{Inclinación} & $0.01^{\circ}$ & $-0.09^{\circ}$ \\ \hline
+
+        \textbf{Azimuth} & $358^{\circ}N$ & $178^{\circ}S$ \\ \hline
+\end{longtable}
+\endgroup
+
+Se identifica de la \autoref{fig:fig_2} que la distancia del enlace es de: $8.72 \, [km]$ y que el nivel de señal esperada es de $-72 \, [dBm]$ y una capacidad estimada de $199 \, [Mbps]$ con línea de vista (\textit{LoS}) despejada.
+
+
+
+\subsection{Línea de vista y zona de Fresnel}
+\label{sec_2.5}
+La evaluación topográfica y geométrica del Enlace A determina la viabilidad del trayecto basándose en el análisis del perfil de elevación y el comportamiento de la onda electromagnética.
+\begin{itemize}
+    \item \underline{Línea de vista directa (LOS):} Observando la simulación mostrada en la \autoref{fig:fig_3}, se evidencia una línea de vista directa e ininterrumpida entre la estación del Canal 10 y FCEFyN.
+    \begin{figure}[H]
+        \centering
+        \begin{minipage}{0.48\linewidth}
+            \centering
+            \includegraphics[width=1\linewidth]{Figura 3.1.png}
+        \end{minipage}
+        \hfill
+        \begin{minipage}{0.48\linewidth}
+            \centering
+            \includegraphics[width=1\linewidth]{Figura 3.2.png}
+        \end{minipage}
+        \caption{A la izquierda se observa el mástil de Canal 10, mientras que a la derecha se observa el avión instalado en la FCEFyN.}
+        \label{fig:fig_3}
+    \end{figure}
+
+    
+    \item \underline{Cálculo manual del radio de Fresnel:} El radio de Fresnel se calcula según \autoref{eq_1}. 
+    \begin{equation}
+        R_{F} = 17.32 \sqrt{\frac{d_{1} \cdot d_{2}}{f \cdot d}}
+        \label{eq_1}
+    \end{equation}
+
+    El punto más crítico para el radio de la primera zona de Fresnel se ubica en el centro exacto del vano de $8.72 \, [km]$, es decir, a $d_{1} = d_{2} = 4.36 \, [km]$. Dado que el enlace opera a una frecuencia de operación típica de $f = 5.8 \, [GHz]$, el radio máximo ($R$) se calcula empleando la siguiente ecuación:
+    \begin{equation}
+        R = 17.32 \sqrt{\frac{4.36 \cdot 4.36}{5.8 \cdot 8.72}} = 10.61 \, [m]
+        \label{eq_2}
+    \end{equation}
+    
+    \item \underline{Análisis de obstáculos (punto crítico):} Observando el terreno subyacente a la línea de vista en la \autoref{Pruebas de latencia} 
+    
+    El edificio urbano situado a 5.35 km del origen se mantiene como la estructura más cercana a la trayectoria geométrica. No obstante, gracias al incremento en las alturas de los mástiles, la evaluación mediante Google Earth permite estimar que el haz principal transcurre a una distancia lateral y vertical lo suficientemente alejada de la edificación[cite: 4]. 
+    
+    \item \underline{Conclusión de despeje:} El ajuste de alturas asegura que el trayecto cumple satisfactoriamente con el requisito de mantener un despeje del 60\% o superior de la primera zona de Fresnel[cite: 4]. Al estar libre de obstrucciones e invasiones significativas, se elimina el riesgo de atenuaciones por difracción, garantizando las condiciones teóricas para alcanzar la señal esperada de -72 dBm.
+\end{itemize}
+
+
+
+
+\subsection{Determinación de las alturas mínimas de antena}
+\label{sec_2.6}
+...
+
+
+
+\subsection{Selección de frecuencia y ancho de canal}
+\label{sec_2.7}
+...
+
+
+
+\subsection{Selección del equipamiento}
+\label{sec_2.8}
+...
+
+
+
+\subsection{Capacidad requerida}
+\label{sec_2.9}
+...
+
+
+
+\subsection{Atenuación de espacio libre}
+\label{sec_2.10}
+...
+
+
+
+\subsection{Presupuesto de radiofrecuencia}
+\label{sec_2.11}
+...
+
+
+
+\subsection{PIRE}
+\label{sec_2.12}
+...
+
+
+
+\subsection{Sensibilidad, modulación y margen de enlace}
+\label{sec_2.13}
+...
+
+
+
+\subsection{Nivel de ruido y SNR}
+\label{sec_2.14}
+...
+
+
+
+\subsection{Pérdidas adicionales y obstáculos}
+\label{sec_2.15}
+...
+
+
+
+\subsection{Análisis de interferencias}
+\label{sec_2.16}
+...
+
+
+
+\subsection{Consideraciones regulatorias}
+\label{sec_2.17}
+...
+
+
+
+\subsection{Análisis mediante Google Earth}
+\label{sec_2.18}
+...
+
+
+
+\subsection{Orientación de las antenas}
+\label{sec_2.19}
+...
+
+
+
+\subsection{Sistema de montaje}
+\label{sec_2.20}
+...
+
+
+
+\subsection{Cableado, alimentación y protección}
+\label{sec_2.21}
+...
+
+
+
+\subsection{Optimización del enlace}
+\label{sec_2.22}
+...

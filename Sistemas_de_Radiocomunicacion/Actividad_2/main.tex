@@ -1,0 +1,93 @@
+\documentclass[12pt]{article}
+
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,es-tabla]{babel}
+\usepackage{graphicx}
+\usepackage{circuitikz}
+\usepackage{amsmath}
+\usepackage{subcaption}
+\usepackage{amssymb}
+\usepackage[hidelinks]{hyperref}
+\usepackage{mathtools}
+%\usepackage[table,xcdraw]{xcolor}
+\usepackage{enumitem}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{csquotes}          
+\usepackage{float}
+\usepackage{setspace}
+\usepackage[style=ieee, backend=biber]{biblatex}
+\addbibresource{bibliografía.bib}  
+\graphicspath{{Figuras/}} 
+\onehalfspacing
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,    
+    citecolor=blue,
+    urlcolor=blue,
+    filecolor=blue
+}
+
+\begin{document}       
+\renewcommand{\figureautorefname}{Fig.}
+\renewcommand{\tableautorefname}{Tab.}
+\renewcommand{\equationautorefname}{Ec.}
+
+\begin{titlepage}
+\thispagestyle{empty}
+\begin{tikzpicture}[remember picture,overlay]
+    \node[opacity=0.2,anchor=center] at (current page.center) 
+        {\includegraphics[width=0.9\paperwidth]{decoracion_a.png}};
+\end{tikzpicture}
+\begin{center}
+    \includegraphics[width=15cm]{unc_fcefyn_logo.png} \\ [0.5cm]
+    \LARGE Universidad Nacional de Córdoba \\ [0.5cm] 
+    \large Facultad de Ciencias Exactas, Físicas y Naturales \\ 
+    \vspace{40pt}
+    \large Sistemas de Radiocomunicación \\ [0.2cm]
+    \large Trabajo Práctico N°2 \\
+    \vspace{60pt}
+    \LARGE Radioenlaces Punto a Punto \\
+    \vspace{60pt}
+    \begin{table}[!h]
+        \centering
+        \begin{tabular}{ll}
+            \multicolumn{1}{c}{Nombre} & \multicolumn{1}{c}{DNI} \\
+            Mendes Rosa, Agustín             & 44.517.201 \\
+            Monja, Ernesto Joaquín           & 43.873.728
+        \end{tabular}
+    \end{table}
+    \vspace{20pt}
+    \begin{table}[!h]
+        \centering
+        \begin{tabular}{ll}
+            \multicolumn{1}{c}{Docentes} & Esp. Ing. Liendo, Carlos Guillermo \\
+                                         & Ing. Dadam, Federico Tomás \\
+        \end{tabular}
+    \end{table}
+    \vfill
+        {\small Córdoba, República Argentina\\
+                Año 2026}
+\end{center}
+\end{titlepage}
+\newpage
+
+\tableofcontents
+\newpage
+\listoffigures
+\newpage
+\listoftables
+\newpage
+
+\input{Parte1}
+\newpage
+\input{Parte2}
+\newpage
+
+\newpage
+\nocite{*}
+\newpage
+\printbibliography[heading=bibintoc, title={5. \, Bibliografía y Referencias}]
+\end{document}

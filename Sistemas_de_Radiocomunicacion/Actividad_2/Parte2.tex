@@ -1,0 +1,168 @@
+
+\section{Parte 2 - Implementación y experimentación con un enlace de corta distancia}
+\label{sec_3}
+\subsection{Reconocimiento del equipamiento}
+\label{sec_3.1}
+En esta primera etapa experimental se realizó el inventario, reconocimiento e inspección técnica de los componentes disponibles en el laboratorio para el armado y puesta en marcha del enlace radioeléctrico punto a punto de corta distancia. Se reconocieron los siguientes elementos:
+
+\begingroup
+\footnotesize
+\begin{longtable}
+    {|>{\centering\arraybackslash}m{2cm}
+     |>{\centering\arraybackslash}m{2.5cm}
+     |>{\centering\arraybackslash}m{3cm}
+     |>{\centering\arraybackslash}m{3.9cm}
+     |>{\centering\arraybackslash}m{2.9cm}|} \hline
+    \textbf{Elemento} & \textbf{Modelo} & \textbf{Función} & \textbf{Características Principales} & \textbf{Formas de Conexión} \\ \hline
+    \endfirsthead
+    
+    \multicolumn{5}{c}{\textit{Continuación de la página anterior}} \\ \hline
+    \textbf{Elemento} & \textbf{Modelo} & \textbf{Función} & \textbf{Características Principales} & \textbf{Formas de Conexión} \\ \hline
+    \endhead
+    
+    \hline 
+    \multicolumn{5}{c}{\textit{Continúa en la página siguiente...}} \\
+    \endfoot
+    
+    \hline
+    \caption{Reconocimiento de equipo incluido en el \textit{Ubiquiti LiteBeam 5AC Gen2}.}
+    \label{tab:tab_3} \\
+    \endlastfoot
+        \textbf{Radios y Antenas (Equipo Integrado)} & 
+        \textit{Ubiquiti LiteBeam 5AC Gen2}&
+        Actuar como transceptor de radiofrecuencia y antena direccional integrada para el establecimiento del enlace inalámbrico. & 
+        Opera en la banda de $5 \, [GHz]$ con una ganancia de $23 \, [dBi]$ en reflector parabólico. Utiliza el protocolo propietario \textit{airMAX ac} (basado en \textit{TDMA}) e integra un radio secundario de gestión en $2,4 \, [GHz]$ para configuración mediante la aplicación \textit{UISP}. & 
+        Posee un puerto \textit{RJ45} blindado en la parte posterior por donde recibe simultáneamente la energía eléctrica (\textit{PoE}) y el tráfico de datos. \\ \hline
+
+
+        \textbf{Fuentes e Inyectores \textit{PoE}} &
+        Adaptador \textit{PoE Gigabit Ubiquiti} ($24 \, [V_{DC}]$, $0,3 \, [A]$). &
+        Suministrar energía eléctrica al transceptor a través del cable de par trenzado, permitiendo la coexistencia de alimentación y datos en la misma infraestructura de cableado. &
+        Salida de $24 \, [V_{DC}]$, $0,3 \, [A]$, compatibilidad con enlaces \textit{Gigabit Ethernet} y puerto con protección contra descargas electrostáticas (\textit{ESD}). &
+        Alimentado desde la red eléctrica ($220 \, [V_{CA}]$). El puerto rotulado como \textit{POE} se conecta a la antena \textit{LiteBeam}, mientras que el puerto \textit{LAN} se vincula al puerto \textit{Ethernet} de la computadora. \\ \hline
+        
+
+        \textbf{Cableado y Conectores} &
+        Cable de par trenzado Categoría $5e$ con conectores \textit{RJ45} blindados (con cuerpo metálico). &
+        Interconectar la fuente de alimentación \textit{PoE} y el equipo terminal de datos. &
+        Presencia de malla de blindaje e hilo de drenaje para la derivación de interferencias electromagnéticas (\textit{EMI}) y cargas estáticas a tierra. Velocidad de hasta $1 \, [Gbps]$ y $100 \, [MHz]$ de ancho de banda. &
+        Conectores \textit{RJ45} crimpeados bajo norma \textit{T568B} en ambos extremos. \\ \hline
+
+
+        \textbf{Soportes de Montaje} &
+        Herraje para trípode articulado con control de altura. Montaje de acimut y montaje de elevación&
+        Brindar sustentación mecánica rígida y permitir la orientación precisa del haz en altura, acimut y elevación. &
+        - &
+        Ensamble mecánico a la estructura de la antena y fijación al mástil mediante abrazadera metálica de ajuste. \\ \hline
+
+
+        \textbf{Computa- \newline -doras de Prueba} &
+        Dos computadoras portátiles (\textit{PC} Estación \textit{A} y \textit{PC} Estación \textit{B}). &
+        Acceso a la interfaz de gestión \textit{airOS 8}, configuración de parámetros de red y ejecución de software para generación/medición de tráfico. &
+        - &
+        Interfaz de red \textit{Ethernet RJ45} conectada mediante \textit{patch cord} directo hacia el puerto \textit{LAN} del inyector \textit{PoE} correspondiente. \\ \hline
+
+        \textbf{Instrumen- \newline -tos y Software de Medición} &
+        Sistema operativo \textit{airOS 8}, analizador de espectro de \textit{RF} en tiempo real \textit{airView}, utilidad de medición de rendimiento \textit{iPerf3} y comandos de red del sistema (\textit{ping}). &
+        Diagnostico del espectro radioeléctrico, medición del nivel de señal recibida (\textit{RSSI}), nivel de ruido, \textit{SNR}, tasa de transferencia útil (\textit{throughput}), latencia, \textit{jitter} y pérdida de paquetes. &
+        - &
+        Cinta métrica para la medición de la distancia física entre antenas en el laboratorio. \\ \hline
+\end{longtable}
+\endgroup
+
+                %\autoref{fig:fig_3.1.1}
+Se muestra en la                        , se muestra una captura del equipamiento y el área de trabajo:
+
+%\begin{figure}[H]
+%    \centering
+%    \includegraphics[width=0.85\textwidth]{Figura 3.1.1}
+%    \caption{Inventario del equipamiento \textit{Ubiquiti LiteBeam 5AC Gen2} e instrumentos de laboratorio.}
+%    \label{fig:fig_3.1.1}
+%\end{figure}
+
+
+
+\subsection{Montaje del enlace}
+\label{sec_3.2}
+...
+
+
+
+\subsection{Configuración básica}
+\label{sec_3.3}
+...
+
+
+
+\subsection{Análisis del espectro}
+\label{sec_3.4}
+...
+
+
+
+\subsection{Alineación y ajuste fino}
+\label{sec_3.5}
+...
+
+
+
+\subsection{Potencia de transmisión}
+\label{sec_3.6}
+...
+
+
+
+\subsection{Pruebas de latencia}
+\label{sec_3.7}
+...
+
+
+
+\subsection{Pruebas de throughput con iPerf3}
+\label{sec_3.8}
+...
+
+
+
+\subsection{Prueba complementaria con Speedtest}
+\label{sec_3.9}
+...
+
+
+
+\subsection{Variación del ancho de canal}
+\label{sec_3.10}
+...
+
+
+
+\subsection{Introducción de una obstrucción}
+\label{sec_3.11}
+...
+
+
+
+\subsection{Análisis de resultados}
+\label{sec_3.12}
+...
+
+
+
+\subsection{Comparación entre teoría, simulación y medición}
+\label{sec_3.13}
+...
+
+
+
+\subsection{Consideraciones sobre enlaces reales}
+\label{sec_3.14}
+...
+
+
+
+
+
+
+\section{Conclusiones}
+\label{sec_4}
+...
