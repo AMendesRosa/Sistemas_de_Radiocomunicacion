@@ -38,8 +38,8 @@
       \strng{authornamehash}{13582062f3f44c2d397ec53a3bc6efa7}
       \strng{authorfullhash}{13582062f3f44c2d397ec53a3bc6efa7}
       \strng{authorfullhashraw}{13582062f3f44c2d397ec53a3bc6efa7}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{howpublished}{Archivo main.pdf}
@@ -47,6 +47,121 @@
       \field{note}{[Diapositivas de presentación]}
       \field{title}{Introducción a Radioenlaces: Sistemas de Radiocomunicación}
       \field{year}{2026}
+    \endentry
+    \entry{b2}{manual}{}{}
+      \name{author}{1}{}{%
+        {{hash=0728d7c053d8097f88761f261e3dd2aa}{%
+           family={{Ubiquiti Networks, Inc.}},
+           familyi={U\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {Ubiquiti Academy}%
+      }
+      \strng{namehash}{0728d7c053d8097f88761f261e3dd2aa}
+      \strng{fullhash}{0728d7c053d8097f88761f261e3dd2aa}
+      \strng{fullhashraw}{0728d7c053d8097f88761f261e3dd2aa}
+      \strng{bibnamehash}{0728d7c053d8097f88761f261e3dd2aa}
+      \strng{authorbibnamehash}{0728d7c053d8097f88761f261e3dd2aa}
+      \strng{authornamehash}{0728d7c053d8097f88761f261e3dd2aa}
+      \strng{authorfullhash}{0728d7c053d8097f88761f261e3dd2aa}
+      \strng{authorfullhashraw}{0728d7c053d8097f88761f261e3dd2aa}
+      \field{sortinit}{5}
+      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{month}{3}
+      \field{note}{Archivo: UBWA\_Spanish\_Training\_Guide.pdf}
+      \field{title}{Ubiquiti Broadband Wireless Admin (Español)}
+      \field{year}{2017}
+    \endentry
+    \entry{b3}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=fae8b34eefe7e5fba35271da7b15d418}{%
+           family={{Colaboradores de Wikipedia}},
+           familyi={C\bibinitperiod}}}%
+      }
+      \strng{namehash}{fae8b34eefe7e5fba35271da7b15d418}
+      \strng{fullhash}{fae8b34eefe7e5fba35271da7b15d418}
+      \strng{fullhashraw}{fae8b34eefe7e5fba35271da7b15d418}
+      \strng{bibnamehash}{fae8b34eefe7e5fba35271da7b15d418}
+      \strng{authorbibnamehash}{fae8b34eefe7e5fba35271da7b15d418}
+      \strng{authornamehash}{fae8b34eefe7e5fba35271da7b15d418}
+      \strng{authorfullhash}{fae8b34eefe7e5fba35271da7b15d418}
+      \strng{authorfullhashraw}{fae8b34eefe7e5fba35271da7b15d418}
+      \field{sortinit}{6}
+      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{[En línea; accedido el 16-septiembre-2026]}
+      \field{title}{Propagación por espacio libre --- {Wikipedia}{,} La enciclopedia libre}
+      \field{year}{2026}
+      \verb{urlraw}
+      \verb https://es.wikipedia.org/wiki/Propagaci\%C3\%B3n_por_espacio_libre
+      \endverb
+      \verb{url}
+      \verb https://es.wikipedia.org/wiki/Propagaci%5C%C3%5C%B3n_por_espacio_libre
+      \endverb
+    \endentry
+    \entry{b4}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=5444615afc2b8ca4314c56806f73b4dd}{%
+           family={{r/Ubiquiti Community}},
+           familyi={r\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Reddit}%
+      }
+      \strng{namehash}{5444615afc2b8ca4314c56806f73b4dd}
+      \strng{fullhash}{5444615afc2b8ca4314c56806f73b4dd}
+      \strng{fullhashraw}{5444615afc2b8ca4314c56806f73b4dd}
+      \strng{bibnamehash}{5444615afc2b8ca4314c56806f73b4dd}
+      \strng{authorbibnamehash}{5444615afc2b8ca4314c56806f73b4dd}
+      \strng{authornamehash}{5444615afc2b8ca4314c56806f73b4dd}
+      \strng{authorfullhash}{5444615afc2b8ca4314c56806f73b4dd}
+      \strng{authorfullhashraw}{5444615afc2b8ca4314c56806f73b4dd}
+      \field{sortinit}{7}
+      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{[En línea; accedido el 16-septiembre-2026]}
+      \field{title}{How to use air{V}iew spectrum analyzer in 2024}
+      \field{year}{2024}
+      \verb{urlraw}
+      \verb https://www.reddit.com/r/Ubiquiti/comments/1e95q9s/how_to_use_airview_spectrum_analyzer_in_2024/
+      \endverb
+      \verb{url}
+      \verb https://www.reddit.com/r/Ubiquiti/comments/1e95q9s/how_to_use_airview_spectrum_analyzer_in_2024/
+      \endverb
+    \endentry
+    \entry{b5}{online}{}{}
+      \name{author}{1}{}{%
+        {{hash=95e9da496697254832e147620de85b84}{%
+           family={{Ente Nacional de Comunicaciones}},
+           familyi={E\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {Gobierno de Argentina}%
+      }
+      \strng{namehash}{95e9da496697254832e147620de85b84}
+      \strng{fullhash}{95e9da496697254832e147620de85b84}
+      \strng{fullhashraw}{95e9da496697254832e147620de85b84}
+      \strng{bibnamehash}{95e9da496697254832e147620de85b84}
+      \strng{authorbibnamehash}{95e9da496697254832e147620de85b84}
+      \strng{authornamehash}{95e9da496697254832e147620de85b84}
+      \strng{authorfullhash}{95e9da496697254832e147620de85b84}
+      \strng{authorfullhashraw}{95e9da496697254832e147620de85b84}
+      \field{sortinit}{9}
+      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{[En línea; accedido el 16-septiembre-2026]}
+      \field{title}{Cuadro de Atribución de Bandas de Frecuencias de la República Argentina}
+      \verb{urlraw}
+      \verb https://hertz.enacom.gob.ar/se/portal/arg/publico/rf_SpectrumChart.php
+      \endverb
+      \verb{url}
+      \verb https://hertz.enacom.gob.ar/se/portal/arg/publico/rf_SpectrumChart.php
+      \endverb
     \endentry
   \enddatalist
 \endrefsection
