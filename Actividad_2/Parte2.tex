@@ -6,7 +6,7 @@ En esta primera etapa experimental se realizó el inventario, reconocimiento e i
 
 \subsubsection{Antenas:}
 \label{sec_3.1.1}
-Se hizo uso del equipo \textit{Ubiquiti LiteBeam 5AC Gen2} (ver \autoref{fig:vista_general_antena}) que actúa como transceptor direccional para estblecer el enlace inalámbrico. El mismo opera en la banda de $5 \, [GHz]$ con una ganancia de $23 \, [dBi]$, y posee un reflector parabólico. Integra una radio de administración del enlace en $2,4 \, [GHz]$ para configuración mediante la aplicación \textit{UISP} \cite{ubiquiti_datasheet}. 
+Se hizo uso del equipo \textit{Ubiquiti LiteBeam 5AC Gen2} (ver \autoref{fig:vista_general_antena}) que actúa como transceptor direccional para establecer el enlace inalámbrico. El mismo opera en la banda de $5 \, [GHz]$ con una ganancia de $23 \, [dBi]$, y posee un reflector parabólico. Integra una radio de administración del enlace en $2,4 \, [GHz]$ para configuración mediante la aplicación \textit{UISP} \cite{ubiquiti_datasheet}. 
 
 \begin{figure}[H]
     \centering
@@ -15,7 +15,7 @@ Se hizo uso del equipo \textit{Ubiquiti LiteBeam 5AC Gen2} (ver \autoref{fig:vis
     \label{fig:vista_general_antena}
 \end{figure}
 
-Puede observarse en la \autoref{fig:vista_general_antena} los reflectores parabólicos que posee el equipo, encargados de concentrar la energía hacia la antena. Estos poseen agujeros en su superficie, debido a que esto educir su resistencia contra el viento, con una disposición específica tal que no interfiere con la reflexión de la onda en el mismo.
+Puede observarse en la \autoref{fig:vista_general_antena} los reflectores parabólicos que posee el equipo, encargados de concentrar la energía hacia la antena poseen agujeros en su superficie, para así reducir su resistencia contra el viento, con una disposición específica tal que no interfiere con la reflexión de la onda en el mismo.
 
 \subsubsection{Fuentes e Inyectores PoE:}
 \label{sec_3.1.2}
@@ -55,7 +55,7 @@ Fue necesario poseer dos computadoras portátiles (una para cada estación), que
 
 \subsection{Montaje}
 \label{sec_3.2}
-El montaje estructural puede obervarse en la \autoref{fig:montaje}. Este se replicó en la segunda antena y se procedió con la puesta a punto del enlace dentro del laboratorio. Los trípodes, junto con los montajes de acimut y elevación de las antenas, fueron desplazados y ajustados según los requerimientos de cada prueba.
+El montaje estructural puede observarse en la \autoref{fig:montaje}. Este se replicó en la segunda antena y se procedió con la puesta a punto del enlace dentro del laboratorio. Los trípodes, junto con los montajes de acimut y elevación de las antenas, fueron desplazados y ajustados según los requerimientos de cada prueba.
 
 \begin{figure}[H]
     \centering
@@ -135,7 +135,7 @@ Al ejecutar la herramienta \textit{Site Survey} integrada en el sistema, esta de
     \label{fig:site_survey}
 \end{figure}
 
-Para complementar esta lectura y visualizar la interferencia electromagnética, se analizó el monitor de espectro \textit{Ambient RF Noise Level}. Según la escala de referencia del fabricante, el espectro local oscila entre niveles de ruido bajos (-125 dBm, representados en tonos azules) y niveles altos (-65 dBm, en tonos cálidos). La gráfica de la banda de 5 GHz mostró una predominancia absoluta de tonalidades celestes, indicando un entorno sumamente limpio y cercano al límite inferior de ruido. Si bien se detectaron picos esporádicos de color verde oscuro (ruido medio, aproximándose a los -97 dBm), esta interferencia fue considerada despreciable dado el amplio nivel de señal ($-44\ dBm$) con respecto al niver de ruido del ambiente.
+Para complementar esta lectura y visualizar la interferencia electromagnética, se analizó el monitor de espectro \textit{Ambient RF Noise Level}. Según la escala de referencia del fabricante, el espectro local oscila entre niveles de ruido bajos (-125 dBm, representados en tonos azules) y niveles altos (-65 dBm, en tonos cálidos). La gráfica de la banda de 5 GHz mostró una predominancia absoluta de tonalidades celestes, indicando un entorno sumamente limpio y cercano al límite inferior de ruido. Si bien se detectaron picos esporádicos de color verde oscuro (ruido medio, aproximándose a los -97 dBm), esta interferencia fue considerada despreciable dado el amplio nivel de señal ($-44\ dBm$) con respecto al nivel de ruido del ambiente.
 
 \begin{figure}[H]
     \centering
@@ -172,7 +172,7 @@ A pesar de esta restricción, el panel de control permitió establecer una líne
 \begin{figure}[H]
     \centering
     \fbox{\includegraphics[width=\linewidth]{pasillo.png}}
-    \caption{Panel principal del enlance en el pasillo}
+    \caption{Panel principal del enlace en el pasillo}
     \label{fig:main_panel_hallway}
 \end{figure}
 
@@ -204,7 +204,7 @@ El impacto de este entorno físico se visualiza claramente en el diagrama de con
   \label{fig:antenas_alineadas}
  \end{figure}
 
-Para contrastar los resultados anteriormente obtenidos, se procedió a desalinear intencionalmente los equipos $\pm90\circ$ en acimut. Al desviar el lóbulo principal, la diferencia de polarización mejoró, registrando un Delta de 3 dB en el equipo remoto y 6 dB en el local. Esta mejora indica que los niveles de señal de las dos polarizaciones presentaban un menor desequilibrio (la desalineación perjudicó a ambas polarizaciones por igual) . Por otro lado se obtuvó atenuación de la señal útil, la cual cayó a -54 dBm al depender de la dispersión de lóbulos secundarios y rebotes residuales, como se observa en la \autoref{fig:antenas_desalineadas}.
+Para contrastar los resultados anteriormente obtenidos, se procedió a desalinear intencionalmente los equipos $\pm90^\circ$ en acimut. Al desviar el lóbulo principal, la diferencia de polarización mejoró, registrando un Delta de 3 dB en el equipo remoto y 6 dB en el local. Esta mejora indica que los niveles de señal de las dos polarizaciones presentaban un menor desequilibrio (la desalineación perjudicó a ambas polarizaciones por igual) . Por otro lado se obtuvó atenuación de la señal útil, la cual cayó a -54 dBm al depender de la dispersión de lóbulos secundarios y rebotes residuales, como se observa en la \autoref{fig:antenas_desalineadas}.
 
 Como se observa en la \autoref{fig:constelaciones_desalineadas}, la pérdida del haz principal forzó al algoritmo de modulación adaptativa a degradar el esquema de codificación a QPSK (4 puntos). Esta transición automática sacrifica la capacidad de tráfico del enlace a cambio de maximizar la robustez matemática frente a las severas distorsiones de fase provocadas por la desalineación geométrica.
 
@@ -311,7 +311,7 @@ Para evaluar el impacto del espectro utilizado sobre el rendimiento del radioenl
 Al comparar los resultados de esta prueba con los obtenidos a 60 MHz, se evidencian las siguientes diferencias fundamentales:
 
 \begin{itemize}
-    \item \textbf{RSSI:} El RSSI (Received Signal Stregth) se mantuvo en $-26$ dB para el caso de antenas alineadas, y descendió a $-63$ dBm al desalinear los equipos. Esto indica que la reducción del ancho de canal no afectó significativamente la potencia de recepción. Si se compara el RSSI de 10 MHz con la de 60 MHz, se observa que la potencia de recepción se mantuvo prácticamente constante, lo cual es un resultado esperado dado que la potencia de transmisión y la distancia del enlace no fueron modificadas.
+    \item \textbf{RSSI:} El RSSI (Received Signal Strength) se mantuvo en $-26$ dBm para el caso de antenas alineadas, y descendió a $-63$ dBm al desalinear los equipos. Esto indica que la reducción del ancho de canal no afectó significativamente la potencia de recepción. Si se compara el RSSI de 10 MHz con la de 60 MHz, se observa que la potencia de recepción se mantuvo prácticamente constante, lo cual es un resultado esperado dado que la potencia de transmisión y la distancia del enlace no fueron modificadas.
     \item \textbf{Ruido:} El piso de ruido (\textit{Noise Floor}) mejoró, descendiendo de -86 dBm a -92 dBm. Al estrechar el canal de recepción a 10 MHz, el radio capta una menor cantidad de ruido blanco de fondo. Consecuentemente, la Relación Señal a Ruido (SNR) mejoró al reducir el ancho de canal.
     \item \textbf{Capacidad (\textit{Throughput} teórico):} Al disponer de una sexta parte del espectro original (de 60 a 10 MHz), la capacidad aislada máxima cayó drásticamente de 454 Mbps a apenas 64.7 Mbps. La falta de espectro físico es el principal factor limitante, a pesar de que el algoritmo logró sostener una MCS (Modulation and Coding Scheme) de 256-QAM (8X) estando alineados.
     \item \textbf{Estabilidad y Latencia:} En la \autoref{fig:ping_10mhz} se observan los resultados de latencia bajo este ancho de canal. Si bien el tiempo mínimo de respuesta aumentó (2.419 ms frente al 1.133 ms de la prueba a 60 MHz debido a que los símbolos toman más tiempo en transmitirse en un canal estrecho), la estabilidad (\textit{jitter}) mejoró drásticamente. El valor máximo registrado fue de apenas 2.909 ms (sin picos severos de 8 ms). Esto demuestra que los canales estrechos son mucho menos susceptibles al desvanecimiento selectivo en frecuencia causado por el \textit{multipath} del pasillo.
@@ -323,10 +323,6 @@ Al comparar los resultados de esta prueba con los obtenidos a 60 MHz, se evidenc
     \caption{Panel principal alineado (10 MHz)}
     \label{fig:panel_10mhz_alineado}
 \end{figure}
-
-\begin{itemize}
-    \item \textbf{Estabilidad y Latencia:} En la \autoref{fig:ping_10mhz} se observan los resultados de latencia bajo este ancho de canal. Si bien el tiempo mínimo de respuesta aumentó (2.419 ms frente al 1.133 ms de la prueba a 60 MHz debido a que los símbolos toman más tiempo en transmitirse en un canal estrecho), la estabilidad (\textit{jitter}) mejoró drásticamente. El valor máximo registrado fue de apenas 2.909 ms (sin picos severos de 8 ms). Esto demuestra que los canales estrechos son mucho menos susceptibles al desvanecimiento selectivo en frecuencia causado por el \textit{multipath} del pasillo.
-\end{itemize}
 
 \begin{figure}[H]
     \centering
