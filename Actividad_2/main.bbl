@@ -38,8 +38,8 @@
       \strng{authornamehash}{13582062f3f44c2d397ec53a3bc6efa7}
       \strng{authorfullhash}{13582062f3f44c2d397ec53a3bc6efa7}
       \strng{authorfullhashraw}{13582062f3f44c2d397ec53a3bc6efa7}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{howpublished}{Archivo main.pdf}
@@ -65,8 +65,8 @@
       \strng{authornamehash}{0728d7c053d8097f88761f261e3dd2aa}
       \strng{authorfullhash}{0728d7c053d8097f88761f261e3dd2aa}
       \strng{authorfullhashraw}{0728d7c053d8097f88761f261e3dd2aa}
-      \field{sortinit}{4}
-      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{sortinit}{5}
+      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{month}{3}
@@ -88,8 +88,8 @@
       \strng{authornamehash}{fae8b34eefe7e5fba35271da7b15d418}
       \strng{authorfullhash}{fae8b34eefe7e5fba35271da7b15d418}
       \strng{authorfullhashraw}{fae8b34eefe7e5fba35271da7b15d418}
-      \field{sortinit}{5}
-      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
+      \field{sortinit}{6}
+      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{note}{[En línea; accedido el 16-septiembre-2026]}
@@ -119,8 +119,8 @@
       \strng{authornamehash}{5444615afc2b8ca4314c56806f73b4dd}
       \strng{authorfullhash}{5444615afc2b8ca4314c56806f73b4dd}
       \strng{authorfullhashraw}{5444615afc2b8ca4314c56806f73b4dd}
-      \field{sortinit}{6}
-      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
+      \field{sortinit}{7}
+      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{note}{[En línea; accedido el 16-septiembre-2026]}
@@ -150,8 +150,8 @@
       \strng{authornamehash}{95e9da496697254832e147620de85b84}
       \strng{authorfullhash}{95e9da496697254832e147620de85b84}
       \strng{authorfullhashraw}{95e9da496697254832e147620de85b84}
-      \field{sortinit}{8}
-      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
+      \field{sortinit}{9}
+      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{note}{[En línea; accedido el 16-septiembre-2026]}
@@ -161,6 +161,49 @@
       \endverb
       \verb{url}
       \verb https://hertz.enacom.gob.ar/se/portal/arg/publico/rf_SpectrumChart.php
+      \endverb
+    \endentry
+    \entry{ubiquiti_datasheet}{online}{}{}
+      \name{author}{1}{}{%
+        {{hash=547175e9938bc6e9b71e88c76231fa67}{%
+           family={Inc.},
+           familyi={I\bibinitperiod},
+           given={Ubiquiti},
+           giveni={U\bibinitperiod}}}%
+      }
+      \strng{namehash}{547175e9938bc6e9b71e88c76231fa67}
+      \strng{fullhash}{547175e9938bc6e9b71e88c76231fa67}
+      \strng{fullhashraw}{547175e9938bc6e9b71e88c76231fa67}
+      \strng{bibnamehash}{547175e9938bc6e9b71e88c76231fa67}
+      \strng{authorbibnamehash}{547175e9938bc6e9b71e88c76231fa67}
+      \strng{authornamehash}{547175e9938bc6e9b71e88c76231fa67}
+      \strng{authorfullhash}{547175e9938bc6e9b71e88c76231fa67}
+      \strng{authorfullhashraw}{547175e9938bc6e9b71e88c76231fa67}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Ubiquiti LiteBeam 5AC Gen2 Datasheet}
+      \verb{urlraw}
+      \verb https://dl.ubnt.com/datasheets/LiteBeam/LiteBeam_AC_Gen2_DS.pdf
+      \endverb
+      \verb{url}
+      \verb https://dl.ubnt.com/datasheets/LiteBeam/LiteBeam_AC_Gen2_DS.pdf
+      \endverb
+    \endentry
+    \entry{ubiquiti_quick_start_guide}{manual}{}{}
+      \list{organization}{1}{%
+        {Ubiquiti Inc.}%
+      }
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labeltitlesource}{title}
+      \field{title}{LiteBeam 5AC Gen 2 Quick Start Guide}
+      \verb{urlraw}
+      \verb https://dl.ui.com/qig/lbe-5ac-gen2/#index
+      \endverb
+      \verb{url}
+      \verb https://dl.ui.com/qig/lbe-5ac-gen2/#index
       \endverb
     \endentry
   \enddatalist
