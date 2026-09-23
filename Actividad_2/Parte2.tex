@@ -2,154 +2,380 @@
 \label{sec_3}
 \subsection{Reconocimiento del equipamiento}
 \label{sec_3.1}
-En esta primera etapa experimental se realizó el inventario, reconocimiento e inspección técnica de los componentes disponibles en el laboratorio para el armado y puesta en marcha del enlace radioeléctrico punto a punto de corta distancia. Se reconocieron los siguientes elementos:
+En esta primera etapa experimental se realizó el inventario, reconocimiento e inspección técnica de los componentes disponibles en el laboratorio para el armado y puesta en marcha del enlace punto a punto. Se reconocieron los siguientes elementos:
 
-\begingroup
-\footnotesize
-\begin{longtable}
-    {|>{\centering\arraybackslash}m{2cm}
-     |>{\centering\arraybackslash}m{2.5cm}
-     |>{\centering\arraybackslash}m{3cm}
-     |>{\centering\arraybackslash}m{3.9cm}
-     |>{\centering\arraybackslash}m{2.9cm}|} \hline
-    \textbf{Elemento} & \textbf{Modelo} & \textbf{Función} & \textbf{Características Principales} & \textbf{Formas de Conexión} \\ \hline
-    \endfirsthead
-    
-    \multicolumn{5}{c}{\textit{Continuación de la página anterior}} \\ \hline
-    \textbf{Elemento} & \textbf{Modelo} & \textbf{Función} & \textbf{Características Principales} & \textbf{Formas de Conexión} \\ \hline
-    \endhead
-    
-    \hline 
-    \multicolumn{5}{c}{\textit{Continúa en la página siguiente...}} \\
-    \endfoot
-    
-    \hline
-    \caption{Reconocimiento de equipo incluido en el \textit{Ubiquiti LiteBeam 5AC Gen2}.}
-    \label{tab:tab_4} \\
-    \endlastfoot
-        \textbf{Radios y Antenas (Equipo Integrado)} & 
-        \textit{Ubiquiti LiteBeam 5AC Gen2} \autoref{fig:vista_general_antena}&
-        Actuar como transceptor de radiofrecuencia y antena direccional integrada para el establecimiento del enlace inalámbrico. & 
-        Opera en la banda de $5 \, [GHz]$ con una ganancia de $23 \, [dBi]$ en reflector parabólico. Utiliza el protocolo propietario \textit{airMAX ac} (basado en \textit{TDMA}) e integra un radio secundario de gestión en $2,4 \, [GHz]$ para configuración mediante la aplicación \textit{UISP}. & 
-        Posee un puerto \textit{RJ45} blindado en la parte posterior por donde recibe simultáneamente la energía eléctrica (\textit{PoE}) y el tráfico de datos. \\ \hline
-
-
-        \textbf{Fuentes e Inyectores \textit{PoE}} &
-        Adaptador \textit{PoE Gigabit Ubiquiti} ($24 \, [V_{DC}]$, $0,3 \, [A]$). &
-        Suministrar energía eléctrica al transceptor a través del cable de par trenzado, permitiendo la coexistencia de alimentación y datos en la misma infraestructura de cableado. &
-        Salida de $24 \, [V_{DC}]$, $0,3 \, [A]$, compatibilidad con enlaces \textit{Gigabit Ethernet} y puerto con protección contra descargas electrostáticas (\textit{ESD}). &
-        Alimentado desde la red eléctrica ($220 \, [V_{CA}]$). El puerto rotulado como \textit{POE} se conecta a la antena \textit{LiteBeam}, mientras que el puerto \textit{LAN} se vincula al puerto \textit{Ethernet} de la computadora. \\ \hline
-        
-
-        \textbf{Cableado y Conectores} &
-        Cable de par trenzado Categoría $5e$ con conectores \textit{RJ45} blindados (con cuerpo metálico). &
-        Interconectar la fuente de alimentación \textit{PoE} y el equipo terminal de datos. &
-        Presencia de malla de blindaje e hilo de drenaje para la derivación de interferencias electromagnéticas (\textit{EMI}) y cargas estáticas a tierra. Velocidad de hasta $1 \, [Gbps]$ y $100 \, [MHz]$ de ancho de banda. &
-        Conectores \textit{RJ45} crimpeados bajo norma \textit{T568B} en ambos extremos. \\ \hline
-
-
-        \textbf{Soportes de Montaje} &
-        Herraje para trípode articulado con control de altura. Montaje de acimut y montaje de elevación&
-        Brindar sustentación mecánica rígida y permitir la orientación precisa del haz en altura, acimut y elevación. &
-        - &
-        Ensamble mecánico a la estructura de la antena y fijación al mástil mediante abrazadera metálica de ajuste. \\ \hline
-
-
-        \textbf{Computa- \newline -doras de Prueba} &
-        Dos computadoras portátiles (\textit{PC} Estación \textit{A} y \textit{PC} Estación \textit{B}). &
-        Acceso a la interfaz de gestión \textit{airOS 8}, configuración de parámetros de red y ejecución de software para generación/medición de tráfico. &
-        - &
-        Interfaz de red \textit{Ethernet RJ45} conectada mediante \textit{patch cord} directo hacia el puerto \textit{LAN} del inyector \textit{PoE} correspondiente. \\ \hline
-
-        \textbf{Instrumen- \newline -tos y Software de Medición} &
-        Sistema operativo \textit{airOS 8}, analizador de espectro de \textit{RF} en tiempo real \textit{airView}, utilidad de medición de rendimiento \textit{iPerf3} y comandos de red del sistema (\textit{ping}). &
-        Diagnostico del espectro radioeléctrico, medición del nivel de señal recibida (\textit{RSSI}), nivel de ruido, \textit{SNR}, tasa de transferencia útil (\textit{throughput}), latencia, \textit{jitter} y pérdida de paquetes. &
-        - &
-        Cinta métrica para la medición de la distancia física entre antenas en el laboratorio. \\ \hline
-\end{longtable}
-\endgroup
+\subsubsection{Antenas:}
+\label{sec_3.1.1}
+Se hizo uso del equipo \textit{Ubiquiti LiteBeam 5AC Gen2} (ver \autoref{fig:vista_general_antena}) que actúa como transceptor direccional para estblecer el enlace inalámbrico. El mismo opera en la banda de $5 \, [GHz]$ con una ganancia de $23 \, [dBi]$, y posee un reflector parabólico. Integra una radio de administración del enlace en $2,4 \, [GHz]$ para configuración mediante la aplicación \textit{UISP} \cite{ubiquiti_datasheet}. 
 
 \begin{figure}[H]
     \centering
     \fbox{\includegraphics[width=0.85\textwidth]{Vista_1.png}}
-    \caption{Vista general \textit{Ubiquiti LiteBeam 5AC Gen2}.}
+    \caption{Vista frontal y lateral \textit{Ubiquiti LiteBeam 5AC Gen2}.}
     \label{fig:vista_general_antena}
 \end{figure}
 
+Puede observarse en la \autoref{fig:vista_general_antena} los reflectores parabólicos que posee el equipo, encargados de concentrar la energía hacia la antena. Estos poseen agujeros en su superficie, debido a que esto educir su resistencia contra el viento, con una disposición específica tal que no interfiere con la reflexión de la onda en el mismo.
+
+\subsubsection{Fuentes e Inyectores PoE:}
+\label{sec_3.1.2}
+La antena posee un puerto Ethernet (\textit{RJ45}) en la parte inferior (ver \autoref{fig:RJ45}) por donde recibe simultáneamente la energía eléctrica y el tráfico de datos, mediante un adaptador \textit{PoE Gigabit Ubiquiti} ($24 \, [V_{DC}]$, $0,3 \, [A]$) (ver \autoref{fig:POE}).
+
+\begin{figure}[H]
+    \centering
+    \fbox{\includegraphics[width=0.45\textwidth]{RJ45.png}}
+    \caption{Vista inferior \textit{Ubiquiti LiteBeam 5AC Gen2}.}
+    \label{fig:RJ45}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \fbox{\includegraphics[width=0.75\textwidth]{POE.png}}
+    \caption{Adaptador PoE.}
+    \label{fig:POE}
+\end{figure}
+
+La conexión se realizó con cables de par trenzado con categoría $5e$ (velocidad de hasta $1 \, [Gbps]$ y $100 \, [MHz]$ de ancho de banda), con conectores \textit{RJ45} en sus extremos.
+
+\subsubsection{Soportes de Montaje:}
+\label{sec_3.1.3}
+Para lograr que el equipo pueda ajustarse tal que pueda variarse su altura, ángulo de acimut y ángulo de elevación, se utilizaron herrajes en forma de trípode con control de altura, además de los soportes de montaje de acimut y de elevación (ver \autoref{fig:Soportes}).
 
 
-\subsection{Montaje del enlace}
+\begin{figure}[H]
+    \centering
+    \fbox{\includegraphics[width=0.65\textwidth]{Soportes.png}}
+    \caption{Soportes para el ajuste de la antena.}
+    \label{fig:Soportes}
+\end{figure}
+
+\subsubsection{Elementos de prueba:}
+
+Fue necesario poseer dos computadoras portátiles (una para cada estación), que puedan tener acceso a la interfaz \textit{airOS 8}, tal que desde el mismo pueda configurarse el enlace y analizar la información del mismo. También se utilizó un dispositivo móvil con la app \textit{UISP} para configuración y análisis de datos.
+
+\subsection{Montaje}
 \label{sec_3.2}
-...
+El montaje estructural puede obervarse en la \autoref{fig:montaje}. Este se replicó en la segunda antena y se procedió con la puesta a punto del enlace dentro del laboratorio. Los trípodes, junto con los montajes de acimut y elevación de las antenas, fueron desplazados y ajustados según los requerimientos de cada prueba.
 
+\begin{figure}[H]
+    \centering
+    \fbox{\includegraphics[width=0.5\textwidth]{Montaje.png}}
+    \caption{Ejemplo de montaje estructural de la antena.}
+    \label{fig:montaje}
+\end{figure}
 
 
 \subsection{Configuración básica}
 \label{sec_3.3}
-...
+La configuración inicial de las antenas está detallada en la ``Guía de Inicio Rápido de \textit{LBE-5AC-Gen2}'' de \textit{Ubiquiti} \cite{ubiquiti_quick_start_guide}, en la que se detalla que puede realizarse la configuración desde un navegador web conectado a la radio de administración mencionada en la \autoref{sec_3.1.1}, o por medio de la aplicación móvil \textit{UISP}.
 
+Debido a que estos pasos fueron realizados por colegas en experiencias previas, las antenas ya se encontraban configuradas como ``Punto A'' y ``Punto B'', por lo que se pasó al análisis del radioenlace entre ellas. Se accedió a la información siguiendo los siguientes pasos:
 
+\begin{itemize}
+    \item \textbf{Conexión Punto A a PC:} Configurar el Protocolo de Internet versión 4 (TCP/IPv4) del Adaptador de Wi-Fi en IP 192.168.0.10. Acceder por el navegador a la dirección https://192.168.0.7. Proporcionar el usuario y contraseña.
+    \item \textbf{Conexión Punto B:} Pueden tomarse dos opciones:
+    \begin{itemize}
+        \item \textbf{A PC con el navegador web:} Configurar el Protocolo de Internet versión 4 (TCP/IPv4) del Adaptador de Wi-Fi en IP 192.168.0.8. Acceder por el navegador a la dirección https://192.168.0.8. Proporcionar el usuario y contraseña.
+        \item \textbf{A celular a través de UISP:} Conectarse al Wi-Fi de la antena e ingresar en la interfaz. 
+    \end{itemize} 
+\end{itemize}
+
+Ya establecida la conexión entre las antenas, se procedió a observar las características operativas que se muestran de forma principal (ver \autoref{fig:principal} y \autoref{fig:principal2}), así como la pantalla de configuración básica (ver \autoref{fig:config}) y la configuración de parámetros inalámbricos (ver \autoref{fig:config2}).
+
+\begin{figure}[H]
+    \centering
+    \fbox{\includegraphics[width=1\textwidth]{PP1.png}}
+    \caption{}
+    \label{fig:principal}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \fbox{\includegraphics[width=1\textwidth]{PP2.png}}
+    \caption{}
+    \label{fig:principal2}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \fbox{\includegraphics[width=1\textwidth]{Config.png}}
+    \caption{}
+    \label{fig:config}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \fbox{\includegraphics[width=1\textwidth]{Config2.png}}
+    \caption{}
+    \label{fig:config2}
+\end{figure}
+
+\begin{itemize}
+    \item \textbf{Modo de operación:} Operación de tráfico transparente en capa 2 (Bridge). El Punto A fue configurado como \textit{Access Point Point-to-Point (AP PtP)} encargado de emitir la red, mientras que el Punto B se configuró como \textit{Station PtP} para actuar como cliente inalámbrico.
+    \item \textbf{Frecuencia control:} 5530 MHz.
+    \item \textbf{Canal (Espectro utilizado):} 5510 - 5570 MHz.
+    \item \textbf{Ancho de canal:} 60 MHz.
+    \item \textbf{Frecuencia central:} 5540 Mhz.
+    \item \textbf{Potencia de transmisión (TX Power):} -4 dBm (ajustado de forma automática por el equipo debido a la corta distancia).
+    \item \textbf{SSID:} ubnt
+    \item \textbf{Seguridad:} WPA2
+    \item \textbf{Direccionamiento IP:} Configurado de forma estática para asegurar el acceso ininterrumpido a las herramientas de monitorización (se verifica la visibilidad bidireccional mediante el registro de la IP remota 192.168.0.8 desde la Estación).
+\end{itemize}
 
 \subsection{Análisis del espectro}
 \label{sec_3.4}
-...
+Se procedió a realizar un escaneo del entorno de radiofrecuencia en la banda de 5 GHz con el objetivo de identificar señales concurrentes, evaluar el piso de ruido y determinar los parámetros óptimos de transmisión.
 
+Al ejecutar la herramienta \textit{Site Survey} integrada en el sistema, esta detectó la presencia de la red del Punto A (ver \autoref{fig:site_survey}).
 
+\begin{figure}[H]
+    \centering
+    \fbox{\includegraphics[width=0.85\textwidth]{SiteSurvey.png}}
+    \caption{Captura del resultado de \textit{Site Survey}}
+    \label{fig:site_survey}
+\end{figure}
+
+Para complementar esta lectura y visualizar la interferencia electromagnética, se analizó el monitor de espectro \textit{Ambient RF Noise Level}. Según la escala de referencia del fabricante, el espectro local oscila entre niveles de ruido bajos (-125 dBm, representados en tonos azules) y niveles altos (-65 dBm, en tonos cálidos). La gráfica de la banda de 5 GHz mostró una predominancia absoluta de tonalidades celestes, indicando un entorno sumamente limpio y cercano al límite inferior de ruido. Si bien se detectaron picos esporádicos de color verde oscuro (ruido medio, aproximándose a los -97 dBm), esta interferencia fue considerada despreciable dado el amplio nivel de señal ($-44\ dBm$) con respecto al niver de ruido del ambiente.
+
+\begin{figure}[H]
+    \centering
+    \fbox{\includegraphics[width=0.6\linewidth]{noise_result.png}}
+    \caption{Nivel de Ruido de RF en el ambiente}
+    \label{fig:noise_result}
+\end{figure}
+
+Considerando la nula ocupación de la banda por equipos de terceros y el bajo nivel de contaminación electromagnética general, se determinó que el espectro presentaba condiciones óptimas. Por consiguiente, se conservaron las siguientes configuraciones:
+
+\begin{itemize}
+    \item \textbf{Frecuencia de control:} Se fijó en 5530 MHz. Esta decisión se fundamenta en la observación directa de la gráfica de ruido, donde el segmento seleccionado carece de picos de interferencia significativos (marcas verdes o rojas).
+    \item \textbf{Ancho de canal:} Se optó por utilizar una portadora de 60 MHz (abarcando desde 5510 hasta 5570 MHz). Al contar con un entorno limpio (tonos celestes), no existió la necesidad de reducir el canal para evadir ruidos adyacentes, permitiendo así maximizar la tasa de modulación y aprovechar el máximo rendimiento del enlace.
+\end{itemize}
+
+\subsection{Pruebas del enlace en el pasillo de la facultad}
+\label{sec_3.5}
+
+Se trasladó el equipo a un pasillo de la facultad con una distancia de $70$ $m$ entre las estaciones, sigue representando una distancia menor a la nominal de diseño sin embargo permite una mayor variabilidad en la alineación entre puntos y evaluación de los parámetros del radioenlace en comparación con el entorno confinado del laboratorio. 
+
+\begin{figure}[H]
+    \centering
+    \fbox{\includegraphics[width=0.5\linewidth]{plano_facultad.png}}
+    \caption{Ubicación del enlace}
+    \label{fig:plano_facultad}
+\end{figure}
+
+La \autoref{fig:plano_facultad} muestra la disposición de los equipos: el círculo A corresponde al Punto A del enlace, el círculo B al Punto B, y la línea intermitente al camino directo entre ellos.
+
+Se mantuvieron constantes los parámetros de configuración establecidos en la etapa previa. Cabe destacar que no fue posible realizar un análisis de espectro para evaluar el nivel de ruido del nuevo entorno, debido a que el Punto B estaba siendo monitoreado exclusivamente de forma inalámbrica a través de un dispositivo móvil; el uso de esta radio de administración Wi-Fi dedicada deshabilita temporalmente la ejecución de la herramienta \textit{airView}, lo cual se evidencia en la interfaz principal mediante la barra de \textit{RF Environment} deshabilitada (en tonos grises), como se observa en la parte superior de la \autoref{fig:main_panel_hallway}.
+
+A pesar de esta restricción, el panel de control permitió establecer una línea base operativa estable. Inicialmente, las antenas lograron una excelente ganancia, registrando potencias de recepción en torno a los -23 dBm y -26 dBm. Asimismo, presentaron una variación de polarización que mantiene un desequilibrio (\textit{Delta}) de apenas 3 dB entre sus cadenas de recepción (\textit{Chain 0} y \textit{Chain 1}) en estado de reposo.
+
+\begin{figure}[H]
+    \centering
+    \fbox{\includegraphics[width=\linewidth]{pasillo.png}}
+    \caption{Panel principal del enlance en el pasillo}
+    \label{fig:main_panel_hallway}
+\end{figure}
+
+Con este diagnóstico base del comportamiento del enlace documentado, se procedió a estructurar la ejecución secuencial de las siguientes pruebas prácticas.
 
 \subsection{Alineación y ajuste fino}
-\label{sec_3.5}
-...
-
-
-
-\subsection{Potencia de transmisión}
 \label{sec_3.6}
-...
+
+Durante la prueba de alineación inicial se partió desde una posición desalineada y se alineó manualmete mediante la herramienta de alineación con el indicador de audio activado. Esta herramienta permite observar el nivel de señal combinada (la potencia total), los ``Chain 0'' y ``Chain 1'' que representan los niveles de señal de las dos polarizaciones (horizontal y vertical) que admite la antena y el desequilibrio entre las mismas $\Delta$ (parámetro que compara qué tanto difieren en potencia las dos polarizaciones). 
+
+Apuntando los transceptores frontalmente, se obtuvo un nivel de señal combinada de -36 dBm, como se observa en la \autoref{fig:alineacion_antenas_alineadas}. Si bien este valor representa una inyección de potencia excelente, el desequilibrio entre las cadenas de recepción arrojó un \textit{Delta} de 8 dB. Esta asimetría en la polarización se atribuye al efecto de trayectos múltiples (o \textit{multipath} en inglés), donde las reflexiones primarias generadas por el piso y las paredes del pasillo causaron interferencia destructiva asimétrica sobre el receptor.
+
+El impacto de este entorno físico se visualiza claramente en el diagrama de constelación (\autoref{fig:constelaciones_alineadas}). Gracias a la alta potencia, los equipos negociaron una modulación de orden superior (256-QAM), evidenciada por la matriz de $16 \times 16$ símbolos. Sin embargo, la dispersión gráfica de los puntos (aumento del \textit{Error Vector Magnitude}) corrobora la presencia de ruido de fase inducido por los constantes rebotes de la señal en el pasillo.
 
 
+\begin{figure}[http]
+  \centering
+  \begin{subfigure}[c]{0.3\linewidth}
+    \includegraphics[width=\linewidth]{antenas_alineadas.png}
+    \caption{Antenas alineadas}
+    \label{fig:alineacion_antenas_alineadas}
+  \end{subfigure}
+  \begin{subfigure}[c]{0.52 \linewidth}      
+  \includegraphics[width=\linewidth]{constelaciones_alineadas.png}
+  \caption{Constelación alineadas}
+  \label{fig:constelaciones_alineadas}
+  \end{subfigure}
+  \caption{Anatenas alineadas}
+  \label{fig:antenas_alineadas}
+ \end{figure}
+
+Para contrastar los resultados anteriormente obtenidos, se procedió a desalinear intencionalmente los equipos $\pm90\circ$ en acimut. Al desviar el lóbulo principal, la diferencia de polarización mejoró, registrando un Delta de 3 dB en el equipo remoto y 6 dB en el local. Esta mejora indica que los niveles de señal de las dos polarizaciones presentaban un menor desequilibrio (la desalineación perjudicó a ambas polarizaciones por igual) . Por otro lado se obtuvó atenuación de la señal útil, la cual cayó a -54 dBm al depender de la dispersión de lóbulos secundarios y rebotes residuales, como se observa en la \autoref{fig:antenas_desalineadas}.
+
+Como se observa en la \autoref{fig:constelaciones_desalineadas}, la pérdida del haz principal forzó al algoritmo de modulación adaptativa a degradar el esquema de codificación a QPSK (4 puntos). Esta transición automática sacrifica la capacidad de tráfico del enlace a cambio de maximizar la robustez matemática frente a las severas distorsiones de fase provocadas por la desalineación geométrica.
+
+Adicionalmente, en ambos casos, se observó que las lecturas de alineación presentaban fluctuaciones constantes. Esto se debió a la circulación ininterrumpida de estudiantes por el pasillo lo cual obstruyó la primer zona de Fresnel. Debido a este efecto y los efectos realicionados al multipath mencionados anteriormente se justifican dichas variaciones.
+
+ \begin{figure}[H]
+  \centering
+  \begin{subfigure}[c]{0.3\linewidth}
+    \includegraphics[width=\linewidth]{antenas_desalineadas.png}
+    \caption{Antenas desalineadas}
+    \label{fig:antenas_desalineadas}
+  \end{subfigure}
+  \begin{subfigure}[c]{0.52\linewidth}      \includegraphics[width=\linewidth]{constelaciones_desalineadas.png}
+  \caption{Constelaciones desalineadas}
+  \label{fig:constelaciones_desalineadas}
+  \end{subfigure}
+  \caption{Antenas desalineadas}
+  \label{fig:alineación_constelaciones}
+ \end{figure}
+
+ Otra prueba que se realizó fue tapar la antena con un elemento reflector, como se observa en la \autoref{fig:dadam}, dando como resultado una potencia de señal cercana al piso de ruido (ver \autoref{fig:tapado}).
+
+ \begin{figure}[H]
+    \centering
+    \fbox{\includegraphics[width=0.35\linewidth]{dadam.png}}
+    \caption{}
+    \label{fig:dadam}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \fbox{\includegraphics[width=\linewidth]{tapado.png}}
+    \caption{}
+    \label{fig:tapado}
+\end{figure}
 
 \subsection{Pruebas de latencia}
 \label{sec_3.7}
-...
+Para evaluar el tiempo de respuesta del canal físico y la estabilidad del enlace frente al entorno dinámico, se ejecutó la herramienta \textit{Network Ping} integrada en la interfaz de gestión, enviando ráfagas de 5 paquetes ICMP de 56 bytes hacia la IP del equipo remoto. La prueba se realizó bajo los dos escenarios físicos previamente descritos: enlace alineado y enlace desalineado.
 
+En el escenario de \textbf{enlace alineado} (\autoref{fig:ping1_antenas_alineadas}), se registró una latencia mínima de 1.133 ms. Este tiempo de respuesta basal óptimo es consecuencia directa de la alta potencia de recepción y la modulación de máxima eficiencia (256-QAM), la cual minimiza el tiempo de aire (\textit{airtime}) requerido para transmitir cada trama. No obstante, se observó un pico máximo de 8.103 ms, evidenciando un alto índice de fluctuación (\textit{jitter}). Este comportamiento errático confirma la susceptibilidad geométrica del haz principal: las obstrucciones temporales generadas por el tránsito humano en el pasillo y el efecto de trayectos múltiples degradan momentáneamente la constelación, forzando retransmisiones en la capa de enlace.
 
+Por el contrario, en el escenario de \textbf{enlace desalineado} (\autoref{fig:ping2_antenas_desalineadas}), el piso de latencia se incrementó notablemente, registrando un mínimo de 2.103 ms y elevando el promedio general a 3.13 ms. Este incremento basal se explica por la transición del algoritmo AMC hacia el esquema de modulación QPSK. Si bien esta modulación reduce drásticamente la capacidad de tráfico (aumentando el tiempo de procesamiento y envío por paquete), otorga una mayor robustez matemática frente al ruido de fase. Esto se reflejó en una atenuación de los picos máximos de latencia (5.45 ms), demostrando que, a costa de una mayor latencia base, la modulación inferior logró mitigar parcialmente las violentas fluctuaciones inducidas por el entorno de propagación.
 
-\subsection{Pruebas de throughput con iPerf3}
-\label{sec_3.8}
-...
-
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}[c]{0.48\linewidth}
+    \includegraphics[width=\linewidth]{ping_1.png}
+    \caption{Ping con las antenas alineadas}
+    \label{fig:ping1_antenas_alineadas}
+  \end{subfigure}
+  \begin{subfigure}[c]{0.48\linewidth}      
+  \includegraphics[width=\linewidth]{ping_2.png}
+  \caption{Ping con las antenas desalineadas}
+  \label{fig:ping2_antenas_desalineadas}
+  \end{subfigure}
+  \caption{Ping}
+  \label{fig:ping_antenas}
+ \end{figure}
 
 
 \subsection{Prueba complementaria con Speedtest}
+\label{sec_3.8}
+
+Como se observa en los resultados (\autoref{fig:speedtest}), la prueba arrojó una latencia promedio de 1.35 ms y una tasa de recepción máxima (\textit{RX Max}) de 266.96 Mbps. Este valor se contrasta con la Capacidad Aislada teórica de 454 Mbps registrada previamente en el panel de control. Esta discrepancia cercana al 40\% no obedece a una degradación del medio inalámbrico, sino a las limitaciones arquitectónicas de la propia herramienta de medición por los siguientes motivos técnicos:
+\begin{itemize}
+    \item \textbf{Limitación del procesador interno (Cuello de botella):} Para medir la velocidad, la herramienta \textit{Speed Test} debe ``fabricar'' paquetes de datos de prueba de la nada. Este proceso exige mucho esfuerzo al procesador principal (CPU) de la antena. Aunque el equipo tiene un chip de radio dedicado diseñado para transmitir por el aire a altísimas velocidades, su CPU general es pequeña. Por lo tanto, el procesador se asfixia y se queda sin fuerza para generar más datos mucho antes de lograr llenar por completo el "tubo" de comunicación inalámbrica.
+    
+    \item \textbf{Sobrecarga por el empaquetado de datos (\textit{Overhead}):} El panel de control muestra la ``Capacidad'' bruta, es decir, el volumen total de información que viaja por el aire. Sin embargo, el test de velocidad mide únicamente la velocidad neta o útil. Para que los datos viajen de forma segura hasta el otro extremo, el sistema primero debe "envolverlos" agregando información de rutas (direcciones IP, MAC) y candados de seguridad (encriptación WPA2). Todo este empaquetado informático ocupa un espacio vital en el aire, consumiendo una porción importante del ancho de banda y reduciendo la velocidad final que realmente percibe el usuario.
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \fbox{\includegraphics[width=0.75\linewidth]{speedtest.png}}
+    \caption{Speedtest}
+    \label{fig:speedtest}
+\end{figure}
+
+
+Por consiguiente, el valor de 266.96 Mbps representa el límite superior de procesamiento de la herramienta de diagnóstico interna, demostrando que el enlace RF subyacente es lo suficientemente holgado y robusto como para cursar dicho tráfico sin congestión. Para estresar el enlace hasta su límite de RF (cercano a los 450 Mbps útiles), se requeriría inyectar tráfico desde equipos informáticos externos situados en los extremos de la red (Punto A y Punto B) utilizando herramientas de rendimiento de red dedicadas, como \textit{iPerf3}.
+
+\subsection{Pruebas de throughput con iPerf3}
 \label{sec_3.9}
-...
+
+Es importante destacar que, durante esta fase de experimentación de campo en el pasillo, no fue posible ejecutar una prueba de rendimiento externa utilizando \textit{iPerf3}. Esto se debió a una limitación en la topología física del montaje: mientras que en el equipo local se contaba con una computadora, el equipo remoto (Punto B) estaba siendo administrado e inicializado exclusivamente de forma inalámbrica a través de un dispositivo móvil. La ejecución de \textit{iPerf3} exige una arquitectura cliente-servidor, lo que hace estrictamente necesario contar con una computadora conectada por cable de red en cada extremo del radioenlace.
+
+A diferencia del \textit{Speed Test} integrado, herramientas externas como \textit{iPerf3} sí son capaces de medir el rendimiento real y llevar el canal inalámbrico a su máxima capacidad teórica. Al utilizar computadoras en los extremos, el enorme esfuerzo computacional de generar los cientos de megabits de prueba recae sobre los potentes procesadores de las PC y no sobre el hardware de la antena. Bajo esta configuración, las antenas actúan puramente como un puente transparente, permitiendo que su chip de radio dedicado brille y mueva todo el tráfico sin sufrir cuellos de botella internos.
+
+Adicionalmente, el uso de esta herramienta estandarizada permite ejecutar diagnósticos mucho más profundos estresando la red con distintos protocolos de la Capa de Transporte:
+
+\begin{itemize}
+    \item \textbf{Pruebas TCP:} Al ser un protocolo orientado a la conexión, simula el tráfico de un usuario real descargando un archivo pesado. TCP exige que el receptor confirme la llegada de cada paquete (\textit{ACK}). Si el entorno físico es inestable y las ondas rebotan perdiendo datos, TCP lo nota, frena la transmisión y reenvía la información, mostrándonos exactamente cuál sería la velocidad útil real en esas condiciones.
+    
+    \item \textbf{Pruebas UDP:} Es un protocolo de ráfaga rápida que no exige acuses de recibo. Permite inyectar datos a ciegas a la máxima velocidad posible (por ejemplo, forzando los 450 Mbps teóricos) para inundar el canal. Esto es ideal para probar la capacidad bruta de la infraestructura física y contabilizar exactamente qué porcentaje de paquetes se destruyen (\textit{packet loss}) al chocar con obstáculos físicos o personas transitando por el enlace.
+\end{itemize}
 
 
 
-\subsection{Variación del ancho de canal}
+\subsection{Variación del ancho de canal a 10 MHz}
 \label{sec_3.10}
-...
+
+Para evaluar el impacto del espectro utilizado sobre el rendimiento del radioenlace, se modificó la configuración inicial reduciendo el ancho de canal de 60 MHz a 10 MHz, manteniendo la frecuencia central y la potencia de transmisión. Se capturaron métricas tanto en estado de alineación óptima (\autoref{fig:panel_10mhz_alineado}) como en desalineación intencional (\autoref{fig:panel_10mhz_desalineado}).
+
+Al comparar los resultados de esta prueba con los obtenidos a 60 MHz, se evidencian las siguientes diferencias fundamentales:
+
+\begin{itemize}
+    \item \textbf{RSSI:} El RSSI (Received Signal Stregth) se mantuvo en $-26$ dB para el caso de antenas alineadas, y descendió a $-63$ dBm al desalinear los equipos. Esto indica que la reducción del ancho de canal no afectó significativamente la potencia de recepción. Si se compara el RSSI de 10 MHz con la de 60 MHz, se observa que la potencia de recepción se mantuvo prácticamente constante, lo cual es un resultado esperado dado que la potencia de transmisión y la distancia del enlace no fueron modificadas.
+    \item \textbf{Ruido:} El piso de ruido (\textit{Noise Floor}) mejoró, descendiendo de -86 dBm a -92 dBm. Al estrechar el canal de recepción a 10 MHz, el radio capta una menor cantidad de ruido blanco de fondo. Consecuentemente, la Relación Señal a Ruido (SNR) mejoró al reducir el ancho de canal.
+    \item \textbf{Capacidad (\textit{Throughput} teórico):} Al disponer de una sexta parte del espectro original (de 60 a 10 MHz), la capacidad aislada máxima cayó drásticamente de 454 Mbps a apenas 64.7 Mbps. La falta de espectro físico es el principal factor limitante, a pesar de que el algoritmo logró sostener una MCS (Modulation and Coding Scheme) de 256-QAM (8X) estando alineados.
+    \item \textbf{Estabilidad y Latencia:} En la \autoref{fig:ping_10mhz} se observan los resultados de latencia bajo este ancho de canal. Si bien el tiempo mínimo de respuesta aumentó (2.419 ms frente al 1.133 ms de la prueba a 60 MHz debido a que los símbolos toman más tiempo en transmitirse en un canal estrecho), la estabilidad (\textit{jitter}) mejoró drásticamente. El valor máximo registrado fue de apenas 2.909 ms (sin picos severos de 8 ms). Esto demuestra que los canales estrechos son mucho menos susceptibles al desvanecimiento selectivo en frecuencia causado por el \textit{multipath} del pasillo.
+\end{itemize}
+
+\begin{figure}[H]
+  \centering
+    \fbox{\includegraphics[width=\linewidth]{main_panel_10MHz.png}}
+    \caption{Panel principal alineado (10 MHz)}
+    \label{fig:panel_10mhz_alineado}
+\end{figure}
+
+\begin{itemize}
+    \item \textbf{Estabilidad y Latencia:} En la \autoref{fig:ping_10mhz} se observan los resultados de latencia bajo este ancho de canal. Si bien el tiempo mínimo de respuesta aumentó (2.419 ms frente al 1.133 ms de la prueba a 60 MHz debido a que los símbolos toman más tiempo en transmitirse en un canal estrecho), la estabilidad (\textit{jitter}) mejoró drásticamente. El valor máximo registrado fue de apenas 2.909 ms (sin picos severos de 8 ms). Esto demuestra que los canales estrechos son mucho menos susceptibles al desvanecimiento selectivo en frecuencia causado por el \textit{multipath} del pasillo.
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \fbox{\includegraphics[width=0.75\linewidth]{ping1_10MHz.png}}
+    \caption{Prueba de ping con canal de 10 MHz (Alineado)}
+    \label{fig:ping_10mhz}
+\end{figure}
+
+Al desalinear el equipo (\autoref{fig:panel_10mhz_desalineado}), el comportamiento fue análogo a las pruebas anteriores: la señal cayó a niveles críticos (-63 dBm) y el índice MCS se degradó a 64-QAM (6X).
+
+\begin{figure}[H]
+  \centering
+    \fbox{\includegraphics[width=\linewidth]{main_panel_10MHz_desalineado.png}}
+    \caption{Panel principal desalineado (10 MHz)}
+    \label{fig:panel_10mhz_desalineado}
+\end{figure}
 
 
+\textbf{Conclusión de la variación de canal:}
 
-\subsection{Introducción de una obstrucción}
-\label{sec_3.11}
-...
-
+La selección del ancho de canal exige un compromiso técnico directo (\textit{trade-off}). Un canal amplio (60 MHz) maximiza el \textit{throughput} absoluto, ideal para mover grandes volúmenes de datos, pero es altamente sensible a las interferencias y rebotes del entorno. Por el contrario, un canal estrecho (10 MHz) sacrifica capacidad de tráfico, pero concentra la densidad espectral de potencia, mejorando el margen frente al ruido, estabilizando la latencia y garantizando un enlace más robusto en entornos eléctricamente ruidosos o con línea de vista comprometida.
 
 
 \subsection{Análisis de resultados}
 \label{sec_3.12}
-...
+En la \autoref{tab:resultados_finales} se resumen los valores finales obtenidos experimentalmente para el escenario de mayor rendimiento (60 MHz, Antenas alineadas).
 
+\begin{table}[htbp]
+\centering
+\caption{Valores finales experimentales (Canal 60 MHz - Alineado)}
+\label{tab:resultados_finales}
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Parámetro} & \textbf{Valor} \\ \hline
+Frecuencia Central & 5540 MHz \\ \hline
+Ancho de canal & 60 MHz \\ \hline
+Potencia TX & -4 dBm \\ \hline
+RSSI (Combinado) & -29 dBm \\ \hline
+Ruido (\textit{Noise Floor}) & -86 dBm \\ \hline
+SNR & 57 dB \\ \hline
+MCS & 8X (256-QAM MIMO) \\ \hline
+Latencia (RTT Ping) & Mín: 1.13 ms / Prom: 2.93 ms \\ \hline
+Pérdida de paquetes & 0 \% \\ \hline
+Throughput TCP A $\rightarrow$ B & 266.96 Mbps (Limitado por hardware de medición)* \\ \hline
+Throughput TCP B $\rightarrow$ A & N/E (No evaluado externamente)* \\ \hline
+Jitter UDP & N/E* \\ \hline
+Pérdida UDP & N/E* \\ \hline
+\end{tabular}
+\\ \vspace{0.2cm}
+\footnotesize{*Nota: Las métricas de Throughput simétrico y métricas UDP no pudieron ser registradas en su totalidad debido a la imposibilidad de ejecutar la herramienta externa \textit{iPerf3}, dependiendo exclusivamente del \textit{Speed Test} embebido en la CPU del transceptor.}
+\end{table}
 
-
-\subsection{Comparación entre teoría, simulación y medición}
-\label{sec_3.13}
-...
-
-
-
-\subsection{Consideraciones sobre enlaces reales}
-\label{sec_3.14}
-...
