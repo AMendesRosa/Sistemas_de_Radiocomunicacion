@@ -1,24 +1,28 @@
 \section{Cálculo del Presupuesto de Potencia}
 \label{sec_3}
-El cálculo del presupuesto de potencia permite verificar matemáticamente si la señal óptica emitida por el transceptor emisor llegará al receptor con un nivel de potencia adecuado, superando su sensibilidad y garantizando un margen de seguridad frente a futuras degradaciones del enlace.
+El cálculo del presupuesto de potencia permite verificar si la señal óptica emitida por el transceptor llegará al receptor con un nivel de potencia superior a su sensibilidad, reservando además un margen de seguridad frente a futuras degradaciones del enlace. El cálculo se realiza para una fibra (un sentido de transmisión); como ambas fibras recorren el mismo trayecto y atraviesan los mismos elementos, el resultado es válido para los dos sentidos.
 
 
 \subsection{Parámetros de Diseño y Ecuaciones Base}
 \label{sec_3_1}
 A partir de la selección de componentes realizada en la \autoref{sec_2}, se definen los parámetros de entrada para el cálculo del enlace:
 \begin{itemize}
-    \item \underline{Longitud del enlace ($L$)}: $8.0 \, [km]$
+    \item \underline{Longitud del enlace ($L$)}: $8 \, [km]$
     \item \underline{Longitud de onda ($\lambda$)}: $1310 \, [nm]$
-    \item \underline{Potencia de transmisión mínima ($P_{t}$)}: $-9.50 \, [dBm]$
-    \item \underline{Sensibilidad del receptor ($S_{r}$)}: $-20.00 \, [dBm]$
-    \item \underline{Atenuación específica de la fibra ($\alpha$)}: $0.35 \, [dB/km]$ (G.652.D a $1310 \, [nm]$)
-    \item \underline{Pérdida por conector ($A_{c}$)}: $0.30 \, [dB]$ por acople \textit{LC/UPC} ($N_{c} = 4$)
-    \item \underline{Pérdida por empalme ($A_{e}$)}: $0.10 \, [dB]$ por fusión ($N_{e} = 4$)
+    \item \underline{Potencia de transmisión ($P_{t}$)}: mínima $-9.5 \, [dBm]$, máxima $-3 \, [dBm]$
+    \item \underline{Sensibilidad del receptor ($S_{r}$)}: $-24 \, [dBm]$
+    \item \underline{Sobrecarga del receptor ($P_{sat}$)}: $0 \, [dBm]$
+    \item \underline{Atenuación de la fibra ($A_f$)}: $0.38 \, [dB/km]$ (G.652.D cableada a $1310 \, [nm]$)
+    \item \underline{Pérdidas de conexión}: patchcord $0.4 \, [dB]$ ($N_{pc} = 2$), pigtail $0.2 \, [dB]$ ($N_{pg} = 2$) y adaptador de panel $0.2 \, [dB]$ ($N_{ad} = 2$)
+    \item \underline{Pérdida por empalme ($A_{e}$)}: $0.1 \, [dB]$ por fusión ($N_{e} = 4$)
+    \item \underline{Margen de seguridad ($M_s$)}: $3 \, [dB]$
 \end{itemize}
 
-Las ecuaciones fundamentales del presupuesto óptico de potencia son:
+El margen de seguridad adoptado corresponde al extremo inferior del rango de $3$ a $6 \, [dB]$ recomendado por la bibliografía de la cátedra, que contempla envejecimiento, variaciones de temperatura y mantenimiento \cite{b7}. Se adopta el valor mínimo porque el resto del cálculo ya es conservador: se utilizan la potencia de transmisión mínima garantizada y la atenuación máxima de la fibra.
+
+Siguiendo la formulación de la bibliografía \cite{b7}, la pérdida física total del enlace, la potencia recibida y la condición de viabilidad son:
 \begin{equation}
-    A_{total} = (L \cdot \alpha) + (N_{c} \cdot A_{c}) + (N_{e} \cdot A_{e})
+    A_{total} = A_f \cdot L + P_c + P_{em}
     \label{eq_1}
 \end{equation}
 
@@ -28,59 +32,77 @@ Las ecuaciones fundamentales del presupuesto óptico de potencia son:
 \end{equation}
 
 \begin{equation}
-    M_{s} = P_{r} - S_{r}
+    P_{t} - S_{r} \geq A_{total} + M_s
     \label{eq_3}
 \end{equation}
+
+donde $P_c$ son las pérdidas totales de conectores y $P_{em}$ las pérdidas totales de empalmes. El margen de seguridad no se descuenta al calcular $P_r$: es una reserva que se compara con la diferencia $P_r - S_r$ \cite{b7}.
 
 
 \subsection{Cálculo Detallado de Atenuación del Canal}
 \label{sec_3.2}
 \begin{enumerate}
-    \item \underline{Pérdida en la fibra óptica ($A_{\text{fibra}}$)}:
+    \item \underline{Pérdida en la fibra óptica ($A_{fibra}$)}:
     \begin{equation}
-        A_{fibra} = 8.0 \, [km] \times 0.35 \, \left[\frac{dB}{km}\right] = 2.80 \, [dB]
+        A_{fibra} = A_f \cdot L = 0.38 \, \left[\frac{dB}{km}\right] \times 8 \, [km] = 3.04 \, [dB]
         \label{eq_4}
     \end{equation}
-    
-    \item \underline{Pérdida total por conectores ($A_{conectores}$)}:
+
+    \item \underline{Pérdida total por conectores ($P_c$)}: incluye los patchcords (cada uno con sus dos conectores), los pigtails y los adaptadores de panel de ambos ODF:
     \begin{equation}
-        A_{conectores} = 4 \times 0.30 \, [dB] = 1.20 \, [dB]
+        P_c = N_{pc} \cdot 0.4 + N_{pg} \cdot 0.2 + N_{ad} \cdot 0.2 = 0.8 + 0.4 + 0.4 = 1.60 \, [dB]
         \label{eq_5}
     \end{equation}
-    
-    \item \underline{Pérdida total por empalmes de fusión ($A_{empalmes}$)}:
+
+    \item \underline{Pérdida total por empalmes de fusión ($P_{em}$)}:
     \begin{equation}
-        A_{empalmes} = 4 \times 0.10 \, [dB] = 0.40 \, [dB]
+        P_{em} = N_e \cdot A_e = 4 \times 0.1 \, [dB] = 0.40 \, [dB]
         \label{eq_6}
     \end{equation}
-    
-    \item \underline{Atenuación total acumulada ($A_{total}$)}:
+
+    \item \underline{Atenuación total del enlace ($A_{total}$)}:
     \begin{equation}
-        A_{total} = 2.80 \, [dB] + 1.20 \, [dB] + 0.40 \, [dB] = 4.40 \, [dB]
+        A_{total} = 3.04 \, [dB] + 1.60 \, [dB] + 0.40 \, [dB] = 5.04 \, [dB]
         \label{eq_7}
     \end{equation}
 \end{enumerate}
 
+La fibra representa el 60\,\% de la pérdida total, mientras que los elementos de conexión en los extremos aportan el 32\,\%. A modo de comparación, si se considerara sólo una pérdida de $0.3 \, [dB]$ por cada uno de los $4$ acoples conectorizados, la pérdida por conectores sería de $1.2 \, [dB]$; el modelo adoptado, que discrimina patchcords, pigtails y adaptadores, resulta $0.4 \, [dB]$ más conservador.
+
 
 \subsection{Nivel de Potencia Recibida y Margen de Seguridad}
 \label{sec_3.3}
-El presupuesto óptico total disponible (\textit{PB}) proporcionado por la pareja transceptora es:
+Con la potencia de transmisión mínima, la potencia recibida en el extremo distante resulta:
 \begin{equation}
-    PB = P_{t} - S_{r} = -9.50 \, [dBm] - (-20.00 \, [dBm]) = 10.50 \, [dB]
-    \label{eq_8}
-\end{equation}
-
-Restando las pérdidas físicas del canal a la potencia emitida, la potencia recibida en el extremo distante ($P_{r}$) resulta:
-\begin{equation}
-    P_{r} = P_{t} - A_{\text{total}} = -9.50 \, [dBm] - 4.40 \, [dB] = -13.90 \, [dBm]
+    P_{r,min} = P_{t,min} - A_{total} = -9.5 \, [dBm] - 5.04 \, [dB] = -14.54 \, [dBm]
     \label{eq_9}
 \end{equation}
 
-El margen de seguridad final del enlace ($M_s$) es:
+Comparando con la sensibilidad del receptor:
 \begin{equation}
-    M_{s} = P_{r} - S_{r} = -13.90 \, [dBm] - (-20.00 \, [dBm]) = 6.10 \, [dB]
+    P_{r,min} - S_{r} = -14.54 \, [dBm] - (-24 \, [dBm]) = 9.46 \, [dB]
     \label{eq_10}
 \end{equation}
+
+Verificando la condición de viabilidad de la \autoref{eq_3}, con el presupuesto óptico de la \autoref{eq:optical_budget}:
+\begin{equation}
+    OB = 14.5 \, [dB] \geq A_{total} + M_s = 5.04 \, [dB] + 3 \, [dB] = 8.04 \, [dB]
+    \label{eq_11}
+\end{equation}
+
+Por lo tanto, el margen sobrante, una vez reservados los $3 \, [dB]$ de margen de seguridad, es:
+\begin{equation}
+    M_{sobrante} = OB - A_{total} - M_s = 14.5 - 5.04 - 3 = 6.46 \, [dB]
+    \label{eq_12}
+\end{equation}
+
+Por último, se verifica el caso opuesto: que la máxima potencia que puede llegar al receptor no lo sature. Con la potencia de transmisión máxima:
+\begin{equation}
+    P_{r,max} = P_{t,max} - A_{total} = -3 \, [dBm] - 5.04 \, [dB] = -8.04 \, [dBm] < P_{sat} = 0 \, [dBm]
+    \label{eq_13}
+\end{equation}
+
+El receptor trabaja $8.04 \, [dB]$ por debajo de su nivel de sobrecarga, por lo que no se requieren atenuadores.
 
 
 \subsection{Resumen del Presupuesto Óptico}
@@ -88,61 +110,64 @@ El margen de seguridad final del enlace ($M_s$) es:
 \begingroup
     \footnotesize
     \begin{longtable}
-        {|>{\centering\arraybackslash}m{4.8cm}
-         |>{\centering\arraybackslash}m{3cm}
+        {|>{\centering\arraybackslash}m{5.2cm}
+         |>{\centering\arraybackslash}m{3.2cm}
          |>{\centering\arraybackslash}m{4cm}|} \hline
         \textbf{Parámetro/Elemento} & \textbf{Valor Unitario} & \textbf{Atenuación/Potencia Total} \\ \hline
         \endfirsthead
-        
+
         \multicolumn{3}{c}{\textit{Continuación de la página anterior}} \\ \hline
         \textbf{Parámetro/Elemento} & \textbf{Valor Unitario} & \textbf{Atenuación/Potencia Total} \\ \hline
         \endhead
-        
-        \hline 
+
+        \hline
         \multicolumn{3}{c}{\textit{Continúa en la página siguiente...}} \\
         \endfoot
-        
+
         \hline
-        \caption{Resumen del Presupuesto de Potencia Óptica del Enlace de $8 \, [km]$.}
+        \caption{Resumen del presupuesto de potencia óptica del enlace de $8 \, [km]$ (por sentido).}
         \label{tab:tab_1} \\
         \endlastfoot
-            Potencia de Transmisión Mínima ($P_{t}$) & --- & $-9.50 \, [dBm]$ \\ \hline
-
-            Atenuación en Fibra ($8 \, [km]$) & $0.35 \, \left[\frac{dB}{km}\right]$ & $2.80 \, [dB]$ \\ \hline
-            
-            Pérdida en Conectores ($4 \, [un.]$) & $0.30 \, \left[\frac{dB}{conector}\right]$ & $1.20 \, [dB]$ \\ \hline
-            
-            Pérdida en Empalmes ($4 \, [un.]$) & $0.10 \, \left[\frac{dB}{empalme}\right]$ & $0.40 \, [dB]$ \\ \hline
-            
-            Atenuación Total del Canal ($A_{total}$) & --- & $\mathbf{4.40 \, [dB]}$ \\ \hline
-            
-            Potencia Recibida Calculada ($P_{r}$) & --- & $\mathbf{-13.90 \, [dBm]}$ \\ \hline
-            
-            Sensibilidad Mínima del Receptor ($S_{r}$) & --- & $-20.00 \, [dBm]$ \\ \hline
-            
-            Margen de Seguridad Obtenido ($M_{s}$) & --- & $\mathbf{6.10 \, [dB]}$ \\ \hline
+            Potencia de transmisión mínima ($P_{t,min}$) & --- & $-9.50 \, [dBm]$ \\ \hline
+            Atenuación en fibra ($8 \, [km]$) & $0.38 \, [dB/km]$ & $3.04 \, [dB]$ \\ \hline
+            Patchcords LC/UPC ($2$) & $0.4 \, [dB]$ & $0.80 \, [dB]$ \\ \hline
+            Pigtails LC/UPC ($2$) & $0.2 \, [dB]$ & $0.40 \, [dB]$ \\ \hline
+            Adaptadores de panel ($2$) & $0.2 \, [dB]$ & $0.40 \, [dB]$ \\ \hline
+            Empalmes por fusión ($4$) & $0.1 \, [dB]$ & $0.40 \, [dB]$ \\ \hline
+            Atenuación total del enlace ($A_{total}$) & --- & $\mathbf{5.04 \, [dB]}$ \\ \hline
+            Potencia recibida mínima ($P_{r,min}$) & --- & $\mathbf{-14.54 \, [dBm]}$ \\ \hline
+            Potencia recibida máxima ($P_{r,max}$) & --- & $-8.04 \, [dBm]$ \\ \hline
+            Sensibilidad del receptor ($S_{r}$) & --- & $-24.00 \, [dBm]$ \\ \hline
+            Diferencia $P_{r,min} - S_r$ & --- & $9.46 \, [dB]$ \\ \hline
+            Margen de seguridad reservado ($M_{s}$) & --- & $3.00 \, [dB]$ \\ \hline
+            Margen sobrante & --- & $\mathbf{6.46 \, [dB]}$ \\ \hline
     \end{longtable}
 \endgroup
 
 
+\subsection{Verificación de la Dispersión Cromática}
+\label{sec_3.6}
+El presupuesto de potencia supone que el enlace está limitado por atenuación. Para confirmarlo, se estima el ensanchamiento de los pulsos por dispersión cromática en el peor caso. Según la recomendación G.652, la longitud de onda de dispersión nula de la fibra está entre $\lambda_0 = 1300$ y $1324 \, [nm]$, con una pendiente máxima $S_0 = 0.092 \, [ps/(nm^2 \cdot km)]$ \cite{b5}. El coeficiente de dispersión a una longitud de onda $\lambda$ se aproxima como:
+\begin{equation}
+    D(\lambda) = \frac{S_0}{4} \left( \lambda - \frac{\lambda_0^4}{\lambda^3} \right)
+    \label{eq_14}
+\end{equation}
+
+Evaluando en los extremos del rango de emisión del transceptor ($1270$ a $1355 \, [nm]$), el peor caso se da para $\lambda = 1270 \, [nm]$ y $\lambda_0 = 1324 \, [nm]$, con $|D| = 5.29 \, [ps/(nm \cdot km)]$. Los láseres 1000BASE-LX tienen un ancho espectral RMS máximo de $\sigma_\lambda = 4 \, [nm]$ \cite{b14}, por lo que el ensanchamiento del pulso resulta:
+\begin{equation}
+    \Delta\tau = |D| \cdot L \cdot \sigma_\lambda = 5.29 \times 8 \times 4 = 169 \, [ps]
+    \label{eq_15}
+\end{equation}
+
+Para fuentes de espectro ancho, la condición para que la dispersión no limite la transmisión es $B \cdot \Delta\tau \leq 1/4$ \cite{b15}. Con la tasa de línea $B = 1.25 \, [Gbps]$:
+\begin{equation}
+    B \cdot \Delta\tau = 1.25 \times 10^{9} \times 169 \times 10^{-12} = 0.21 < 0.25
+    \label{eq_16}
+\end{equation}
+
+Aun en el peor caso, la condición se cumple, por lo que el enlace de $8 \, [km]$ está efectivamente limitado por atenuación. En la práctica, el láser emite cerca de $1310 \, [nm]$, donde la dispersión es prácticamente nula, y el ensanchamiento real es mucho menor.
+
+
 \subsection{Conclusión de Viabilidad Técnica}
 \label{sec_3.5}
-Puesto que la potencia recibida de $-13.90 \, [dBm]$ supera holgadamente la sensibilidad mínima del receptor ($-20.00 \, [dBm]$), el enlace es técnicamente viable. El margen de seguridad obtenido ($6.10 \, [dB]$) satisface el estándar de diseño recomendado ($3 \, [dB] \text{ a } 6 \, [dB]$), asegurando que el sistema tolerará degradaciones por envejecimiento de componentes y eventuales re-empalmes.
-
-Para calcular la potencia recibida en condiciones de espacio libre, se emplea la ecuación de transmisión de Friis:
-\begin{equation}
-    P_{r} = P_{t} \cdot G_{t} \cdot G_{r} \left(\frac{\lambda}{4 \pi d}\right)^{2}
-    \label{eq_11}
-\end{equation}
-
-La capacidad máxima teórica del canal de comunicaciones, conociendo el ancho de banda y la relación señal a ruido, está dada por el teorema de Shannon-Hartley:
-\begin{equation}
-    C = BW \cdot \log_{2}\left(1 + \frac{S}{N}\right)
-    \label{eq_12}
-\end{equation}
-
-Finalmente, la pérdida básica por propagación en el espacio libre (Path Loss) se puede expresar en decibelios mediante la siguiente relación:
-\begin{equation}
-    L_{p} = 20 \cdot \log_{10}\left(\frac{4 \pi d}{\lambda}\right)
-    \label{eq_13}
-\end{equation}
+El enlace es \textbf{viable}. En el caso más desfavorable (potencia de transmisión mínima y atenuación máxima de la fibra), la potencia recibida de $-14.54 \, [dBm]$ supera en $9.46 \, [dB]$ la sensibilidad del receptor ($-24 \, [dBm]$). Reservando $3 \, [dB]$ de margen de seguridad, quedan $6.46 \, [dB]$ de margen sobrante. En el caso más favorable, la potencia recibida de $-8.04 \, [dBm]$ se mantiene por debajo del nivel de sobrecarga de $0 \, [dBm]$, y la dispersión cromática no limita la transmisión. Aun si se adoptara el margen de seguridad máximo recomendado de $6 \, [dB]$, el enlace seguiría cumpliendo con $3.46 \, [dB]$ de holgura.
