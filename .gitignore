@@ -17,4 +17,4 @@
 *-blx.bib
 
 # Opcional: descomenta si NO quieres incluir el PDF compilado en el repositorio
-# *.pdf
+*.pdf
