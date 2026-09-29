@@ -18,3 +18,13 @@
 
 # Opcional: descomenta si NO quieres incluir el PDF compilado en el repositorio
 *.pdf
+
+# Otros temporales de LaTeX
+*.bbl-SAVE-ERROR
+*.bcf-SAVE-ERROR
+*.synctex(busy)
+*.dvi
+*.xdv
+*.nav
+*.snm
+*.vrb
