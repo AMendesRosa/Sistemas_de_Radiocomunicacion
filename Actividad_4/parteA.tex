@@ -4,61 +4,117 @@ Para el dimensionamiento del enlace óptico punto a punto de $8 \, [km]$, se sel
 
 
 \subsection{Transceptor Óptico (SFP)}
+Se selecciona un módulo transceptor del tipo \textbf{SFP 1000BASE-LX}, modelo \textit{ProLabs SFP-1000BASE-LX-I-C}, el cual trabaja a $1310 \, [nm]$ sobre fibra monomodo con conector \textit{LC} dúplex, es decir, utiliza una fibra para transmisión y otra para recepción, tal como requiere el enlace. Según su hoja de datos \cite{b1}, presenta los parámetros técnicos de la \autoref{fig:fig_1} y la \autoref{fig:fig_2}:
 \label{sec_2.1}
 Se selecciona un módulo transceptor del tipo \textbf{SFP 1000BASE-LX} el cual según su hoja de datos\cite{b1}, presenta los siguientes parámetros tecnicos:
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{Figura 1.png}
-    \caption{Módulo transceptor SFP 1000BASE-LX. Fuente: Hoja de datos del fabricante. \cite{b1}}
+    \caption{Características ópticas del transceptor SFP 1000BASE-LX. Fuente: Hoja de datos del fabricante \cite{b1}.}
     \label{fig:fig_1}
 \end{figure}
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{Figura 2.png}
-    \caption{Módulo transceptor SFP 1000BASE-LX. Fuente: Hoja de datos del fabricante. \cite{b1}}
+    \caption{Valores máximos absolutos del transceptor SFP 1000BASE-LX. Fuente: Hoja de datos del fabricante \cite{b1}.}
     \label{fig:fig_2}
 \end{figure}
 
-De las \autoref{fig:fig_1} y \autoref{fig:fig_2} se extraen los siguientes parámetros de operación:
+De las figuras se extraen los siguientes parámetros de operación:
 \begin{itemize}
-    \item \underline{Longitud de onda de operación ($\lambda$):} $1310 \, [nm]$.
-    \item \underline{Potencia de transmisión ($P_{t}$):} Mínima de $-9.5 \, dBm$ y máxima de $-3.0 \, [dBm]$ (para el cálculo de enlace conservador se adopta $P_t = -9.5 \, dBm$).
-    \item \underline{Sensibilidad del receptor ($S_r$):} $-20.0 \, [dBm]$.
-    \item \underline{Potencia de sobrecarga ($P_{sat}$):} $-3.0 \, [dBm]$.
-    \item \underline{Justificación:} El estándar 1000BASE-LX cubre holgadamente la distancia de $8 \, [km]$ a $1310 \, [nm]$, operando en la zona de dispersión cromática prácticamente nula de las fibras monomodo estándar.
+    \item \underline{Longitud de onda de operación ($\lambda$):} $1310 \, [nm]$ (rango de $1270$ a $1355 \, [nm]$).
+    \item \underline{Potencia de transmisión ($P_{t}$):} mínima de $-9.5 \, [dBm]$ y máxima de $-3 \, [dBm]$.
+    \item \underline{Sensibilidad del receptor ($S_r$):} $-24 \, [dBm]$.
+    \item \underline{Potencia de sobrecarga del receptor ($P_{sat}$):} $0 \, [dBm]$.
+    \item \underline{Tasa máxima:} $1.25 \, [Gbps]$, suficiente para \textit{Gigabit Ethernet} ($1 \, [Gbps]$ de datos con codificación 8B/10B).
 \end{itemize}
 
+El \textit{Optical Budget} (presupuesto óptico) es la máxima atenuación que puede introducir el trayecto para que la señal llegue al receptor con un nivel igual a su sensibilidad. Siguiendo un criterio conservador, se calcula con la potencia de transmisión mínima garantizada por el fabricante \cite{b7}:
+\begin{equation}
+    OB = P_{t,min} - S_r = -9.5 \, [dBm] - (-24 \, [dBm]) = 14.5 \, [dB]
+    \label{eq:optical_budget}
+\end{equation}
 
+Si se utilizara la potencia máxima, el presupuesto sería de $21 \, [dB]$; sin embargo, ese valor describe el caso favorable y no garantiza el funcionamiento del enlace, por lo que se adopta $OB = 14.5 \, [dB]$ para el diseño.
+
+\textbf{Justificación:} el estándar 1000BASE-LX cubre la distancia de $8 \, [km]$ a $1310 \, [nm]$, longitud de onda que coincide con la zona de dispersión cromática prácticamente nula de las fibras monomodo estándar, por lo que el enlace queda limitado únicamente por atenuación.
+
+
+\subsection{Fibra Óptica}
+\subsubsection{Tipo de fibra: G.652.D frente a G.657}
+La consigna plantea elegir entre dos tipos de fibra monomodo:
+\begin{itemize}
+    \item \underline{UIT-T G.652.D} \cite{b5}: fibra monomodo estándar de bajo pico de agua (\textit{Low Water Peak}), optimizada para $1310 \, [nm]$ y utilizable en todo el rango de $1260$ a $1625 \, [nm]$. Es la fibra de uso general en redes troncales y de transporte.
+    \item \underline{UIT-T G.657} \cite{b6}: fibra monomodo insensible a curvaturas (\textit{bend-insensitive}). La categoría G.657.A es compatible con G.652.D, pero admite radios de curvatura mucho menores (de $10$ a $7.5 \, [mm]$), por lo que se emplea principalmente en instalaciones internas, acometidas FTTH y cajas con poco espacio.
+\end{itemize}
+
+Ambas presentan una atenuación similar a $1310 \, [nm]$, por lo que la diferencia está en la aplicación. Se selecciona la \textbf{fibra G.652.D}, ya que el enlace es un tramo troncal de $8 \, [km]$ en ducto subterráneo, donde el cable se instala respetando radios de curvatura amplios y la ventaja de la G.657 frente a macrocurvaturas no aporta beneficios que justifiquen su mayor costo. Además, es la fibra recomendada por la bibliografía de la cátedra para este tipo de enlaces \cite{b7}.
+
+\subsubsection{Cable seleccionado}
+Se adopta el cable \textbf{Lightera CFOA-SM-DDR-S 04F TS G-652D (PFV) NR}, cable óptico dieléctrico totalmente seco para ductos, con protección dieléctrica contra roedores, fabricado según la norma ABNT NBR 14773 \cite{b2}:
 \subsection{Fibra Óptica - [CAMBIAR]}
 \label{sec_2.2}
 Se adopta un cable de fibra óptica monomodo clasificado bajo la recomendación \textbf{ITU-T G.652.D} (Low Water Peak)[cite: 3].
 \begin{itemize}
-    \item \textbf{Atenuación específica ($\alpha$):} $0.35$~dB/km a 1310~nm[cite: 1, 3].
-    \item \textbf{Estructura del cable:} Construcción de tubo holgado (\textit{loose tube}) relleno de gel antihumedad, con cubierta exterior de polietileno de alta densidad (HDPE) y miembro central de tracción dieléctrico (FRP) con armadura de cinta de acero corrugado.
-    \item \textbf{Justificación:} La fibra G.652.D elimina el pico de agua y es la norma estándar para tendidos de transporte[cite: 3]. La chaqueta de tubo holgado con armadura metálica resulta imprescindible para instalaciones subterráneas en ductos, protegiendo el núcleo contra humedad, roedores y esfuerzos mecánicos de tracción durante la canalización[cite: 1].
+    \item \underline{Fibras:} 4 fibras monomodo G.652.D, de las cuales 2 se utilizan para el enlace (transmisión y recepción) y 2 quedan de reserva para mantenimiento o futuras ampliaciones.
+    \item \underline{Atenuación ($\alpha$):} $0.38 \, [dB/km]$ máxima a $1310 \, [nm]$. La especificación del cable remite las características ópticas a la especificación de fibra monomodo del fabricante; el valor adoptado es la atenuación máxima que Lightera declara para fibra G.652.D cableada \cite{b3}. Se utiliza el valor máximo para el cálculo conservador del presupuesto.
+    \item \underline{Estructura:} tubos holgados (\textit{loose tube}) con núcleo totalmente seco protegido contra la humedad mediante materiales hidroexpansibles, elemento central de FRP (plástico reforzado con fibra de vidrio), filamentos dieléctricos de tracción, capa interna termoplástica, capa de fibra de vidrio de $1.3 \, [mm]$ contra roedores y cubierta externa de polietileno negro resistente a la intemperie. Diámetro nominal de $12.4 \, [mm]$ y masa de $127 \, [kg/km]$.
+    \item \underline{Características mecánicas:} carga máxima de instalación de $2000 \, [N]$ y compresión de $1000 \, [N]$; radio mínimo de curvatura de $20$ veces el diámetro durante la instalación y $10$ veces una vez instalado; temperatura de operación de $-20$ a $65 \, [^\circ C]$.
+    \item \underline{Presentación:} bobinas de $4000 \, [m]$, por lo que el tramo de $8 \, [km]$ requiere necesariamente empalmes intermedios, lo cual es coherente con las cajas de empalme previstas en la ruta.
 \end{itemize}
 
+\textbf{Justificación:} al ser totalmente dieléctrico, el cable es inmune a inducciones y descargas eléctricas y no requiere puesta a tierra. Su núcleo seco protegido contra la penetración de agua y su resistencia a la tracción lo hacen apto para ser tendido en ductos subterráneos, donde puede quedar expuesto a humedad o inundaciones y es sometido a esfuerzos durante el tirado. La capa de fibra de vidrio lo protege contra el ataque de roedores, un riesgo habitual en canalizaciones subterráneas, sin agregar elementos metálicos.
 
+
+\subsection{Conectores y Empalmes}
+Todos los conectores son del tipo \textit{LC/UPC}, compatibles con el transceptor seleccionado. Considerando el recorrido de una fibra (un sentido de transmisión), desde el SFP del \textit{Router A} hasta el SFP del \textit{Router B}, se tienen los siguientes elementos:
 \subsection{Empalmes y Conectores}
 \label{sec_2.3}
 Para la interconexión física de la red se determinan los siguientes elementos y eventos por cada fibra/sentido de transmisión:
 \begin{itemize}
-    \item \underline{Conectores ($N_{c} = 4$):} Conectores tipo \textit{LC/UPC} (Ultra Physical Contact). Se contabilizan dos conectores en los patchcords de conexión hacia los equipos activos y dos en los adaptadores de panel del \textit{ODF}. Se asigna una pérdida por inserción de $0.3 \, [dB]$ por acoplamiento conectorizado.
-    \item \underline{Empalmes por fusión ($N_{e} = 4$):} La línea de transmisión presenta 4 empalmes distribuidos así:
+    \item \underline{Patchcords ($2$):} uno en cada extremo, entre el SFP y el panel del ODF. Cada patchcord tiene $2$ conectores LC/UPC, uno hacia el SFP y otro hacia el adaptador del ODF.
+    \item \underline{Adaptadores de panel ($2$):} uno en cada ODF, donde se acopla el patchcord con el pigtail.
+    \item \underline{Pigtails ($2$):} uno en cada ODF. Tienen un conector LC/UPC que se inserta en el adaptador y su otro extremo se empalma por fusión con la fibra del cable exterior.
+    \item \underline{Empalmes por fusión ($4$):}
     \begin{enumerate}
-        \item 1 empalme en el \textit{ODF A} (unión del pigtail monomodo con la fibra del cable exterior).
-        \item 2 empalmes en cajas de paso/registro subterráneas intermedias dispuestas a lo largo del tramo de $8 \, [km]$.
-        \item 1 empalme en el \textit{ODF B} (unión de la fibra del cable exterior con el pigtail de remate).
+        \item 1 empalme en el \textit{ODF A} (pigtail con fibra del cable exterior).
+        \item 2 empalmes en las cajas de empalme subterráneas intermedias, que dividen el tendido en 3 tramos de cable.
+        \item 1 empalme en el \textit{ODF B} (fibra del cable exterior con pigtail).
     \end{enumerate}
-    Se adopta una atenuación típica de $0.1 \, [dB]$ por cada empalme efectuado mediante fusionadora por alineación de núcleo.
 \end{itemize}
+
+En total, cada fibra atraviesa $6$ conectores LC/UPC ($4$ de los patchcords y $2$ de los pigtails), $2$ adaptadores y $4$ empalmes por fusión. Como el enlace es bidireccional con dos fibras, la cantidad de elementos físicos a instalar es el doble, pero el presupuesto se calcula por sentido, ya que ambas fibras recorren el mismo trayecto.
+
+Las pérdidas asignadas a cada elemento, tomadas de los valores típicos de la bibliografía \cite{b7}, se resumen en la \autoref{tab:perdidas_elementos}.
+
+\begin{table}[H]
+    \centering
+    \caption{Pérdidas típicas asignadas a cada elemento del enlace.}
+    \label{tab:perdidas_elementos}
+    \begin{tabular}{|l|c|c|}
+        \hline
+        \textbf{Elemento} & \textbf{Cantidad por fibra} & \textbf{Pérdida unitaria} \\
+        \hline
+        Fibra G.652.D a $1310 \, [nm]$ & $8 \, [km]$ & $0.38 \, [dB/km]$ \\
+        Patchcord LC/UPC (2 conectores) & $2$ & $0.4 \, [dB]$ \\
+        Pigtail LC/UPC & $2$ & $0.2 \, [dB]$ \\
+        Adaptador de panel LC/UPC & $2$ & $0.15 \, [dB]$ \\
+        Empalme por fusión & $4$ & $0.1 \, [dB]$ \\
+        \hline
+    \end{tabular}
+\end{table}
 
 
 \subsection{Distribuidor Óptico (ODF)}
+En cada extremo del enlace (\textit{Sitio A} y \textit{Sitio B}) se instala un distribuidor interno óptico \textbf{Lightera DIO BW12} \cite{b4}, en el cual termina el cable exterior. Sus características principales son:
 \label{sec_2.4}
 En cada extremo del enlace (Sitio \textit{A} y Sitio \textit{B}) se dispone un organizador o distribuidores de fibra óptica (\textit{ODF}) montable en rack de $19$ pulgadas.
 \begin{itemize}
-    \item \underline{Componentes integrados:} Bandejas de empalme por fusión con casetes de protección, chasis para adaptadores de panel \textit{LC/UPC} dúplex y pigtails monomodo de $1.5 \, [m]$.
-    \item \underline{Justificación:} El \textit{ODF} actúa como punto de demarcación y transición entre el cable exterior rígido de estructura holgada y los cables de parcheo flexibles que conectan a los \textit{SFPs}. Protege mecánicamente los empalmes por fusión y simplifica las tareas de prueba, mantenimiento y reconfiguración del enlace.
+    \item \underline{Capacidad:} hasta $12$ empalmes en una bandeja articulada reversible, suficiente para las $4$ fibras del cable (las $2$ activas y las $2$ de reserva).
+    \item \underline{Acceso:} placa de hasta $12$ adaptadores LC dúplex, compatible con los conectores LC/UPC del enlace.
+    \item \underline{Cable de entrada:} admite cables \textit{loose tube} de hasta $14 \, [mm]$ de diámetro, por lo que acepta el cable CFOA-SM-DDR de $12.4 \, [mm]$, y cuenta con un elemento de fijación para los elementos de tracción del cable.
+    \item \underline{Instalación:} montaje en rack de $19"$ o sobre superficie, en ambiente interno.
 \end{itemize}
+
+\textbf{Justificación:} el ODF actúa como punto de demarcación y transición entre el cable exterior de estructura holgada y los patchcords flexibles que conectan a los SFP. Protege mecánicamente los empalmes por fusión, organiza las fibras de reserva y simplifica las tareas de prueba, mantenimiento y reconfiguración del enlace.
