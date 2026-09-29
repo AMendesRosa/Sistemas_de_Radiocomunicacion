@@ -1,3 +1,148 @@
 \section{Cálculo del Presupuesto de Potencia}
 \label{sec_3}
-...
+El cálculo del presupuesto de potencia permite verificar matemáticamente si la señal óptica emitida por el transceptor emisor llegará al receptor con un nivel de potencia adecuado, superando su sensibilidad y garantizando un margen de seguridad frente a futuras degradaciones del enlace.
+
+
+\subsection{Parámetros de Diseño y Ecuaciones Base}
+\label{sec_3_1}
+A partir de la selección de componentes realizada en la \autoref{sec_2}, se definen los parámetros de entrada para el cálculo del enlace:
+\begin{itemize}
+    \item \underline{Longitud del enlace ($L$)}: $8.0 \, [km]$
+    \item \underline{Longitud de onda ($\lambda$)}: $1310 \, [nm]$
+    \item \underline{Potencia de transmisión mínima ($P_{t}$)}: $-9.50 \, [dBm]$
+    \item \underline{Sensibilidad del receptor ($S_{r}$)}: $-20.00 \, [dBm]$
+    \item \underline{Atenuación específica de la fibra ($\alpha$)}: $0.35 \, [dB/km]$ (G.652.D a $1310 \, [nm]$)
+    \item \underline{Pérdida por conector ($A_{c}$)}: $0.30 \, [dB]$ por acople \textit{LC/UPC} ($N_{c} = 4$)
+    \item \underline{Pérdida por empalme ($A_{e}$)}: $0.10 \, [dB]$ por fusión ($N_{e} = 4$)
+\end{itemize}
+
+Las ecuaciones fundamentales del presupuesto óptico de potencia son:
+\begin{equation}
+    A_{total} = (L \cdot \alpha) + (N_{c} \cdot A_{c}) + (N_{e} \cdot A_{e})
+    \label{eq_1}
+\end{equation}
+
+\begin{equation}
+    P_{r} = P_{t} - A_{total}
+    \label{eq_2}
+\end{equation}
+
+\begin{equation}
+    M_{s} = P_{r} - S_{r}
+    \label{eq_3}
+\end{equation}
+
+
+\subsection{Cálculo Detallado de Atenuación del Canal}
+\label{sec_3.2}
+\begin{enumerate}
+    \item \underline{Pérdida en la fibra óptica ($A_{\text{fibra}}$)}:
+    \begin{equation}
+        A_{fibra} = 8.0 \, [km] \times 0.35 \, \left[\frac{dB}{km}\right] = 2.80 \, [dB]
+        \label{eq_4}
+    \end{equation}
+    
+    \item \underline{Pérdida total por conectores ($A_{conectores}$)}:
+    \begin{equation}
+        A_{conectores} = 4 \times 0.30 \, [dB] = 1.20 \, [dB]
+        \label{eq_5}
+    \end{equation}
+    
+    \item \underline{Pérdida total por empalmes de fusión ($A_{empalmes}$)}:
+    \begin{equation}
+        A_{empalmes} = 4 \times 0.10 \, [dB] = 0.40 \, [dB]
+        \label{eq_6}
+    \end{equation}
+    
+    \item \underline{Atenuación total acumulada ($A_{total}$)}:
+    \begin{equation}
+        A_{total} = 2.80 \, [dB] + 1.20 \, [dB] + 0.40 \, [dB] = 4.40 \, [dB]
+        \label{eq_7}
+    \end{equation}
+\end{enumerate}
+
+
+\subsection{Nivel de Potencia Recibida y Margen de Seguridad}
+\label{sec_3.3}
+El presupuesto óptico total disponible (\textit{PB}) proporcionado por la pareja transceptora es:
+\begin{equation}
+    PB = P_{t} - S_{r} = -9.50 \, [dBm] - (-20.00 \, [dBm]) = 10.50 \, [dB]
+    \label{eq_8}
+\end{equation}
+
+Restando las pérdidas físicas del canal a la potencia emitida, la potencia recibida en el extremo distante ($P_{r}$) resulta:
+\begin{equation}
+    P_{r} = P_{t} - A_{\text{total}} = -9.50 \, [dBm] - 4.40 \, [dB] = -13.90 \, [dBm]
+    \label{eq_9}
+\end{equation}
+
+El margen de seguridad final del enlace ($M_s$) es:
+\begin{equation}
+    M_{s} = P_{r} - S_{r} = -13.90 \, [dBm] - (-20.00 \, [dBm]) = 6.10 \, [dB]
+    \label{eq_10}
+\end{equation}
+
+
+\subsection{Resumen del Presupuesto Óptico}
+\label{sec_3.4}
+\begingroup
+    \footnotesize
+    \begin{longtable}
+        {|>{\centering\arraybackslash}m{4.8cm}
+         |>{\centering\arraybackslash}m{3cm}
+         |>{\centering\arraybackslash}m{4cm}|} \hline
+        \textbf{Parámetro/Elemento} & \textbf{Valor Unitario} & \textbf{Atenuación/Potencia Total} \\ \hline
+        \endfirsthead
+        
+        \multicolumn{3}{c}{\textit{Continuación de la página anterior}} \\ \hline
+        \textbf{Parámetro/Elemento} & \textbf{Valor Unitario} & \textbf{Atenuación/Potencia Total} \\ \hline
+        \endhead
+        
+        \hline 
+        \multicolumn{3}{c}{\textit{Continúa en la página siguiente...}} \\
+        \endfoot
+        
+        \hline
+        \caption{Resumen del Presupuesto de Potencia Óptica del Enlace de $8 \, [km]$.}
+        \label{tab:tab_1} \\
+        \endlastfoot
+            Potencia de Transmisión Mínima ($P_{t}$) & --- & $-9.50 \, [dBm]$ \\ \hline
+
+            Atenuación en Fibra ($8 \, [km]$) & $0.35 \, \left[\frac{dB}{km}\right]$ & $2.80 \, [dB]$ \\ \hline
+            
+            Pérdida en Conectores ($4 \, [un.]$) & $0.30 \, \left[\frac{dB}{conector}\right]$ & $1.20 \, [dB]$ \\ \hline
+            
+            Pérdida en Empalmes ($4 \, [un.]$) & $0.10 \, \left[\frac{dB}{empalme}\right]$ & $0.40 \, [dB]$ \\ \hline
+            
+            Atenuación Total del Canal ($A_{total}$) & --- & $\mathbf{4.40 \, [dB]}$ \\ \hline
+            
+            Potencia Recibida Calculada ($P_{r}$) & --- & $\mathbf{-13.90 \, [dBm]}$ \\ \hline
+            
+            Sensibilidad Mínima del Receptor ($S_{r}$) & --- & $-20.00 \, [dBm]$ \\ \hline
+            
+            Margen de Seguridad Obtenido ($M_{s}$) & --- & $\mathbf{6.10 \, [dB]}$ \\ \hline
+    \end{longtable}
+\endgroup
+
+
+\subsection{Conclusión de Viabilidad Técnica}
+\label{sec_3.5}
+Puesto que la potencia recibida de $-13.90 \, [dBm]$ supera holgadamente la sensibilidad mínima del receptor ($-20.00 \, [dBm]$), el enlace es técnicamente viable. El margen de seguridad obtenido ($6.10 \, [dB]$) satisface el estándar de diseño recomendado ($3 \, [dB] \text{ a } 6 \, [dB]$), asegurando que el sistema tolerará degradaciones por envejecimiento de componentes y eventuales re-empalmes.
+
+Para calcular la potencia recibida en condiciones de espacio libre, se emplea la ecuación de transmisión de Friis:
+\begin{equation}
+    P_{r} = P_{t} \cdot G_{t} \cdot G_{r} \left(\frac{\lambda}{4 \pi d}\right)^{2}
+    \label{eq_11}
+\end{equation}
+
+La capacidad máxima teórica del canal de comunicaciones, conociendo el ancho de banda y la relación señal a ruido, está dada por el teorema de Shannon-Hartley:
+\begin{equation}
+    C = BW \cdot \log_{2}\left(1 + \frac{S}{N}\right)
+    \label{eq_12}
+\end{equation}
+
+Finalmente, la pérdida básica por propagación en el espacio libre (Path Loss) se puede expresar en decibelios mediante la siguiente relación:
+\begin{equation}
+    L_{p} = 20 \cdot \log_{10}\left(\frac{4 \pi d}{\lambda}\right)
+    \label{eq_13}
+\end{equation}

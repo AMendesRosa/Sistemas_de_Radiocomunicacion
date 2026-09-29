@@ -4,6 +4,7 @@ Para el dimensionamiento del enlace óptico punto a punto de $8 \, [km]$, se sel
 
 
 \subsection{Transceptor Óptico (SFP)}
+\label{sec_2.1}
 Se selecciona un módulo transceptor del tipo \textbf{SFP 1000BASE-LX} el cual según su hoja de datos\cite{b1}, presenta los siguientes parámetros tecnicos:
 \begin{figure}[H]
     \centering
@@ -30,6 +31,7 @@ De las \autoref{fig:fig_1} y \autoref{fig:fig_2} se extraen los siguientes pará
 
 
 \subsection{Fibra Óptica - [CAMBIAR]}
+\label{sec_2.2}
 Se adopta un cable de fibra óptica monomodo clasificado bajo la recomendación \textbf{ITU-T G.652.D} (Low Water Peak)[cite: 3].
 \begin{itemize}
     \item \textbf{Atenuación específica ($\alpha$):} $0.35$~dB/km a 1310~nm[cite: 1, 3].
@@ -39,6 +41,7 @@ Se adopta un cable de fibra óptica monomodo clasificado bajo la recomendación 
 
 
 \subsection{Empalmes y Conectores}
+\label{sec_2.3}
 Para la interconexión física de la red se determinan los siguientes elementos y eventos por cada fibra/sentido de transmisión:
 \begin{itemize}
     \item \underline{Conectores ($N_{c} = 4$):} Conectores tipo \textit{LC/UPC} (Ultra Physical Contact). Se contabilizan dos conectores en los patchcords de conexión hacia los equipos activos y dos en los adaptadores de panel del \textit{ODF}. Se asigna una pérdida por inserción de $0.3 \, [dB]$ por acoplamiento conectorizado.
@@ -53,6 +56,7 @@ Para la interconexión física de la red se determinan los siguientes elementos 
 
 
 \subsection{Distribuidor Óptico (ODF)}
+\label{sec_2.4}
 En cada extremo del enlace (Sitio \textit{A} y Sitio \textit{B}) se dispone un organizador o distribuidores de fibra óptica (\textit{ODF}) montable en rack de $19$ pulgadas.
 \begin{itemize}
     \item \underline{Componentes integrados:} Bandejas de empalme por fusión con casetes de protección, chasis para adaptadores de panel \textit{LC/UPC} dúplex y pigtails monomodo de $1.5 \, [m]$.
