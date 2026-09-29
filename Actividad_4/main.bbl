@@ -16,5 +16,26 @@
   {}
 \endgroup
 
-\datalist[entry]{none/global//global/global/global}\enddatalist
+\datalist[entry]{none/global//global/global/global}
+  \entry{b1}{manual}{}{}
+    \name{author}{1}{}{%
+      {{hash=P}{%
+         family={{ProLabs}},
+         familyi={P\bibinitperiod},
+      }}%
+    }
+    \list{organization}{1}{%
+      {ProLabs}%
+    }
+    \strng{namehash}{P1}
+    \strng{fullhash}{P1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{SFP-1000BASE-LX-I-C Transceiver Datasheet}
+    \verb{url}
+    \verb https://prolabs.com/Datasheets/SFP-1000BASE-LX-I-C_datasheets_EN.pdf
+    \endverb
+    \field{type}{Datasheet}
+  \endentry
+\enddatalist
 \endinput

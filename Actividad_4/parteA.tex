@@ -4,32 +4,32 @@ Para el dimensionamiento del enlace óptico punto a punto de $8 \, [km]$, se sel
 
 
 \subsection{Transceptor Óptico (SFP)}
-Se selecciona un módulo transceptor del tipo \textit{SFP 1000BASE-LX} el cual según su hoja de datos\cite{b1}, presenta los siguientes parámetros tecnicos:
+Se selecciona un módulo transceptor del tipo \textbf{SFP 1000BASE-LX} el cual según su hoja de datos\cite{b1}, presenta los siguientes parámetros tecnicos:
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{Figura 1.png}
     \caption{Módulo transceptor SFP 1000BASE-LX. Fuente: Hoja de datos del fabricante. \cite{b1}}
-    \label{fig_fig_1}
+    \label{fig:fig_1}
 \end{figure}
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{Figura 2.png}
     \caption{Módulo transceptor SFP 1000BASE-LX. Fuente: Hoja de datos del fabricante. \cite{b1}}
-    \label{fig_fig_2}
+    \label{fig:fig_2}
 \end{figure}
 
 De las \autoref{fig:fig_1} y \autoref{fig:fig_2} se extraen los siguientes parámetros de operación:
 \begin{itemize}
     \item \underline{Longitud de onda de operación ($\lambda$):} $1310 \, [nm]$.
     \item \underline{Potencia de transmisión ($P_{t}$):} Mínima de $-9.5 \, dBm$ y máxima de $-3.0 \, [dBm]$ (para el cálculo de enlace conservador se adopta $P_t = -9.5 \, dBm$).
-    \item \underline{Sensibilidad del receptor ($S_r$):} $-20.0 \, [dBm]$ [cite: 1].
+    \item \underline{Sensibilidad del receptor ($S_r$):} $-20.0 \, [dBm]$.
     \item \underline{Potencia de sobrecarga ($P_{sat}$):} $-3.0 \, [dBm]$.
     \item \underline{Justificación:} El estándar 1000BASE-LX cubre holgadamente la distancia de $8 \, [km]$ a $1310 \, [nm]$, operando en la zona de dispersión cromática prácticamente nula de las fibras monomodo estándar.
 \end{itemize}
 
 
-\subsection{Fibra Óptica}
+\subsection{Fibra Óptica - [CAMBIAR]}
 Se adopta un cable de fibra óptica monomodo clasificado bajo la recomendación \textbf{ITU-T G.652.D} (Low Water Peak)[cite: 3].
 \begin{itemize}
     \item \textbf{Atenuación específica ($\alpha$):} $0.35$~dB/km a 1310~nm[cite: 1, 3].
@@ -39,17 +39,18 @@ Se adopta un cable de fibra óptica monomodo clasificado bajo la recomendación 
 
 
 \subsection{Empalmes y Conectores}
-Para la interconexión física de la red se determinan los siguientes elementos y eventos por cada fibra/sentido de transmisión[cite: 1]:
+Para la interconexión física de la red se determinan los siguientes elementos y eventos por cada fibra/sentido de transmisión:
 \begin{itemize}
-    \item \textbf{Conectores ($N_c = 4$):} Conectores tipo LC/UPC (Ultra Physical Contact)[cite: 3]. Se contabilizan dos conectores en los patchcords de conexión hacia los equipos activos y dos en los adaptadores de panel del ODF[cite: 3]. Se asigna una pérdida por inserción de $0.3$~dB por acoplamiento conectorizado[cite: 3].
-    \item \textbf{Empalmes por fusión ($N_e = 4$):} La línea de transmisión presenta 4 empalmes distribuidos así:
+    \item \underline{Conectores ($N_{c} = 4$):} Conectores tipo \textit{LC/UPC} (Ultra Physical Contact). Se contabilizan dos conectores en los patchcords de conexión hacia los equipos activos y dos en los adaptadores de panel del \textit{ODF}. Se asigna una pérdida por inserción de $0.3 \, [dB]$ por acoplamiento conectorizado.
+    \item \underline{Empalmes por fusión ($N_{e} = 4$):} La línea de transmisión presenta 4 empalmes distribuidos así:
     \begin{enumerate}
-        \item 1 empalme en el ODF A (unión del pigtail monomodo con la fibra del cable exterior)[cite: 3].
-        \item 2 empalmes en cajas de paso/registro subterráneas intermedias dispuestas a lo largo del tramo de 8~km[cite: 1].
-        \item 1 empalme en el ODF B (unión de la fibra del cable exterior con el pigtail de remate)[cite: 3].
+        \item 1 empalme en el \textit{ODF A} (unión del pigtail monomodo con la fibra del cable exterior).
+        \item 2 empalmes en cajas de paso/registro subterráneas intermedias dispuestas a lo largo del tramo de $8 \, [km]$.
+        \item 1 empalme en el \textit{ODF B} (unión de la fibra del cable exterior con el pigtail de remate).
     \end{enumerate}
-    Se adopta una atenuación típica de $0.1$~dB por cada empalme efectuado mediante fusionadora por alineación de núcleo[cite: 3].
+    Se adopta una atenuación típica de $0.1 \, [dB]$ por cada empalme efectuado mediante fusionadora por alineación de núcleo.
 \end{itemize}
+
 
 \subsection{Distribuidor Óptico (ODF)}
 En cada extremo del enlace (Sitio A y Sitio B) se dispone un organizador o distribuidores de fibra óptica (\textbf{ODF}) montable en rack de 19 pulgadas[cite: 3].
