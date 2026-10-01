@@ -1,0 +1,116 @@
+\section{Marco Teórico}
+
+\subsection{Sistemas de Comunicaciones Ópticas}
+Un sistema de comunicación óptica convierte una señal eléctrica de información en una onda electromagnética en el espectro óptico, transmite la luz a través de un canal y la reconvierte en una señal eléctrica en el receptor (ver \autoref{fig:diagrama1}). El canal de transmisión puede ser el espacio libre (propagación no guiada) o un medio confinado como la fibra óptica (propagación guiada).
+
+\begin{figure}[H]
+    \centering
+    \fbox{\includegraphics[width=0.6\linewidth]{diagrama1.png}}
+    \caption{Diagrama elemental de un sistema de comunicación óptico.}
+    \label{fig:diagrama1}
+\end{figure}
+
+\subsection{Propagación por Espacio Libre y en Fibra Óptica}
+
+\subsubsection{Transmisión en Espacio Libre}
+En espacio libre, la radiación emitida por la fuente viaja y obedece las leyes de la óptica geométrica, como la ley de reflexión especular, donde el ángulo de incidencia es igual al ángulo de reflexión respecto a la normal en el mismo medio. Esto permite la manipulación y redireccionamiento del haz de luz mediante elementos reflectantes externos (como es el caso de espejos).
+
+\subsubsection{Estructura de la Fibra Óptica y Reflexión Total Interna}
+La fibra óptica es un conductor de luz con muy baja atenuación (en relación a los cable coaxiales), tal que se pueden lograr comunicaciones de miles de kilómetros. Consta de un núcleo cilíndrico construido de dióxido de silicio ($SiO_2$) con índice de refracción $\eta_1$, rodeado por un revestimiento con índice de refracción $\eta_2$, donde se cumple que $\eta_1 > \eta_2$.
+
+El confinamiento y guiado de la luz dentro del núcleo se basa en el fenómeno de la Reflexión Total Interna (RTI). La refracción en la interfaz núcleo-revestimiento se rige por la Ley de Snell (donde sí existe un rebote por cambio de medios):
+
+\begin{equation}
+\eta_1 \sin(\theta_i) = \eta_2 \sin(\theta_t)
+\end{equation}
+
+donde $\theta_i$ es el ángulo de incidencia y $\theta_t$ es el ángulo de refracción, medidos respecto a la normal de la interfaz. 
+
+El ángulo crítico ($\theta_c$) es el ángulo mínimo de incidencia a partir del cual no existe rayo refractado hacia el revestimiento ($\theta_t = 90^\circ$), reflejándose toda la energía dentro del núcleo:
+
+\begin{equation}
+\theta_c = \arcsin\left(\frac{n_2}{n_1}\right)
+\end{equation}
+
+\subsubsection{Cono de Aceptación y Apertura Numérica}
+
+Para que la luz ingresada por el extremo de la fibra cumpla la condición de RTI, debe ingresar dentro de un límite angular denominado cono de aceptación \autoref{fig:Cono}. La capacidad de captación de luz de la fibra se define mediante la Apertura Numérica (AN), es decir, el nivel de aceptancia de la FO para captar la energía entregada por la fuente óptica:
+
+\begin{equation}
+\text{AN} = \sin(\alpha_{\text{máx}}) = \eta_1 \cdot \sin(\theta_c) = \sqrt{n_1^2 - n_2^2} 
+\end{equation}
+
+donde $\alpha_{\text{máx}}$ representa el ángulo máximo de aceptación en el aire ($n_0 \approx 1$).
+
+\begin{figure}[H]
+    \centering
+    \fbox{\includegraphics[width=0.5\linewidth]{Cono.png}}
+    \caption{Cono de aceptación.}
+    \label{fig:Cono}
+\end{figure}
+
+
+\subsection{Componentes utilizados en FO}
+
+\subsubsection{Emisores de Luz}
+Los transmisores utilizan Diodos Emisores de Luz (LEDs) que operan tanto en el espectro visible como en el infrarrojo.
+
+\subsubsection{Detectores de Luz}
+El receptor emplea fotodiodos para convertir la potencia óptica incidente en una corriente eléctrica proporcional. Sus principales parámetros son:
+
+\begin{itemize}
+    \item \textbf{Sensibilidad Mínima [dBm]}: Mínima potencia de entrada necesaria para garantizar la correcta detección de bits o la calidad de la señal.
+    
+    \item \textbf{Potencia Máxima Admisible [dBm]}: Nivel de potencia límite que la interfaz del receptor puede soportar sin saturarse.
+    
+    \item \textbf{Responsitividad [A/W]}: Relación entre la corriente de salida y la potencia óptica de entrada. Mide la eficiencia de conversión.
+    
+    \item \textbf{Reflectancia:} Cuánto devuelve el sensor de la luz incidente.
+\end{itemize}
+
+
+\subsection{Clasificación y Características de las Fibras Ópticas}
+
+Las fibras ópticas se clasifican principalmente según el número de modos (trayectorias electromagnéticas) que permiten propagar en su interior, según la distribución del índice de refracción dentro del núcleo.
+
+\subsubsection{Clasificación según los Modos de Propagación}
+
+\begin{itemize}
+    \item \textbf{Fibra Monomodo (SMF - \textit{Single-Mode Fiber}):}
+    Posee un núcleo muy estrecho, típicamente de $8\text{ a } 10\,\mu\text{m}$ de diámetro. Debido a estas dimensiones tan reducidas respecto a la longitud de onda de trabajo ($\lambda$), solo se permite la propagación del modo fundamental.
+
+    \item \textbf{Fibra Multimodo (MMF - \textit{Multi-Mode Fiber}):}
+    Posee un núcleo sustancialmente mayor, típicamente de $50\,\mu\text{m}$ de diámetro. Permite que múltiples modos de luz viajen simultáneamente a través de diferentes ángulos de transmisión.
+    
+    Sufre de \textbf{dispersión intermodal}, ya que los diferentes modos recorren distancias distintas y llegan en tiempos diferentes al fotodetector, provocando ensanchamiento de los pulsos digitales y limitando la distancia y la velocidad máxima de transmisión.
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \fbox{\includegraphics[width=0.7\linewidth]{Modos.png}}
+    \caption{Dimensiones del cable según los modos.}
+    \label{fig:Modos}
+\end{figure}
+
+
+\subsection{Atenuación}
+La atenuación cuantifica la pérdida de potencia que sufre la señal óptica al propagarse por el medio de transmisión:
+
+\begin{equation}
+\alpha \, [\text{dB}] = 10 \log_{10}\left(\frac{P_{\text{entrada}}}{P_{\text{salida}}}\right)
+\end{equation}
+
+La fibra óptica más moderna tiene una atenuación de $0.15 \, [dB/km]$, es decir, cada $20 \, [km]$ la señal se reducie a la mitad de potencia.
+
+Debido a las pérdidas por longitud, un cable óptico largo presenta mayor atenuación que uno corto. Para mitigar esto en el receptor digital, se debe incrementar la potencia del emisor o ajustar el nivel del umbral digital, ya que si la señal que llega al receptor es muy débil, el receptor no detecta correctamente los bits y la tasa de error aumenta.
+
+Las curvas de la \autoref{fig:Atenuacion} muestran la variación del nivel de atenuación según incrementa la longitud de onda, para distintos tipos de fibra.
+
+\begin{figure}[H]
+    \centering
+    \fbox{\includegraphics[width=0.75\linewidth]{Atenuacion.png}}
+    \caption{Curvas de Atenuación según Longitud de Onda.}
+    \label{fig:Atenuacion}
+\end{figure}
+
+El ``Pico de Agua'' que logra verse es un aumento en la atenuación de la señal, causado cuando los iones hidróxido ($OH^-$) atrapados en el vidrio absorben longitudes de onda específicas al reaccionar con la humedad. Actualmente se fabrican fibras que casi no tienen pico de agua, llamadas fibras ZWPF (\textit{Zero Water Peak Fiber}) o fibras LWP (\textit{Low Water Peak}).

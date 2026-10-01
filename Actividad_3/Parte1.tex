@@ -1,0 +1,205 @@
+\section{Parte 1: Transmisión en Modo Analógico y Digital}
+
+\subsection{Práctico A: Modo Analógico}
+
+La intensidad de la luz es directamente proporcional a la señal de tensión de entrada (más un sesgo de continua). 
+
+\subsubsection{Materiales Necesarios}
+\begin{itemize}
+    \item Fuente de alimentación externa (\autoref{fig:alimentacion}).
+    \item Cables banana-cocodrilo (\autoref{fig:coco}).
+    \item Módulo Transmisor y Módulo Receptor del Kit (\autoref{fig:kit}).
+    \item Dispositivo reproductor de audio con salida Jack $3.5\,\text{mm}$.
+    \item Cable de audio mono $3.5\,\text{mm}$ a $3.5\,\text{mm}$ (\autoref{fig:jack}).
+    \item Espejo de prueba (\autoref{fig:kit}).
+    \item Cable óptico corto y cable óptico largo (\autoref{fig:kit}).
+\end{itemize}
+
+Las imágenes a continuación muestran las referencias a los elementos de control de operación del Receptor y Transmisor.
+
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}{0.4\linewidth}
+    \fbox{\includegraphics[width=\linewidth]{Transmisor.png}}
+    \caption{Transmisor}
+    \label{fig:transmisor}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}{0.45\linewidth}      
+    \fbox{\includegraphics[width=\linewidth]{Receptor.png}}
+    \caption{Receptor}
+    \label{fig:receptor}
+  \end{subfigure}
+  \caption{Referencias de Elementos de Control.}
+  \label{fig:referencias}
+\end{figure}
+
+
+
+\subsubsection{Práctico A.1: Transmisión de Señal de Audio por Espacio Libre}
+
+\subsubsection*{Consignas y Procedimiento}
+\begin{enumerate}
+    \item Colocar el interruptor 11 del receptor en OFF (altavoz de baja impedancia).
+    \item Colocar el interruptor 1 del receptor en OFF (buzzer).
+    \item Posicionar el transmisor y el receptor enfrentados a una distancia aproximada de $50\,\text{cm}$, alineando la salida 12 del transmisor (LED infrarrojo) con la entrada 12 del receptor (fotodiodo).
+    \item Conectar la fuente de alimentación externa a ambos equipos según el Anexo \ref{Anexo1}.
+    \item Seleccionar el modo analógico en ambos módulos (interruptor 7 del transmisor y 4 del receptor).
+    \item Ajustar el potenciómetro 8 del transmisor al mínimo (ganancia analógica).
+    \item Ajustar el potenciómetro 9 del transmisor al máximo (potencia de salida).
+    \item Reproducir audio en el reproductor a volumen máximo con el cable mono $3.5\,\text{mm}$ a la entrada analógica de baja impedancia (borne 21 del transmisor).
+    \item Colocar el interruptor 11 del receptor en ON (altavoz de baja impedancia).
+    \item Ajustar la ganancia analógica del receptor (potenciómetro 5) hasta obtener un nivel audible adecuado.
+    \item En caso de percibir distorsión armónica, reducir el volumen del dispositivo reproductor de audio.
+    \item Tapar el LED de alta luminosidad (salida 10 del transmisor) para verificar que la transmisión se efectúa mediante luz infrarroja (salida 12 del transmisor).
+    \item Orientar el transmisor a $90^\circ$ respecto del receptor y emplear el espejo para reflejar el haz infrarrojo, comprobando que se restablece el sonido en el altavoz.
+\end{enumerate}
+
+\subsubsection*{Resultados, Fotografías y Observaciones}
+
+El experimento fue satisfactorio en cuanto a resultados, se siguieron los pasos al pipe de la letra y la señal audible pudo escucharse con claridad.
+
+\begin{figure}[H]
+   \centering
+   \fbox{\includegraphics[width=1\textwidth]{espejo.png}}
+   \caption{Disposición para la transmisión en espacio libre y reflexión con espejo.}
+   \label{fig:espejo}
+\end{figure}
+
+
+\subsubsection{Práctico A.2: Transmisión de Señal de Audio por Fibra Óptica}
+
+\subsubsection*{Consignas y Procedimiento}
+\begin{enumerate}
+    \item Configurar los modos y potenciómetros iniciales según los pasos 1 a 7 del práctico anterior.
+    \item Reproducir audio a volumen casi mínimo e ingresar la señal por el borne 21 del transmisor.
+    \item Interconectar la salida óptica 10 del transmisor con la entrada 12 del receptor mediante el cable óptico corto.
+    \item Encender el altavoz del receptor (interruptor 11 en ON).
+    \item Ajustar levemente el volumen de entrada si la señal resulta muy tenue.
+    \item Reducir la potencia del transmisor (potenciómetro 9) para evitar la saturación del fotodetector y eliminar la distorsión.
+    \item Ajustar la ganancia del receptor (potenciómetro 5) al nivel de audición óptimo.
+    \item Desconectar la fibra del receptor, conectar la fibra larga a este último y enfrentar manualmente los extremos de ambas fibras para verificar el acoplamiento y la continuidad de la señal.
+    \item Demostración del emisor indicador: Configurar la máxima potencia en TX y RX, conectar el cable corto al receptor y colocar su extremo libre cerca del LED indicador de salida (LED 11) del transmisor.
+\end{enumerate}
+
+\subsubsection*{Resultados, Fotografías y Observaciones}
+
+La transmisión por fibra óptica demostró ser capaz de concentrar una mayor cantidad de potencia hasta el receptor tal que, con la misma configuración de volúmenes que en el práctico anterior, la señal audible se escucha mucho más fuerte.
+
+Por otro lado, al desconectar la fibra y enfrentar de forma manual los conectores, logra escucharse la señal, con un nivel mayor al del práctico anterior, pero no tan alto como con los cables conectados correctamente.
+
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}{0.48\linewidth}
+    \fbox{\includegraphics[width=\linewidth]{A2_corto.png}}
+    \caption{Práctico con cable de F.O. corto}
+    \label{fig:corto}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}{0.48\linewidth}      
+    \fbox{\includegraphics[width=\linewidth]{A2_largo.png}}
+    \caption{Práctico con cable de F.O. largo}
+    \label{fig:largo}
+  \end{subfigure}
+  \begin{subfigure}{0.48\linewidth}      
+    \fbox{\includegraphics[width=\linewidth]{salida.png}}
+    \caption{Extremo del cable enfrentado al receptor}
+    \label{fig:salida}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}{0.48\linewidth}      
+    \fbox{\includegraphics[width=\linewidth]{1.png}}
+    \caption{Extremos de cables enfrentados entre sí}
+    \label{fig:1}
+  \end{subfigure}
+  \caption{Imágenes de práctico A.2.}
+  \label{fig:A2}
+\end{figure}
+
+
+
+\subsection{Práctico D: Modo Digital}
+
+En modo digital, la salida óptica conmuta entre estados ON y OFF en función del nivel de tensión digital a la entrada.
+
+\subsubsection{Materiales Necesarios}
+\begin{itemize}
+    \item Fuente de alimentación (\autoref{fig:alimentacion}).
+    \item Cables banana-cocodrilo (\autoref{fig:coco}).
+    \item Módulo Transmisor y Módulo Receptor del Kit (\autoref{fig:kit}).
+    \item Cable óptico corto y cable óptico largo (\autoref{fig:kit}).
+    \item Osciloscopio (\autoref{fig:osc}).
+\end{itemize}
+
+\subsubsection{Práctico D.1: Comunicaciones Digitales (Morse y Generador de Ondas)}
+
+\subsubsection*{Consignas y Procedimiento}
+\begin{enumerate}
+    \item Configurar el transmisor en modo digital (interruptor 7).
+    \item Seleccionar la posición TTL CONTACT/MORSE en el interruptor 6 del transmisor.
+    \item Ajustar la potencia de salida al máximo (potenciómetro 9).
+    \item Seleccionar modo digital en el receptor (interruptor 4).
+    \item Ajustar el control de umbral digital (potenciómetro 2 del receptor) en posición intermedia.
+    \item Encender el buzzer del receptor (interruptor 1).
+    \item Conectar el cable óptico corto entre la salida 10 (TX) y la entrada 12 (RX).
+    \item Conectar la fuente de alimentación externa a ambos equipos según el Anexo \ref{Anexo1}.
+    \item Presionar el pulsador Morse (interruptor 4 del transmisor) para verificar la emisión.
+    \item Desconectar la fibra del transmisor y generar señales digitales utilizando la luz ambiente, modulando la recepción mediante el ajuste del umbral (potenciómetro 2).
+    \item Reconectar la fibra óptica y fijar la frecuencia del generador interno del transmisor al mínimo (potenciómetro 5).
+    \item Cambiar el interruptor 6 del transmisor a la posición PSEUDO-RANDOM SIGNAL e incrementar progresivamente la frecuencia.
+    \item Seleccionar la posición SQUARE WAVE en el interruptor 6.
+    \item Variar la frecuencia con el potenciómetro 5 y comprobar el cambio de tono en el altavoz/buzzer del receptor.
+    \item Aumentar la frecuencia hasta que la respuesta visual del LED indicador 11 deje de percibir el parpadeo, mientras que el tono acústico continúe variando.
+\end{enumerate}
+
+\subsubsection*{Resultados, Fotografías y Observaciones}
+
+Al verificar la emisión de información con el pulsador Morse correctamente y se procedió a ajustar el umbral hasta lograr recibir las señales utilizando la luz del ambiente como medio transmisor.
+
+Luego se utilizaron las funciones de PSEUDO-RANDOM SIGNAL y SQUARE WAVE para recibir distintos tipos de señal y con el buzzer pudo escucharse el sonido de dichas señales. Al aumentar la frecuencia, fue posible notar como aumenta el tono que se escucha desde el buzzer, y el parpadeo del LED indicador deja de notarse y pasa a ser una luz constante para el ojo humano.
+
+
+\subsubsection{Práctico D.2: Mediciones en Funcionamiento Digital}
+
+\subsubsection*{Consignas y Procedimiento}
+\begin{enumerate}
+    \item Configurar los modos y potenciómetros iniciales según los pasos 1 a 8 del práctico anterior
+    \item Seleccionar la posición SQUARE WAVE en el interruptor 6.
+    \item Conectar un osciloscopio conectado en los bornes RS232 (blancos) y GROUND (verdes) en el transmisor y receptor. 
+    \item Comparar la onda emitida por el transmisor y la onda de salida del receptor en modo digital con el generador de onda cuadrada.
+    \item Comparar frecuencias, ancho de banda (para todo el rango de frecuencia de trabajo del generador) y amplitudes. 
+    \item Verificar si la onda del transmisor se encuentra en fase con el receptor y si existe o no inversión de la misma. 
+    \item Observar que ocurre al variar los potenciómetros 9 y 2 del transmisor y receptor respectivamente (potencia de salida y umbral digital).
+    \item Demostrar con el ajuste de los mismos que la atenuación del cable óptico largo es mayor a la del corto.
+\end{enumerate}
+
+\subsubsection*{Resultados, Fotografías y Observaciones}
+
+Se lograron ver las curvas de entrada y salida, en fase entre ellas, sin embargo, con las medidas del osciloscopio logra notarse una amplificación de la señal que no pudo definirse a qué se debe a pesar de haber leído el manual y haber configurado correctamente el osciloscopio.
+
+Puede notarse que la diferencia de frecuencia (ver \autoref{fig:inferior} y \autoref{fig:superior}) genera una deformación de la onda en (completar las causas posibles)
+
+La \autoref{fig:umbral} es consecuencia de haber seteado el umbral en el límite donde aún recibe la señal con el cable óptico corto, tal que a cambiar al cable óptico largo el aumento de atenuación hace que la señal que llega no pasa el umbral y en consecuencia no hay señal a la salida.
+
+
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}{0.42\linewidth}
+    \fbox{\includegraphics[width=\linewidth]{20hz.png}}
+    \caption{Límite inferior de frecuencia.}
+    \label{fig:inferior}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}{0.53\linewidth}      
+    \fbox{\includegraphics[width=\linewidth]{4khz.png}}
+    \caption{Límite superior de frecuencia.}
+    \label{fig:superior}
+  \end{subfigure}
+  \begin{subfigure}{0.53\linewidth}      
+    \fbox{\includegraphics[width=\linewidth]{umbral.png}}
+    \caption{Entrada y Salida cambiando a cable óptico largo.}
+    \label{fig:umbral}
+  \end{subfigure}
+  \caption{Imágenes de Práctico D.2.}
+  \label{fig:D2}
+\end{figure}
