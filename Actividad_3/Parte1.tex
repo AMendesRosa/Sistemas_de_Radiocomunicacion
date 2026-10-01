@@ -2,8 +2,6 @@
 
 \subsection{Práctico A: Modo Analógico}
 
-La intensidad de la luz es directamente proporcional a la señal de tensión de entrada (más un sesgo de continua). 
-
 \subsubsection{Materiales Necesarios}
 \begin{itemize}
     \item Fuente de alimentación externa (\autoref{fig:alimentacion}).
@@ -57,7 +55,7 @@ Las imágenes a continuación muestran las referencias a los elementos de contro
 
 \subsubsection*{Resultados, Fotografías y Observaciones}
 
-El experimento fue satisfactorio en cuanto a resultados, se siguieron los pasos al pipe de la letra y la señal audible pudo escucharse con claridad.
+El experimento fue satisfactorio en cuanto a resultados, se ejecutó según el procedimiento mencionado anteriormente y la señal audible pudo escucharse con claridad.
 
 \begin{figure}[H]
    \centering
@@ -87,6 +85,8 @@ El experimento fue satisfactorio en cuanto a resultados, se siguieron los pasos 
 La transmisión por fibra óptica demostró ser capaz de concentrar una mayor cantidad de potencia hasta el receptor tal que, con la misma configuración de volúmenes que en el práctico anterior, la señal audible se escucha mucho más fuerte.
 
 Por otro lado, al desconectar la fibra y enfrentar de forma manual los conectores, logra escucharse la señal, con un nivel mayor al del práctico anterior, pero no tan alto como con los cables conectados correctamente.
+
+Esto sucede porque en el espacio libre la luz sufre de atenuación geométrica, el haz diverge y la potencia decae con la distancia. En cambio, la fibra óptica confina el haz de luz mediante reflexión total interna, guiando casi toda la potencia óptica emitida directamente hacia el área activa del fotodetector, minimizando las pérdidas.
 
 \begin{figure}[H]
   \centering
@@ -119,8 +119,6 @@ Por otro lado, al desconectar la fibra y enfrentar de forma manual los conectore
 
 
 \subsection{Práctico D: Modo Digital}
-
-En modo digital, la salida óptica conmuta entre estados ON y OFF en función del nivel de tensión digital a la entrada.
 
 \subsubsection{Materiales Necesarios}
 \begin{itemize}
@@ -175,9 +173,9 @@ Luego se utilizaron las funciones de PSEUDO-RANDOM SIGNAL y SQUARE WAVE para rec
 
 \subsubsection*{Resultados, Fotografías y Observaciones}
 
-Se lograron ver las curvas de entrada y salida, en fase entre ellas, sin embargo, con las medidas del osciloscopio logra notarse una amplificación de la señal que no pudo definirse a qué se debe a pesar de haber leído el manual y haber configurado correctamente el osciloscopio.
+Se lograron ver las curvas de entrada y salida, en fase entre ellas, sin embargo, con la función de ``Medidas'' del osciloscopio logra notarse una amplificación de la señal que se atribuye a que el modo digital lleva la señal de salida al valor de la tensión de alimentación.
 
-Puede notarse que la diferencia de frecuencia (ver \autoref{fig:inferior} y \autoref{fig:superior}) genera una deformación de la onda en (completar las causas posibles)
+Las frecuencias extremas de operación (20,64 Hz en el límite inferior y 4,745 kHz en el superior, ver \autoref{fig:inferior} y \autoref{fig:superior}) generan deformaciones en la onda cuadrada que evidencian las limitaciones en la respuesta en frecuencia del circuito. En el límite inferior, se observa una caída en los niveles de tensión constante, lo que corresponde a un efecto de acoplamiento en AC (filtro pasa-altos), donde actúan los capacitores que bloquean la posible continua generada por la luz ambiental constante. Por el contrario, en el límite superior, los flancos pierden verticalidad y se observan redondeados, un efecto de filtro pasa-bajos que es consecuencia directa de la capacitancia intrínseca del circuito —como la del diodo receptor— interactuando con la resistencia de carga, lo que limita la velocidad de respuesta del sistema y aumenta los tiempos de conmutación.
 
 La \autoref{fig:umbral} es consecuencia de haber seteado el umbral en el límite donde aún recibe la señal con el cable óptico corto, tal que a cambiar al cable óptico largo el aumento de atenuación hace que la señal que llega no pasa el umbral y en consecuencia no hay señal a la salida.
 

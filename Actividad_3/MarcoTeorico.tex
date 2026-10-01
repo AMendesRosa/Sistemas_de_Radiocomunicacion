@@ -16,17 +16,17 @@ Un sistema de comunicación óptica convierte una señal eléctrica de informaci
 En espacio libre, la radiación emitida por la fuente viaja y obedece las leyes de la óptica geométrica, como la ley de reflexión especular, donde el ángulo de incidencia es igual al ángulo de reflexión respecto a la normal en el mismo medio. Esto permite la manipulación y redireccionamiento del haz de luz mediante elementos reflectantes externos (como es el caso de espejos).
 
 \subsubsection{Estructura de la Fibra Óptica y Reflexión Total Interna}
-La fibra óptica es un conductor de luz con muy baja atenuación (en relación a los cable coaxiales), tal que se pueden lograr comunicaciones de miles de kilómetros. Consta de un núcleo cilíndrico construido de dióxido de silicio ($SiO_2$) con índice de refracción $\eta_1$, rodeado por un revestimiento con índice de refracción $\eta_2$, donde se cumple que $\eta_1 > \eta_2$.
+La fibra óptica es un conductor de luz con muy baja atenuación (en relación a los cable coaxiales), tal que se pueden lograr comunicaciones de miles de kilómetros. Consta de un núcleo cilíndrico construido de dióxido de silicio ($SiO_2$) con índice de refracción $n_1$, rodeado por un revestimiento con índice de refracción $n_2$, donde se cumple que $n_1 > n_2$ \cite{pres1}.
 
 El confinamiento y guiado de la luz dentro del núcleo se basa en el fenómeno de la Reflexión Total Interna (RTI). La refracción en la interfaz núcleo-revestimiento se rige por la Ley de Snell (donde sí existe un rebote por cambio de medios):
 
 \begin{equation}
-\eta_1 \sin(\theta_i) = \eta_2 \sin(\theta_t)
+n_1 \sin(\theta_i) = n_2 \sin(\theta_t)
 \end{equation}
 
-donde $\theta_i$ es el ángulo de incidencia y $\theta_t$ es el ángulo de refracción, medidos respecto a la normal de la interfaz. 
+donde $\theta_i$ es el ángulo de incidencia y $\theta_t$ es el ángulo de refracción, medidos respecto a la normal de la interfaz \cite{pres1}. 
 
-El ángulo crítico ($\theta_c$) es el ángulo mínimo de incidencia a partir del cual no existe rayo refractado hacia el revestimiento ($\theta_t = 90^\circ$), reflejándose toda la energía dentro del núcleo:
+El ángulo crítico ($\theta_c$) es el ángulo mínimo de incidencia a partir del cual no existe rayo refractado hacia el revestimiento ($\theta_t = 90^\circ$), reflejándose toda la energía dentro del núcleo \cite{pres1}:
 
 \begin{equation}
 \theta_c = \arcsin\left(\frac{n_2}{n_1}\right)
@@ -37,10 +37,10 @@ El ángulo crítico ($\theta_c$) es el ángulo mínimo de incidencia a partir de
 Para que la luz ingresada por el extremo de la fibra cumpla la condición de RTI, debe ingresar dentro de un límite angular denominado cono de aceptación \autoref{fig:Cono}. La capacidad de captación de luz de la fibra se define mediante la Apertura Numérica (AN), es decir, el nivel de aceptancia de la FO para captar la energía entregada por la fuente óptica:
 
 \begin{equation}
-\text{AN} = \sin(\alpha_{\text{máx}}) = \eta_1 \cdot \sin(\theta_c) = \sqrt{n_1^2 - n_2^2} 
+\text{AN} = \sin(\alpha_{\text{máx}}) = n_1 \cdot \sin(\theta_c) = \sqrt{n_1^2 - n_2^2} 
 \end{equation}
 
-donde $\alpha_{\text{máx}}$ representa el ángulo máximo de aceptación en el aire ($n_0 \approx 1$).
+donde $\alpha_{\text{máx}}$ representa el ángulo máximo de aceptación en el aire ($n_0 \approx 1$) \cite{pres1} \cite{pres2}.
 
 \begin{figure}[H]
     \centering
@@ -53,10 +53,10 @@ donde $\alpha_{\text{máx}}$ representa el ángulo máximo de aceptación en el 
 \subsection{Componentes utilizados en FO}
 
 \subsubsection{Emisores de Luz}
-Los transmisores utilizan Diodos Emisores de Luz (LEDs) que operan tanto en el espectro visible como en el infrarrojo.
+Los transmisores utilizan Diodos Emisores de Luz (LEDs) que operan tanto en el espectro visible como en el infrarrojo \cite{pres3}.
 
 \subsubsection{Detectores de Luz}
-El receptor emplea fotodiodos para convertir la potencia óptica incidente en una corriente eléctrica proporcional. Sus principales parámetros son:
+El receptor emplea fotodiodos para convertir la potencia óptica incidente en una corriente eléctrica proporcional \cite{pres3}. Sus principales parámetros son:
 
 \begin{itemize}
     \item \textbf{Sensibilidad Mínima [dBm]}: Mínima potencia de entrada necesaria para garantizar la correcta detección de bits o la calidad de la señal.
@@ -77,12 +77,12 @@ Las fibras ópticas se clasifican principalmente según el número de modos (tra
 
 \begin{itemize}
     \item \textbf{Fibra Monomodo (SMF - \textit{Single-Mode Fiber}):}
-    Posee un núcleo muy estrecho, típicamente de $8\text{ a } 10\,\mu\text{m}$ de diámetro. Debido a estas dimensiones tan reducidas respecto a la longitud de onda de trabajo ($\lambda$), solo se permite la propagación del modo fundamental.
+    Posee un núcleo muy estrecho, típicamente de $8\text{ a } 10\,\mu\text{m}$ de diámetro. Debido a estas dimensiones tan reducidas respecto a la longitud de onda de trabajo ($\lambda$), solo se permite la propagación del modo fundamental \cite{pres1}.
 
     \item \textbf{Fibra Multimodo (MMF - \textit{Multi-Mode Fiber}):}
-    Posee un núcleo sustancialmente mayor, típicamente de $50\,\mu\text{m}$ de diámetro. Permite que múltiples modos de luz viajen simultáneamente a través de diferentes ángulos de transmisión.
+    Posee un núcleo sustancialmente mayor, típicamente de $50\,\mu\text{m}$ de diámetro. Permite que múltiples modos de luz viajen simultáneamente a través de diferentes ángulos de transmisión \cite{pres1}.
     
-    Sufre de \textbf{dispersión intermodal}, ya que los diferentes modos recorren distancias distintas y llegan en tiempos diferentes al fotodetector, provocando ensanchamiento de los pulsos digitales y limitando la distancia y la velocidad máxima de transmisión.
+    Sufre de dispersión modal, ya que los diferentes modos recorren distancias distintas y llegan en tiempos diferentes al fotodetector, provocando ensanchamiento de los pulsos digitales y limitando la distancia y la velocidad máxima de transmisión \cite{wiki}.
 \end{itemize}
 
 \begin{figure}[H]
@@ -100,11 +100,11 @@ La atenuación cuantifica la pérdida de potencia que sufre la señal óptica al
 \alpha \, [\text{dB}] = 10 \log_{10}\left(\frac{P_{\text{entrada}}}{P_{\text{salida}}}\right)
 \end{equation}
 
-La fibra óptica más moderna tiene una atenuación de $0.15 \, [dB/km]$, es decir, cada $20 \, [km]$ la señal se reducie a la mitad de potencia.
+La fibra óptica más moderna tiene una atenuación de $0.15 \, [dB/km]$, es decir, cada $20 \, [km]$ la señal se reducie a la mitad de potencia \cite{pres2}.
 
 Debido a las pérdidas por longitud, un cable óptico largo presenta mayor atenuación que uno corto. Para mitigar esto en el receptor digital, se debe incrementar la potencia del emisor o ajustar el nivel del umbral digital, ya que si la señal que llega al receptor es muy débil, el receptor no detecta correctamente los bits y la tasa de error aumenta.
 
-Las curvas de la \autoref{fig:Atenuacion} muestran la variación del nivel de atenuación según incrementa la longitud de onda, para distintos tipos de fibra.
+Las curvas de la \autoref{fig:Atenuacion} muestran la variación del nivel de atenuación según incrementa la longitud de onda, para distintos tipos de fibra \cite{pres2}.
 
 \begin{figure}[H]
     \centering
@@ -113,4 +113,24 @@ Las curvas de la \autoref{fig:Atenuacion} muestran la variación del nivel de at
     \label{fig:Atenuacion}
 \end{figure}
 
-El ``Pico de Agua'' que logra verse es un aumento en la atenuación de la señal, causado cuando los iones hidróxido ($OH^-$) atrapados en el vidrio absorben longitudes de onda específicas al reaccionar con la humedad. Actualmente se fabrican fibras que casi no tienen pico de agua, llamadas fibras ZWPF (\textit{Zero Water Peak Fiber}) o fibras LWP (\textit{Low Water Peak}).
+El ``Pico de Agua'' que logra verse es un aumento en la atenuación de la señal, causado cuando los iones hidróxido ($OH^-$) atrapados en el vidrio absorben longitudes de onda específicas al reaccionar con la humedad. Actualmente se fabrican fibras que casi no tienen pico de agua, llamadas fibras ZWPF (\textit{Zero Water Peak Fiber}) o fibras LWP (\textit{Low Water Peak}) \cite{wiki2}.
+
+
+\subsection{Modulación Óptica: Modo Analógico y Digital}
+
+En los sistemas de comunicaciones por fibra óptica, la información eléctrica puede modular a la fuente de luz principalmente de dos maneras, dependiendo de la naturaleza de la señal a transmitir:
+
+\subsubsection*{Modulación Analógica}
+En este modo, la intensidad de la luz emitida por el LED es directamente proporcional a la tensión de la señal eléctrica de entrada. Para evitar recortes en la señal (ya que la luz no puede tener valores negativos), se suma un nivel de tensión de continua (sesgo o \textit{DC bias}) a la señal alterna de información. De esta forma, el fotodetector en el receptor genera una fotocorriente que reproduce fielmente las variaciones continuas de amplitud de la onda original.
+
+\subsubsection*{Modulación Digital}
+En las comunicaciones digitales, la señal óptica no varía de forma continua, sino que se emplea un esquema de modulación de amplitud conmutada. En el transmisor, la fuente de luz conmuta entre dos estados lógicos: un nivel de alta intensidad lumínica para representar un bit ``1'', y un nivel de baja intensidad (o apagado) para representar un bit ``0''.
+
+En el receptor, la corriente generada por el fotodiodo es convertida a un nivel de tensión, el cual ingresa a un circuito comparador. Este circuito evalúa la señal recibida frente a un nivel de referencia preestablecido conocido como umbral de decisión (threshold). 
+
+\begin{itemize}
+    \item Si el nivel de la señal detectada supera el umbral, el sistema reconstruye un 1 lógico.
+    \item Si el nivel de la señal se encuentra por debajo del umbral, el sistema asume que se recibió un 0 lógico.
+\end{itemize}
+
+El ajuste correcto de este umbral es crítico: si la señal sufre mucha atenuación en el trayecto y la potencia recibida no logra superar el nivel de umbral configurado, el receptor no podrá regenerar la señal, interrumpiendo la comunicación.
