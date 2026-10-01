@@ -1,3 +1,4 @@
+# Archivos auxiliares solicitados
 *.aux
 *.log
 *.out
@@ -5,3 +6,25 @@
 *.synctex.gz
 *.fls
 *.fdb_latexmk
+
+# Archivos temporales de Bibliografía y Listas (visibles en tu proyecto)
+*.bbl
+*.blg
+*.bcf
+*.run.xml
+*.lof
+*.lot
+*-blx.bib
+
+# Opcional: descomenta si NO quieres incluir el PDF compilado en el repositorio
+*.pdf
+
+# Otros temporales de LaTeX
+*.bbl-SAVE-ERROR
+*.bcf-SAVE-ERROR
+*.synctex(busy)
+*.dvi
+*.xdv
+*.nav
+*.snm
+*.vrb

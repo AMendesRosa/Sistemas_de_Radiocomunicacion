@@ -1,0 +1,205 @@
+\section{Representación gráfica}
+\label{sec_4}
+En esta sección se representa el enlace desde el \textit{Router A} (transmisor) hasta el \textit{Router B} (receptor), indicando cada elemento, la distancia acumulada y la pérdida de cada evento, junto con la evolución del nivel de potencia a lo largo del trayecto. Se representa una sola fibra (un sentido de transmisión); la fibra del sentido opuesto recorre el mismo camino y atraviesa los mismos elementos en orden inverso.
+
+Para ubicar las cajas de empalme se supone que dividen la ruta en tres tramos iguales de $8/3 \approx 2.67 \, [km]$. Cada tramo es menor que la longitud de una bobina de cable ($4000 \, [m]$), por lo que puede tenderse sin empalmes adicionales. En una instalación real, la posición exacta de las cajas depende de la ubicación de las cámaras de la canalización subterránea. Los patchcords y pigtails miden pocos metros, por lo que su longitud no se considera en la distancia acumulada.
+
+
+\subsection{Esquema del Enlace}
+\label{sec_4.1}
+La \autoref{fig:esquema_enlace} muestra el esquema del enlace con todos sus elementos. Sobre cada evento se indica su pérdida y, en la parte inferior, la distancia acumulada desde el ODF del sitio A.
+
+\begin{figure}[H]
+    \centering
+    \resizebox{\textwidth}{!}{%
+    \begin{tikzpicture}[font=\footnotesize,
+        equipo/.style={draw, thick, rounded corners=2pt, minimum width=1.7cm, minimum height=1.3cm, align=center, fill=blue!8},
+        odf/.style={draw, thick, minimum width=3.0cm, minimum height=1.7cm, fill=gray!12},
+        caja/.style={draw, thick, rounded corners=5pt, minimum width=1.2cm, minimum height=0.8cm, fill=orange!15},
+        empalme/.style={circle, fill=red!75!black, inner sep=1.7pt},
+        conector/.style={draw, thick, fill=white, minimum width=0.24cm, minimum height=0.24cm, inner sep=0pt},
+        perdida/.style={font=\scriptsize\bfseries, text=red!75!black},
+        evento/.style={circle, draw=black!60, fill=white, font=\tiny, inner sep=0.6pt, minimum size=0.36cm}]
+
+        % Equipos y distribuidores
+        \node[equipo] (RA) at (0.85,0) {Router A\\[1pt]\textbf{SFP TX}};
+        \node[odf] (OA) at (4.8,0) {};
+        \node[font=\footnotesize\bfseries, above] at (OA.north) {ODF A};
+        \node[odf] (OB) at (14.2,0) {};
+        \node[font=\footnotesize\bfseries, above] at (OB.north) {ODF B};
+        \node[equipo] (RB) at (18.15,0) {Router B\\[1pt]\textbf{SFP RX}};
+
+        % Fibras: patchcord (azul), pigtail (amarillo) y cable exterior (gris)
+        \draw[line width=1.6pt, blue!60!black] (RA.east) -- (3.7,0);
+        \draw[line width=1.6pt, yellow!55!black] (3.7,0) -- (5.9,0);
+        \draw[line width=2.6pt, black!65] (5.9,0) -- (13.1,0);
+        \draw[line width=1.6pt, yellow!55!black] (13.1,0) -- (15.3,0);
+        \draw[line width=1.6pt, blue!60!black] (15.3,0) -- (RB.west);
+
+        % Cajas de empalme
+        \node[caja] (C1) at (8.3,0) {};
+        \node[font=\footnotesize\bfseries, above=1pt] at (C1.north) {Caja 1};
+        \node[caja] (C2) at (10.7,0) {};
+        \node[font=\footnotesize\bfseries, above=1pt] at (C2.north) {Caja 2};
+
+        % Conectores, adaptadores y empalmes
+        \node[conector] at (RA.east) {};
+        \node[conector] at (3.7,0) {};
+        \node[empalme] at (5.9,0) {};
+        \node[empalme] at (8.3,0) {};
+        \node[empalme] at (10.7,0) {};
+        \node[empalme] at (13.1,0) {};
+        \node[conector] at (15.3,0) {};
+        \node[conector] at (RB.west) {};
+
+        % Pérdida (arriba) y número de evento (abajo), según la tabla de eventos
+        \foreach \x/\p/\n in {2.7/0{,}4/1, 3.7/0{,}2/2, 4.8/0{,}2/3, 5.9/0{,}1/4,
+                              7.1/1{,}01/5, 9.5/1{,}01/7, 11.9/1{,}01/9,
+                              13.1/0{,}1/10, 14.2/0{,}2/11, 15.3/0{,}2/12, 16.3/0{,}4/13}{
+            \node[perdida] at (\x,0.4) {$\p$};
+            \node[evento] at (\x,-0.45) {\n};
+        }
+        \foreach \x/\n in {8.3/6, 10.7/8}{
+            \node[perdida] at (\x,-0.62) {$0{,}1$};
+            \node[evento] at (\x+0.45,-0.62) {\n};
+        }
+
+        % Eje de distancia acumulada
+        \draw[-{Stealth}, thick] (5.9,-1.45) -- (13.7,-1.45) node[right, font=\scriptsize] {$d$ [km]};
+        \foreach \x/\d in {5.9/0{,}00, 8.3/2{,}67, 10.7/5{,}33, 13.1/8{,}00}{
+            \draw[thick] (\x,-1.35) -- (\x,-1.55);
+            \node[below, font=\scriptsize] at (\x,-1.55) {$\d$};
+        }
+        \foreach \x in {5.9, 13.1}{
+            \draw[densely dotted, black!50] (\x,-1.35) -- (\x,-0.7);
+        }
+        \foreach \x in {8.3, 10.7}{
+            \draw[densely dotted, black!50] (\x,-1.35) -- (\x,-0.85);
+        }
+
+        % Referencias
+        \node[conector] at (1.0,-2.45) {};
+        \node[right, font=\scriptsize] at (1.15,-2.45) {Conector/adaptador LC/UPC};
+        \node[empalme] at (5.6,-2.45) {};
+        \node[right, font=\scriptsize] at (5.75,-2.45) {Empalme por fusión};
+        \draw[line width=2.6pt, black!65] (9.0,-2.45) -- (9.6,-2.45);
+        \node[right, font=\scriptsize] at (9.65,-2.45) {Cable CFOA-SM-DDR-S 04F};
+        \node[evento] at (14.3,-2.45) {n};
+        \node[right, font=\scriptsize] at (14.5,-2.45) {N° de evento (\autoref{tab:eventos})};
+    \end{tikzpicture}%
+    }
+    \caption{Esquema del enlace (una fibra, sentido A $\rightarrow$ B) con la pérdida de cada evento en dB (en rojo) y la distancia acumulada. Los elementos internos de cada sitio se representan fuera de escala.}
+    \label{fig:esquema_enlace}
+\end{figure}
+
+
+\subsection{Tabla de Eventos}
+\label{sec_4.2}
+La \autoref{tab:eventos} detalla cada evento del trayecto, su distancia acumulada, la pérdida que introduce y el nivel de potencia resultante para las potencias de transmisión mínima y máxima del transceptor.
+
+\begin{table}[H]
+    \centering
+    \footnotesize
+    \caption{Eventos de pérdida a lo largo del enlace (sentido A $\rightarrow$ B).}
+    \label{tab:eventos}
+    \begin{tabular}{|c|l|c|c|c|c|}
+        \hline
+        \multirow{2}{*}{\textbf{N°}} & \multirow{2}{*}{\textbf{Evento}} & \multirow{2}{*}{\textbf{$d$ [km]}} & \multirow{2}{*}{\textbf{Pérdida [dB]}} & \multicolumn{2}{c|}{\textbf{Nivel de potencia [dBm]}} \\
+        \cline{5-6}
+         & & & & \textbf{con $P_{t,min}$} & \textbf{con $P_{t,max}$} \\
+        \hline
+        -- & Salida del SFP TX & $0{,}00$ & -- & $-9.50$ & $-3.00$ \\
+        1 & Patchcord A & $0{,}00$ & $0{,}40$ & $-9.90$ & $-3.40$ \\
+        2 & Adaptador ODF A & $0{,}00$ & $0{,}20$ & $-10.10$ & $-3.60$ \\
+        3 & Pigtail ODF A & $0{,}00$ & $0{,}20$ & $-10.30$ & $-3.80$ \\
+        4 & Empalme ODF A & $0{,}00$ & $0{,}10$ & $-10.40$ & $-3.90$ \\
+        5 & Fibra, tramo 1 & $2{,}67$ & $1{,}01$ & $-11.41$ & $-4.91$ \\
+        6 & Empalme caja 1 & $2{,}67$ & $0{,}10$ & $-11.51$ & $-5.01$ \\
+        7 & Fibra, tramo 2 & $5{,}33$ & $1{,}01$ & $-12.53$ & $-6.03$ \\
+        8 & Empalme caja 2 & $5{,}33$ & $0{,}10$ & $-12.63$ & $-6.13$ \\
+        9 & Fibra, tramo 3 & $8{,}00$ & $1{,}01$ & $-13.64$ & $-7.14$ \\
+        10 & Empalme ODF B & $8{,}00$ & $0{,}10$ & $-13.74$ & $-7.24$ \\
+        11 & Pigtail ODF B & $8{,}00$ & $0{,}20$ & $-13.94$ & $-7.44$ \\
+        12 & Adaptador ODF B & $8{,}00$ & $0{,}20$ & $-14.14$ & $-7.64$ \\
+        13 & Patchcord B & $8{,}00$ & $0{,}40$ & $-14.54$ & $-8.04$ \\
+        \hline
+        \multicolumn{3}{|r|}{\textbf{Total}} & $\mathbf{5{,}04}$ & $\mathbf{-14.54}$ & $\mathbf{-8.04}$ \\
+        \hline
+    \end{tabular}
+\end{table}
+
+
+\subsection{Gráfico del Presupuesto Óptico}
+\label{sec_4.3}
+La \autoref{fig:presupuesto} representa el nivel de potencia a lo largo del enlace. La curva continua corresponde a la potencia de transmisión mínima (caso de diseño) y la curva de trazos, a la potencia máxima. Se indican la potencia de transmisión ($P_t$), la suma de pérdidas ($\Sigma$ pérdidas), la potencia de llegada al receptor ($P_r$), la sensibilidad del receptor ($S_r$) y el margen de seguridad ($M_s$), cuyo límite superior define el umbral de diseño $S_r + M_s = -21 \, [dBm]$.
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            width=\textwidth, height=10.5cm,
+            xmin=-1.5, xmax=11.2, ymin=-26, ymax=-1,
+            xlabel={Distancia acumulada [km]},
+            ylabel={Potencia óptica [dBm]},
+            xtick={0,2.667,5.333,8}, xticklabels={$0{,}00$,$2{,}67$,$5{,}33$,$8{,}00$},
+            ytick={-26,-24,-22,-20,-18,-16,-14,-12,-10,-8,-6,-4,-2},
+            grid=major, grid style={black!12},
+            tick label style={font=\footnotesize},
+            label style={font=\small},
+            clip=false,
+            legend style={font=\scriptsize, at={(axis cs:0.3,-15.2)}, anchor=north west, fill=white, fill opacity=0.9, text opacity=1},
+            legend cell align=left
+        ]
+            % Zonas de los sitios A y B (fuera de escala)
+            \fill[blue!5] (axis cs:-1.5,-26) rectangle (axis cs:0,-1);
+            \fill[blue!5] (axis cs:8,-26) rectangle (axis cs:9.5,-1);
+            \node[font=\scriptsize, align=center] at (axis cs:-0.75,-2.2) {Sitio A\\(fuera de escala)};
+            \node[font=\scriptsize, align=center] at (axis cs:8.75,-2.2) {Sitio B\\(fuera de escala)};
+
+            % Nivel con Pt mínima
+            \addplot[very thick, blue!70!black, mark=none] coordinates {
+                (-1.2,-9.50) (-0.9,-9.50) (-0.9,-9.90) (-0.6,-9.90) (-0.6,-10.10)
+                (-0.3,-10.10) (-0.3,-10.30) (0,-10.30) (0,-10.40)
+                (2.667,-11.413) (2.667,-11.513) (5.333,-12.527) (5.333,-12.627)
+                (8,-13.640) (8,-13.740) (8.3,-13.740) (8.3,-13.940) (8.6,-13.940)
+                (8.6,-14.140) (8.9,-14.140) (8.9,-14.540) (9.2,-14.540)};
+            \addlegendentry{Nivel con $P_{t,min} = -9.5$ dBm}
+
+            % Nivel con Pt máxima
+            \addplot[thick, dashed, black!55, mark=none] coordinates {
+                (-1.2,-3.00) (-0.9,-3.00) (-0.9,-3.40) (-0.6,-3.40) (-0.6,-3.60)
+                (-0.3,-3.60) (-0.3,-3.80) (0,-3.80) (0,-3.90)
+                (2.667,-4.913) (2.667,-5.013) (5.333,-6.027) (5.333,-6.127)
+                (8,-7.140) (8,-7.240) (8.3,-7.240) (8.3,-7.440) (8.6,-7.440)
+                (8.6,-7.640) (8.9,-7.640) (8.9,-8.040) (9.2,-8.040)};
+            \addlegendentry{Nivel con $P_{t,max} = -3$ dBm}
+
+            % Sensibilidad y umbral de diseño
+            \addplot[thick, red, dashed, domain=-1.5:9.5, samples=2] {-24};
+            \addlegendentry{Sensibilidad $S_r = -24$ dBm}
+            \addplot[very thick, orange, dotted, domain=-1.5:9.5, samples=2] {-21};
+            \addlegendentry{Umbral de diseño $S_r + M_s = -21$ dBm}
+
+            % Puntos notables
+            \node[circle, fill=blue!70!black, inner sep=1.5pt] at (axis cs:-1.2,-9.5) {};
+            \node[font=\scriptsize, above right, fill=white, inner sep=1pt] at (axis cs:-1.25,-9.3) {$P_{t} = -9{,}5$};
+            \node[circle, fill=blue!70!black, inner sep=1.5pt] at (axis cs:9.2,-14.54) {};
+            \node[font=\scriptsize, below left] at (axis cs:9.2,-14.54) {$P_{r} = -14{,}54$};
+
+            % Cotas a la derecha
+            \draw[{Stealth}-{Stealth}, thick, blue!70!black] (axis cs:9.75,-9.5) -- (axis cs:9.75,-14.54)
+                node[midway, right, font=\scriptsize, align=left] {$\Sigma$ pérdidas\\$5.04$ dB};
+            \draw[densely dotted, blue!70!black] (axis cs:-1.2,-9.5) -- (axis cs:9.75,-9.5);
+            \draw[{Stealth}-{Stealth}, thick, green!50!black] (axis cs:9.75,-14.54) -- (axis cs:9.75,-21)
+                node[midway, right, font=\scriptsize, align=left] {Margen\\sobrante\\$6.46$ dB};
+            \draw[{Stealth}-{Stealth}, thick, orange!85!black] (axis cs:9.75,-21) -- (axis cs:9.75,-24)
+                node[midway, right, font=\scriptsize, align=left] {$M_s$\\$3$ dB};
+        \end{axis}
+    \end{tikzpicture}
+    \caption{Presupuesto óptico del enlace: nivel de potencia a lo largo del trayecto (sentido A $\rightarrow$ B).}
+    \label{fig:presupuesto}
+\end{figure}
+
+El gráfico muestra que la pérdida se reparte en forma casi uniforme a lo largo de la fibra (pendiente de $0.38 \, [dB/km]$), con escalones en cada empalme, mientras que los elementos de conexión concentran pérdidas en ambos extremos. La potencia de llegada con $P_{t,min}$ queda $6.46 \, [dB]$ por encima del umbral de diseño y $9.46 \, [dB]$ por encima de la sensibilidad, mientras que con $P_{t,max}$ se mantiene por debajo del nivel de sobrecarga del receptor ($0 \, [dBm]$).
+
+La consigna requiere además el dibujo del enlace en papel, que se adjunta por separado. La \autoref{tab:eventos} contiene todos los valores necesarios para realizarlo.

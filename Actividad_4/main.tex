@@ -1,0 +1,136 @@
+\documentclass[12pt]{article}
+
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,es-tabla]{babel}
+\usepackage{graphicx}
+\usepackage{circuitikz}
+\usepackage{amsmath}
+\usepackage{subcaption}
+\usepackage{amssymb}
+\usepackage[hidelinks]{hyperref}
+\usepackage{mathtools}
+%\usepackage[table,xcdraw]{xcolor}
+\usepackage{enumitem}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{multirow}
+\usepackage{csquotes}
+\usepackage{float}
+\usepackage{setspace}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usetikzlibrary{arrows.meta, decorations.pathreplacing, calc, positioning}
+\usepackage[style=ieee, backend=bibtex]{biblatex}
+\addbibresource{bibliografía.bib}
+\graphicspath{{Figuras/}}
+\onehalfspacing
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,    
+    citecolor=blue,
+    urlcolor=blue,
+    filecolor=blue
+}
+
+\begin{document}       
+\renewcommand{\figureautorefname}{Fig.}
+\renewcommand{\tableautorefname}{Tab.}
+\renewcommand{\equationautorefname}{Ec.}
+
+\begin{titlepage}
+\thispagestyle{empty}
+\begin{tikzpicture}[remember picture,overlay]
+    \node[opacity=0.2,anchor=center] at (current page.center) 
+        {\includegraphics[width=0.9\paperwidth]{decoracion_a.png}};
+\end{tikzpicture}
+\begin{center}
+    \includegraphics[width=15cm]{unc_fcefyn_logo.png} \\ [0.5cm]
+    \LARGE Universidad Nacional de Córdoba \\ [0.5cm] 
+    \large Facultad de Ciencias Exactas, Físicas y Naturales \\ 
+    \vspace{40pt}
+    \large Sistemas de Radiocomunicación \\ [0.2cm]
+    \large Trabajo Práctico N°4 \\
+    \vspace{60pt}
+    \LARGE Enlaces Punto a Punto con Fibra Óptica\\
+    \vspace{60pt}
+    \begin{table}[!h]
+        \centering
+        \begin{tabular}{ll}
+            \multicolumn{1}{c}{Nombre} & \multicolumn{1}{c}{DNI} \\
+            Mendes Rosa, Agustín             & 44.517.201 \\
+            Monja, Ernesto Joaquín           & 43.873.728 \\
+            Arteaga Barrera, Cristian Eduardo           & 95.159.096 \\
+            Baccino, Luca           & 45.328.380 
+        \end{tabular}
+    \end{table}
+    \vspace{20pt}
+    \begin{table}[!h]
+        \centering
+        \begin{tabular}{ll}
+            \multicolumn{1}{c}{Docentes} & Esp. Ing. Liendo, Carlos Guillermo \\
+                                         & Ing. Dadam, Federico Tomás \\
+        \end{tabular}
+    \end{table}
+    \vfill
+        {\small Córdoba, República Argentina\\
+                Año 2026}
+\end{center}
+\end{titlepage}
+\newpage
+
+\tableofcontents
+\newpage
+\listoffigures
+\newpage
+\listoftables
+\newpage
+
+\section{Introducción}
+\label{sec_1}
+El presente trabajo práctico aborda el diseño, dimensionamiento y validación técnica de un enlace de fibra óptica punto a punto de $8 \, [km]$ de longitud, proyectado para operar a una tasa de transmisión de $1 \, [Gbps]$ en la ventana óptica de $1310 \, [nm]$. El sistema emplea una topología bidireccional mediante el uso de $2$ fibras ópticas monomodo instaladas en canalización subterránea, garantizando el aislamiento y la integridad de la señal frente a condiciones ambientales adversas.
+
+El objetivo central radica en determinar la viabilidad del enlace mediante la selección fundamentada del equipamiento activo y pasivo, la construcción del presupuesto de potencia óptica y el análisis de los márgenes de seguridad requeridos. A través de la caracterización de cada evento físico (atenuación intrínseca de la fibra, pérdidas por inserción en conectores y empalmes por fusión), se establece la factibilidad técnica y operativa del enlace proyectado.
+
+El trabajo se organiza siguiendo las partes de la consigna. En la \autoref{sec_2} se seleccionan el transceptor, la fibra, los conectores y empalmes y los distribuidores ópticos, considerando tanto criterios técnicos como económicos. En la \autoref{sec_3} se calcula el presupuesto de potencia y se verifica la viabilidad del enlace. En la \autoref{sec_4} se representa gráficamente el enlace con cada evento de pérdida y la evolución del nivel de potencia. Finalmente, en la \autoref{sec_5} se responden las preguntas de análisis sobre la extensión del enlace, el uso de la ventana de $1550 \, [nm]$, el margen de seguridad y los instrumentos de validación.
+
+
+\input{parteA.tex}
+\newpage
+
+
+
+\input{parteB.tex}
+\newpage
+
+
+
+\input{parteC.tex}
+\newpage
+
+
+
+\input{parteD.tex}
+\newpage
+
+
+
+\section{Conclusiones}
+\label{sec_6}
+Se diseñó un enlace óptico punto a punto de $8 \, [km]$ a $1 \, [Gbps]$ full dúplex entre dos edificios, utilizando dos fibras monomodo G.652.D a $1310 \, [nm]$ en canalización subterránea. El enlace resulta \textbf{técnicamente viable}: en el caso más desfavorable, con la potencia de transmisión mínima y la atenuación máxima de la fibra, las pérdidas totales son de $5.04 \, [dB]$ y la potencia recibida de $-14.54 \, [dBm]$ supera en $9.46 \, [dB]$ la sensibilidad del receptor. Reservando un margen de seguridad de $3 \, [dB]$, quedan $6.46 \, [dB]$ de margen sobrante, y el enlace seguiría siendo viable aun con el margen máximo recomendado de $6 \, [dB]$. En el caso más favorable, la potencia recibida ($-8.04 \, [dBm]$) no satura el receptor, y la verificación de dispersión cromática confirma que el enlace está limitado por atenuación.
+
+La selección de componentes combinó criterios técnicos y económicos. El transceptor 1000BASE-LX de $10 \, [km]$ es la categoría más económica que cubre la distancia y no requiere atenuadores. La fibra G.652.D es la opción estándar para tendidos troncales y resulta más económica que la G.657, cuya ventaja frente a curvaturas no se aprovecha en un ducto. El cable Lightera de $4$ fibras para ductos, con núcleo seco y protección contra roedores, es adecuado para la instalación subterránea y deja $2$ fibras de reserva. Los distribuidores de $12$ fibras son los de menor capacidad que admiten el cable.
+
+La fibra concentra el 60\,\% de las pérdidas, por lo que la distancia es la variable que más afecta al presupuesto. Al duplicarla a $16 \, [km]$, el presupuesto de potencia aún cerraría, pero el transceptor quedaría fuera de su alcance especificado y la dispersión podría empezar a limitar el enlace; la solución más conveniente es un módulo de $40 \, [km]$ con láser DFB, con un sobrecosto marginal frente al de la infraestructura. La ventana de $1550 \, [nm]$ se justifica en enlaces largos, sobre una sola fibra o con multiplexación, pero en este enlace sólo agregaría costo y obligaría a usar atenuadores.
+
+Por último, el margen de seguridad es lo que permite que el enlace siga funcionando frente al envejecimiento, las reparaciones, la suciedad de los conectores y las variaciones de temperatura, y su cumplimiento debe verificarse en campo con inspección de conectores, OLTS, OTDR y pruebas de tasa de error, dejando las mediciones como referencia para el mantenimiento.
+
+
+
+\newpage
+\nocite{*}
+
+\newpage
+\printbibliography[heading=bibintoc, title={Bibliografía y Referencias}]
+\end{document}
