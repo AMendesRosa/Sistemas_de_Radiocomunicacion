@@ -2387,7 +2387,8 @@
     <bcf:citekey order="11" intorder="1">pres2</bcf:citekey>
     <bcf:citekey order="12" intorder="1">pres2</bcf:citekey>
     <bcf:citekey order="13" intorder="1">wiki2</bcf:citekey>
-    <bcf:citekey order="14" intorder="1" nocite="1">*</bcf:citekey>
+    <bcf:citekey order="14" intorder="1">datasheet</bcf:citekey>
+    <bcf:citekey order="15" intorder="1" nocite="1">*</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="none">
