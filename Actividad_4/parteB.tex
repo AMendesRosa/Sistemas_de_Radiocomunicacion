@@ -110,8 +110,8 @@ El receptor trabaja $8.04 \, [dB]$ por debajo de su nivel de sobrecarga, por lo 
 \begingroup
     \footnotesize
     \begin{longtable}
-        {|>{\centering\arraybackslash}m{5.2cm}
-         |>{\centering\arraybackslash}m{3.2cm}
+        {|>{\centering\arraybackslash}m{6.5cm}
+         |>{\centering\arraybackslash}m{3.5cm}
          |>{\centering\arraybackslash}m{4cm}|} \hline
         \textbf{Parámetro/Elemento} & \textbf{Valor Unitario} & \textbf{Atenuación/Potencia Total} \\ \hline
         \endfirsthead
@@ -138,7 +138,7 @@ El receptor trabaja $8.04 \, [dB]$ por debajo de su nivel de sobrecarga, por lo 
             Potencia recibida mínima ($P_{r,min}$) & --- & $\mathbf{-14.54 \, [dBm]}$ \\ \hline
             Potencia recibida máxima ($P_{r,max}$) & --- & $-8.04 \, [dBm]$ \\ \hline
             Sensibilidad del receptor ($S_{r}$) & --- & $-24.00 \, [dBm]$ \\ \hline
-            Diferencia $P_{r,min} - S_r$ & --- & $9.46 \, [dB]$ \\ \hline
+            Diferencia ($P_{r,min} - S_r$) & --- & $9.46 \, [dB]$ \\ \hline
             Margen de seguridad reservado ($M_{s}$) & --- & $3.00 \, [dB]$ \\ \hline
             Margen sobrante & --- & $\mathbf{6.46 \, [dB]}$ \\ \hline
     \end{longtable}
@@ -147,15 +147,15 @@ El receptor trabaja $8.04 \, [dB]$ por debajo de su nivel de sobrecarga, por lo 
 
 \subsection{Verificación de la Dispersión Cromática}
 \label{sec_3.6}
-El presupuesto de potencia supone que el enlace está limitado por atenuación. Para confirmarlo, se estima el ensanchamiento de los pulsos por dispersión cromática en el peor caso. Según la recomendación G.652, la longitud de onda de dispersión nula de la fibra está entre $\lambda_0 = 1300$ y $1324 \, [nm]$, con una pendiente máxima $S_0 = 0.092 \, [ps/(nm^2 \cdot km)]$ \cite{b5}. El coeficiente de dispersión a una longitud de onda $\lambda$ se aproxima como:
+El presupuesto de potencia supone que el enlace está limitado por atenuación. Para confirmarlo, se estima el ensanchamiento de los pulsos por dispersión cromática en el peor caso. Según la recomendación G.652, la longitud de onda de dispersión nula de la fibra está entre $\lambda_0 = 1300$ y $1324 \, [nm]$, con una pendiente máxima $S_{0} = 0.092 \, [ps/(nm^2 \cdot km)]$ \cite{b5}. El coeficiente de dispersión a una longitud de onda $\lambda$ se aproxima como:
 \begin{equation}
-    D(\lambda) = \frac{S_0}{4} \left( \lambda - \frac{\lambda_0^4}{\lambda^3} \right)
+    D(\lambda) = \frac{S_{0}}{4} \left(\lambda - \frac{\lambda_{0}^{4}}{\lambda^{3}}\right)
     \label{eq_14}
 \end{equation}
 
-Evaluando en los extremos del rango de emisión del transceptor ($1270$ a $1355 \, [nm]$), el peor caso se da para $\lambda = 1270 \, [nm]$ y $\lambda_0 = 1324 \, [nm]$, con $|D| = 5.29 \, [ps/(nm \cdot km)]$. Los láseres 1000BASE-LX tienen un ancho espectral RMS máximo de $\sigma_\lambda = 4 \, [nm]$ \cite{b14}, por lo que el ensanchamiento del pulso resulta:
+Evaluando en los extremos del rango de emisión del transceptor ($1270$ a $1355 \, [nm]$), el peor caso se da para $\lambda = 1270 \, [nm]$ y $\lambda_{0} = 1324 \, [nm]$, con $|D| = 5.29 \, [ps/(nm \cdot km)]$. Los láseres 1000BASE-LX tienen un ancho espectral RMS máximo de $\sigma_{\lambda} = 4 \, [nm]$ \cite{b14}, por lo que el ensanchamiento del pulso resulta:
 \begin{equation}
-    \Delta\tau = |D| \cdot L \cdot \sigma_\lambda = 5.29 \times 8 \times 4 = 169 \, [ps]
+    \Delta\tau = |D| \cdot L \cdot \sigma_{\lambda} = 5.29 \times 8 \times 4 = 169 \, [ps]
     \label{eq_15}
 \end{equation}
 

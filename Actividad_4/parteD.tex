@@ -32,30 +32,40 @@ Desde el punto de vista de la potencia el enlace cerraría, pero el margen sobra
 \end{enumerate}
 
 La solución es reemplazar los transceptores por modelos especificados para mayor distancia. La \autoref{tab:alternativas_16km} compara dos opciones a $1310 \, [nm]$ con la misma fibra:
-
-\begin{table}[H]
-    \centering
+\begingroup
     \footnotesize
-    \caption{Alternativas de transceptor para el enlace de $16 \, [km]$ ($A_{total} = 8.18 \, [dB]$, $M_s = 3 \, [dB]$).}
-    \label{tab:alternativas_16km}
-    \begin{tabular}{|l|c|c|c|}
+    \begin{longtable}
+        {|>{\raggedright\arraybackslash}m{4.5cm}
+         |>{\centering\arraybackslash}m{3cm}
+         |>{\centering\arraybackslash}m{3cm}
+         |>{\centering\arraybackslash}m{3.5cm}|} \hline
+        \textbf{Parámetro} & \textbf{LX actual} & \textbf{LX 20 km (FP)} & \textbf{EX 40 km (DFB)} \\ \hline
+        \endfirsthead
+
+        \multicolumn{3}{c}{\textit{Continuación de la página anterior}} \\ \hline
+        \textbf{Parámetro} & \textbf{LX actual} & \textbf{LX 20 km (FP)} & \textbf{EX 40 km (DFB)} \\ \hline
+        \endhead
+
         \hline
-        \textbf{Parámetro} & \textbf{LX actual} & \textbf{LX 20 km (FP)} & \textbf{EX 40 km (DFB)} \\
+        \multicolumn{3}{c}{\textit{Continúa en la página siguiente...}} \\
+        \endfoot
+
         \hline
-        Alcance especificado & $10 \, [km]$ & $20 \, [km]$ & $40 \, [km]$ \\
-        $P_t$ [dBm] & $-9.5$ a $-3$ & $-9.5$ a $-3$ & $-5$ a $0$ \\
-        $S_r$ [dBm] & $-24$ & $-23$ & $-24$ \\
-        Sobrecarga [dBm] & $0$ & $-3$ & $-3$ \\
-        $OB = P_{t,min} - S_r$ [dB] & $14.5$ & $13.5$ & $19$ \\
-        Margen sobrante [dB] & $3.32$ & $2.32$ & $7.82$ \\
-        $P_{r,max}$ [dBm] & $-11.18$ & $-11.18$ & $-8.18$ \\
-        Láser & FP & FP & DFB \\
-        Precio de referencia (c/u) & US\$ $8$ & US\$ $8$ & US\$ $16$ \\
-        \hline
-        Fuente & \cite{b1} & \cite{b9} & \cite{b20} \\
-        \hline
-    \end{tabular}
-\end{table}
+        \caption{Alternativas de transceptor para el enlace de $16 \, [km]$ ($A_{total} = 8.18 \, [dB]$, $M_s = 3 \, [dB]$).}
+        \label{tab:alternativas_16km} \\
+        \endlastfoot
+            Alcance especificado & $10 \, [km]$ & $20 \, [km]$ & $40 \, [km]$ \\
+            $P_{t}$ [dBm] & $-9.5$ a $-3$ & $-9.5$ a $-3$ & $-5$ a $0$ \\
+            $S_{r}$ [dBm] & $-24$ & $-23$ & $-24$ \\
+            Sobrecarga [dBm] & $0$ & $-3$ & $-3$ \\
+            $OB = P_{t,min} - S_{r}$ [dB] & $14.5$ & $13.5$ & $19$ \\
+            Margen sobrante $[dB]$ & $3.32$ & $2.32$ & $7.82$ \\
+            $P_{r,max} \, [dBm]$ & $-11.18$ & $-11.18$ & $-8.18$ \\
+            Láser & FP & FP & DFB \\
+            Precio de referencia (c/u) & US\$ $8$ & US\$ $8$ & US\$ $16$ \\ \hline
+            Fuente & \cite{b1} & \cite{b9} & \cite{b20} \\ \hline
+    \end{longtable}
+\endgroup
 
 Se recomienda el módulo \textbf{1000BASE-EX de $40 \, [km]$ con láser DFB}: su espectro angosto elimina la limitación por dispersión, recupera un margen sobrante de $7.82 \, [dB]$ y la potencia máxima recibida ($-8.18 \, [dBm]$) queda por debajo del nivel de sobrecarga ($-3 \, [dBm]$), por lo que no requiere atenuadores. El sobrecosto es de unos US\$ $16$ para el par de módulos, despreciable frente al costo del cable, la obra civil y los empalmes de los $8 \, [km]$ adicionales. El módulo de $20 \, [km]$, al mismo precio que el actual, sería una alternativa aceptable desde el presupuesto de potencia, pero con menor margen y la misma fuente de espectro ancho.
 

@@ -40,23 +40,36 @@ Si se utilizara la potencia máxima, el presupuesto sería de $21 \, [dB]$; sin 
 \textbf{Justificación técnica:} el alcance de $10 \, [km]$ cubre la distancia de $8 \, [km]$ y la longitud de onda de $1310 \, [nm]$ coincide con la zona de dispersión cromática prácticamente nula de la fibra G.652.D, por lo que el enlace queda limitado por atenuación y no por dispersión (se verifica en la \autoref{sec_3}). Además, como la potencia máxima de transmisión ($-3 \, [dBm]$) es menor que la potencia de sobrecarga del receptor ($0 \, [dBm]$), el receptor no puede saturarse aun sin pérdidas en el trayecto, por lo que no se requieren atenuadores.
 
 \textbf{Justificación económica:} la \autoref{tab:costo_sfp} compara precios de referencia de transceptores SFP de $1 \, [Gbps]$ de distinto alcance de un mismo proveedor con lista de precios pública. Los módulos de $40$ y $80 \, [km]$ cuestan entre $2$ y $3.4$ veces más y, por su mayor potencia de transmisión, pueden requerir atenuadores en un enlace corto. Por lo tanto, la categoría de $10 \, [km]$ es la opción más económica que satisface el enlace.
-
-\begin{table}[H]
-    \centering
-    \caption{Precios de referencia de transceptores SFP de $1 \, [Gbps]$ (FS.com, consultados el 29/09/2026) \cite{b12}.}
-    \label{tab:costo_sfp}
-    \begin{tabular}{|l|c|c|c|}
+\begingroup
+    \footnotesize
+    \begin{longtable}
+        {|>{\centering\arraybackslash}m{2.5cm}
+         |>{\centering\arraybackslash}m{3.5cm}
+         |>{\centering\arraybackslash}m{2.5cm}
+         |>{\centering\arraybackslash}m{3cm}|} \hline
+        \textbf{Tipo} & \textbf{Longitud de onda} & \textbf{Alcance} & \textbf{Precio unitario} \\ \hline
+        \endfirsthead
+        
+        \multicolumn{4}{c}{\textit{Continuación de la página anterior}} \\ \hline
+        \textbf{Tipo} & \textbf{Longitud de onda} & \textbf{Alcance} & \textbf{Precio unitario} \\ \hline
+        \endhead
+        
+        \hline 
+        \multicolumn{4}{c}{\textit{Continúa en la página siguiente...}} \\
+        \endfoot
+        
         \hline
-        \textbf{Tipo} & \textbf{Longitud de onda} & \textbf{Alcance} & \textbf{Precio unitario} \\
-        \hline
-        1000BASE-LX & $1310 \, [nm]$ & $10 \, [km]$ & US\$ $8$ \\
-        1000BASE-LX & $1310 \, [nm]$ & $20 \, [km]$ & US\$ $8$ \\
-        1000BASE-EX & $1310 \, [nm]$ & $40 \, [km]$ & US\$ $16$ \\
-        1000BASE-EX & $1550 \, [nm]$ & $40 \, [km]$ & US\$ $27$ \\
-        1000BASE-ZX & $1550 \, [nm]$ & $80 \, [km]$ & US\$ $27$ \\
-        \hline
-    \end{tabular}
-\end{table}
+        \caption{Precios de referencia de transceptores SFP de $1 \, [Gbps]$ (FS.com, consultados el 29/09/2026) \cite{b12}.}
+        \label{tab:costo_sfp} \\
+        \endlastfoot
+            1000BASE-LX & $1310 \, [nm]$ & $10 \, [km]$ & US\$ $8$ \\
+            1000BASE-LX & $1310 \, [nm]$ & $20 \, [km]$ & US\$ $8$ \\
+            1000BASE-EX & $1310 \, [nm]$ & $40 \, [km]$ & US\$ $16$ \\
+            1000BASE-EX & $1550 \, [nm]$ & $40 \, [km]$ & US\$ $27$ \\
+            1000BASE-ZX & $1550 \, [nm]$ & $80 \, [km]$ & US\$ $27$ \\
+            \hline
+    \end{longtable}
+\endgroup
 
 
 \subsection{Fibra Óptica}
@@ -71,6 +84,7 @@ La consigna plantea elegir entre dos tipos de fibra monomodo:
 Ambas presentan una atenuación similar a $1310 \, [nm]$, por lo que la diferencia está en la aplicación y en el costo. En abril de 2026, el precio de referencia de la fibra G.652.D era de $12$ a $17 \, [US\$/km]$, frente a $16.5$ a $19.5 \, [US\$/km]$ para la G.657.A1 y $30$ a $33 \, [US\$/km]$ para la G.657.A2 \cite{b13}.
 
 Se selecciona la \textbf{fibra G.652.D}, ya que el enlace es un tramo troncal de $8 \, [km]$ en ducto subterráneo, donde el cable se instala respetando radios de curvatura amplios (del orden de decenas de centímetros, ver \autoref{sec_2.2.2}) y la ventaja de la G.657 frente a macrocurvaturas no aporta beneficios que justifiquen su mayor costo. Además, es la fibra recomendada por la bibliografía de la cátedra para este tipo de enlaces \cite{b7}.
+
 
 \subsubsection{Cable seleccionado}
 \label{sec_2.2.2}
@@ -106,23 +120,34 @@ Todos los conectores son del tipo \textit{LC/UPC}, compatibles con el transcepto
 En total, cada fibra atraviesa $6$ conectores LC/UPC ($4$ de los patchcords y $2$ de los pigtails), $2$ adaptadores y $4$ empalmes por fusión. Como el enlace es bidireccional con dos fibras, la cantidad de elementos físicos a instalar es el doble, pero el presupuesto se calcula por sentido, ya que ambas fibras recorren el mismo trayecto. Las cajas de empalme intermedias deben ser herméticas (grado de protección IP68), ya que quedan alojadas en cámaras subterráneas expuestas a inundación \cite{b7}.
 
 Las pérdidas asignadas a cada elemento, tomadas de la tabla de valores típicos de la bibliografía de la cátedra \cite{b7}, se resumen en la \autoref{tab:perdidas_elementos}.
-
-\begin{table}[H]
-    \centering
-    \caption{Pérdidas típicas asignadas a cada elemento del enlace.}
-    \label{tab:perdidas_elementos}
-    \begin{tabular}{|l|c|c|}
+\begingroup
+    \footnotesize
+    \begin{longtable}
+        {|>{\centering\arraybackslash}m{6.5cm}
+         |>{\centering\arraybackslash}m{4cm}
+         |>{\centering\arraybackslash}m{3cm}|} \hline
+        \textbf{Elemento} & \textbf{Cantidad por fibra} & \textbf{Pérdida unitaria} \\ \hline
+        \endfirsthead
+        
+        \multicolumn{3}{c}{\textit{Continuación de la página anterior}} \\ \hline
+        \textbf{Elemento} & \textbf{Cantidad por fibra} & \textbf{Pérdida unitaria} \\ \hline
+        \endhead
+        
+        \hline 
+        \multicolumn{3}{c}{\textit{Continúa en la página siguiente...}} \\
+        \endfoot
+        
         \hline
-        \textbf{Elemento} & \textbf{Cantidad por fibra} & \textbf{Pérdida unitaria} \\
-        \hline
-        Fibra G.652.D a $1310 \, [nm]$ & $8 \, [km]$ & $0.38 \, [dB/km]$ \\
-        Patchcord LC/UPC (2 conectores) & $2$ & $0.4 \, [dB]$ \\
-        Pigtail LC/UPC & $2$ & $0.2 \, [dB]$ \\
-        Adaptador de panel LC/UPC & $2$ & $0.2 \, [dB]$ \\
-        Empalme por fusión & $4$ & $0.1 \, [dB]$ \\
-        \hline
-    \end{tabular}
-\end{table}
+        \caption{Pérdidas típicas asignadas a cada elemento del enlace.}
+        \label{tab:perdidas_elementos} \\
+        \endlastfoot
+            Fibra G.652.D a $1310 \, [nm]$ & $8 \, [km]$ & $0.38 \, [dB/km]$ \\
+            Patchcord LC/UPC (2 conectores) & $2$ & $0.4 \, [dB]$ \\
+            Pigtail LC/UPC & $2$ & $0.2 \, [dB]$ \\
+            Adaptador de panel LC/UPC & $2$ & $0.2 \, [dB]$ \\
+            Empalme por fusión & $4$ & $0.1 \, [dB]$ \\ \hline
+    \end{longtable}
+\endgroup
 
 
 \subsection{Distribuidor Óptico (ODF)}

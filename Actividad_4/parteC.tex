@@ -8,7 +8,6 @@ Para ubicar las cajas de empalme se supone que dividen la ruta en tres tramos ig
 \subsection{Esquema del Enlace}
 \label{sec_4.1}
 La \autoref{fig:esquema_enlace} muestra el esquema del enlace con todos sus elementos. Sobre cada evento se indica su pérdida y, en la parte inferior, la distancia acumulada desde el ODF del sitio A.
-
 \begin{figure}[H]
     \centering
     \resizebox{\textwidth}{!}{%
@@ -96,48 +95,61 @@ La \autoref{fig:esquema_enlace} muestra el esquema del enlace con todos sus elem
 \subsection{Tabla de Eventos}
 \label{sec_4.2}
 La \autoref{tab:eventos} detalla cada evento del trayecto, su distancia acumulada, la pérdida que introduce y el nivel de potencia resultante para las potencias de transmisión mínima y máxima del transceptor.
-
-\begin{table}[H]
-    \centering
+\begingroup
     \footnotesize
-    \caption{Eventos de pérdida a lo largo del enlace (sentido A $\rightarrow$ B).}
-    \label{tab:eventos}
-    \begin{tabular}{|c|l|c|c|c|c|}
-        \hline
+    \begin{longtable}
+        {|>{\centering\arraybackslash}m{0.5cm}
+         |>{\raggedright\arraybackslash}m{3.3cm}
+         |>{\centering\arraybackslash}m{1cm}
+         |>{\centering\arraybackslash}m{2.3cm}
+         |>{\centering\arraybackslash}m{2.45cm}
+         |>{\centering\arraybackslash}m{2.45cm}|} \hline
         \multirow{2}{*}{\textbf{N°}} & \multirow{2}{*}{\textbf{Evento}} & \multirow{2}{*}{\textbf{$d$ [km]}} & \multirow{2}{*}{\textbf{Pérdida [dB]}} & \multicolumn{2}{c|}{\textbf{Nivel de potencia [dBm]}} \\
-        \cline{5-6}
-         & & & & \textbf{con $P_{t,min}$} & \textbf{con $P_{t,max}$} \\
+        \cline{5-6} & & & & \textbf{con $P_{t,min}$} & \textbf{con $P_{t,max}$} \\ \hline
+        \endfirsthead
+
+        \multicolumn{6}{c}{\textit{Continuación de la página anterior}} \\ \hline
+        \multirow{2}{*}{\textbf{N°}} & \multirow{2}{*}{\textbf{Evento}} & \multirow{2}{*}{\textbf{$d$ [km]}} & \multirow{2}{*}{\textbf{Pérdida [dB]}} & \multicolumn{2}{c|}{\textbf{Nivel de potencia [dBm]}} \\
+        \cline{5-6} & & & & \textbf{con $P_{t,min}$} & \textbf{con $P_{t,max}$} \\ \hline
+        \endhead
+
         \hline
-        -- & Salida del SFP TX & $0{,}00$ & -- & $-9.50$ & $-3.00$ \\
-        1 & Patchcord A & $0{,}00$ & $0{,}40$ & $-9.90$ & $-3.40$ \\
-        2 & Adaptador ODF A & $0{,}00$ & $0{,}20$ & $-10.10$ & $-3.60$ \\
-        3 & Pigtail ODF A & $0{,}00$ & $0{,}20$ & $-10.30$ & $-3.80$ \\
-        4 & Empalme ODF A & $0{,}00$ & $0{,}10$ & $-10.40$ & $-3.90$ \\
-        5 & Fibra, tramo 1 & $2{,}67$ & $1{,}01$ & $-11.41$ & $-4.91$ \\
-        6 & Empalme caja 1 & $2{,}67$ & $0{,}10$ & $-11.51$ & $-5.01$ \\
-        7 & Fibra, tramo 2 & $5{,}33$ & $1{,}01$ & $-12.53$ & $-6.03$ \\
-        8 & Empalme caja 2 & $5{,}33$ & $0{,}10$ & $-12.63$ & $-6.13$ \\
-        9 & Fibra, tramo 3 & $8{,}00$ & $1{,}01$ & $-13.64$ & $-7.14$ \\
-        10 & Empalme ODF B & $8{,}00$ & $0{,}10$ & $-13.74$ & $-7.24$ \\
-        11 & Pigtail ODF B & $8{,}00$ & $0{,}20$ & $-13.94$ & $-7.44$ \\
-        12 & Adaptador ODF B & $8{,}00$ & $0{,}20$ & $-14.14$ & $-7.64$ \\
-        13 & Patchcord B & $8{,}00$ & $0{,}40$ & $-14.54$ & $-8.04$ \\
+        \multicolumn{6}{c}{\textit{Continúa en la página siguiente...}} \\
+        \endfoot
+
         \hline
-        \multicolumn{3}{|r|}{\textbf{Total}} & $\mathbf{5{,}04}$ & $\mathbf{-14.54}$ & $\mathbf{-8.04}$ \\
-        \hline
-    \end{tabular}
-\end{table}
+        \caption{Eventos de pérdida a lo largo del enlace (sentido A $\rightarrow$ B).}
+        \label{tab:eventos} \\
+        \endlastfoot
+            -- & Salida del SFP TX & $0{,}00$ & -- & $-9.50$ & $-3.00$ \\
+            1  & Patchcord A & $0{,}00$ & $0{,}40$ & $-9.90$ & $-3.40$ \\
+            2  & Adaptador ODF A & $0{,}00$ & $0{,}20$ & $-10.10$ & $-3.60$ \\
+            3  & Pigtail ODF A & $0{,}00$ & $0{,}20$ & $-10.30$ & $-3.80$ \\
+            4  & Empalme ODF A & $0{,}00$ & $0{,}10$ & $-10.40$ & $-3.90$ \\
+            5  & Fibra, tramo 1 & $2{,}67$ & $1{,}01$ & $-11.41$ & $-4.91$ \\
+            6  & Empalme caja 1 & $2{,}67$ & $0{,}10$ & $-11.51$ & $-5.01$ \\
+            7  & Fibra, tramo 2 & $5{,}33$ & $1{,}01$ & $-12.53$ & $-6.03$ \\
+            8  & Empalme caja 2 & $5{,}33$ & $0{,}10$ & $-12.63$ & $-6.13$ \\
+            9  & Fibra, tramo 3 & $8{,}00$ & $1{,}01$ & $-13.64$ & $-7.14$ \\
+            10 & Empalme ODF B & $8{,}00$ & $0{,}10$ & $-13.74$ & $-7.24$ \\
+            11 & Pigtail ODF B & $8{,}00$ & $0{,}20$ & $-13.94$ & $-7.44$ \\
+            12 & Adaptador ODF B & $8{,}00$ & $0{,}20$ & $-14.14$ & $-7.64$ \\
+            13 & Patchcord B & $8{,}00$ & $0{,}40$ & $-14.54$ & $-8.04$ \\
+            \hline
+            \multicolumn{3}{|r|}{\textbf{Total}} & $\mathbf{5{,}04}$ & $\mathbf{-14.54}$ & $\mathbf{-8.04}$ \\
+            \hline
+    \end{longtable}
+\endgroup
 
 
 \subsection{Gráfico del Presupuesto Óptico}
 \label{sec_4.3}
 La \autoref{fig:presupuesto} representa el nivel de potencia a lo largo del enlace. La curva continua corresponde a la potencia de transmisión mínima (caso de diseño) y la curva de trazos, a la potencia máxima. Se indican la potencia de transmisión ($P_{t}$), la suma de pérdidas ($\Sigma$ pérdidas), la potencia de llegada al receptor ($P_{r}$), la sensibilidad del receptor ($S_{r}$) y el margen de seguridad ($M_{s}$), cuyo límite superior define el umbral de diseño $S_{r} + M_{s} = -21 \, [dBm]$.
-
 \begin{figure}[H]
     \centering
     \begin{tikzpicture}
         \begin{axis}[
-            width=\textwidth, height=10.5cm,
+            width=\textwidth, height=9.3cm,
             xmin=-1.5, xmax=11.2, ymin=-26, ymax=-1,
             xlabel={Distancia acumulada [km]},
             ylabel={Potencia óptica [dBm]},
