@@ -17,7 +17,7 @@ Las pérdidas de conectores no cambian ($1.6 \, [dB]$), por lo que la pérdida t
 
 Con el mismo transceptor ($P_{t,min} = -9.5 \, [dBm]$, $S_r = -24 \, [dBm]$):
 \begin{equation}
-    P_{r,min} = -9.5 - 8.18 = -17.68 \, [dBm] \quad \Rightarrow \quad P_{r,min} - S_r = 6.32 \, [dB]
+    P_{r,min} = -9.5 - 8.18 = -17.68 \, [dBm] \quad \Rightarrow \quad P_{r,min} - S_{r} = 6.32 \, [dB]
     \label{eq_d2}
 \end{equation}
 \begin{equation}
@@ -66,7 +66,7 @@ En resumen, al duplicar la distancia, el costo del enlace pasa a estar dominado 
 \label{sec_5.2}
 La fibra G.652.D presenta su mínima atenuación en la ventana de $1550 \, [nm]$, con $0.25 \, [dB/km]$ en fibra cableada frente a $0.38 \, [dB/km]$ a $1310 \, [nm]$ \cite{b3}, es decir, un 34\,\% menos. Por eso es recomendable en los siguientes casos:
 \begin{itemize}
-    \item \underline{Enlaces largos limitados por atenuación:} a partir de unos $40 \, [km]$ la pérdida de la fibra domina el presupuesto. Los módulos 1000BASE-ZX a $1550 \, [nm]$ alcanzan $80 \, [km]$ (por ejemplo, $P_t = 0$ a $+5 \, [dBm]$ y $S_r = -23 \, [dBm]$ \cite{b11}).
+    \item \underline{Enlaces largos limitados por atenuación:} a partir de unos $40 \, [km]$ la pérdida de la fibra domina el presupuesto. Los módulos 1000BASE-ZX a $1550 \, [nm]$ alcanzan $80 \, [km]$ (por ejemplo, $P_{t} = 0$ a $+5 \, [dBm]$ y $S_{r} = -23 \, [dBm]$ \cite{b11}).
     \item \underline{Enlaces sobre una sola fibra (BiDi):} cuando sólo se dispone de una fibra, se usa un par de transceptores bidireccionales en el que un extremo transmite a $1310 \, [nm]$ y el otro a $1550 \, [nm]$, separando los sentidos por longitud de onda \cite{b7}.
     \item \underline{Multiplexación (CWDM/DWDM):} para transportar varios canales sobre la misma fibra se utilizan longitudes de onda en la banda de $1550 \, [nm]$.
     \item \underline{Enlaces con amplificación óptica:} los amplificadores de fibra dopada con erbio (EDFA), utilizados en enlaces de más de $80$ a $100 \, [km]$, operan en la banda de $1550 \, [nm]$ \cite{b7}.
@@ -86,12 +86,12 @@ Para el enlace de $8 \, [km]$ no se justifica el cambio. Con un módulo ZX, la p
 \label{sec_5.3}
 El presupuesto de potencia se calcula con valores de catálogo al momento de la instalación, pero las condiciones del enlace cambian durante su vida útil. El margen de seguridad es una reserva de potencia que permite absorber esas variaciones sin que la potencia recibida caiga por debajo de la sensibilidad. Las principales causas de degradación son:
 \begin{itemize}
-    \item \underline{Envejecimiento de los componentes:} la potencia emitida por el láser puede disminuir a lo largo de su vida útil y los conectores se desgastan con las sucesivas conexiones y desconexiones \cite{b7}.
-    \item \underline{Reparaciones:} un corte del cable, por ejemplo por obras en la vía pública, se repara insertando un tramo nuevo, lo que agrega al menos dos empalmes y una caja de empalme adicional.
-    \item \underline{Suciedad en los conectores:} es la principal causa de fallas en enlaces de fibra, ya que una partícula de polvo puede ser tan grande como el núcleo de la fibra monomodo e introducir pérdidas y reflexiones significativas \cite{b17}.
-    \item \underline{Temperatura:} las especificaciones de cables Lightera para ductos admiten un incremento de atenuación de hasta $0.1 \, [dB/km]$ a $1310 \, [nm]$ en el ensayo de ciclado térmico \cite{b8}, lo que en $8 \, [km]$ representaría hasta $0.8 \, [dB]$.
-    \item \underline{Esfuerzos mecánicos:} curvaturas o compresiones del cable por trabajos posteriores en la canalización.
-    \item \underline{Diferencias entre valores de cálculo y reales:} el presupuesto usa valores típicos de pérdida de conectores y empalmes, que en campo pueden ser mayores (por ejemplo, la bibliografía recomienda no superar $0.15 \, [dB]$ por empalme \cite{b7}), además de reconfiguraciones futuras que agreguen patchcords.
+    \item \underline{Envejecimiento de los componentes:} La potencia emitida por el láser puede disminuir a lo largo de su vida útil y los conectores se desgastan con las sucesivas conexiones y desconexiones \cite{b7}.
+    \item \underline{Reparaciones:} Un corte del cable, por ejemplo por obras en la vía pública, se repara insertando un tramo nuevo, lo que agrega al menos dos empalmes y una caja de empalme adicional.
+    \item \underline{Suciedad en los conectores:} Es la principal causa de fallas en enlaces de fibra, ya que una partícula de polvo puede ser tan grande como el núcleo de la fibra monomodo e introducir pérdidas y reflexiones significativas \cite{b17}.
+    \item \underline{Temperatura:} Las especificaciones de cables Lightera para ductos admiten un incremento de atenuación de hasta $0.1 \, [dB/km]$ a $1310 \, [nm]$ en el ensayo de ciclado térmico \cite{b8}, lo que en $8 \, [km]$ representaría hasta $0.8 \, [dB]$.
+    \item \underline{Esfuerzos mecánicos:} Curvaturas o compresiones del cable por trabajos posteriores en la canalización.
+    \item \underline{Diferencias entre valores de cálculo y reales:} El presupuesto usa valores típicos de pérdida de conectores y empalmes, que en campo pueden ser mayores (por ejemplo, la bibliografía recomienda no superar $0.15 \, [dB]$ por empalme \cite{b7}), además de reconfiguraciones futuras que agreguen patchcords.
 \end{itemize}
 
 Si el enlace se diseñara con la potencia recibida justo igual a la sensibilidad, funcionaría el día de la instalación, pero cualquiera de estas degradaciones llevaría al receptor por debajo de su sensibilidad. Como la sensibilidad se define para una tasa de error de $10^{-12}$, operar por debajo de ella aumenta rápidamente la tasa de errores y genera cortes intermitentes, difíciles de diagnosticar.
