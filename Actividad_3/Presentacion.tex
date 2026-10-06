@@ -1,0 +1,700 @@
+\documentclass[aspectratio=169,10pt]{beamer}
+
+% -------------------------
+%         PAQUETES
+% -------------------------
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish,es-noshorthands]{babel}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{booktabs}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning}
+
+% -------------------------
+%         TEMA
+% -------------------------
+\usetheme{Madrid}
+\usecolortheme{whale}
+\setbeamertemplate{footline}[page number]
+
+% Índice al comienzo de cada sección
+\AtBeginSection[]{
+  \begin{frame}
+    \frametitle{Contenido}
+    \tableofcontents[currentsection]
+  \end{frame}
+}
+
+% -------------------------
+%   MACRO PARA FIGURAS
+% -------------------------
+% \figura{ruta/archivo.png}{ancho}{texto del recuadro si el archivo no existe}
+% Si el archivo existe, muestra la imagen; si no, un recuadro provisorio.
+\newcommand{\figura}[3]{%
+  \IfFileExists{#1}%
+    {\includegraphics[width=#2]{#1}}%
+    {\fbox{\parbox[c][2.6cm][c]{#2}{\centering\footnotesize [#3]}}}%
+}
+
+% -------------------------
+%   DATOS DE LA PORTADA
+% -------------------------
+\title[TP3: Fibra Óptica]{Actividad 3: Fibra Óptica}
+\subtitle{Sistemas de Radiocomunicaciones}
+\author[Arteaga, Baccino, Mendes Rosa, Monja]{Arteaga Barrera, Cristian Eduardo \\ Baccino, Luca \\ Mendes Rosa, Agustín \\ Monja, Ernesto Joaquín}
+\date{\today}
+
+\begin{document}
+
+% =====================================================
+\begin{frame}
+    \begin{tikzpicture}[remember picture,overlay]
+        \node[opacity=0.2,anchor=center] at (current page.center) 
+            {\includegraphics[width=0.9\paperwidth]{Figuras/decoracion_a.png}};
+    \end{tikzpicture}
+    
+    \titlepage
+    \begin{center}
+        \vspace{-0.5cm}
+        \includegraphics[width=6cm]{Figuras/unc_fcefyn_logo.png}
+    \end{center}
+    
+\end{frame}
+
+\begin{frame}{Contenido}
+  \tableofcontents
+\end{frame}
+
+% =====================================================
+\section{Introducción}
+
+\begin{frame}{Introducción y objetivos}
+  \textbf{Objetivo general:} comprender, analizar y comprobar empíricamente los principios físicos y electrónicos de los enlaces ópticos.
+
+  \medskip
+  \textbf{Equipamiento:} kit educativo de fibra óptica {EFO1101} (transmisor, receptor, espejo y cables ópticos), más instrumental de laboratorio.
+
+  \medskip
+  \begin{columns}[T]
+    \begin{column}{0.48\textwidth}
+      \begin{block}{Parte 1: Transmisión}
+        \begin{itemize}
+          \item Modo analógico: espacio libre vs. fibra óptica.
+          \item Modo digital: umbral de decisión, atenuación y límites en frecuencia (con osciloscopio).
+        \end{itemize}
+      \end{block}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \begin{block}{Parte 2: Instalación}
+        \begin{itemize}
+          \item Detección visual de fallas (VFL).
+          \item Conectorización mecánica SC-APC.
+          \item Empalme mecánico de fibra.
+        \end{itemize}
+      \end{block}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+% =====================================================
+\section{Marco teórico}
+
+\begin{frame}{Sistema de comunicación óptico}
+  Convierte una señal eléctrica en luz, la transmite por un canal y la reconvierte en señal eléctrica.
+
+  \bigskip
+  \begin{center}
+  \begin{tikzpicture}[node distance=0.6cm, >=Stealth,
+      box/.style={draw, rounded corners, minimum height=1.3cm, minimum width=2.1cm, align=center, fill=blue!8, font=\small}]
+    \node[box] (a) {Señal\\eléctrica};
+    \node[box, right=of a] (b) {Transmisor\\(LED)};
+    \node[box, right=of b, fill=orange!15] (c) {Canal\\(espacio libre\\o fibra)};
+    \node[box, right=of c] (d) {Receptor\\(fotodiodo)};
+    \node[box, right=of d] (e) {Señal\\eléctrica};
+    \draw[->] (a) -- (b);
+    \draw[->] (b) -- (c);
+    \draw[->] (c) -- (d);
+    \draw[->] (d) -- (e);
+  \end{tikzpicture}
+  \end{center}
+
+  \bigskip
+  \begin{itemize}
+    \item \textbf{Propagación no guiada:} espacio libre.
+    \item \textbf{Propagación guiada:} fibra óptica.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Propagación en espacio libre y en fibra}
+  \begin{columns}[T]
+    \begin{column}{0.48\textwidth}
+      \begin{block}{Espacio libre (Práctico A.1)}
+        \begin{itemize}
+          \item Obedece a la óptica geométrica.
+          \item {Reflexión especular}: ángulo de incidencia = ángulo de reflexión. Permite redirigir el haz con un espejo.
+          \item El haz diverge: la potencia decae con la distancia y exige alinear emisor y receptor.
+        \end{itemize}
+      \end{block}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \begin{block}{Fibra óptica (Práctico A.2)}
+        \begin{itemize}
+          \item La luz queda confinada en el núcleo por {reflexión total interna}.
+          \item Casi toda la potencia emitida llega al fotodetector.
+          \item Muy baja atenuación comparada con otros medios.
+        \end{itemize}
+      \end{block}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Reflexión total interna}
+  \begin{itemize}
+    \item Núcleo de dióxido de silicio (SiO$_2$) con índice $n_1$, rodeado por un revestimiento con índice $n_2$, con $n_1 > n_2$.
+    \item En la interfaz núcleo--revestimiento rige la {ley de Snell}:
+  \end{itemize}
+  \[
+    n_1 \sin\theta_i = n_2 \sin\theta_t
+  \]
+  \begin{itemize}
+    \item El {ángulo crítico} es el mínimo ángulo de incidencia para el cual ya no hay rayo refractado ($\theta_t = 90^\circ$): toda la energía se refleja dentro del núcleo.
+  \end{itemize}
+  \[
+    \theta_c = \arcsin\!\left(\frac{n_2}{n_1}\right)
+  \]
+\end{frame}
+
+\begin{frame}{Tipos de fibra}
+  \begin{columns}[T]
+    \begin{column}{0.48\textwidth}
+      \begin{block}{Monomodo (SMF)}
+        \begin{itemize}
+          \item Núcleo de 8 a 10 $\mu$m.
+          \item Solo se propaga el modo fundamental.
+        \end{itemize}
+      \end{block}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \begin{block}{Multimodo (MMF)}
+        \begin{itemize}
+          \item Núcleo de unos 50 $\mu$m.
+          \item Varios modos a la vez: sufre dispersión modal.
+        \end{itemize}
+      \end{block}
+    \end{column}
+  \end{columns}
+
+  \bigskip
+  Los conectores y empalmes mecánicos de la Parte 2 sirven para fibras monomodo o multimodo con revestimiento (\emph{cladding}) de 125~$\mu$m.
+\end{frame}
+
+\begin{frame}{Emisores y detectores}
+  \begin{itemize}
+    \item \textbf{Emisores:} LED en el espectro visible e infrarrojo.
+    \item \textbf{Detectores:} fotodiodos, que convierten la potencia óptica en una corriente proporcional.
+  \end{itemize}
+
+  \medskip
+  \begin{block}{Parámetros del receptor}
+    \begin{itemize}
+      \item \textbf{Sensibilidad mínima:} mínima potencia para detectar correctamente.
+      \item \textbf{Potencia máxima admisible:} límite antes de {saturar} (por eso se reduce la potencia en A.2).
+      \item \textbf{Responsividad:} corriente de salida por potencia óptica [A/W].
+      \item \textbf{Reflectancia:} cuánta luz devuelve el sensor.
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+\begin{frame}{Atenuación}
+  Pérdida de potencia de la señal al propagarse:
+  \[
+    \alpha\,[\mathrm{dB}] = 10 \log_{10}\!\left(\frac{P_{entrada}}{P_{salida}}\right)
+  \]
+
+  \begin{itemize}
+    \item Fibra moderna: 0,15 dB/km, es decir, cada 20 km la potencia se reduce a la mitad.
+    \item Un cable {largo} atenúa más que uno {corto}.
+    \item En el receptor digital se compensa subiendo la potencia del emisor o ajustando el umbral. Si la señal es muy débil, el receptor no detecta bits.
+  \end{itemize}
+
+  \medskip
+  \textbf{Se usa en:} Práctico D.2 (cable corto vs. cable largo).
+\end{frame}
+
+\begin{frame}{Modulación analógica y digital}
+  \begin{columns}[T]
+    \begin{column}{0.48\textwidth}
+      \begin{block}{Analógica (A.1 y A.2)}
+        \begin{itemize}
+          \item La intensidad de la luz es {proporcional} a la tensión de entrada.
+          \item Se suma un nivel de continua (sesgo o \emph{DC bias}), porque la luz no puede ser negativa.
+          \item El fotodiodo reproduce las variaciones de la señal original.
+        \end{itemize}
+      \end{block}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \begin{block}{Digital (D.1 y D.2)}
+        \begin{itemize}
+          \item La luz conmuta entre dos estados: alta intensidad (``1'') y baja o apagada (``0'').
+          \item El receptor usa un {comparador con umbral de decisión}.
+          \item Si la señal no supera el umbral, no se regenera el pulso y se corta la comunicación.
+        \end{itemize}
+      \end{block}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+% =====================================================
+\section{Seguridad en la manipulación de fibra óptica}
+
+\begin{frame}{Seguridad óptica y protección ocular}
+  \begin{alertblock}{Atención}
+    Gran parte de las fuentes operan en {infrarrojo}, que no se ve: el ojo no activa el reflejo de parpadeo.
+  \end{alertblock}
+
+  \medskip
+  \begin{itemize}
+    \item \textbf{Nunca} mirar directamente el extremo de una fibra, un conector o un puerto emisor activo.
+    \item \textbf{Nunca} apuntar una fibra o una fuente hacia la cara de otra persona.
+    \item Para verificar que hay luz, usar un {medidor de potencia óptica} o reflejar el haz sobre una superficie difusa a distancia segura.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Manipulación mecánica y esquirlas}
+  \begin{itemize}
+    \item \textbf{Radio mínimo de curvatura:} evitar curvas pronunciadas y estrangulamientos. Pueden quebrar o astillar la fibra, generar pérdidas por radiación y provocar cortes.
+    \item \textbf{Esquirlas de vidrio:} muy pequeñas, transparentes y afiladas. Pueden penetrar en la piel o los ojos.
+    \item No tocar las puntas desnudas ni recoger restos con las manos sin protección.
+    \item \textbf{Residuos:} recoger de inmediato los fragmentos y depositarlos en un contenedor para vidrio. No dejarlos sobre la mesada.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Productos químicos e higiene}
+  \begin{itemize}
+    \item \textbf{Alcohol isopropílico} (para limpiar fibras y conectores):
+      \begin{itemize}
+        \item es {inflamable}: usarlo lejos de fuentes de calor, chispas o arcos eléctricos;
+        \item evitar el contacto prolongado con piel y ojos.
+      \end{itemize}
+    \item \textbf{Higiene personal:} al terminar, y antes de frotarse los ojos, manipular lentes de contacto o comer, lavarse bien las manos para retirar partículas.
+  \end{itemize}
+\end{frame}
+
+% =====================================================
+\section{Parte 1: Transmisión en modo analógico y digital}
+
+\begin{frame}{Kit EFO1101 y alimentación}
+  \begin{columns}[T]
+    \begin{column}{0.5\textwidth}
+      \textbf{Alimentación externa (9 V a 15 V):}
+      \begin{itemize}
+        \item Positivo $\rightarrow$ borne rojo 13 (TX) y 19 (RX).
+        \item Negativo $\rightarrow$ borne verde 15 (TX) y 21 (RX).
+        \item Los interruptores 2 y 9 no tienen efecto: se enciende y apaga conectando o desconectando los cables de la fuente.
+      \end{itemize}
+      \medskip
+      \textbf{Materiales:} fuente, cables banana-cocodrilo, transmisor, receptor, reproductor de audio con cable mono 3,5~mm, espejo, cables ópticos (corto y largo), osciloscopio.
+    \end{column}
+    \begin{column}{0.24\textwidth}
+      \figura{Figuras/Transmisor.png}{\textwidth}{Referencias de elementos de control (transmisor y receptor)}
+      \figura{Figuras/Receptor.png}{\textwidth}{Referencias de elementos de control (transmisor y receptor)}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+% ------------------ A.1 ------------------
+\subsection{Práctico A.1}
+
+\begin{frame}{A.1: Audio por espacio libre. Configuración}
+  \textbf{Objetivo:} transmitir audio con luz infrarroja por el aire y comprobar que se comporta como la luz visible.
+
+  \medskip
+  \small
+  \begin{columns}[T]
+    \begin{column}{0.52\textwidth}
+      \begin{enumerate}
+        \item Receptor: interruptores 11 (altavoz) y 1 (buzzer) en OFF.
+        \item Enfrentar TX y RX a unos 50~cm: salida 12 (LED infrarrojo) hacia entrada 12 (fotodiodo).
+        \item Alimentar ambos equipos.
+        \item {Modo analógico} en ambos (interruptor 7 TX y 4 RX).
+      \end{enumerate}
+    \end{column}
+    \begin{column}{0.46\textwidth}
+      \begin{enumerate}
+        \setcounter{enumi}{4}
+        \item Potenciómetro 8 TX (ganancia) al mínimo y 9 TX (potencia) al máximo.
+        \item Audio a volumen máximo por el borne 21 del TX.
+        \item Altavoz del RX en ON y ajustar la ganancia (potenciómetro 5).
+        \item Si hay distorsión, bajar el volumen del reproductor.
+      \end{enumerate}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{A.1: Verificaciones y resultados}
+  \begin{columns}[T]
+    \begin{column}{0.5\textwidth}
+      \begin{block}{Verificaciones}
+        \begin{itemize}
+          \item \textbf{Tapar el LED de alta luminosidad} (salida 10): se comprueba que la información viaja por la salida infrarroja (12).
+          \item \textbf{Espejo:} con el TX a 90$^\circ$ del RX, se reflejó el haz hacia el receptor.
+        \end{itemize}
+      \end{block}
+      \begin{block}{Resultados}
+        \begin{itemize}
+          \item El audio se escuchó con claridad.
+          \item Con el espejo se recuperó el sonido: la luz infrarroja cumple la ley de reflexión como la luz visible.
+        \end{itemize}
+      \end{block}
+    \end{column}
+    \begin{column}{0.46\textwidth}
+      \figura{Figuras/espejo.png}{\textwidth}{Foto: disposición en espacio libre y reflexión con espejo}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+% ------------------ A.2 ------------------
+\subsection{Práctico A.2}
+
+\begin{frame}{A.2: Audio por fibra óptica. Configuración}
+  \textbf{Objetivo:} transmitir el mismo audio guiado por fibra y comparar con el espacio libre.
+
+  \medskip
+  \begin{enumerate}
+    \item Configuración inicial igual que A.1 (pasos 1 a 7).
+    \item Audio a volumen {casi mínimo} por el borne 21 del TX.
+    \item Unir la salida 10 del TX con la entrada 12 del RX con el {cable óptico corto}.
+    \item Altavoz del RX en ON.
+    \item Reducir la potencia del TX (potenciómetro 9) hasta escuchar claro y sin distorsión, para {no sobrecargar el receptor}.
+    \item Ajustar la ganancia del RX (potenciómetro 5).
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}{A.2: Verificaciones}
+  \begin{columns}[T]
+    \begin{column}{0.46\textwidth}
+      \begin{block}{Cable largo}
+        Se quitó el cable corto del receptor, se conectó el largo y se enfrentaron manualmente ambos extremos para comprobar el paso de la señal.
+      \end{block}
+      \begin{block}{LED indicador (11)}
+        Con máxima potencia en TX y RX, se acercó el extremo del cable corto al LED indicador: emite la misma señal que el emisor principal, con menor intensidad.
+      \end{block}
+    \end{column}
+    \begin{column}{0.52\textwidth}
+      \begin{columns}[T]
+        \begin{column}{0.48\textwidth}
+          \figura{Figuras/A2_corto.png}{\textwidth}{(a) Cable corto}
+        \end{column}
+        \begin{column}{0.48\textwidth}
+          \figura{Figuras/A2_largo.png}{\textwidth}{(b) Cable largo}
+        \end{column}
+      \end{columns}
+      \medskip
+      \begin{columns}[T]
+        \begin{column}{0.48\textwidth}
+          \figura{Figuras/salida.png}{\textwidth}{(c) Extremo frente al LED indicador}
+        \end{column}
+        \begin{column}{0.48\textwidth}
+          \figura{Figuras/1.png}{\textwidth}{(d) Extremos enfrentados}
+        \end{column}
+      \end{columns}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{A.2: Resultados y explicación}
+  \begin{itemize}
+    \item Con la fibra óptica el audio llegó con {mayor nivel} que en espacio libre, y hubo que bajar la potencia para evitar distorsión.
+    \item Al enfrentar a mano los extremos de los cables, la señal se escuchó con un nivel mayor que en espacio libre, pero {menor} que con los cables conectados correctamente: hay pérdidas de acople.
+    \item Lo mismo ocurrió usando el LED indicador como emisor.
+  \end{itemize}
+
+  \medskip
+  \begin{block}{¿Por qué?}
+    En el aire el haz {diverge} y la potencia decae con la distancia. La fibra lo {confina} por reflexión total interna y lo guía casi completo hacia el área activa del fotodetector.
+  \end{block}
+\end{frame}
+
+% ------------------ D.1 ------------------
+\subsection{Práctico D.1}
+
+\begin{frame}{D.1: Comunicaciones digitales. Configuración}
+  \textbf{Objetivo:} transmitir señales digitales (Morse y generador interno) y observar el efecto de la frecuencia.
+
+  \medskip
+  \small
+  \begin{columns}[T]
+    \begin{column}{0.52\textwidth}
+      \begin{enumerate}
+        \item TX en {modo digital} (interruptor 7) y RX en modo digital (interruptor 4).
+        \item Interruptor 6 del TX en \texttt{TTL CONTACT/MORSE}.
+        \item Potencia de salida al máximo (potenciómetro 9).
+        \item Umbral digital del RX en posición intermedia (potenciómetro 2).
+        \item Buzzer del RX encendido (interruptor 1).
+        \item Cable óptico corto entre TX y RX y alimentación conectada.
+      \end{enumerate}
+    \end{column}
+    \begin{column}{0.46\textwidth}
+      \begin{enumerate}
+        \setcounter{enumi}{6}
+        \item Pulsar la tecla Morse.
+        \item Desconectar la fibra del TX y generar señales con {luz ambiente}, ajustando el umbral del RX.
+        \item Reconectar la fibra y poner la frecuencia del generador al mínimo (potenciómetro 5).
+        \item Interruptor 6 en \texttt{PSEUDO-RANDOM SIGNAL} y subir la frecuencia.
+        \item Interruptor 6 en \texttt{SQUARE WAVE} y variar la frecuencia.
+      \end{enumerate}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{D.1: Resultados}
+  \begin{itemize}
+    \item La emisión con el pulsador {Morse} funcionó correctamente.
+    \item Ajustando el {umbral} del receptor se logró recibir señales usando la luz del ambiente.
+    \item Con \texttt{PSEUDO-RANDOM SIGNAL} y \texttt{SQUARE WAVE} el buzzer reprodujo el sonido de cada señal.
+    \item Al {aumentar la frecuencia}, el tono del buzzer sube.
+    \item El parpadeo del LED indicador deja de percibirse y pasa a verse como una {luz constante}, aunque el tono siga cambiando: el ojo no sigue esas frecuencias, pero el receptor sí.
+  \end{itemize}
+\end{frame}
+
+% ------------------ D.2 ------------------
+\subsection{Práctico D.2}
+
+\begin{frame}{D.2: Mediciones con osciloscopio. Montaje}
+  \textbf{Objetivo:} comparar la señal emitida por el TX con la salida del RX en modo digital.
+
+  \medskip
+  \begin{itemize}
+    \item Configuración inicial igual que D.1, con el generador en \texttt{SQUARE WAVE}.
+    \item Osciloscopio conectado en los bornes {RS232} (blancos) y {GROUND} (verdes), en TX y en RX.
+    \item Se comparan {frecuencias}, {ancho de banda} (todo el rango del generador), {amplitudes} y {fase} (verificando si hay inversión).
+    \item Se varían los potenciómetros 9 (potencia de salida del TX) y 2 (umbral del RX).
+    \item Se compara la atenuación del cable {largo} frente al {corto}.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{D.2: Resultados}
+  \begin{columns}[T]
+    \begin{column}{0.5\textwidth}
+      \begin{itemize}
+        \item Las ondas de entrada y salida están {en fase}, sin inversión.
+        \item Con la función de medidas se ve una ``amplificación'': el modo digital lleva la salida del receptor al valor de la {tensión de alimentación} (comporta como un comparador).
+        \item Frecuencias extremas de operación:
+          \begin{itemize}
+            \item límite inferior: {20,64~Hz};
+            \item límite superior: {4,745~kHz}.
+          \end{itemize}
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \begin{columns}[T]
+        \begin{column}{0.6\textwidth}
+          \figura{Figuras/20hz.png}{\textwidth}{(a) Límite inferior}
+          \figura{Figuras/4khz.png}{\textwidth}{(b) Límite superior}
+        \end{column}
+      \end{columns}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{D.2: Deformaciones y atenuación del cable largo}
+  \begin{columns}[T]
+    \begin{column}{0.5\textwidth}
+      \begin{block}{Frecuencia baja}
+        Caída de la parte plana de la onda: efecto de {acoplamiento AC} (comportamiento pasa-altos). Los canales del osciloscopio estaban en acoplamiento AC.
+      \end{block}
+      \begin{block}{Frecuencia alta}
+        Los flancos pierden verticalidad y se redondean: efecto {pasa-bajos} por la capacitancia del circuito y la resistencia de carga, que aumenta los tiempos de conmutación.
+      \end{block}
+    \end{column}
+    \begin{column}{0.46\textwidth}
+      \figura{Figuras/umbral.png}{\textwidth}{(c) Entrada y salida con cable óptico largo}
+      \medskip
+
+      \small
+      Se ajustó el umbral al límite en el que el RX recibe con el cable corto. Al pasar al cable {largo}, la mayor atenuación impide superar el umbral y {no hay señal} a la salida.
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Conclusiones de la Parte 1}
+  \begin{itemize}
+    \item \textbf{Fibra vs. espacio libre:} la fibra confina la energía por RTI y entrega más potencia al fotodetector. El espacio libre diverge y exige alineación estricta.
+    \item \textbf{Modo digital:} el receptor no es lineal, sino un {comparador} que conmuta a los niveles de la tensión de alimentación cuando la señal supera el umbral.
+    \item \textbf{Atenuación:} al alargar la fibra baja la potencia recibida. Si cae por debajo del umbral, el receptor no regenera el pulso.
+    \item \textbf{Balance del enlace:} potencia de emisión, sensibilidad y umbral de recepción deben estar equilibrados para mantener la comunicación.
+  \end{itemize}
+\end{frame}
+
+% =====================================================
+\section{Parte 2: Herramientas para instalación de fibra óptica}
+
+\begin{frame}{Herramientas e instrumentos}
+  \begin{columns}[T]
+    \begin{column}{0.5\textwidth}
+      \begin{itemize}
+        \item Localizador visual de fallas (VFL).
+        \item Medidor de potencia óptica.
+        \item Pinza peladora de precisión.
+        \item Cortadora de precisión (\emph{cleaver}).
+        \item Alcohol isopropílico y paños de limpieza.
+        \item Contenedor seguro para residuos de fibra.
+        \item Conector mecánico SC-APC.
+        \item Herramienta 3M Fibrlok II 2501 y empalmes mecánicos Fibrlok II 2529.
+        \item Protección para empalmes.
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.46\textwidth}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+% ------------------ VFL ------------------
+\subsection{Práctico A: detección visual de fallas}
+
+\begin{frame}{VFL: Procedimiento y resultados}
+  \begin{columns}[T]
+    \begin{column}{0.5\textwidth}
+      \begin{block}{Procedimiento}
+        \begin{enumerate}
+          \item Acoplar el VFL al conector de entrada del tramo bajo prueba.
+          \item Encender el láser del VFL (continuo o pulsado).
+          \item Inspeccionar la cubierta y el extremo opuesto: se busca luz roja visible que identifique el núcleo, roturas, macrocurvaturas o fisuras.
+        \end{enumerate}
+      \end{block}
+      \begin{block}{Resultados}
+        \begin{itemize}
+          \item Se comprobó la continuidad óptica de la fibra.
+          \item En un tramo en buen estado, la luz sale como un punto brillante definido en el extremo, sin fugas laterales.
+        \end{itemize}
+      \end{block}
+    \end{column}
+    \begin{column}{0.46\textwidth}
+      \figura{Figuras/vfl.png}{\textwidth}{Foto: inspección con VFL y medidor de potencia}
+      \medskip
+
+      \small
+      {Limitación del medidor:} el VFL emite a 650~nm y el medidor solo selecciona desde 800~nm. La calibración no corresponde, así que el valor sirve para confirmar presencia de señal, pero no es preciso.
+    \end{column}
+  \end{columns}
+\end{frame}
+
+% ------------------ Conectorización ------------------
+\subsection{Práctico B: conectorización}
+
+\begin{frame}{Conector mecánico SC-APC: Procedimiento}
+  \small
+  \begin{columns}[T]
+    \begin{column}{0.5\textwidth}
+      \begin{enumerate}
+        \item Desarmar las piezas del conector.
+        \item Retirar unos {40~mm} de cubierta e introducir la bota a rosca.
+        \item Pelar la fibra dejando {20~mm} de recubrimiento secundario.
+        \item Limpiar la fibra con alcohol isopropílico.
+        \item Cortar la fibra a {10~mm} con la cortadora de precisión.
+      \end{enumerate}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \begin{enumerate}
+        \setcounter{enumi}{5}
+        \item Verificar que el seguro naranja esté retraído.
+        \item Insertar la fibra hasta el tope: debe formarse un {leve arco}.
+        \item Fijar deslizando el seguro naranja hacia adelante.
+        \item Deslizar levemente la fibra hacia atrás para quitar el arco.
+        \item Roscar la bota y colocar la carcasa externa.
+      \end{enumerate}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Conector SC-APC: Resultados}
+  \begin{columns}[T]
+    \begin{column}{0.4\textwidth}
+      \begin{itemize}
+        \item Hubo {varios intentos} en los que la fibra se quebró por la falta de práctica con las herramientas.
+        \item El arco de control confirmó que la fibra cortada hace contacto contra el tope interno.
+        \item Al medir con el medidor de potencia, {no marcó potencia}.
+        \item Se atribuye a una rotura de la fibra en algún punto durante la manipulación.
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.58\textwidth}
+      \begin{columns}[T]
+        \begin{column}{0.5\textwidth}
+          \figura{Figuras/cris.png}{\textwidth}{(a) Inserción de la fibra}
+        \end{column}
+        \begin{column}{0.5\textwidth}
+          \figura{Figuras/conector.png}{\textwidth}{(b) Conector armado}
+        \end{column}
+      \end{columns}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+% ------------------ Empalme ------------------
+\subsection{Práctico C: empalme mecánico}
+
+\begin{frame}{Empalme mecánico Fibrlok II 2529: Procedimiento}
+  \footnotesize
+  \begin{columns}[T]
+    \begin{column}{0.52\textwidth}
+      \begin{enumerate}
+        \item Colocar el empalme en la cuna de la herramienta 2501.
+        \item Orientar el brazo con almohadillas según el recubrimiento (250~$\mu$m o 900~$\mu$m).
+        \item Pelar de 25 a 51~mm de la primera fibra.
+        \item Limpiar con alcohol isopropílico.
+        \item Cortar a {12,5~mm} y verificar con la escala de la herramienta.
+        \item Insertar la fibra hasta sentir resistencia, con un arco máximo de 3~mm.
+      \end{enumerate}
+    \end{column}
+    \begin{column}{0.46\textwidth}
+      \begin{enumerate}
+        \setcounter{enumi}{6}
+        \item Preparar (pelar, limpiar y cortar) la segunda fibra.
+        \item Insertarla por el lado opuesto hasta sentir resistencia e {igualar los arcos} de ambas fibras.
+        \item Cerrar la tapa con la palanca de montaje: se fija la alineación de los núcleos, con gel de adaptación de índice.
+        \item Retirar las fibras de las almohadillas y extraer el empalme.
+      \end{enumerate}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Empalme mecánico: Resultados}
+  \begin{columns}[T]
+    \begin{column}{0.5\textwidth}
+      \begin{itemize}
+        \item Se logró el acople mecánico de dos tramos {sin fusión térmica}.
+        \item Pelado, limpieza y corte plano fueron determinantes: llevó {varios intentos} lograr las dimensiones correctas.
+        \item Como se usó el mismo cable del práctico anterior, el medidor volvió a {no marcar potencia}.
+        \item Se agregó una {protección} al empalme, que guarda los tramos desprotegidos de fibra.
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.58\textwidth}
+      \begin{columns}[T]
+        \begin{column}{0.55\textwidth}
+          \figura{Figuras/empalme.png}{\textwidth}{(a) Cable empalmado}
+          \figura{Figuras/proteccion.png}{\textwidth}{(b) Empalme con protector}
+        \end{column}
+      \end{columns}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Conclusiones de la Parte 2}
+  \begin{itemize}
+    \item Los conectores y empalmes {mecánicos} evitan la fusionadora, pero la preparación manual exige mucha precisión.
+    \item El {VFL} es una herramienta clave para verificar continuidad y detectar fugas de luz por fisuras a simple vista.
+    \item Las fallas en el conector y el empalme (lectura de potencia nula) muestran la {fragilidad} de la fibra ante manipulaciones bruscas.
+    \item Basta una limpieza deficiente, un corte con longitud incorrecta o una mala inserción para atenuar por completo la señal.
+  \end{itemize}
+
+  \medskip
+  \begin{block}{Idea clave}
+    El éxito de un enlace óptico depende de una técnica de acondicionamiento rigurosa: cualquier error manual penaliza la transmisión.
+  \end{block}
+\end{frame}
+
+
+\end{document}

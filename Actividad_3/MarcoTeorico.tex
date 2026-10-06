@@ -16,9 +16,9 @@ Un sistema de comunicación óptica convierte una señal eléctrica de informaci
 En espacio libre, la radiación emitida por la fuente viaja y obedece las leyes de la óptica geométrica, como la ley de reflexión especular, donde el ángulo de incidencia es igual al ángulo de reflexión respecto a la normal en el mismo medio. Esto permite la manipulación y redireccionamiento del haz de luz mediante elementos reflectantes externos (como es el caso de espejos).
 
 \subsubsection{Estructura de la Fibra Óptica y Reflexión Total Interna}
-La fibra óptica es un conductor de luz con muy baja atenuación (en relación a los cable coaxiales), tal que se pueden lograr comunicaciones de miles de kilómetros. Consta de un núcleo cilíndrico construido de dióxido de silicio ($SiO_2$) con índice de refracción $n_1$, rodeado por un revestimiento con índice de refracción $n_2$, donde se cumple que $n_1 > n_2$ \cite{pres1}.
+La fibra óptica es un conductor de luz con muy baja atenuación (en relación a los cables coaxiales), tal que se pueden lograr comunicaciones de miles de kilómetros. Consta de un núcleo cilíndrico construido de dióxido de silicio ($SiO_2$) con índice de refracción $n_1$, rodeado por un revestimiento con índice de refracción $n_2$, donde se cumple que $n_1 > n_2$ \cite{pres1}.
 
-El confinamiento y guiado de la luz dentro del núcleo se basa en el fenómeno de la Reflexión Total Interna (RTI). La refracción en la interfaz núcleo-revestimiento se rige por la Ley de Snell (donde sí existe un rebote por cambio de medios):
+El confinamiento y guiado de la luz dentro del núcleo se basa en el fenómeno de la Reflexión Total Interna (RTI). La refracción en la interfaz núcleo-revestimiento se rige por la Ley de Snell (donde sí existe una refracción por cambio de medios):
 
 \begin{equation}
 n_1 \sin(\theta_i) = n_2 \sin(\theta_t)
@@ -37,7 +37,7 @@ El ángulo crítico ($\theta_c$) es el ángulo mínimo de incidencia a partir de
 Para que la luz ingresada por el extremo de la fibra cumpla la condición de RTI, debe ingresar dentro de un límite angular denominado cono de aceptación \autoref{fig:Cono}. La capacidad de captación de luz de la fibra se define mediante la Apertura Numérica (AN), es decir, el nivel de aceptancia de la FO para captar la energía entregada por la fuente óptica:
 
 \begin{equation}
-\text{AN} = \sin(\alpha_{\text{máx}}) = n_1 \cdot \sin(\theta_c) = \sqrt{n_1^2 - n_2^2} 
+\text{AN} = \sin(\alpha_{\text{máx}}) \approx \sqrt{n_1^2 - n_2^2} 
 \end{equation}
 
 donde $\alpha_{\text{máx}}$ representa el ángulo máximo de aceptación en el aire ($n_0 \approx 1$) \cite{pres1} \cite{pres2}.
@@ -63,7 +63,7 @@ El receptor emplea fotodiodos para convertir la potencia óptica incidente en un
     
     \item \textbf{Potencia Máxima Admisible [dBm]}: Nivel de potencia límite que la interfaz del receptor puede soportar sin saturarse.
     
-    \item \textbf{Responsitividad [A/W]}: Relación entre la corriente de salida y la potencia óptica de entrada. Mide la eficiencia de conversión.
+    \item \textbf{Responsividad [A/W]}: Relación entre la corriente de salida y la potencia óptica de entrada. Mide la eficiencia de conversión.
     
     \item \textbf{Reflectancia:} Cuánto devuelve el sensor de la luz incidente.
 \end{itemize}

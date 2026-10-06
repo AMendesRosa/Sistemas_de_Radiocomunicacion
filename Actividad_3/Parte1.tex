@@ -84,11 +84,11 @@ El uso del espejo como reflector al mover el receptor a 90 grados permitió que 
 
 \subsubsection*{Resultados, Fotografías y Observaciones}
 
-La transmisión por fibra óptica demostró ser capaz de concentrar una mayor cantidad de potencia hasta el receptor tal que, con la misma configuración de volúmenes que en el práctico anterior, la señal audible se escucha mucho más fuerte.
+La transmisión por fibra óptica demostró ser capaz de concentrar una mayor cantidad de potencia hasta el receptor tal que la señal audible se escucha mucho más fuerte.
 
 Por otro lado, al desconectar la fibra y enfrentar de forma manual los conectores, logra escucharse la señal, con un nivel mayor al del práctico anterior, pero no tan alto como con los cables conectados correctamente.
 
-Esto sucede porque en el espacio libre la luz sufre de atenuación geométrica, el haz diverge y la potencia decae con la distancia. En cambio, la fibra óptica confina el haz de luz mediante reflexión total interna, guiando casi toda la potencia óptica emitida directamente hacia el área activa del fotodetector, minimizando las pérdidas.
+Esto sucede porque en el espacio libre la luz sufre de atenuación geométrica, el haz diverge y la potencia decae con la distancia. En cambio, la fibra óptica confina el haz de luz mediante reflexión total interna, guiando casi toda la potencia óptica emitida directamente hacia el área activa del fotodetector, minimizando las pérdidas. Lo mismo con el caso donde se utilizó el LED indicador para transmitir la información.
 
 \begin{figure}[H]
   \centering
@@ -105,7 +105,7 @@ Esto sucede porque en el espacio libre la luz sufre de atenuación geométrica, 
   \end{subfigure}
   \begin{subfigure}{0.48\linewidth}      
     \fbox{\includegraphics[width=\linewidth]{salida.png}}
-    \caption{Extremo del cable enfrentado al receptor}
+    \caption{Extremo del cable enfrentado al LED indicador}
     \label{fig:salida}
   \end{subfigure}
   \hfill
@@ -154,7 +154,7 @@ Esto sucede porque en el espacio libre la luz sufre de atenuación geométrica, 
 
 \subsubsection*{Resultados, Fotografías y Observaciones}
 
-Al verificar la emisión de información con el pulsador Morse correctamente y se procedió a ajustar el umbral hasta lograr recibir las señales utilizando la luz del ambiente como medio transmisor.
+Luego de verificar la emisión de información con el pulsador Morse correctamente, se procedió a ajustar el umbral hasta lograr recibir las señales utilizando la luz del ambiente como medio transmisor.
 
 Luego se utilizaron las funciones de PSEUDO-RANDOM SIGNAL y SQUARE WAVE para recibir distintos tipos de señal y con el buzzer pudo escucharse el sonido de dichas señales. Al aumentar la frecuencia, fue posible notar como aumenta el tono que se escucha desde el buzzer, y el parpadeo del LED indicador deja de notarse y pasa a ser una luz constante para el ojo humano.
 
@@ -175,11 +175,11 @@ Luego se utilizaron las funciones de PSEUDO-RANDOM SIGNAL y SQUARE WAVE para rec
 
 \subsubsection*{Resultados, Fotografías y Observaciones}
 
-Se lograron ver las curvas de entrada y salida, en fase entre ellas, sin embargo, con la función de ``Medidas'' del osciloscopio logra notarse una amplificación de la señal que se atribuye a que el modo digital lleva la señal de salida al valor de la tensión de alimentación.
+Se lograron ver las curvas de entrada y salida, en fase entre ellas y sin inversión, sin embargo, con la función de ``Medidas'' del osciloscopio logra notarse una amplificación de la señal que se atribuye a que el modo digital lleva la señal de salida al valor de la tensión de alimentación.
 
-Las frecuencias extremas de operación (20,64 Hz en el límite inferior y 4,745 kHz en el superior, ver \autoref{fig:inferior} y \autoref{fig:superior}) generan deformaciones en la onda cuadrada que evidencian las limitaciones en la respuesta en frecuencia del circuito. En el límite inferior, se observa una caída en los niveles de tensión constante, lo que corresponde a un efecto de acoplamiento en AC (filtro pasa-altos), donde actúan los capacitores que bloquean la posible continua generada por la luz ambiental constante. Por el contrario, en el límite superior, los flancos pierden verticalidad y se observan redondeados, un efecto de filtro pasa-bajos que es consecuencia directa de la capacitancia intrínseca del circuito —como la del diodo receptor— interactuando con la resistencia de carga, lo que limita la velocidad de respuesta del sistema y aumenta los tiempos de conmutación.
+Las frecuencias extremas de operación (20,64 Hz en el límite inferior y 4,745 kHz en el superior, ver \autoref{fig:inferior} y \autoref{fig:superior}) generan deformaciones en la onda cuadrada que evidencian las limitaciones en la respuesta en frecuencia del circuito. En el límite inferior, se observa una caída en los niveles de tensión constante, lo que corresponde a un efecto de filtro pasa-altos, atribuido a que los canales del osciloscopio están configurados en Acoplamiento AC, y el capacitor de bloqueo de DC del instrumento de medición puede generar la atenuación en la parte plana de las curvas a frecuencias bajas. Por el contrario, en el límite superior, los flancos pierden verticalidad y se observan redondeados, un efecto de filtro pasa-bajos que es consecuencia directa de la capacitancia intrínseca del circuito interactuando con la resistencia de carga, lo que limita la velocidad de respuesta del sistema y aumenta los tiempos de conmutación.
 
-La \autoref{fig:umbral} es consecuencia de haber seteado el umbral en el límite donde aún recibe la señal con el cable óptico corto, tal que a cambiar al cable óptico largo el aumento de atenuación hace que la señal que llega no pasa el umbral y en consecuencia no hay señal a la salida.
+La \autoref{fig:umbral} es consecuencia de setear el umbral en el límite donde recibe la señal con el cable óptico corto, tal que al cambiar al cable óptico largo el aumento de atenuación hace que la señal no pase el umbral y en consecuencia no haya señal a la salida.
 
 
 \begin{figure}[H]
@@ -195,11 +195,19 @@ La \autoref{fig:umbral} es consecuencia de haber seteado el umbral en el límite
     \caption{Límite superior de frecuencia.}
     \label{fig:superior}
   \end{subfigure}
-  \begin{subfigure}{0.53\linewidth}      
+  \begin{subfigure}{0.55\linewidth}      
     \fbox{\includegraphics[width=\linewidth]{umbral.png}}
-    \caption{Entrada y Salida cambiando a cable óptico largo.}
+    \caption{Entrada y Salida con cable óptico largo.}
     \label{fig:umbral}
   \end{subfigure}
   \caption{Imágenes de Práctico D.2.}
   \label{fig:D2}
 \end{figure}
+
+\subsection{Conclusiones - Parte 1}
+
+Se demostró la superioridad de la propagación guiada por fibra óptica frente a la transmisión en espacio libre. Mientras que en el espacio libre la divergencia del haz lumínico genera una rápida atenuación y exige una alineación estricta entre emisor y receptor, la fibra óptica logra confinar la energía mediante el fenómeno de reflexión total interna, garantizando que una fracción mayor de la potencia óptica emitida incida sobre la zona activa del fotodetector, obteniendo un mayor nivel de señal recibida.
+
+El análisis del modo digital evidenció el comportamiento de los transmisores y receptores adaptados a normativas de comunicación de datos (como RS232). Se corroboró que el sistema receptor no opera de forma lineal, sino como un comparador lógico que conmuta su salida a los niveles de la tensión de alimentación una vez que la señal óptica supera el umbral preestablecido. 
+
+Asimismo, se verificó el impacto crítico de la atenuación del medio en los sistemas digitales: al incrementar la longitud de la fibra, las pérdidas intrínsecas aumentan, reduciendo la potencia recibida. Si esta potencia cae por debajo del umbral de decisión, el receptor es incapaz de regenerar el pulso, evidenciando que un correcto balance del enlace (potencia de emisión vs. sensibilidad y umbral de recepción) es vital para mantener la comunicación.
