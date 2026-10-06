@@ -1,0 +1,130 @@
+\section{Parte 2: Herramientas para Instalación de Fibra Óptica}
+
+\subsection{Materiales Necesarios}
+\begin{itemize}
+    \item Localizador visual de fallas (VFL - \textit{Visual Fault Locator}) (\autoref{fig:vfl}).
+    \item Tramo de cable óptico, \textit{pigtail} o \textit{patchcord} a inspeccionar.
+    \item Contenedor seguro para desecho de fibra y kit de limpieza (alcohol isopropílico y paños).
+    \item Medidor de potencia óptica (\autoref{fig:medidor})
+    \item Conector mecánico rápido SC-APC (\autoref{fig:sc_apc}).
+    \item Cable de fibra óptica a conectorizar.
+    \item Pinza peladora de precisión (\autoref{fig:stripper}).
+    \item Cortadora de precisión para fibra óptica (\autoref{fig:cortadora}).
+    \item Herramienta de montaje 3M Fibrlok II Assembly Tool 2501 (\autoref{empalmadora}).
+    \item Módulos de empalme mecánico (\autoref{empalmes}).
+    \item Cables de fibra óptica a empalmar.
+\end{itemize}
+
+
+\subsection{Práctico A: Detección Visual de Fallas}
+
+\subsubsection*{Consignas y Procedimiento}
+\begin{enumerate}
+    \item Acoplar el localizador visual de fallas (VFL) al conector de entrada del tramo de fibra óptica bajo prueba.
+    \item Encender la fuente láser del VFL en modo de emisión continua o pulsada.
+    \item Inspeccionar a lo largo de la cubierta del cable y en el extremo opuesto la presencia de luz roja visible para identificar el núcleo, así como roturas internas, macrocurvaturas excesivas o fisuras.
+    
+\end{enumerate}
+
+\subsubsection*{Resultados, Fotografías y Observaciones}
+
+La prueba mediante el localizador visual de fallas (VFL) permitió comprobar la continuidad óptica del hilo de fibra. En un tramo en buen estado, la luz roja visible se proyecta como un punto brillante definido en el extremo distante sin fugas laterales. 
+
+Adicionalmente, se intentó cuantificar la potencia del haz mediante un medidor de potencia óptica, tal como se aprecia en la \autoref{fig:monja}. Sin embargo, la fuente VFL opera a una longitud de onda de $650\text{ nm}$, mientras que la longitud de onda mínima seleccionable en el medidor es de $800\text{ nm}$. Dado que la capacidad de respuesta del sensor interno del instrumento depende intrínsecamente de $\lambda$, la calibración para $800\text{ nm}$ introduce un error de escala en la lectura. Si bien la medición arrojó un valor distinto de cero (lo que permite confirmar cualitativamente la presencia y continuidad de la señal óptica), la magnitud desplegada no resulta cuantitativamente precisa.
+
+\begin{figure}[H]
+  \centering
+  \fbox{\includegraphics[width=0.35\textwidth]{monja.png}}
+  \caption{Inspección visual de continuidad y detección de fallas mediante VFL.}
+  \label{fig:monja}
+\end{figure}
+
+\subsection{Práctico B: Conectorización Mecánica de Fibra Óptica}
+
+\subsubsection*{Consignas y Procedimiento}
+\begin{enumerate}
+    \item Desarmar las piezas principales del conector mecánico SC-APC.
+    \item Retirar aproximadamente $40\,\text{mm}$ de la cubierta exterior del cable e introducir la bota a rosca del conector.
+    \item Pelar la fibra manteniendo $20\,\text{mm}$ de recubrimiento secundario.
+    \item Limpiar la fibra expuesta con un paño embebido en alcohol isopropílico.
+    \item Cortar la fibra a una longitud exacta de $10\,\text{mm}$ utilizando la cortadora de precisión.
+    \item Verificar que la traba/seguro naranja del conector se encuentre retrotraído.
+    \item Insertar la fibra en el conector hasta sentir el tope y observar la formación de un ligero arco de control.
+    \item Fijar la fibra deslizando el seguro naranja hacia adelante.
+    \item Deslizar ligeramente la fibra hacia atrás para quitar el arco y dejarla recta.
+    \item Roscar la bota posterior y colocar la carcasa protectora externa del conector SC-APC.
+\end{enumerate}
+
+\subsubsection*{Resultados, Fotografías y Observaciones}
+
+Luego de varios intentos en los que se quebraba la fibra debido a la inexperiencia con las herramientas, la conectorización con conectores mecánicos SC-APC demostró ser una técnica eficiente.
+
+Durante el procedimiento, la formación del arco de control confirmó que la fibra recortada hace contacto físico continuo contra el tope interno. Sin embargo, al momento de la medición con el medidor de potencia, éste marcó que no recibía potencia.
+
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}{0.32\linewidth}
+    \fbox{\includegraphics[width=\linewidth]{cris.png}}
+    \caption{Inserción de la fibra recortada en el conector.}
+    \label{fig:cris}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}{0.48\linewidth} 
+    \fbox{\includegraphics[width=\linewidth]{conector.png}}
+    \caption{Conector SC-APC armado y bloqueado.}
+    \label{fig:conector}
+  \end{subfigure}
+  \caption{Proceso de montaje de conector rápido SC-APC.}
+  \label{fig:practico_a}
+\end{figure}
+
+\subsection{Práctico C: Empalme Mecánico de Fibra Óptica}
+
+\subsubsection*{Consignas y Procedimiento}
+\begin{enumerate}
+    \item Colocar un módulo de empalme en la cuna de la herramienta de montaje 2501 presionando firmemente los extremos.
+    \item Orientar los brazos de retención con almohadillas según el diámetro de recubrimiento de las fibras ($250\,\mu\text{m}$ o $900\,\mu\text{m}$).
+    \item Pelar entre $25\,\text{mm}$ y $51\,\text{mm}$ del recubrimiento de la primera fibra dejando el vidrio expuesto.
+    \item Limpiar la fibra desnuda con un paño impregnado en alcohol isopropílico.
+    \item Efectuar el corte de precisión con la cortadora de precisión a $12.5\,\text{mm}$ y verificar la longitud con la escala impresas en la herramienta 2501.
+    \item Sujetar la fibra en el brazo de retención e insertarla suavemente en el empalme hasta sentir resistencia, comprobando que quede con un arco máximo de $3\,\text{mm}$.
+    \item Preparar (pelar, limpiar y cortar a $12.5\,\text{mm}$) la segunda fibra.
+    \item Insertar la segunda fibra por el lado opuesto del empalme hasta encontrar resistencia e igualar los arcos de ambas fibras.
+    \item Accionar la palanca de montaje para cerrar la tapa del empalme, fijando mecánicamente la alineación de ambos núcleos con el gel de adaptación de índice de refracción.
+    \item Retirar las fibras de las almohadillas de retención y extraer el empalme completado.
+\end{enumerate}
+
+\subsubsection*{Resultados, Fotografías y Observaciones}
+
+El empalme permitió lograr un acoplamiento mecánico entre dos tramos de fibra sin necesidad de fusión térmica. La precisión en las etapas de pelado, limpieza minuciosamente ejecutada con alcohol isopropílico y el corte plano mediante la cortadora, resultaron determinantes, y tomaron varios intentos hasta lograr las dimensiones correctas de la fibra para ejecutar el empalme.
+
+Debido a que se utilizó el mismo cable del práctico anterior, el medidor de potencia volvió a marcar que no recibía potencia.
+
+Posteriormente, se agregó una protección al empalme (\autoref{fig:protector}) que permite guardar los segmentos desprotegidos de cable alrededor de un plástico.
+
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}{0.38\linewidth}
+    \fbox{\includegraphics[width=\linewidth]{empalme.png}}
+    \caption{Cable empalmado final.}
+    \label{fig:empalme_proceso}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}{0.59\linewidth} 
+    \fbox{\includegraphics[width=\linewidth]{proteccion.png}}
+    \caption{Empalme con protector.}
+    \label{fig:empalme_completado}
+  \end{subfigure}
+  \caption{Procedimiento de ejecución del empalme mecánico.}
+  \label{fig:empalme_mecanico}
+\end{figure}
+
+
+
+\subsection{Conclusiones - Parte 2}
+
+La realización de esta segunda parte evidenció que, si bien los empalmes y conectores mecánicos evitan el uso de costosas fusionadoras, la preparación manual de la fibra exige un alto nivel de precisión. En primer lugar, el localizador visual de fallas (VFL) demostró ser una herramienta de diagnóstico clave para verificar la continuidad y detectar fugas de luz por fisuras a simple vista. 
+
+Por otro lado, los inconvenientes experimentados durante el armado del conector SC-APC y el empalme, que se atribuyen a una rotura de la fibra en algún punto que no se trató con cuidado y se rompió, derivando en una lectura de potencia nula, dejaron en evidencia la extrema fragilidad del material ante manipulaciones bruscas. Este fallo demuestra que no hay margen para errores: una limpieza deficiente, una mínima desviación en la longitud del corte con la cortadora de precisión, o una mala inserción que impida el contacto físico entre los núcleos, son suficientes para atenuar por completo la señal. 
+
+En definitiva, se comprobó empíricamente que el éxito de un enlace óptico depende de una técnica de acondicionamiento rigurosa, ya que cualquier error manual penaliza drásticamente la viabilidad de la transmisión.

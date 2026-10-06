@@ -1,24 +1,40 @@
 \babel@toc {spanish}{}\relax 
-\contentsline {figure}{\numberline {1}{\ignorespaces Diagrama elemental de un sistema de comunicación óptico.}}{4}{figure.caption.5}%
-\contentsline {figure}{\numberline {2}{\ignorespaces Cono de aceptación.}}{6}{figure.caption.6}%
-\contentsline {figure}{\numberline {3}{\ignorespaces Dimensiones del cable según los modos.}}{7}{figure.caption.7}%
-\contentsline {figure}{\numberline {4}{\ignorespaces Curvas de Atenuación según Longitud de Onda.}}{8}{figure.caption.8}%
-\contentsline {figure}{\numberline {5}{\ignorespaces Referencias de Elementos de Control.}}{12}{figure.caption.11}%
-\contentsline {subfigure}{\numberline {a}{\ignorespaces Transmisor}}{12}{figure.caption.11}%
-\contentsline {subfigure}{\numberline {b}{\ignorespaces Receptor}}{12}{figure.caption.11}%
-\contentsline {figure}{\numberline {6}{\ignorespaces Disposición para la transmisión en espacio libre y reflexión con espejo.}}{14}{figure.caption.14}%
-\contentsline {figure}{\numberline {7}{\ignorespaces Imágenes de práctico A.2.}}{15}{figure.caption.17}%
-\contentsline {subfigure}{\numberline {a}{\ignorespaces Práctico con cable de F.O. corto}}{15}{figure.caption.17}%
-\contentsline {subfigure}{\numberline {b}{\ignorespaces Práctico con cable de F.O. largo}}{15}{figure.caption.17}%
-\contentsline {subfigure}{\numberline {c}{\ignorespaces Extremo del cable enfrentado al receptor}}{15}{figure.caption.17}%
-\contentsline {subfigure}{\numberline {d}{\ignorespaces Extremos de cables enfrentados entre sí}}{15}{figure.caption.17}%
-\contentsline {figure}{\numberline {8}{\ignorespaces Imágenes de Práctico D.2.}}{18}{figure.caption.22}%
-\contentsline {subfigure}{\numberline {a}{\ignorespaces Límite inferior de frecuencia.}}{18}{figure.caption.22}%
-\contentsline {subfigure}{\numberline {b}{\ignorespaces Límite superior de frecuencia.}}{18}{figure.caption.22}%
-\contentsline {subfigure}{\numberline {c}{\ignorespaces Entrada y Salida cambiando a cable óptico largo.}}{18}{figure.caption.22}%
-\contentsline {figure}{\numberline {9}{\ignorespaces Materiales Necesarios.}}{20}{figure.caption.23}%
-\contentsline {subfigure}{\numberline {a}{\ignorespaces Fuente de alimentacion externa}}{20}{figure.caption.23}%
-\contentsline {subfigure}{\numberline {b}{\ignorespaces Cable banana-cocodrilo}}{20}{figure.caption.23}%
-\contentsline {subfigure}{\numberline {c}{\ignorespaces Kit de Fibra Óptica. Contiene Transmisor, Receptor, Espejo y Cables}}{20}{figure.caption.23}%
-\contentsline {subfigure}{\numberline {d}{\ignorespaces Cable jack 3,5 mm}}{20}{figure.caption.23}%
-\contentsline {subfigure}{\numberline {e}{\ignorespaces Osciloscopio Digital Tektronix. Serie TDS.}}{20}{figure.caption.23}%
+\contentsline {figure}{\numberline {1}{\ignorespaces Diagrama elemental de un sistema de comunicación óptico.}}{5}{figure.caption.5}%
+\contentsline {figure}{\numberline {2}{\ignorespaces Cono de aceptación.}}{7}{figure.caption.6}%
+\contentsline {figure}{\numberline {3}{\ignorespaces Dimensiones del cable según los modos.}}{8}{figure.caption.7}%
+\contentsline {figure}{\numberline {4}{\ignorespaces Curvas de Atenuación según Longitud de Onda.}}{9}{figure.caption.8}%
+\contentsline {figure}{\numberline {5}{\ignorespaces Referencias de Elementos de Control.}}{13}{figure.caption.11}%
+\contentsline {subfigure}{\numberline {a}{\ignorespaces Transmisor}}{13}{figure.caption.11}%
+\contentsline {subfigure}{\numberline {b}{\ignorespaces Receptor}}{13}{figure.caption.11}%
+\contentsline {figure}{\numberline {6}{\ignorespaces Disposición para la transmisión en espacio libre y reflexión con espejo.}}{15}{figure.caption.14}%
+\contentsline {figure}{\numberline {7}{\ignorespaces Imágenes de práctico A.2.}}{16}{figure.caption.17}%
+\contentsline {subfigure}{\numberline {a}{\ignorespaces Práctico con cable de F.O. corto}}{16}{figure.caption.17}%
+\contentsline {subfigure}{\numberline {b}{\ignorespaces Práctico con cable de F.O. largo}}{16}{figure.caption.17}%
+\contentsline {subfigure}{\numberline {c}{\ignorespaces Extremo del cable enfrentado al LED indicador}}{16}{figure.caption.17}%
+\contentsline {subfigure}{\numberline {d}{\ignorespaces Extremos de cables enfrentados entre sí}}{16}{figure.caption.17}%
+\contentsline {figure}{\numberline {8}{\ignorespaces Imágenes de Práctico D.2.}}{19}{figure.caption.22}%
+\contentsline {subfigure}{\numberline {a}{\ignorespaces Límite inferior de frecuencia.}}{19}{figure.caption.22}%
+\contentsline {subfigure}{\numberline {b}{\ignorespaces Límite superior de frecuencia.}}{19}{figure.caption.22}%
+\contentsline {subfigure}{\numberline {c}{\ignorespaces Entrada y Salida con cable óptico largo.}}{19}{figure.caption.22}%
+\contentsline {figure}{\numberline {9}{\ignorespaces Inspección visual de continuidad y detección de fallas mediante VFL.}}{22}{figure.caption.25}%
+\contentsline {figure}{\numberline {10}{\ignorespaces Proceso de montaje de conector rápido SC-APC.}}{23}{figure.caption.28}%
+\contentsline {subfigure}{\numberline {a}{\ignorespaces Inserción de la fibra recortada en el conector.}}{23}{figure.caption.28}%
+\contentsline {subfigure}{\numberline {b}{\ignorespaces Conector SC-APC armado y bloqueado.}}{23}{figure.caption.28}%
+\contentsline {figure}{\numberline {11}{\ignorespaces Procedimiento de ejecución del empalme mecánico.}}{25}{figure.caption.31}%
+\contentsline {subfigure}{\numberline {a}{\ignorespaces Cable empalmado final.}}{25}{figure.caption.31}%
+\contentsline {subfigure}{\numberline {b}{\ignorespaces Empalme con protector.}}{25}{figure.caption.31}%
+\contentsline {figure}{\numberline {12}{\ignorespaces Materiales Necesarios 1.}}{26}{figure.caption.32}%
+\contentsline {subfigure}{\numberline {a}{\ignorespaces Fuente de alimentacion externa}}{26}{figure.caption.32}%
+\contentsline {subfigure}{\numberline {b}{\ignorespaces Cable banana-cocodrilo}}{26}{figure.caption.32}%
+\contentsline {subfigure}{\numberline {c}{\ignorespaces Kit de Fibra Óptica. Contiene Transmisor, Receptor, Espejo y Cables}}{26}{figure.caption.32}%
+\contentsline {subfigure}{\numberline {d}{\ignorespaces Cable jack 3,5 mm}}{26}{figure.caption.32}%
+\contentsline {subfigure}{\numberline {e}{\ignorespaces Osciloscopio Digital Tektronix. Serie TDS.}}{26}{figure.caption.32}%
+\contentsline {subfigure}{\numberline {f}{\ignorespaces Localizador visual de fallas (VFL).}}{26}{figure.caption.32}%
+\contentsline {figure}{\numberline {13}{\ignorespaces Materiales Necesarios 2.}}{27}{figure.caption.33}%
+\contentsline {subfigure}{\numberline {a}{\ignorespaces Medidor de Potencia Óptica.}}{27}{figure.caption.33}%
+\contentsline {subfigure}{\numberline {b}{\ignorespaces Conector mecánico SC-APC.}}{27}{figure.caption.33}%
+\contentsline {subfigure}{\numberline {c}{\ignorespaces Pinza Peladora de Precisión.}}{27}{figure.caption.33}%
+\contentsline {subfigure}{\numberline {d}{\ignorespaces Cortadora de Precisión para Fibra Óptica.}}{27}{figure.caption.33}%
+\contentsline {subfigure}{\numberline {e}{\ignorespaces Herramienta 3M Fibrlok II Assembly Tool 2501.}}{27}{figure.caption.33}%
+\contentsline {subfigure}{\numberline {f}{\ignorespaces Empalmes mecánicos.}}{27}{figure.caption.33}%
+\contentsline {subfigure}{\numberline {g}{\ignorespaces Proteccion para empalmes.}}{27}{figure.caption.33}%
