@@ -5,7 +5,7 @@ Para el dimensionamiento del enlace óptico punto a punto de $8 \, [km]$, se sel
 
 \subsection{Transceptor Óptico (SFP)}
 \label{sec_2.1}
-Se selecciona un módulo transceptor del tipo \textbf{SFP 1000BASE-LX}, modelo \textit{ProLabs SFP-1000BASE-LX-I-C}, el cual trabaja a $1310 \, [nm]$ sobre fibra monomodo con conector \textit{LC} dúplex, es decir, utiliza una fibra para transmisión y otra para recepción, tal como requiere el enlace. El fabricante lo especifica para enlaces de hasta $10 \, [km]$, con monitoreo digital (\textit{DOM}, según SFF-8472) y rango de temperatura industrial de $-40$ a $85 \, [^\circ C]$ \cite{b1}. Sus parámetros ópticos se muestran en la \autoref{fig:fig_1} y la \autoref{fig:fig_2}:
+Se selecciona un módulo transceptor del tipo \textbf{SFP 1000BASE-LX}, modelo \textit{ProLabs SFP-1000BASE-LX-I-C}, el cual trabaja a $1310 \, [nm]$ sobre fibra monomodo con conector \textit{LC} dúplex, es decir, utiliza una fibra para transmisión y otra para recepción, tal como requiere el enlace. El fabricante lo especifica para enlaces de hasta $10 \, [km]$ y rango de temperatura industrial de $-40$ a $85 \, [^\circ C]$ \cite{b1}. Sus parámetros ópticos se muestran en la \autoref{fig:fig_1} y la \autoref{fig:fig_2}:
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{Figura 1.png}
@@ -26,7 +26,7 @@ De las figuras se extraen los siguientes parámetros de operación:
     \item \underline{Potencia de transmisión ($P_{t}$):} mínima de $-9.5 \, [dBm]$ y máxima de $-3 \, [dBm]$.
     \item \underline{Sensibilidad del receptor ($S_r$):} $-24 \, [dBm]$, medida con potencia promedio, en configuración \textit{back-to-back}, a $1.25 \, [Gbps]$ y para una tasa de error de bit $BER = 10^{-12}$.
     \item \underline{Potencia de sobrecarga del receptor ($P_{sat}$):} $0 \, [dBm]$.
-    \item \underline{Tasa máxima:} $1.25 \, [Gbps]$, suficiente para \textit{Gigabit Ethernet} ($1 \, [Gbps]$ de datos con codificación 8B/10B).
+    \item \underline{Tasa máxima:} $1.25 \, [Gbps]$.
 \end{itemize}
 
 El \textit{Optical Budget} (presupuesto óptico) es la máxima atenuación que puede introducir el trayecto para que la señal llegue al receptor con un nivel igual a su sensibilidad. Siguiendo un criterio conservador, se calcula con la potencia de transmisión mínima garantizada por el fabricante \cite{b7}:
