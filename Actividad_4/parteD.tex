@@ -6,7 +6,7 @@
 Al duplicar la distancia cambian dos elementos del presupuesto:
 \begin{itemize}
     \item \underline{Pérdida en la fibra:} se duplica, pasando a $16 \, [km] \times 0.38 \, [dB/km] = 6.08 \, [dB]$.
-    \item \underline{Empalmes:} con bobinas de $4000 \, [m]$ se necesitan al menos $4$ bobinas, es decir, $3$ empalmes intermedios, que sumados a los $2$ de los ODF dan $5$ empalmes ($0.5 \, [dB]$).
+    \item \underline{Empalmes:} con bobinas de $4000 \, [m]$ se necesitan al menos $4$ bobinas, es decir, $3$ empalmes intermedios, que sumados a los $2$ de los ODF dan $5$ empalmes por fusión ($0.5 \, [dB]$).
 \end{itemize}
 
 Las pérdidas de conectores no cambian ($1.6 \, [dB]$), por lo que la pérdida total resulta:
@@ -79,7 +79,6 @@ La fibra G.652.D presenta su mínima atenuación en la ventana de $1550 \, [nm]$
     \item \underline{Enlaces largos limitados por atenuación:} a partir de unos $40 \, [km]$ la pérdida de la fibra domina el presupuesto. Los módulos 1000BASE-ZX a $1550 \, [nm]$ alcanzan $80 \, [km]$ (por ejemplo, $P_{t} = 0$ a $+5 \, [dBm]$ y $S_{r} = -23 \, [dBm]$ \cite{b11}).
     \item \underline{Enlaces sobre una sola fibra (BiDi):} cuando sólo se dispone de una fibra, se usa un par de transceptores bidireccionales en el que un extremo transmite a $1310 \, [nm]$ y el otro a $1550 \, [nm]$, separando los sentidos por longitud de onda \cite{b7}.
     \item \underline{Multiplexación (CWDM/DWDM):} para transportar varios canales sobre la misma fibra se utilizan longitudes de onda en la banda de $1550 \, [nm]$.
-    \item \underline{Enlaces con amplificación óptica:} los amplificadores de fibra dopada con erbio (EDFA), utilizados en enlaces de más de $80$ a $100 \, [km]$, operan en la banda de $1550 \, [nm]$ \cite{b7}.
 \end{itemize}
 
 Sin embargo, la ventana de $1550 \, [nm]$ tiene desventajas:
@@ -89,7 +88,7 @@ Sin embargo, la ventana de $1550 \, [nm]$ tiene desventajas:
     \item \underline{Mayor costo:} los módulos de $1550 \, [nm]$ cuestan del orden de US\$ $27$, frente a US\$ $8$ de un módulo LX de $1310 \, [nm]$ (\autoref{tab:costo_sfp}).
 \end{itemize}
 
-Para el enlace de $8 \, [km]$ no se justifica el cambio. Con un módulo ZX, la pérdida total bajaría a $8 \times 0.25 + 1.6 + 0.4 = 4.0 \, [dB]$, pero la potencia máxima recibida sería $+5 - 4.0 = +1 \, [dBm]$, superior a la sobrecarga del receptor ($-3 \, [dBm]$) \cite{b11}. Sería necesario agregar un atenuador de al menos $4 \, [dB]$, lo que anula la ventaja de la menor atenuación y agrega costo. El enlace de $1310 \, [nm]$ ya tiene $6.46 \, [dB]$ de margen sobrante, por lo que la menor atenuación a $1550 \, [nm]$ no aporta beneficios.
+Para el enlace de $8 \, [km]$ no se justifica el cambio. La pérdida total bajaría a $8 \times 0.25 + 1.6 + 0.4 = 4.0 \, [dB]$, pero la potencia máxima recibida sería $+5 - 4.0 = +1 \, [dBm]$, superior a la sobrecarga del receptor ($-3 \, [dBm]$) \cite{b11}. Sería necesario agregar un atenuador de al menos $4 \, [dB]$, lo que anula la ventaja de la menor atenuación y agrega costo. El enlace de $1310 \, [nm]$ ya tiene $6.46 \, [dB]$ de margen sobrante, por lo que la menor atenuación a $1550 \, [nm]$ no aporta beneficios.
 
 
 \subsection{Importancia del margen de seguridad}
@@ -104,7 +103,7 @@ El presupuesto de potencia se calcula con valores de catálogo al momento de la 
     \item \underline{Diferencias entre valores de cálculo y reales:} El presupuesto usa valores típicos de pérdida de conectores y empalmes, que en campo pueden ser mayores (por ejemplo, la bibliografía recomienda no superar $0.15 \, [dB]$ por empalme \cite{b7}), además de reconfiguraciones futuras que agreguen patchcords.
 \end{itemize}
 
-Si el enlace se diseñara con la potencia recibida justo igual a la sensibilidad, funcionaría el día de la instalación, pero cualquiera de estas degradaciones llevaría al receptor por debajo de su sensibilidad. Como la sensibilidad se define para una tasa de error de $10^{-12}$, operar por debajo de ella aumenta rápidamente la tasa de errores y genera cortes intermitentes, difíciles de diagnosticar.
+Si el enlace se diseñara con la potencia recibida justo igual a la sensibilidad, quizás funcionaría el día de la instalación, pero cualquiera de estas degradaciones llevaría al receptor por debajo de su sensibilidad. Como la sensibilidad se define para una tasa de error de $10^{-12}$, operar por debajo de ella aumenta rápidamente la tasa de errores y genera cortes intermitentes, difíciles de diagnosticar.
 
 En este diseño se reservó un margen de $3 \, [dB]$ y quedaron $6.46 \, [dB]$ adicionales. Por ejemplo, el enlace podría absorber el incremento térmico máximo ($0.8 \, [dB]$) y varias reparaciones de $0.2 \, [dB]$ cada una sin comprometer su funcionamiento. El margen tampoco debe ser excesivo: sobredimensionar la potencia implica transceptores más costosos y puede llevar al receptor a la saturación, como se analizó para el caso de $1550 \, [nm]$.
 
@@ -116,8 +115,6 @@ Una vez instalado, el enlace debe validarse con mediciones en campo que confirme
 \begin{table}[H]
     \centering
     \footnotesize
-    \caption{Instrumentos de medición para la validación del enlace.}
-    \label{tab:instrumentos}
     \begin{tabular}{|>{\raggedright\arraybackslash}m{3.2cm}|>{\raggedright\arraybackslash}m{5.6cm}|>{\raggedright\arraybackslash}m{5.2cm}|}
         \hline
         \textbf{Instrumento} & \textbf{Qué verifica} & \textbf{Criterio de aceptación} \\
@@ -128,13 +125,11 @@ Una vez instalado, el enlace debe validarse con mediciones en campo que confirme
         \hline
         Fuente de luz estabilizada y medidor de potencia (OLTS) & Pérdida de inserción total de extremo a extremo de cada fibra, a $1310 \, [nm]$. & Pérdida medida menor o igual a la calculada ($5.04 \, [dB]$ con patchcords). \\
         \hline
-        OTDR con bobina de lanzamiento & Ubicación y pérdida de cada evento: empalmes a $\approx 2.67$ y $5.33 \, [km]$, conectores y longitud total. Se mide en ambos sentidos y se promedian las pérdidas de empalme. & Hasta $0.1 \, [dB]$ por empalme y $0.5 \, [dB]$ por conector \cite{b7}. Las trazas quedan como referencia para el mantenimiento. \\
-        \hline
-        Monitoreo digital del SFP (DOM) & Potencia transmitida y recibida en operación, leída desde los routers \cite{b18}. & Potencia recibida entre $-14.54$ y $-8.04 \, [dBm]$. \\
-        \hline
-        Analizador de tasa de error (BER) & Integridad de la transmisión a $1 \, [Gbps]$ en ambos sentidos con secuencias pseudoaleatorias o tráfico real. & $BER < 10^{-12}$ \cite{b7}. \\
+        OTDR & Ubicación y pérdida de cada evento: empalmes a $\approx 2.67$ y $5.33 \, [km]$, conectores y longitud total. Se mide en ambos sentidos y se promedian las pérdidas de empalme. & Hasta $0.1 \, [dB]$ por empalme y $0.5 \, [dB]$ por conector \cite{b7}. Las trazas quedan como referencia para el mantenimiento. \\
         \hline
     \end{tabular}
+    \caption{Instrumentos de medición para la validación del enlace.}
+    \label{tab:instrumentos}
 \end{table}
 
-El OTDR requiere una bobina de lanzamiento, un tramo de fibra de aproximadamente $1 \, [km]$ conectado entre el instrumento y el enlace, que permite superar la zona muerta inicial del OTDR y medir correctamente el primer conector \cite{b7, b17}. Las mediciones con OLTS y OTDR se complementan: el OLTS da la pérdida total que efectivamente verá el transceptor, mientras que el OTDR permite localizar y cuantificar cada evento individual.
+El OTDR requiere una bobina de lanzamiento, un tramo de fibra de aproximadamente $1 \, [km]$ conectado entre el instrumento y el enlace, que permite superar la zona muerta inicial del OTDR y medir correctamente el primer conector \cite{b7, b17}.

@@ -9,14 +9,14 @@ Se selecciona un módulo transceptor del tipo \textbf{SFP 1000BASE-LX}, modelo \
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{Figura 1.png}
-    \caption{Características ópticas del transceptor SFP 1000BASE-LX. Fuente: Hoja de datos del fabricante \cite{b1}.}
+    \caption[Características ópticas del transceptor SFP 1000BASE-LX.]{Características ópticas del transceptor SFP 1000BASE-LX \cite{b1}.}
     \label{fig:fig_1}
 \end{figure}
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{Figura 2.png}
-    \caption{Valores máximos absolutos del transceptor SFP 1000BASE-LX. Fuente: Hoja de datos del fabricante \cite{b1}.}
+    \caption[Valores máximos absolutos del transceptor SFP 1000BASE-LX.]{Valores máximos absolutos del transceptor SFP 1000BASE-LX \cite{b1}.}
     \label{fig:fig_2}
 \end{figure}
 
@@ -60,7 +60,7 @@ En cuanto al ámbito económico, la \autoref{tab:costo_sfp} compara precios de r
         \endfoot
         
         \hline
-        \caption{Precios de referencia de transceptores SFP de $1 \, [Gbps]$ (FS.com, consultados el 29/09/2026) \cite{b12}.}
+        \caption[Precios de referencia de transceptores SFP]{Precios de referencia de transceptores SFP de $1 \, [Gbps]$ \cite{b12}.}
         \label{tab:costo_sfp} \\
         \endlastfoot
             1000BASE-LX & $1310 \, [nm]$ & $10 \, [km]$ & US\$ $8$ \\
@@ -82,7 +82,7 @@ La consigna plantea elegir entre dos tipos de fibra monomodo:
     \item \underline{UIT-T G.657} \cite{b6}: fibra monomodo insensible a curvaturas (\textit{bend-insensitive}). La categoría G.657.A es compatible con G.652.D, pero admite radios de curvatura mucho menores ($10 \, [mm]$ la A1 y $7.5 \, [mm]$ la A2), por lo que se emplea principalmente en instalaciones internas, acometidas FTTH y cajas con poco espacio.
 \end{itemize}
 
-Ambas presentan una atenuación similar a $1310 \, [nm]$, ($\approx 0.35 \, [dB/km]$) por lo que la diferencia está en la aplicación y en el costo. La \autoref{tab:costo_fiber} muestra los precios de referencia de los tipos de fibra de abril del 2026:
+Ambas presentan una atenuación similar a $1310 \, [nm]$ ($\approx 0.35 \, [dB/km]$) por lo que la diferencia está en la aplicación y en el costo. La \autoref{tab:costo_fiber} muestra los precios de referencia de los tipos de fibra de abril del 2026:
 
 
 \begingroup
@@ -102,7 +102,7 @@ Ambas presentan una atenuación similar a $1310 \, [nm]$, ($\approx 0.35 \, [dB/
         \endfoot
         
         \hline
-        \caption{Precios de referencia de tipos de fibra en consideración \cite{b13}.}
+        \caption[Precios de referencia de tipos de fibra en consideración]{Precios de referencia de tipos de fibra en consideración \cite{b13}.}
         \label{tab:costo_fiber} \\
         \endlastfoot
             G.652.D & $US\$ \, 12$ a $17$ \\
@@ -134,9 +134,9 @@ El cable se especifica según la norma brasileña ABNT, ya que Lightera fabrica 
 \label{sec_2.3}
 Todos los conectores son del tipo \textit{LC/UPC}, compatibles con el transceptor SFP seleccionado. Considerando el recorrido de una fibra (un sentido de transmisión), desde el SFP del \textit{Router A} hasta el SFP del \textit{Router B}, se tienen los siguientes elementos:
 \begin{itemize}
-    \item \underline{Patchcords ($2$):} uno en cada extremo, entre el SFP y el panel del ODF. Cada patchcord tiene $2$ conectores LC/UPC, uno hacia el SFP y otro hacia el adaptador del ODF.
+    \item \underline{Patchcords ($2$):} uno en cada extremo, entre el SFP y el panel del ODF. Cada patchcord tiene $2$ conectores \textit{LC/UPC}, uno hacia el SFP y otro hacia el adaptador del ODF.
     \item \underline{Adaptadores de panel ($2$):} uno en cada ODF, donde se acopla el patchcord con el pigtail.
-    \item \underline{Pigtails ($2$):} uno en cada ODF. Tienen un conector LC/UPC que se inserta en el adaptador y su otro extremo se empalma por fusión con la fibra del cable exterior.
+    \item \underline{Pigtails ($2$):} uno en cada ODF. Tienen un conector \textit{LC/UPC} que se inserta en el adaptador y su otro extremo se empalma por fusión con la fibra del cable exterior.
     \item \underline{Empalmes por fusión ($4$):}
     \begin{enumerate}
         \item 1 empalme en el \textit{ODF A} (pigtail con fibra del cable exterior).
@@ -145,9 +145,9 @@ Todos los conectores son del tipo \textit{LC/UPC}, compatibles con el transcepto
     \end{enumerate}
 \end{itemize}
 
-En total, cada fibra atraviesa $6$ conectores LC/UPC ($4$ de los patchcords y $2$ de los pigtails), $2$ adaptadores y $4$ empalmes por fusión. Como el enlace es bidireccional con dos fibras, la cantidad de elementos físicos a instalar es el doble, pero el presupuesto se calcula por sentido, ya que ambas fibras recorren el mismo trayecto. Las cajas de empalme intermedias deben ser herméticas (grado de protección IP68), ya que quedan alojadas en cámaras subterráneas expuestas a inundación \cite{b7}.
+En total, cada fibra atraviesa $6$ conectores \textit{LC/UPC} ($4$ de los patchcords y $2$ de los pigtails), $2$ adaptadores y $4$ empalmes por fusión.
 
-Las pérdidas asignadas a cada elemento, tomadas de la tabla de valores típicos de la bibliografía de la cátedra \cite{b7}, se resumen en la \autoref{tab:perdidas_elementos}.
+Las pérdidas asignadas a cada elemento, tomadas de la tabla de valores típicos de la bibliografía de la cátedra \cite{b7}, se muestran en la \autoref{tab:perdidas_elementos}.
 \begingroup
     \footnotesize
     \begin{longtable}
@@ -170,7 +170,7 @@ Las pérdidas asignadas a cada elemento, tomadas de la tabla de valores típicos
         \label{tab:perdidas_elementos} \\
         \endlastfoot
             Fibra G.652.D a $1310 \, [nm]$ & $8 \, [km]$ & $0.38 \, [dB/km]$ \\
-            Patchcord LC/UPC (2 conectores) & $2$ & $0.4 \, [dB]$ \\
+            Patchcord LC/UPC & $2$ & $0.4 \, [dB]$ \\
             Pigtail LC/UPC & $2$ & $0.2 \, [dB]$ \\
             Adaptador de panel LC/UPC & $2$ & $0.2 \, [dB]$ \\
             Empalme por fusión & $4$ & $0.1 \, [dB]$ \\ \hline
@@ -180,7 +180,7 @@ Las pérdidas asignadas a cada elemento, tomadas de la tabla de valores típicos
 
 \subsection{Distribuidor Óptico (ODF)}
 \label{sec_2.4}
-En cada extremo del enlace (\textit{Sitio A} y \textit{Sitio B}) se instala un distribuidor interno óptico \textbf{Lightera DIO BW12} \cite{b4}, en el cual termina el cable exterior. Sus características principales son:
+En cada extremo del enlace (\textit{Router A} y \textit{Router B}) se instala un distribuidor interno óptico \textbf{Lightera DIO BW12} \cite{b4}, en el cual termina el cable exterior. Sus características principales son:
 \begin{itemize}
     \item \underline{Capacidad:} hasta $12$ empalmes en una bandeja articulada reversible, suficiente para las $4$ fibras del cable (las $2$ activas y las $2$ de reserva).
     \item \underline{Acceso:} placa de hasta $12$ adaptadores LC dúplex, compatible con los conectores LC/UPC del enlace.
@@ -188,4 +188,4 @@ En cada extremo del enlace (\textit{Sitio A} y \textit{Sitio B}) se instala un d
     \item \underline{Instalación:} sobre cualquier superficie plana o en rack de $19"$ o $23"$, en ambiente interno.
 \end{itemize}
 
-\textbf{Justificación:} el ODF actúa como punto de demarcación y transición entre el cable exterior de estructura holgada y los patchcords flexibles que conectan a los SFP. Protege mecánicamente los empalmes por fusión, organiza las fibras de reserva y simplifica las tareas de prueba, mantenimiento y reconfiguración del enlace. Desde el punto de vista económico, es el modelo de menor capacidad que admite el cable elegido; los distribuidores de $48$ o $144$ fibras quedarían ampliamente subutilizados para un cable de $4$ fibras.
+Se selecciona este ODF porque debe actuar como punto de transición entre el cable exterior y los patchcords flexibles que conectan a los SFP. Protege mecánicamente los empalmes por fusión, organiza las fibras de reserva y simplifica las tareas de prueba, mantenimiento y reconfiguración del enlace. Desde el punto de vista económico, es el modelo de menor capacidad que admite el cable elegido; los distribuidores de $48$ o $144$ fibras quedarían ampliamente subutilizados para un cable de $4$ fibras.
