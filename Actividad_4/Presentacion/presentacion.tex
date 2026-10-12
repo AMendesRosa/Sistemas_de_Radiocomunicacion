@@ -467,7 +467,7 @@
         \node[empalme] at (10.6,-3.7) {};
         \node[right, font=\scriptsize] at (10.75,-3.7) {Empalme por fusión};
         \node[evento] at (15.5,-3.7) {n};
-        \node[right, font=\scriptsize] at (15.7,-3.7) {N° de evento (\autoref{tab:eventos})};
+        \node[right, font=\scriptsize] at (15.7,-3.7) {N° de evento};
 
         \draw[line width=1.6pt, blue!60!black] (0.2,-4.4) -- (0.8,-4.4);
         \node[right, font=\scriptsize] at (0.8,-4.4) {Patchcord LC/UPC};
@@ -593,7 +593,6 @@
         \item Enlaces largos limitados por atenuación
         \item Una sola fibra (Bidireccional 1310/1550)
         \item Multiplexación CWDM/DWDM
-        \item Amplificación con EDFA ($>$ 80 a 100 km)
       \end{itemize}
       \textbf{Desventajas}
       \begin{itemize}
@@ -649,13 +648,8 @@
     VFL (650 nm) & Continuidad, roturas y curvaturas & Continuidad en las 4 fibras \\
     OLTS (fuente + medidor) & Pérdida total por fibra & $\leq 5{,}04$ dB \\
     OTDR + bobina de lanzamiento & Ubicación y pérdida de cada evento & $\leq 0{,}1$ dB/empalme, $\leq 0{,}5$ dB/conector \\
-    DOM del SFP & Potencia TX/RX en operación & $P_r$ entre $-14{,}54$ y $-8{,}04$ dBm \\
-    Analizador de BER & Integridad de los datos a 1 Gbps & BER $< 10^{-12}$ \\
     \bottomrule
   \end{tabular}
-
-  \vspace{0.3cm}
-  \normalsize Las trazas del OTDR quedan como referencia para el mantenimiento.
 \end{frame}
 
 % =====================================================
