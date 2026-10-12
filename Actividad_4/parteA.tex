@@ -35,11 +35,12 @@ El \textit{Optical Budget} (presupuesto óptico) es la máxima atenuación que p
     \label{eq:optical_budget}
 \end{equation}
 
-Si se utilizara la potencia máxima, el presupuesto sería de $21 \, [dB]$; sin embargo, ese valor describe el caso favorable y no garantiza el funcionamiento del enlace, por lo que se adopta $OB = 14.5 \, [dB]$ para el diseño.
+Si se utilizara la potencia máxima, el presupuesto óptico sería de $21 \, [dB]$; sin embargo, ese valor describe el caso favorable y no garantiza el funcionamiento del enlace, por lo que se adopta $OB = 14.5 \, [dB]$ para el diseño.
 
-\textbf{Justificación técnica:} el alcance de $10 \, [km]$ cubre la distancia de $8 \, [km]$ y la longitud de onda de $1310 \, [nm]$ corresponde con la zona de dispersión cromática prácticamente nula de la fibra G.652.D, por lo que el enlace queda limitado por atenuación y no por dispersión (se verifica en la \autoref{sec_3}). Además, como la potencia máxima de transmisión ($-3 \, [dBm]$) es menor que la potencia de sobrecarga del receptor ($0 \, [dBm]$), el receptor no puede saturarse aun sin pérdidas en el trayecto, por lo que no se requieren atenuadores.
+La elección se justifica de forma técnica ya que el alcance de $10 \, [km]$ cubre la distancia de $8 \, [km]$, y la longitud de onda de $1310 \, [nm]$ corresponde con la zona de dispersión cromática prácticamente nula de la fibra G.652.D, por lo que el enlace queda limitado por atenuación y no por dispersión (se verifica en la \autoref{sec_3}). Además, como la potencia máxima de transmisión ($-3 \, [dBm]$) es menor que la potencia de sobrecarga del receptor ($0 \, [dBm]$), el receptor no puede saturarse aun sin pérdidas en el trayecto, por lo que no se requieren atenuadores.
 
-\textbf{Justificación económica:} la \autoref{tab:costo_sfp} compara precios de referencia de transceptores SFP de $1 \, [Gbps]$ de distinto alcance de un mismo proveedor con lista de precios pública. Los módulos de $40$ y $80 \, [km]$ cuestan entre $2$ y $3.4$ veces más y, por su mayor potencia de transmisión, pueden requerir atenuadores en un enlace corto. Por lo tanto, la categoría de $10 \, [km]$ es la opción más económica que satisface el enlace.
+En cuanto al ámbito económico, la \autoref{tab:costo_sfp} compara precios de referencia de transceptores SFP de $1 \, [Gbps]$ de distinto alcance de un mismo proveedor con lista de precios pública. Los módulos de $40$ y $80 \, [km]$ cuestan entre $2$ y $3.4$ veces más y, por su mayor potencia de transmisión, pueden requerir atenuadores en un enlace corto. Por lo tanto, la categoría de $10 \, [km]$ es la opción más económica que satisface el enlace.
+
 \begingroup
     \footnotesize
     \begin{longtable}
@@ -81,30 +82,57 @@ La consigna plantea elegir entre dos tipos de fibra monomodo:
     \item \underline{UIT-T G.657} \cite{b6}: fibra monomodo insensible a curvaturas (\textit{bend-insensitive}). La categoría G.657.A es compatible con G.652.D, pero admite radios de curvatura mucho menores ($10 \, [mm]$ la A1 y $7.5 \, [mm]$ la A2), por lo que se emplea principalmente en instalaciones internas, acometidas FTTH y cajas con poco espacio.
 \end{itemize}
 
-Ambas presentan una atenuación similar a $1310 \, [nm]$, por lo que la diferencia está en la aplicación y en el costo. En abril de 2026, el precio de referencia de la fibra G.652.D era de $12$ a $17 \, [US\$/km]$, frente a $16.5$ a $19.5 \, [US\$/km]$ para la G.657.A1 y $30$ a $33 \, [US\$/km]$ para la G.657.A2 \cite{b13}.
+Ambas presentan una atenuación similar a $1310 \, [nm]$, ($\approx 0.35 \, [dB/km]$) por lo que la diferencia está en la aplicación y en el costo. La \autoref{tab:costo_fiber} muestra los precios de referencia de los tipos de fibra de abril del 2026:
+
+
+\begingroup
+    \footnotesize
+    \begin{longtable}
+        {|>{\centering\arraybackslash}m{3cm}
+         |>{\centering\arraybackslash}m{5cm}|} \hline
+        \textbf{Tipo} & \textbf{Precio por kilómetro} \\ \hline
+        \endfirsthead
+        
+        \multicolumn{2}{c}{\textit{Continuación de la página anterior}} \\ \hline
+        \textbf{Tipo} & \textbf{Precio por kilómetro} \\ \hline
+        \endhead
+        
+        \hline 
+        \multicolumn{2}{c}{\textit{Continúa en la página siguiente...}} \\
+        \endfoot
+        
+        \hline
+        \caption{Precios de referencia de tipos de fibra en consideración \cite{b13}.}
+        \label{tab:costo_fiber} \\
+        \endlastfoot
+            G.652.D & $US\$ \, 12$ a $17$ \\
+            G.657.A1 & $US\$ \, 16.5$ a $19.5$ \\
+            G.657.A2 & $US\$ \, 30$ a  $33$\\
+            \hline
+    \end{longtable}
+\endgroup
 
 Se selecciona la \textbf{fibra G.652.D}, ya que el enlace es un tramo troncal de $8 \, [km]$ en ducto subterráneo, donde el cable se instala respetando radios de curvatura amplios (del orden de decenas de centímetros, ver \autoref{sec_2.2.2}) y la ventaja de la G.657 frente a macrocurvaturas no aporta beneficios que justifiquen su mayor costo. Además, es la fibra recomendada por la bibliografía de la cátedra para este tipo de enlaces \cite{b7}.
 
 
 \subsubsection{Cable seleccionado}
 \label{sec_2.2.2}
-Se adopta el cable \textbf{Lightera CFOA-SM-DDR-S 04F TS G-652D (PFV) NR}, cable óptico dieléctrico totalmente seco para ductos, con protección dieléctrica contra roedores, fabricado según la norma ABNT NBR 14773 \cite{b2}:
+Se adopta el cable \textbf{Lightera CFOA-SM-DDR-S 04F TS G-652D (PFV) NR}, cable óptico dieléctrico totalmente seco para ductos, con protección dieléctrica y con fibra de vidrio contra roedores, fabricado según la norma ABNT NBR 14773 \cite{b2}:
 \begin{itemize}
     \item \underline{Fibras:} 4 fibras monomodo G.652.D, de las cuales 2 se utilizan para el enlace (transmisión y recepción) y 2 quedan de reserva para mantenimiento o futuras ampliaciones. Es la menor formación que deja fibras de reserva, lo que minimiza el costo del cable.
     \item \underline{Atenuación ($\alpha$):} $0.38 \, [dB/km]$ máxima a $1310 \, [nm]$. La especificación del cable remite las características ópticas a la especificación de fibra monomodo del fabricante, ya que un mismo cable puede fabricarse con distintos tipos de fibra. El valor adoptado es la atenuación máxima que Lightera declara para fibra G.652.D cableada \cite{b3}, y coincide con la informada por otro fabricante para un cable equivalente \cite{b19}. Se utiliza el valor máximo para el cálculo conservador del presupuesto.
     \item \underline{Estructura:} tubos holgados (\textit{loose tube}) con núcleo totalmente seco protegido contra la humedad mediante materiales hidroexpansibles, elemento central de FRP (plástico reforzado con fibra de vidrio), filamentos dieléctricos de tracción, capa interna termoplástica, capa de fibra de vidrio de $1.3 \, [mm]$ contra roedores y cubierta externa de polietileno negro resistente a la intemperie. Diámetro nominal de $12.4 \, [mm]$ y masa de $127 \, [kg/km]$.
     \item \underline{Características mecánicas:} carga máxima de instalación de $2000 \, [N]$ y compresión de $1000 \, [N]$; radio mínimo de curvatura de $20$ veces el diámetro durante la instalación ($248 \, [mm]$) y $10$ veces una vez instalado ($124 \, [mm]$); temperatura de operación de $-20$ a $65 \, [^\circ C]$.
-    \item \underline{Presentación:} bobinas de $4000 \, [m]$, por lo que el tramo de $8 \, [km]$ requiere necesariamente empalmes intermedios, lo cual es coherente con las cajas de empalme previstas en la ruta.
+    \item \underline{Presentación:} bobinas de $4000 \, [m]$, por lo que el tramo de $8 \, [km]$ requiere necesariamente empalmes intermedios, lo cual es coherente con las cajas de empalme previstas en la ruta por la consigna.
 \end{itemize}
 
-\textbf{Justificación:} al ser totalmente dieléctrico, el cable es inmune a inducciones y descargas eléctricas y no requiere puesta a tierra. Su núcleo seco protegido contra la penetración de agua y su resistencia a la tracción lo hacen apto para ser tendido en ductos subterráneos, donde puede quedar expuesto a humedad o inundaciones y es sometido a esfuerzos durante el tirado. La capa de fibra de vidrio lo protege contra el ataque de roedores, un riesgo habitual en canalizaciones subterráneas, sin agregar elementos metálicos.
+Se justifica su elección ya que al ser totalmente dieléctrico, el cable es inmune a inducciones y descargas eléctricas y no requiere puesta a tierra. Su núcleo seco protegido contra la penetración de agua y su resistencia a la tracción lo hacen apto para ser tendido en ductos subterráneos, donde puede quedar expuesto a humedad o inundaciones y es sometido a esfuerzos durante el tirado. La capa de fibra de vidrio lo protege contra el ataque de roedores, un riesgo habitual en canalizaciones subterráneas, sin agregar elementos metálicos.
 
 El cable se especifica según la norma brasileña ABNT, ya que Lightera fabrica esta línea para el mercado sudamericano. En Argentina, la norma de referencia para cables ópticos de exterior es la IRAM 4225 \cite{b16}, cuyo cumplimiento debería solicitarse al proveedor al momento de la compra.
 
-
 \subsection{Conectores y Empalmes}
 \label{sec_2.3}
-Todos los conectores son del tipo \textit{LC/UPC}, compatibles con el transceptor seleccionado. Considerando el recorrido de una fibra (un sentido de transmisión), desde el SFP del \textit{Router A} hasta el SFP del \textit{Router B}, se tienen los siguientes elementos:
+Todos los conectores son del tipo \textit{LC/UPC}, compatibles con el transceptor SFP seleccionado. Considerando el recorrido de una fibra (un sentido de transmisión), desde el SFP del \textit{Router A} hasta el SFP del \textit{Router B}, se tienen los siguientes elementos:
 \begin{itemize}
     \item \underline{Patchcords ($2$):} uno en cada extremo, entre el SFP y el panel del ODF. Cada patchcord tiene $2$ conectores LC/UPC, uno hacia el SFP y otro hacia el adaptador del ODF.
     \item \underline{Adaptadores de panel ($2$):} uno en cada ODF, donde se acopla el patchcord con el pigtail.
