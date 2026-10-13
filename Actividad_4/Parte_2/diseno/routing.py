@@ -1,5 +1,6 @@
 import json, pickle, math, numpy as np, networkx as nx, collections
-G=pickle.load(open('G.pkl','rb')); D=json.load(open('diseno.json'))
+from reg import fn
+G=pickle.load(open('G.pkl','rb')); D=json.load(open(fn('diseno.json')))
 ids=list(G.nodes); P=np.array([G.nodes[n]['xy'] for n in ids])
 def snap(c): return ids[int(np.argmin(((P-np.asarray(c))**2).sum(1)))]
 def plen(path): return sum(G[a][b]['length'] for a,b in zip(path,path[1:]))
@@ -54,7 +55,7 @@ for i,s in enumerate(S):
 rec.sort(key=lambda r:r['L_max'])
 D.update(HUB=HUB,tron_edges=[(list(e),f,l) for e,f,l in tron_edges],clu_edges={k:[list(e) for e in v] for k,v in clu_edges.items()},recorridos=rec,L_tron=L_tron,L_clu=L_clu,L_dist=L_dist)
 for s in S: s['dist_edges']=[list(e) for e in s['dist_edges']]
-json.dump(D,open('diseno2.json','w'))
+json.dump(D,open(fn('diseno2.json'),'w'))
 print('Longitudes de cable [km]: troncal',round(L_tron/1e3,2),'| clusters',round(L_clu/1e3,2),'| distribución',round(L_dist/1e3,2))
 print('Fibras máx. en una arista troncal',max(f for *_,f in tron_edges))
 print('Recorrido MAYOR: ',{k:round(v) if isinstance(v,float) else v for k,v in rec[-1].items()})

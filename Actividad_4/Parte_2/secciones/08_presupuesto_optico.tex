@@ -54,31 +54,37 @@ Criterios adoptados:
 \end{itemize}
 
 \subsection{Recorridos verificados}
-Las longitudes de todos los recorridos (hub $\rightarrow$ CEO $\rightarrow$ caja de distribución $\rightarrow$ CTO $\rightarrow$ vivienda) se calcularon sobre la red de calles. Los recorridos extremos se identifican en el plano de la \autoref{fig:troncal}:
+Las longitudes de todos los recorridos (hub $\rightarrow$ CEO $\rightarrow$ caja de distribución $\rightarrow$ CTO $\rightarrow$ vivienda) se calcularon sobre la red de calles. En cada región se verifican los dos recorridos extremos, que se identifican en los planos de la \autoref{fig:troncal} y la \autoref{fig:troncal_O}:
 \begin{itemize}
-    \item \textbf{Mayor pérdida:} CTO-91.1, en el barrio aislado del noreste (sector 91, cluster C12). Tiene $3.896 \, [m]$ de red (troncal, cable de cluster y distribución) más un drop de $183 \, [m]$, y atraviesa cinco cajas de derivación del troncal (D1, D2, CEO-C5, D4 y CEO-C6).
-    \item \textbf{Menor pérdida:} CTO-28.3, junto al hub (sector 28, cluster C3), con $170 \, [m]$ de red y un drop de $93 \, [m]$.
+    \item \textbf{Mayor pérdida, Región Este:} CTO-91.1, en el barrio aislado del noreste (sector 91, cluster C12). Tiene $3.896 \, [m]$ de red (troncal, cable de cluster y distribución) más un drop de $183 \, [m]$, y atraviesa cinco cajas de derivación del troncal (D1, D2, CEO-C5, D4 y CEO-C6).
+    \item \textbf{Mayor pérdida, Región Oeste:} CTO-O77.3, en el noroeste (sector O77, cluster O10). Tiene $4.364 \, [m]$ de red más un drop de $237 \, [m]$, y atraviesa tres cajas de derivación (DO1, DO3 y DO5).
+    \item \textbf{Menor pérdida, Región Este:} CTO-28.3, junto al hub (sector 28, cluster C3), con $170 \, [m]$ de red y un drop de $93 \, [m]$.
+    \item \textbf{Menor pérdida, Región Oeste:} CTO-O42.4 (sector O42, cluster O6), con $664 \, [m]$ de red y un drop de $104 \, [m]$.
 \end{itemize}
 
 \begin{table}[H]
     \centering
     \footnotesize
-    \caption{Pérdidas de los recorridos extremos.}
+    \caption{Pérdidas de los recorridos extremos de cada región.}
     \label{tab:perdidas_recorridos}
-    \begin{tabular}{|l|r|r|}
+    \begin{tabular}{|l|r|r|r|r|}
         \hline
-        \textbf{Elemento} & \textbf{Mayor pérdida (CTO-91.1)} & \textbf{Menor pérdida (CTO-28.3)} \\
+        & \multicolumn{2}{c|}{\textbf{Mayor pérdida}} & \multicolumn{2}{c|}{\textbf{Menor pérdida}} \\
+        \cline{2-5}
+        \textbf{Elemento} & \textbf{CTO-91.1} & \textbf{CTO-O77.3} & \textbf{CTO-28.3} & \textbf{CTO-O42.4} \\
         \hline
-        Fibra de la red & $3{,}896 \times 0{,}38 = 1{,}48 \, [dB]$ & \multirow{2}{*}{$0{,}263 \times 0{,}25 = 0{,}07 \, [dB]$} \\
-        Fibra del drop & $0{,}183 \times 0{,}36 = 0{,}07 \, [dB]$ & \\
-        Splitters 1:4 y 1:16 & $7{,}1 + 13{,}7 = 20{,}80 \, [dB]$ & $6{,}02 + 12{,}04 = 18{,}06 \, [dB]$ \\
-        Conexiones & $5 \times 0{,}30 = 1{,}50 \, [dB]$ & $0$ \\
-        Empalmes & $11 \times 0{,}1 = 1{,}10 \, [dB]$ & $0$ \\
+        Fibra de la red ($\times 0{,}38$ o $0{,}25$) & $1{,}48 \, [dB]$ & $1{,}66 \, [dB]$ & \multirow{2}{*}{$0{,}07 \, [dB]$} & \multirow{2}{*}{$0{,}19 \, [dB]$} \\
+        Fibra del drop ($\times 0{,}36$ o $0{,}25$) & $0{,}07 \, [dB]$ & $0{,}09 \, [dB]$ & & \\
+        Splitters 1:4 y 1:16 & $20{,}80 \, [dB]$ & $20{,}80 \, [dB]$ & $18{,}06 \, [dB]$ & $18{,}06 \, [dB]$ \\
+        Conexiones ($5 \times 0{,}30$) & $1{,}50 \, [dB]$ & $1{,}50 \, [dB]$ & $0$ & $0$ \\
+        Empalmes ($\times 0{,}1$) & $11$: $1{,}10 \, [dB]$ & $9$: $0{,}90 \, [dB]$ & $0$ & $0$ \\
         \hline
-        \textbf{Pérdida total $A_{total}$} & $\mathbf{24{,}95 \, [dB]}$ & $\mathbf{18{,}13 \, [dB]}$ \\
+        \textbf{Pérdida total $A_{total}$} & $\mathbf{24{,}95 \, [dB]}$ & $\mathbf{24{,}94 \, [dB]}$ & $\mathbf{18{,}13 \, [dB]}$ & $\mathbf{18{,}25 \, [dB]}$ \\
         \hline
     \end{tabular}
 \end{table}
+
+En la Región Oeste el recorrido más desfavorable tiene más fibra pero atraviesa menos cajas de derivación, por lo que su pérdida total es prácticamente igual a la del Este. El recorrido de menor pérdida del Oeste es más largo que el del Este porque el hub está fuera de la región, sobre su límite este.
 
 \subsection{Sentido descendente (OLT $\rightarrow$ ONT, $1490 \, [nm]$)}
 \label{sec:descendente}
@@ -87,18 +93,20 @@ Las longitudes de todos los recorridos (hub $\rightarrow$ CEO $\rightarrow$ caja
     \footnotesize
     \caption{Presupuesto óptico descendente.}
     \label{tab:descendente}
-    \begin{tabular}{|l|c|c|}
+    \begin{tabular}{|l|c|c|c|c|}
         \hline
-        \textbf{Verificación} & \textbf{Mayor pérdida} & \textbf{Menor pérdida} \\
+        & \multicolumn{2}{c|}{\textbf{Mayor pérdida}} & \multicolumn{2}{c|}{\textbf{Menor pérdida}} \\
+        \cline{2-5}
+        \textbf{Verificación} & \textbf{CTO-91.1} & \textbf{CTO-O77.3} & \textbf{CTO-28.3} & \textbf{CTO-O42.4} \\
         \hline
-        Potencia de transmisión de la OLT & $P_{t,min} = +3 \, [dBm]$ & $P_{t,max} = +7 \, [dBm]$ \\
-        Pérdida total & $24{,}95 \, [dB]$ & $18{,}13 \, [dB]$ \\
-        Potencia recibida en la ONT & $-21{,}95 \, [dBm]$ & $-11{,}13 \, [dBm]$ \\
-        Referencia del receptor & $S_r = -27 \, [dBm]$ & $P_{sat} = -8 \, [dBm]$ \\
-        Diferencia & $5{,}05 \, [dB]$ sobre $S_r$ & $3{,}13 \, [dB]$ bajo $P_{sat}$ \\
-        Margen sobrante (descontado $M_s = 3 \, [dB]$) & $\mathbf{2{,}05 \, [dB]}$ & -- \\
+        Potencia de la OLT & \multicolumn{2}{c|}{$P_{t,min} = +3 \, [dBm]$} & \multicolumn{2}{c|}{$P_{t,max} = +7 \, [dBm]$} \\
+        Pérdida total [dB] & $24{,}95$ & $24{,}94$ & $18{,}13$ & $18{,}25$ \\
+        Potencia en la ONT [dBm] & $-21{,}95$ & $-21{,}94$ & $-11{,}13$ & $-11{,}25$ \\
+        Referencia del receptor & \multicolumn{2}{c|}{$S_r = -27 \, [dBm]$} & \multicolumn{2}{c|}{$P_{sat} = -8 \, [dBm]$} \\
+        Diferencia [dB] & $5{,}05$ sobre $S_r$ & $5{,}06$ sobre $S_r$ & $3{,}13$ bajo $P_{sat}$ & $3{,}25$ bajo $P_{sat}$ \\
+        Sobrante ($M_s = 3 \, [dB]$) [dB] & $\mathbf{2{,}05}$ & $\mathbf{2{,}06}$ & -- & -- \\
         \hline
-        \textbf{Resultado} & \textbf{Cumple} & \textbf{Cumple} \\
+        \textbf{Resultado} & \textbf{Cumple} & \textbf{Cumple} & \textbf{Cumple} & \textbf{Cumple} \\
         \hline
     \end{tabular}
 \end{table}
@@ -110,29 +118,29 @@ Las longitudes de todos los recorridos (hub $\rightarrow$ CEO $\rightarrow$ caja
     \footnotesize
     \caption{Presupuesto óptico ascendente.}
     \label{tab:ascendente}
-    \begin{tabular}{|l|c|c|}
+    \begin{tabular}{|l|c|c|c|c|}
         \hline
-        \textbf{Verificación} & \textbf{Mayor pérdida} & \textbf{Menor pérdida} \\
+        & \multicolumn{2}{c|}{\textbf{Mayor pérdida}} & \multicolumn{2}{c|}{\textbf{Menor pérdida}} \\
+        \cline{2-5}
+        \textbf{Verificación} & \textbf{CTO-91.1} & \textbf{CTO-O77.3} & \textbf{CTO-28.3} & \textbf{CTO-O42.4} \\
         \hline
-        Potencia de transmisión de la ONT & $P_{t,min} = 0 \, [dBm]$ & $P_{t,max} = +4 \, [dBm]$ \\
-        Pérdida total & $24{,}95 \, [dB]$ & $18{,}13 \, [dB]$ \\
-        Potencia recibida en la OLT & $-24{,}95 \, [dBm]$ & $-14{,}13 \, [dBm]$ \\
-        Referencia del receptor & $S_r = -30 \, [dBm]$ & $P_{sat} = -12 \, [dBm]$ \\
-        Diferencia & $5{,}05 \, [dB]$ sobre $S_r$ & $2{,}13 \, [dB]$ bajo $P_{sat}$ \\
-        Margen sobrante (descontado $M_s = 3 \, [dB]$) & $\mathbf{2{,}05 \, [dB]}$ & -- \\
+        Potencia de la ONT & \multicolumn{2}{c|}{$P_{t,min} = 0 \, [dBm]$} & \multicolumn{2}{c|}{$P_{t,max} = +4 \, [dBm]$} \\
+        Pérdida total [dB] & $24{,}95$ & $24{,}94$ & $18{,}13$ & $18{,}25$ \\
+        Potencia en la OLT [dBm] & $-24{,}95$ & $-24{,}94$ & $-14{,}13$ & $-14{,}25$ \\
+        Referencia del receptor & \multicolumn{2}{c|}{$S_r = -30 \, [dBm]$} & \multicolumn{2}{c|}{$P_{sat} = -12 \, [dBm]$} \\
+        Diferencia [dB] & $5{,}05$ sobre $S_r$ & $5{,}06$ sobre $S_r$ & $2{,}13$ bajo $P_{sat}$ & $2{,}25$ bajo $P_{sat}$ \\
+        Sobrante ($M_s = 3 \, [dB]$) [dB] & $\mathbf{2{,}05}$ & $\mathbf{2{,}06}$ & -- & -- \\
         \hline
-        \textbf{Resultado} & \textbf{Cumple} & \textbf{Cumple} \\
+        \textbf{Resultado} & \textbf{Cumple} & \textbf{Cumple} & \textbf{Cumple} & \textbf{Cumple} \\
         \hline
     \end{tabular}
 \end{table}
 
 \subsection{Análisis y correcciones}
-El diseño cumple en ambos sentidos y en ambos recorridos extremos, por lo que no se requieren correcciones. Los resultados confirman las siguientes decisiones:
+El diseño cumple en ambos sentidos y en los recorridos extremos de las dos regiones, por lo que no se requieren correcciones. Los resultados confirman las siguientes decisiones:
 \begin{itemize}
-    \item \underline{Óptica Clase C+ en la OLT:} con un SFP Clase B+ ($P_t$ de $+1{,}5$ a $+5 \, [dBm]$; $S_r = -28 \, [dBm]$ \cite{g984_2}), el recorrido de mayor pérdida quedaría con un margen sobrante de apenas $0{,}05 \, [dB]$ en sentido ascendente, sin holgura para imprecisiones del diseño.
-    \item \underline{Un puerto por sector:} compartir un puerto entre dos sectores con un splitter 1:2 en el hub agregaría $3{,}7 \, [dB]$ más un conector, y el margen sobrante del recorrido de mayor pérdida pasaría a $-1{,}95 \, [dB]$ (no cumple).
-    \item \underline{Sin atenuadores:} en el recorrido de menor pérdida la potencia recibida queda por debajo del nivel de saturación en ambos sentidos, aun con pérdidas nulas de conectores y empalmes. En cambio, no deben instalarse módulos de mayor potencia (Clase C++, con hasta $+10 \, [dBm]$) sin verificar este caso: con $+10 \, [dBm]$ la ONT más cercana recibiría $-8{,}1 \, [dBm]$, en el límite de su saturación.
-    \item \underline{Video overlay:} si se agrega (\autoref{sec:television}), el WDM del amplificador suma $0{,}8 \, [dB]$ al recorrido GPON y el margen sobrante pasa a $1{,}25 \, [dB]$, que sigue cumpliendo.
+    \item \underline{Óptica Clase C+ en la OLT:} con un SFP Clase B+ ($P_t$ de $+1{,}5$ a $+5 \, [dBm]$; $S_r = -28 \, [dBm]$ \cite{g984_2}), el recorrido de mayor pérdida quedaría en sentido ascendente con un margen sobrante de apenas $0{,}05 \, [dB]$ en el Este y $0{,}06 \, [dB]$ en el Oeste, sin holgura para imprecisiones del diseño.
+    \item \underline{Un puerto por sector:} compartir un puerto entre dos sectores con un splitter 1:2 en el hub agregaría $3{,}7 \, [dB]$ más un conector, y el margen sobrante del recorrido de mayor pérdida pasaría a $-1{,}95 \, [dB]$ en el Este y $-1{,}94 \, [dB]$ en el Oeste (no cumple).
+    \item \underline{Sin atenuadores:} en el recorrido de menor pérdida la potencia recibida queda por debajo del nivel de saturación en ambos sentidos, aun con pérdidas nulas de conectores y empalmes. En cambio, no deben instalarse módulos de mayor potencia (Clase C++, con hasta $+10 \, [dBm]$) sin verificar este caso: con $+10 \, [dBm]$ la ONT más cercana recibiría $-8{,}1 \, [dBm]$ en el Este y $-8{,}3 \, [dBm]$ en el Oeste, en el límite de su saturación.
+    \item \underline{Video overlay:} si se agrega (\autoref{sec:television}), el WDM del amplificador suma $0{,}8 \, [dB]$ al recorrido GPON y el margen sobrante pasa a $1{,}25 \, [dB]$ en el Este y $1{,}26 \, [dB]$ en el Oeste, que sigue cumpliendo.
 \end{itemize}
-
-\pendiente{Región Oeste: recorridos de mayor y menor pérdida propios, a cargo de Mendes Rosa y Monja.}

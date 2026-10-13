@@ -62,9 +62,9 @@ El hub (nodo cabecera) se ubica en la sede de la Cooperativa COYSPU, en 9 de Jul
         \hline
         \textbf{Unidad} & \textbf{Definición} & \textbf{Capacidad prevista} \\
         \hline
-        Región & Mitad del área de cobertura a cada lado de la RP12 & Este: $6.153$ viviendas, 12 clusters, 92 sectores \\
+        Región & Mitad del área de cobertura a cada lado de la RP12 & Este: $6.153$ viviendas, 12 clusters, 92 sectores. Oeste: $5.982$ viviendas, 12 clusters, 89 sectores \\
         \hline
-        Cluster & Grupo contiguo de hasta 8 sectores alimentado por un bloque de 24 fibras del troncal, que se deriva en una caja de empalme (CEO) & 7 u 8 sectores: entre 439 y 540 viviendas \\
+        Cluster & Grupo contiguo de hasta 8 sectores alimentado por un bloque de 24 fibras del troncal, que se deriva en una caja de empalme (CEO) & 7 u 8 sectores: entre 439 y 543 viviendas \\
         \hline
         Sector de diseño & Zona atendida por un puerto PON: un splitter 1:4 en su caja de distribución y hasta 4 CTO 1:16 & Hasta 68 viviendas, 64 salidas: 61 abonados al 90\,\% \\
         \hline
@@ -75,13 +75,14 @@ El hub (nodo cabecera) se ubica en la sede de la Cooperativa COYSPU, en 9 de Jul
 
 \textbf{Metodología de sectorización.} Las viviendas de cada manzana se representan como puntos sobre su perímetro (\autoref{sec:casas}). Sobre ellos se aplica el siguiente procedimiento, implementado en Python con los datos de calles de OpenStreetMap:
 \begin{enumerate}
-    \item Se identifican los grupos de viviendas conexos, separados entre sí por más de $100 \, [m]$, para que ningún sector abarque zonas sin viviendas. En la Región Este resultan tres grupos: el casco urbano ($6.074$ viviendas) y dos barrios aislados al noreste (45 y 34 viviendas).
+    \item Se identifican los grupos de viviendas conexos, separados entre sí por más de $100 \, [m]$, para que ningún sector abarque zonas sin viviendas. En la Región Este resultan tres grupos: el casco urbano ($6.074$ viviendas) y dos barrios aislados al noreste (45 y 34 viviendas). En la Región Oeste resultan dos: el casco urbano ($5.961$ viviendas) y un grupo aislado de 21 viviendas.
     \item Cada grupo se divide por bisecciones sucesivas en sectores contiguos de hasta 68 viviendas.
     \item Dentro de cada sector, las viviendas se asignan a hasta 4 CTO con capacidad de 17. Cada CTO se ubica en la esquina que minimiza la longitud de acometida más larga.
     \item Los sectores se agrupan en clusters contiguos de hasta 8 sectores.
 \end{enumerate}
 
-Resultan \textbf{12 clusters, 92 sectores y 365 cajas terminales} en la Región Este (\autoref{fig:sectores} y \autoref{tab:clusters}). Los 90 sectores del casco urbano tienen 4 CTO y entre 67 y 68 viviendas; los dos barrios aislados forman los sectores 91 (34 viviendas, 2 CTO) y 92 (45 viviendas, 3 CTO). El detalle de cada sector se presenta en el \autoref{anexo:sectores}.
+\subsubsection{Región Este}
+Resultan \textbf{12 clusters, 92 sectores y 365 cajas terminales} (\autoref{fig:sectores} y \autoref{tab:clusters}). Los 90 sectores del casco urbano tienen 4 CTO y entre 67 y 68 viviendas; los dos barrios aislados forman los sectores 91 (34 viviendas, 2 CTO) y 92 (45 viviendas, 3 CTO). El detalle de cada sector se presenta en el \autoref{anexo:sectores}.
 
 \begin{figure}[H]
     \centering
@@ -92,16 +93,51 @@ Resultan \textbf{12 clusters, 92 sectores y 365 cajas terminales} en la Región 
 
 \input{secciones/tablas/clusters}
 
+\subsubsection{Región Oeste}
+Resultan \textbf{12 clusters (O1 a O12), 89 sectores y 354 cajas terminales} (\autoref{fig:sectores_O} y \autoref{tab:clusters_O}). Los 88 sectores del casco urbano tienen 4 CTO y entre 67 y 68 viviendas; el grupo aislado forma el sector O89 (21 viviendas, 2 CTO). El detalle de cada sector se presenta en el \autoref{anexo:sectores_O}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{plano_oeste_sectores.pdf}
+    \caption{Región Oeste: clusters (O1 a O12) y sectores de diseño (O1 a O89).}
+    \label{fig:sectores_O}
+\end{figure}
+
+\input{secciones/tablas/clusters_O}
+
 \subsection{Trazas generales}
 \label{sec:trazas}
 Los cables se tienden en forma aérea sobre la postería, siguiendo los recorridos más cortos por la red de calles. Las longitudes se calcularon sobre el grafo de calles de OpenStreetMap \cite{osm}. Se distinguen tres niveles de cable:
 
 \begin{itemize}
-    \item \underline{Troncal o alimentación:} desde el ODF del hub hasta la caja de empalme (CEO) de cada cluster. Cada cluster tiene asignadas 24 fibras, por lo que la capacidad de cada tramo es la suma de los clusters que alimenta. La traza total es de $7{,}22 \, [km]$ (\autoref{fig:troncal} y \autoref{tab:tramos}).
-    \item \underline{Cable de cluster:} cable MINI-RA de 24 fibras que parte de la CEO de cluster y recorre las cajas de distribución de sus sectores. En cada caja se abre el tubo y se derivan las fibras del sector sin cortar las que siguen de paso (sangría). Longitud total: $26{,}25 \, [km]$.
-    \item \underline{Distribución de sector:} cable MINI-RA de 12 fibras desde la caja de distribución (splitter 1:4) hasta las CTO del sector. Longitud total: $33{,}40 \, [km]$.
-    \item \underline{Acometida (drop):} desde la CTO hasta cada vivienda. Su longitud media es de $68 \, [m]$, el 90\,\% de las viviendas queda a menos de $129 \, [m]$ de su CTO y la máxima es de $270 \, [m]$.
+    \item \underline{Troncal o alimentación:} desde el ODF del hub hasta la caja de empalme (CEO) de cada cluster. Cada cluster tiene asignadas 24 fibras, por lo que la capacidad de cada tramo es la suma de los clusters que alimenta.
+    \item \underline{Cable de cluster:} cable MINI-RA de 24 fibras que parte de la CEO de cluster y recorre las cajas de distribución de sus sectores. En cada caja se abre el tubo y se derivan las fibras del sector sin cortar las que siguen de paso (sangría).
+    \item \underline{Distribución de sector:} cable MINI-RA de 12 fibras desde la caja de distribución (splitter 1:4) hasta las CTO del sector.
+    \item \underline{Acometida (drop):} desde la CTO hasta cada vivienda.
 \end{itemize}
+
+\begin{table}[H]
+    \centering
+    \footnotesize
+    \caption{Longitudes de traza por nivel de cable.}
+    \label{tab:longitudes}
+    \begin{tabular}{|l|r|r|}
+        \hline
+        \textbf{Nivel} & \textbf{Región Este} & \textbf{Región Oeste} \\
+        \hline
+        Troncal (traza) & $7{,}22 \, [km]$ & $10{,}50 \, [km]$ \\
+        Cables de cluster (24 F) & $26{,}25 \, [km]$ & $22{,}82 \, [km]$ \\
+        Cables de distribución (12 F) & $33{,}40 \, [km]$ & $32{,}02 \, [km]$ \\
+        Drop: media / 90\,\% de las viviendas / máximo & $68 / 129 / 270 \, [m]$ & $69 / 138 / 415 \, [m]$ \\
+        \hline
+    \end{tabular}
+\end{table}
+
+La Región Oeste requiere más troncal porque el hub está del lado Este. Sus cables cruzan la RP12 a pocas cuadras del hub y recorren más distancia hasta los clusters del noroeste y del sur.
+
+Ambos troncales salen del hub por 9 de Julio hasta la esquina con Bv. Lardizábal (derivaciones D1 y DO1), con $240 + 192 = 432$ fibras. En ese primer tramo se tienden tres cables de 144 fibras, y como cada FK-CEO-4M admite hasta 144 fibras, D1 y DO1 son cajas separadas en el mismo poste.
+
+\subsubsection{Región Este}
 
 \begin{figure}[H]
     \centering
@@ -113,11 +149,23 @@ Los cables se tienden en forma aérea sobre la postería, siguiendo los recorrid
 \input{secciones/tablas/tramos_troncal}
 \input{secciones/tablas/nodos_troncal}
 
-\textbf{Ubicación de cajas y splitters:}
+\subsubsection{Región Oeste}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{plano_oeste_troncal.pdf}
+    \caption{Región Oeste: traza del cable troncal, cajas de empalme de cluster y recorridos de mayor y menor pérdida óptica.}
+    \label{fig:troncal_O}
+\end{figure}
+
+\input{secciones/tablas/tramos_troncal_O}
+\input{secciones/tablas/nodos_troncal_O}
+
+\subsubsection{Ubicación de cajas y splitters}
 \begin{itemize}
-    \item \underline{Cajas de empalme del troncal (FK-CEO-4M):} en las 12 CEO de cluster y en los 4 puntos de derivación D1 a D4 (\autoref{tab:nodos}), donde cambia la capacidad del cable.
-    \item \underline{Cajas de distribución (FK-CEO-4M con splitter 1:4):} una por sector (92 en total), en la esquina que minimiza el recorrido de distribución hasta sus CTO. Su ubicación se lista en el \autoref{anexo:sectores}.
-    \item \underline{Cajas terminales (FK-CTO-16MC con splitter 1:16):} 365 cajas en postes de esquina, cada una para hasta 17 viviendas.
+    \item \underline{Cajas de empalme del troncal (FK-CEO-4M):} en las CEO de cluster (12 por región) y en los puntos de derivación donde cambia la capacidad del cable: D1 a D4 en el Este (\autoref{tab:nodos}) y DO1 a DO6 en el Oeste (\autoref{tab:nodos_O}).
+    \item \underline{Cajas de distribución (FK-CEO-4M con splitter 1:4):} una por sector (92 en el Este y 89 en el Oeste), en la esquina que minimiza el recorrido de distribución hasta sus CTO. En cada cluster, una de ellas coincide con la CEO. Su ubicación se lista en los anexos.
+    \item \underline{Cajas terminales (FK-CTO-16MC con splitter 1:16):} 365 en el Este y 354 en el Oeste, en postes de esquina, cada una para hasta 17 viviendas.
 \end{itemize}
 
 \textbf{Reservas de cable:} se deja un rulo de reserva de $20 \, [m]$ en cada CEO y caja de distribución y de $10 \, [m]$ en cada CTO. Esto permite reabrir los empalmes y reubicar las cajas sin reemplazar el cable. Además, se adiciona un 10\,\% a las longitudes de traza por catenaria, bajadas y desvíos en los postes.
@@ -126,21 +174,30 @@ Los cables se tienden en forma aérea sobre la postería, siguiendo los recorrid
 \label{sec:verificacion}
 \begin{itemize}
     \item \underline{Postería:} propiedad, estado, altura y vanos reales, y acuerdo de uso con su propietario (la COYSPU no figura como distribuidora eléctrica \cite{coyspu}, por lo que el permiso debe gestionarse con la distribuidora o el municipio).
-    \item \underline{Cruces especiales:} cruces de la RN9, de la RP12 y de la traza ferroviaria, que pueden requerir tendido subterráneo o permisos de Vialidad y del concesionario ferroviario.
+    \item \underline{Cruces especiales:} cruces de la RN9, de la RP12 (que deben cruzar todos los troncales del Oeste) y de la traza ferroviaria, que pueden requerir tendido subterráneo o permisos de Vialidad y del concesionario ferroviario.
     \item \underline{Viviendas reales:} cantidad de viviendas por manzana, en especial en el centro, donde los edificios de departamentos requieren un diseño vertical propio, y en los barrios en expansión de la periferia, donde OpenStreetMap puede no estar actualizado.
-    \item \underline{Calles sin nombre y loteos nuevos} en el noreste de la región (sectores 91 y 92).
+    \item \underline{Calles sin nombre y loteos nuevos} en el noreste de la Región Este (sectores 91 y 92) y en el grupo aislado del Oeste (sector O89).
+    \item \underline{Acometidas largas:} las CTO cuyo drop más largo supera los $250 \, [m]$ (la máxima, de $415 \, [m]$, en el Oeste) deben reubicarse o dividirse en el relevamiento.
     \item \underline{Ubicación exacta del nodo REFEFO} y de la red de fibra existente de la COYSPU, que podría reutilizarse para el enlace mayorista.
 \end{itemize}
 
-\subsection{Desarrollo de dos sectores}
+\subsection{Desarrollo de dos sectores por región}
 \label{sec:sectores}
-Se desarrollan en detalle dos sectores representativos:
+Se desarrollan en detalle dos sectores representativos de cada región:
 \begin{itemize}
-    \item El \textbf{sector 28} (cluster C3), en el centro, junto al hub, que contiene el recorrido de menor pérdida de la región.
-    \item El \textbf{sector 90} (cluster C12), en la periferia noreste: es el sector completo, con 4 CTO, más alejado del hub.
+    \item \textbf{Región Este:}
+    \begin{itemize}
+        \item El \textbf{sector 28} (cluster C3), en el centro, junto al hub, que contiene el recorrido de menor pérdida de la región.
+        \item El \textbf{sector 90} (cluster C12), en la periferia noreste: es el sector completo, con 4 CTO, más alejado del hub.
+    \end{itemize}
+    \item \textbf{Región Oeste:}
+    \begin{itemize}
+        \item El \textbf{sector O42} (cluster O6), junto a Bv. Lardizábal, que contiene el recorrido de menor pérdida de la región.
+        \item El \textbf{sector O77} (cluster O10), en el noroeste: es el sector completo más alejado del hub y contiene el recorrido de mayor pérdida de la región.
+    \end{itemize}
 \end{itemize}
 
-En ambos casos las fibras del cable de distribución de 12 fibras se asignan así:
+En todos los casos las fibras del cable de distribución de 12 fibras se asignan así:
 \begin{itemize}
     \item F1 a F4: salidas 1 a 4 del splitter 1:4, una para cada CTO.
     \item F5 a F8: crecimiento.
@@ -172,4 +229,26 @@ El sector 90 tiene 67 viviendas en el noreste de la región, alrededor de Herman
 
 \input{secciones/tablas/sector_90}
 
-\pendiente{Región Oeste: organización en clusters y sectores, trazas y desarrollo de sus dos sectores, a cargo de Mendes Rosa y Monja.}
+\subsubsection{Sector O42}
+El sector O42 tiene 68 viviendas en torno a Bv. Lardizábal, entre Santiago del Estero y Rosario de Santa Fe, con cajas terminales también en Pasaje Maipú y Tucumán y en San Lorenzo (\autoref{fig:sectorO42}). Su caja de distribución CD-O42 está en Bv. Lardizábal y Santiago del Estero, en el mismo poste que la CEO del cluster O6, a $664 \, [m]$ del hub. El cable de distribución mide $836 \, [m]$ y la acometida más larga es de $215 \, [m]$, en la CTO-O42.3 (\autoref{tab:sectorO42}).
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{plano_sector_O42.pdf}
+    \caption{Plano ampliado del sector O42 (cluster O6).}
+    \label{fig:sectorO42}
+\end{figure}
+
+\input{secciones/tablas/sector_O42}
+
+\subsubsection{Sector O77}
+El sector O77 tiene 67 viviendas en el noroeste de la región, alrededor de 19 de Octubre y El Porvenir (\autoref{fig:sectorO77}). Su caja de distribución CD-O77 está en 19 de Octubre y El Porvenir, a $3{,}84 \, [km]$ del hub: $2{,}77 \, [km]$ de troncal y $1{,}06 \, [km]$ de cable de cluster. El cable de distribución mide $991 \, [m]$ y la acometida más larga es de $237 \, [m]$, en la CTO-O77.3, que es además el recorrido de mayor pérdida de la Región Oeste (\autoref{tab:sectorO77}).
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{plano_sector_O77.pdf}
+    \caption{Plano ampliado del sector O77 (cluster O10).}
+    \label{fig:sectorO77}
+\end{figure}
+
+\input{secciones/tablas/sector_O77}

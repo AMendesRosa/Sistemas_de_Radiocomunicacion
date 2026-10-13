@@ -14,7 +14,7 @@ Los canales se transmiten como flujos IP dentro de la capacidad GPON, y cada viv
 \begin{itemize}
     \item Si la cabecera IPTV se instala en el hub (por ejemplo, transcodificando las señales que ya recibe la cooperativa), el multicast no consume capacidad mayorista.
     \item Si los canales llegan desde un proveedor externo, el multicast agrega una carga fija de $100 \times 8 = 800 \, [Mbps]$, independiente de la cantidad de abonados.
-    \item El unicast, en cambio, viaja por el enlace mayorista salvo que se use una caché local. Con el 40\,\% de los abonados de la primera etapa de ambas regiones mirando contenido a demanda en la hora pico, serían $0{,}4 \times 5.463 \times 8 \, [Mbps] \approx 17{,}5 \, [Gbps]$ adicionales.
+    \item El unicast, en cambio, viaja por el enlace mayorista salvo que se use una caché local. Con el 40\,\% de los abonados de la primera etapa de ambas regiones mirando contenido a demanda en la hora pico, serían $0{,}4 \times 5.468 \times 8 \, [Mbps] \approx 17{,}5 \, [Gbps]$ adicionales.
 \end{itemize}
 
 \subsection{Video overlay óptico}
@@ -24,7 +24,7 @@ La señal de televisión por radiofrecuencia (la misma grilla de canales de la r
 \textbf{Equipos y componentes adicionales:}
 \begin{itemize}
     \item Un \textbf{transmisor óptico de $1550 \, [nm]$} en el hub, que modula la grilla de RF de la cabecera existente.
-    \item \textbf{Amplificadores ópticos (EDFA) con WDM incorporado}, que combinan la señal de video con la GPON de cada puerto. Con el modelo VSOL V8816W-32P-19, de 32 salidas de $+19 \, [dBm]$ \cite{vsol_edfa}, la Región Este requiere 3 equipos para sus 92 puertos.
+    \item \textbf{Amplificadores ópticos (EDFA) con WDM incorporado}, que combinan la señal de video con la GPON de cada puerto. Con el modelo VSOL V8816W-32P-19, de 32 salidas de $+19 \, [dBm]$ \cite{vsol_edfa}, la red requiere 6 equipos (192 salidas) para sus 181 puertos PON: 3 por región.
     \item \textbf{ONT con receptor de RF} (VSOL V2802GWT), con salida coaxial para el televisor \cite{vsol_catv}.
 \end{itemize}
 
@@ -54,7 +54,7 @@ La señal de televisión por radiofrecuencia (la misma grilla de canales de la r
     \end{tabular}
 \end{table}
 
-Además, el WDM del EDFA agrega $0{,}8 \, [dB]$ al recorrido GPON, que sigue cumpliendo con un margen sobrante de $1{,}25 \, [dB]$ (\autoref{sec:presupuesto}).
+En la Región Oeste los resultados son prácticamente iguales: $-6{,}2 \, [dBm]$ en la CTO-O77.3 (splitters, conexiones y empalmes suman $23{,}2 \, [dB]$, con $4{,}60 \, [km]$ de fibra) y $+0{,}8 \, [dBm]$ en la CTO-O42.4 ($0{,}77 \, [km]$). Además, el WDM del EDFA agrega $0{,}8 \, [dB]$ al recorrido GPON, que sigue cumpliendo con un margen sobrante de $1{,}25 \, [dB]$ en el Este y $1{,}26 \, [dB]$ en el Oeste (\autoref{sec:presupuesto}).
 
 \subsection{Comparación y elección}
 \label{sec:tv_eleccion}

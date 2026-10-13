@@ -36,37 +36,37 @@ En los cables de distribución de cada sector (12 fibras) se asignan:
 \end{itemize}
 
 \subsubsection{Capacidad de los cables por tramo}
-La cantidad de fibras de cada tramo del troncal es la suma de los bloques de los clusters que alimenta, y se cubre con las capacidades comerciales del cable CFOA-SM-AS80-S TS: 24, 48, 72, 96 y 144 fibras \cite{et_as_ts}. El tramo de salida del hub (CT-01) concentra 240 fibras, por lo que se resuelve con dos cables de 144 fibras. La capacidad de cada tramo figura en la \autoref{tab:tramos}. La \autoref{tab:cantidades} resume las cantidades de cable y de cajas de la Región Este.
+La cantidad de fibras de cada tramo del troncal es la suma de los bloques de los clusters que alimenta, y se cubre con las capacidades comerciales del cable CFOA-SM-AS80-S TS: 24, 48, 72, 96 y 144 fibras \cite{et_as_ts}. Los tramos de salida del hub concentran 240 fibras en el Este (CT-01) y 192 en el Oeste (CT-O01), por lo que cada uno se resuelve con dos cables de 144 fibras. La capacidad de cada tramo figura en la \autoref{tab:tramos} y la \autoref{tab:tramos_O}. La \autoref{tab:cantidades} resume las cantidades de cable y de cajas de la red.
 
 \begin{table}[H]
     \centering
     \footnotesize
-    \caption{Cantidades de cables y cajas de la Región Este.}
+    \caption{Cantidades de cables y cajas de la red.}
     \label{tab:cantidades}
-    \begin{tabular}{|p{6.2cm}|r|r|}
+    \begin{tabular}{|p{6.0cm}|r|r|r|}
         \hline
-        \textbf{Elemento} & \textbf{Traza} & \textbf{Con 10\,\% adicional} \\
+        \textbf{Elemento} & \textbf{Este (traza)} & \textbf{Oeste (traza)} & \textbf{Total + 10\,\%} \\
         \hline
-        Troncal AS80-S TS 144 F (2 cables en CT-01) & $0{,}14 \, [km]$ & $0{,}15 \, [km]$ \\
-        Troncal AS80-S TS 96 F & $0{,}40 \, [km]$ & $0{,}44 \, [km]$ \\
-        Troncal AS80-S TS 72 F & $0{,}42 \, [km]$ & $0{,}47 \, [km]$ \\
-        Troncal AS80-S TS 48 F & $1{,}46 \, [km]$ & $1{,}61 \, [km]$ \\
-        Troncal AS80-S TS 24 F & $4{,}81 \, [km]$ & $5{,}29 \, [km]$ \\
-        Cable de cluster MINI-RA 24 F & $26{,}25 \, [km]$ & $28{,}87 \, [km]$ \\
-        Cable de distribución MINI-RA 12 F & $33{,}40 \, [km]$ & $36{,}74 \, [km]$ \\
-        Drop Fig.8 1 F, primera etapa ($2.771 \times 83 \, [m]$) & -- & $230 \, [km]$ \\
+        Troncal AS80-S TS 144 F & $0{,}14 \, [km]$ & $0{,}01 \, [km]$ & $0{,}17 \, [km]$ \\
+        Troncal AS80-S TS 96 F & $0{,}40 \, [km]$ & $1{,}99 \, [km]$ & $2{,}63 \, [km]$ \\
+        Troncal AS80-S TS 72 F & $0{,}42 \, [km]$ & $0{,}66 \, [km]$ & $1{,}19 \, [km]$ \\
+        Troncal AS80-S TS 48 F & $1{,}46 \, [km]$ & $0{,}88 \, [km]$ & $2{,}57 \, [km]$ \\
+        Troncal AS80-S TS 24 F & $4{,}81 \, [km]$ & $6{,}97 \, [km]$ & $12{,}96 \, [km]$ \\
+        Cable de cluster MINI-RA 24 F & $26{,}25 \, [km]$ & $22{,}82 \, [km]$ & $53{,}98 \, [km]$ \\
+        Cable de distribución MINI-RA 12 F & $33{,}40 \, [km]$ & $32{,}02 \, [km]$ & $71{,}96 \, [km]$ \\
+        Drop Fig.8 1 F, primera etapa & $230 \, [km]$ & $227 \, [km]$ & $457 \, [km]$ \\
         \hline
-        \textbf{Cajas y equipos pasivos} & \multicolumn{2}{r|}{\textbf{Cantidad}} \\
+        \textbf{Cajas y equipos pasivos} & \textbf{Este} & \textbf{Oeste} & \textbf{Total} \\
         \hline
-        ODF DIO B144 en el hub & \multicolumn{2}{r|}{2} \\
-        Cajas FK-CEO-4M: derivaciones D1 a D4 y cajas de distribución (12 de ellas también son CEO de cluster) & \multicolumn{2}{r|}{96} \\
-        Splitters PLC 1:4 & \multicolumn{2}{r|}{92} \\
-        CTO FK-CTO-16MC con splitter 1:16 & \multicolumn{2}{r|}{365} \\
+        ODF DIO B144 en el hub & 2 & 2 & 4 \\
+        Cajas FK-CEO-4M: derivaciones y cajas de distribución (12 por región también son CEO de cluster) & 96 & 95 & 191 \\
+        Splitters PLC 1:4 & 92 & 89 & 181 \\
+        CTO FK-CTO-16MC con splitter 1:16 & 365 & 354 & 719 \\
         \hline
     \end{tabular}
 \end{table}
 
-La longitud de cada drop se estima como el recorrido medio entre la CTO y la vivienda ($68 \, [m]$) más $15 \, [m]$ para la bajada del poste y el ingreso al domicilio. A los rulos de reserva de $20 \, [m]$ por caja de empalme y $10 \, [m]$ por CTO (\autoref{sec:trazas}) corresponden unos $2 \, [km]$ adicionales de cable de cluster y $5{,}5 \, [km]$ de cable de distribución.
+La longitud de cada drop se estima como el recorrido medio entre la CTO y la vivienda (68 y $69 \, [m]$ en cada región) más $15 \, [m]$ para la bajada del poste y el ingreso al domicilio, y se multiplica por los abonados de la primera etapa. Además, los rulos de reserva de $20 \, [m]$ por caja de empalme y $10 \, [m]$ por CTO (\autoref{sec:trazas}) agregan unos $4 \, [km]$ de cable de cluster y $11 \, [km]$ de cable de distribución en toda la red.
 
 \subsection{Puertos GPON y ancho de banda}
 \label{sec:puertos}
@@ -74,13 +74,18 @@ La longitud de cada drop se estima como el recorrido medio entre la CTO y la viv
 \subsubsection{Abonados por puerto y relación de división}
 \begin{itemize}
     \item \underline{Relación de división:} dos etapas, 1:4 en la caja de distribución y 1:16 en la CTO, que dan una relación total de \textbf{1:64}. La OLT admite hasta 1:128 \cite{vsol_olt}, pero 1:64 deja margen en el presupuesto óptico (\autoref{sec:presupuesto}) y mayor capacidad por abonado.
-    \item \underline{Abonados por puerto:} hasta 64 por diseño físico. Con 68 viviendas por sector y una adopción del 90\,\%, cada puerto atiende como máximo \textbf{61 abonados} en la cobertura final. En la primera etapa el promedio es de $2.771 / 92 \approx 30$ abonados por puerto.
+    \item \underline{Abonados por puerto:} hasta 64 por diseño físico. Con 68 viviendas por sector y una adopción del 90\,\%, cada puerto atiende como máximo \textbf{61 abonados} en la cobertura final. En la primera etapa el promedio es de unos 30 abonados por puerto en ambas regiones ($2.771 / 92$ en el Este y $2.697 / 89$ en el Oeste).
 \end{itemize}
 
 \subsubsection{Cantidad de puertos}
-Cada sector se alimenta con una fibra del troncal que se conecta a un puerto PON, por lo que la Región Este requiere \textbf{92 puertos PON tanto en la primera etapa como en la cobertura final}. Para reducir los puertos de la primera etapa podría conectarse cada puerto a dos sectores mediante un splitter 1:2 en el hub. Sin embargo, esa división adicional ($3{,}7 \, [dB]$ más un conector) haría que el recorrido de mayor pérdida no cumpla el presupuesto óptico por $1{,}95 \, [dB]$ (\autoref{sec:presupuesto}), por lo que se descarta.
+Cada sector se alimenta con una fibra del troncal que se conecta a un puerto PON, por lo que se requieren \textbf{92 puertos PON en la Región Este y 89 en la Oeste (181 en total), tanto en la primera etapa como en la cobertura final}. Para reducir los puertos de la primera etapa podría conectarse cada puerto a dos sectores mediante un splitter 1:2 en el hub. Sin embargo, esa división adicional ($3{,}7 \, [dB]$ más un conector) haría que el recorrido de mayor pérdida no cumpla el presupuesto óptico por $1{,}95 \, [dB]$ (\autoref{sec:presupuesto}), por lo que se descarta.
 
-Se instalan \textbf{6 OLT VSOL V1600G2-B} de 16 puertos (96 puertos), cada una a cargo de dos clusters: la OLT-E1 atiende C1 y C2, la OLT-E2 atiende C3 y C4, y así sucesivamente hasta la OLT-E6 con C11 y C12. Quedan 4 puertos libres.
+Se instalan \textbf{12 OLT VSOL V1600G2-B} de 16 puertos, 6 por región, y cada una queda a cargo de dos clusters:
+\begin{itemize}
+    \item \underline{Región Este:} la OLT-E1 atiende C1 y C2, la OLT-E2 atiende C3 y C4, y así sucesivamente hasta la OLT-E6 con C11 y C12. Usa 92 de 96 puertos.
+    \item \underline{Región Oeste:} la OLT-O1 atiende O1 y O2, y así sucesivamente hasta la OLT-O6 con O11 y O12. Usa 89 de 96 puertos.
+\end{itemize}
+Quedan 11 puertos libres para crecimiento.
 
 \subsubsection{Capacidad compartida y demanda en la hora de mayor tráfico}
 Cada puerto GPON ofrece $2{,}488 \, [Gbps]$ de bajada y $1{,}244 \, [Gbps]$ de subida, compartidos entre todos los abonados del sector \cite{g984_2}.
@@ -116,5 +121,3 @@ Se trata de dos conceptos distintos:
 \end{itemize}
 
 Ambas condicionan la capacidad ofrecida. La relación de división limita la capacidad garantizada en el peor caso: si los 61 abonados de un puerto transmitieran a la vez, cada uno dispondría de $2.488 / 61 \approx 41 \, [Mbps]$. La sobrecontratación define si esa limitación se percibe: con una demanda simultánea de $305 \, [Mbps]$ por puerto, un abonado puede alcanzar la velocidad de su plan, incluso el de $600 \, [Mbps]$, durante la hora pico. La sobrecontratación de $7{,}4:1$ es moderada para una red residencial. Si la demanda creciera, la capacidad se amplía usando las fibras de crecimiento para dividir sectores o para incorporar XGS-PON ($10 \, [Gbps]$) sobre la misma ODN, sin modificar la relación de división física.
-
-\pendiente{Región Oeste: fibras por tramo y puertos, a cargo de Mendes Rosa y Monja.}

@@ -1,11 +1,12 @@
 import json, math, pickle, numpy as np
+from reg import REG, NOMBRE, fn
 from shapely.geometry import shape
 from capkm import cap_kmeans, cap_assign
 VIV_CENSO=12135; ADOP_FINAL=0.90
 VIV_CTO=17; CTO_SECTOR=4; VIV_SECTOR=VIV_CTO*CTO_SECTOR      # 68 viviendas -> 61 abonados al 90 %
 M=json.load(open('manzanas.json')); urb=[m for m in M if m['tipo']=='urbana']
 dens=VIV_CENSO/sum(m['area'] for m in urb)
-E=[m for m in urb if m['reg']=='E']
+E=[m for m in urb if m['reg']==REG]
 X=[]; MZ=[]; acc=0.0
 for i,m in enumerate(E):
     p=shape(m['geom']); v=m['area']*dens; acc+=v; n=int(round(acc))-int(round(acc-v))
@@ -65,7 +66,7 @@ for ci in range(kc):
     idx=[int(i) for i in np.where(labc==ci)[0]]
     for i in idx: sectores[i]['cluster']=ci
     clusters.append({'sectores':idx,'c':SC[idx].mean(0).tolist(),'viv':sum(sectores[i]['viv'] for i in idx)})
-json.dump({'dens':dens,'H':H,'manzanas':[{'id':i,'geom':m['geom']} for i,m in enumerate(E)],'sectores':sectores,'clusters':clusters},open('diseno.json','w'))
+json.dump({'dens':dens,'H':H,'manzanas':[{'id':i,'geom':m['geom']} for i,m in enumerate(E)],'sectores':sectores,'clusters':clusters},open(fn('diseno.json'),'w'))
 v=[s['viv'] for s in sectores]; cv=[c['viv'] for s in sectores for c in s['ctos']]; dm=np.array([c['drop_max'] for s in sectores for c in s['ctos']])
-print('casas pasadas Este',H,'| sectores',ks,'| clusters',kc,'| viv/sector',min(v),max(v),'| viv/CTO',min(cv),max(cv))
+print('casas pasadas',NOMBRE,H,'| sectores',ks,'| clusters',kc,'| viv/sector',min(v),max(v),'| viv/CTO',min(cv),max(cv))
 print('drop max p50/p90/max',np.percentile(dm,[50,90,100]).round(),'| >200 m:',(dm>200).sum(),'de',len(dm),'| sect/cluster',[len(c['sectores']) for c in clusters])

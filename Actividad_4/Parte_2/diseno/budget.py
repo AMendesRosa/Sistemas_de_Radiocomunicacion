@@ -1,5 +1,6 @@
 import json, math, networkx as nx
-D=json.load(open('diseno2.json')); TB=json.load(open('tablas.json'))
+from reg import fn
+D=json.load(open(fn('diseno2.json'))); TB=json.load(open(fn('tablas.json')))
 S=D['sectores']; C=D['clusters']; r=D['recorridos']
 # Árbol troncal para contar cajas de derivación atravesadas
 T=nx.Graph(); [T.add_edge(a,b,l=l) for (a,b),f,l in D['tron_edges']]
@@ -35,4 +36,4 @@ print('B+ DS sobrante',round(1.5-w['total']+28-MS,2),'| B+ US sobrante',round(0-
 print('Con 1:2 extra en hub, DS sobrante',round(ds_w-3.7-0.3-EQ['ont_sens']-MS,2))
 # Overlay: WDM del EDFA en el paso OLT (+0.8 dB)
 print('Con WDM overlay (+0.8 dB): DS sobrante',round(ds_w-0.8-EQ['ont_sens']-MS,2),'US',round(us_w-0.8-EQ['olt_sens']-MS,2))
-json.dump(dict(peor=w,mejor=b),open('budget.json','w'))
+json.dump(dict(peor=w,mejor=b),open(fn('budget.json'),'w'))

@@ -13,12 +13,16 @@ python blocks.py     # manzanas dentro del área de cobertura (georreferenciada 
 python regions.py    # división Este/Oeste según la traza de la RP12
 python classify.py   # manzanas urbanizadas por región
 python graph.py      # grafo de calles para el ruteo
+
+# Por región: REG=E (Este) o REG=O (Oeste). DETALLE = sectores a desarrollar (índices desde 0)
+export REG=E DETALLE=27,89     # Región Este: sectores 28 y 90
+# export REG=O DETALLE=41,76   # Región Oeste: sectores O42 y O77
 python design.py     # viviendas, sectores, CTO y clusters
 python routing.py    # ruteo de cables y recorridos ópticos
 python tablas.py     # tramos del troncal y clusters
 python budget.py     # presupuesto óptico de los recorridos extremos
 python planos.py     # planos en PDF (copiarlos luego a ../Planos/)
-python gen_tex.py    # tablas LaTeX para el informe
+python gen_tex.py    # tablas LaTeX para el informe (sufijo _O para el Oeste)
 ```
 
 ## Supuestos principales (ver sección 4 del informe)
@@ -30,4 +34,4 @@ python gen_tex.py    # tablas LaTeX para el informe
 
 `geo.py` define la proyección local (origen en el hub, coordenadas en metros).
 `georef.py` contiene los puntos de control y el borde del área de cobertura digitalizado de la consigna.
-Para la Región Oeste basta con cambiar `'E'` por `'O'` en `design.py`.
+`reg.py` define la región y los prefijos de nombres (C/O para clusters, O para sectores del Oeste).

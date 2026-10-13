@@ -15,7 +15,7 @@ Las dos regiones de diseño se dividen según la traza de la ruta 12, que en la 
     \label{fig:regiones}
 \end{figure}
 
-Este informe desarrolla en detalle la \textbf{Región Este} (a cargo de Arteaga Barrera y Baccino). La \textbf{Región Oeste} es desarrollada por el otro equipo (Mendes Rosa y Monja), que comparte el hub, la conectividad mayorista y los criterios de diseño.
+Ambas regiones se diseñan con los mismos criterios y comparten el hub y la conectividad mayorista. La Región Este quedó a cargo de Arteaga Barrera y Baccino, y la Región Oeste de Mendes Rosa y Monja. Para distinguirlas, los elementos del Oeste llevan el prefijo O: clusters O1 a O12, sectores O1 a O89 y cajas como CTO-O42.1.
 
 \subsection{Casas pasadas}
 \label{sec:casas}
@@ -26,7 +26,7 @@ Según el Censo Nacional 2022, la localidad de Marcos Juárez tiene $28.706$ hab
     \item Las $12.135$ viviendas del censo se reparten en forma uniforme sobre esa superficie, lo que da una densidad de $16{,}99 \, [viv/ha]$, unas 19 viviendas por manzana típica de $1{,}1 \, [ha]$.
 \end{enumerate}
 
-Se obtienen \textbf{$6.153$ casas pasadas en la Región Este} y $5.982$ en la Región Oeste. Dentro de cada manzana, las viviendas se distribuyen a lo largo de su perímetro (frentes sobre la calle), lo que permite ubicar las cajas terminales y estimar las longitudes de acometida.
+Se obtienen \textbf{$6.153$ casas pasadas en la Región Este} y \textbf{$5.982$ en la Región Oeste}, que suman las $12.135$ del censo. Dentro de cada manzana, las viviendas se distribuyen a lo largo de su perímetro (frentes sobre la calle), lo que permite ubicar las cajas terminales y estimar las longitudes de acometida.
 
 El supuesto de densidad uniforme subestima las viviendas del centro, más denso, y sobreestima las de la periferia. Además, el censo municipal de 2024 informó $31.365$ habitantes \cite{indec_censo}, un 9\,\% más que el censo nacional. Ambos efectos se absorben con la reserva de capacidad prevista en cada nivel de la red (\autoref{sec:crecimiento}), y el conteo debe verificarse en campo (\autoref{sec:verificacion}).
 
@@ -34,15 +34,15 @@ El supuesto de densidad uniforme subestima las viviendas del centro, más denso,
 \label{sec:abonados}
 \begin{table}[H]
     \centering
-    \caption{Casas pasadas y abonados previstos en la Región Este.}
+    \caption{Casas pasadas y abonados previstos por región.}
     \label{tab:abonados}
-    \begin{tabular}{|l|c|r|}
+    \begin{tabular}{|l|c|r|r|r|}
         \hline
-        \textbf{Concepto} & \textbf{Adopción} & \textbf{Región Este} \\
+        \textbf{Concepto} & \textbf{Adopción} & \textbf{Este} & \textbf{Oeste} & \textbf{Total} \\
         \hline
-        Casas pasadas & -- & $6.153$ \\
-        Abonados en la primera etapa (año 1) & 45\,\% & $2.771$ \\
-        Abonados en la cobertura final & 90\,\% & $5.541$ \\
+        Casas pasadas & -- & $6.153$ & $5.982$ & $12.135$ \\
+        Abonados en la primera etapa (año 1) & 45\,\% & $2.771$ & $2.697$ & $5.468$ \\
+        Abonados en la cobertura final & 90\,\% & $5.541$ & $5.388$ & $10.929$ \\
         \hline
     \end{tabular}
 \end{table}
@@ -70,9 +70,7 @@ La COYSPU no publica sus planes vigentes \cite{coyspu}, por lo que se adoptan lo
     \item \underline{Infraestructura dimensionada para la cobertura final:} toda la red pasiva (cables, cajas y splitters) se construye en la primera etapa para atender al 90\,\% de las casas pasadas. En las etapas siguientes solo se agregan acometidas, ONT y, si hace falta, módulos de la OLT.
     \item \underline{Cajas terminales:} cada CTO de 16 salidas atiende como máximo 17 viviendas, es decir, 16 abonados al 90\,\%.
     \item \underline{Fibras de crecimiento:} cada sector tiene reservada en el troncal una segunda fibra, además de la que se usa. Permite dividir un sector cuando su demanda crezca, o hacer convivir una tecnología de mayor capacidad (XGS-PON) sobre la misma ODN.
-    \item \underline{Fibras de reserva:} en cada cable se dejan fibras libres para reparaciones y reasignaciones: entre 6 y 7 de 24 en los cables de cluster y 4 de 12 en los de distribución.
+    \item \underline{Fibras de reserva:} en cada cable se dejan fibras libres para reparaciones y reasignaciones: 6 u 8 de 24 en los cables de cluster y 4 de 12 en los de distribución.
     \item \underline{Otras aplicaciones:} dos fibras por cluster para enlaces punto a punto (clientes corporativos, edificios municipales, cámaras de seguridad o radiobases).
     \item \underline{Capacidad activa:} las OLT tienen puertos de reserva, y el ancho de banda mayorista se dimensiona con un margen de crecimiento del 30\,\% (\autoref{sec:mayorista}).
 \end{itemize}
-
-\pendiente{Región Oeste: casas pasadas, abonados y supuestos propios, a cargo de Mendes Rosa y Monja. La estimación de este informe para el Oeste ($5.982$ viviendas) se usa solo para la conectividad mayorista.}
