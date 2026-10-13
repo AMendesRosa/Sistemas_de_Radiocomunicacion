@@ -22,7 +22,7 @@
 \pgfplotsset{compat=1.18}
 \usetikzlibrary{arrows.meta, decorations.pathreplacing, calc, positioning}
 \usepackage[style=ieee, backend=bibtex]{biblatex}
-\addbibresource{bibliografía.bib}
+\addbibresource{bibliografia.bib}
 \graphicspath{{Figuras/}}
 \onehalfspacing
 
@@ -51,7 +51,7 @@
     \large Facultad de Ciencias Exactas, Físicas y Naturales \\ 
     \vspace{40pt}
     \large Sistemas de Radiocomunicación \\ [0.2cm]
-    \large Trabajo Práctico N°4 \\
+    \large Trabajo Práctico N°4: Parte 1\\
     \vspace{60pt}
     \LARGE Enlaces Punto a Punto con Fibra Óptica\\
     \vspace{60pt}
@@ -59,10 +59,11 @@
         \centering
         \begin{tabular}{ll}
             \multicolumn{1}{c}{Nombre} & \multicolumn{1}{c}{DNI} \\
-            Mendes Rosa, Agustín                & 44.517.201 \\
-            Monja, Ernesto Joaquín              & 43.873.728 \\
             Arteaga Barrera, Cristian Eduardo   & 95.159.096 \\
-            Baccino, Luca                       & 45.328.380 
+            Baccino, Luca                       & 45.328.380 \\
+            Mendes Rosa, Agustín                & 44.517.201 \\
+            Monja, Ernesto Joaquín              & 43.873.728 
+            
         \end{tabular}
     \end{table}
     \vspace{20pt}
@@ -124,7 +125,7 @@ La selección de componentes combinó criterios técnicos y económicos. El tran
 
 La fibra concentra el $60 \, [\%]$ de las pérdidas, por lo que la distancia es la variable que más afecta al presupuesto. Al duplicarla a $16 \, [km]$, el presupuesto de potencia aún cerraría, pero el transceptor quedaría fuera de su alcance especificado y la dispersión podría empezar a limitar el enlace; la solución más conveniente es un módulo de $40 \, [km]$ con láser DFB, con un sobrecosto marginal frente al de la infraestructura. La ventana de $1550 \, [nm]$ se justifica en enlaces largos, sobre una sola fibra o con multiplexación, pero en este enlace sólo agregaría costo y obligaría a usar atenuadores.
 
-Por último, el margen de seguridad es lo que permite que el enlace siga funcionando frente al envejecimiento, las reparaciones, la suciedad de los conectores y las variaciones de temperatura, y su cumplimiento debe verificarse en campo con inspección de conectores, OLTS, OTDR y pruebas de tasa de error, dejando las mediciones como referencia para el mantenimiento.
+Por último, el margen de seguridad es lo que permite que el enlace siga funcionando frente al envejecimiento, las reparaciones, la suciedad de los conectores y las variaciones de temperatura, y su cumplimiento debe verificarse en campo con inspección de conectores, OLTS y OTDR, dejando las mediciones como referencia para el mantenimiento.
 
 
 

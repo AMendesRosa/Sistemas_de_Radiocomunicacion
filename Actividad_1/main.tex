@@ -1,23 +1,24 @@
 \documentclass[12pt]{article}
 \usepackage[utf8]{inputenc}
-\usepackage{graphicx}
+\usepackage[T1]{fontenc}
 \usepackage[spanish,es-tabla]{babel}
-\usepackage{amsmath}
+\usepackage{csquotes}
 \usepackage[a4paper,margin=1in]{geometry}
-\usepackage{subcaption}
-\usepackage{amssymb}
-\usepackage[hidelinks]{hyperref}
-\usepackage{mathtools}
+\usepackage{graphicx}
+\usepackage{amsmath}
 \usepackage[table,xcdraw]{xcolor}
-\usepackage[style=ieee, backend=biber]{biblatex}
-\usepackage{enumitem}
 \usepackage{array}
 \usepackage{longtable}
-\usepackage{csquotes}
-\usepackage{circuitikz}
-\graphicspath{{Figuras/}}           
+\usepackage{pdflscape}
 \usepackage{float}
+\usepackage{tikz}
+\usepackage{siunitx}
 \usepackage{setspace}
+\usepackage{hyperref}
+\usepackage[style=ieee, backend=biber]{biblatex}
+
+\graphicspath{{Figuras/}}
+\addbibresource{bibliografia.bib}
 \onehalfspacing
 
 \addbibresource{bibliografía.bib}   
@@ -143,7 +144,7 @@ La \textit{UIT} está conformada por $193$ naciones o estados miembros, agrupado
     \label{fig:fig_2}
 \end{figure}
 
-Esta división se realizó con el fin de planificar, atribuir y asignar las bandas de frecuencias del espectro radioeléctrico, de manera tal que todos los países puedan compartir este recurso natural no renovable en forma equitativa y armonizada. \cite[p. 4-5]{b1}
+Esta división se realizó con el fin de planificar, atribuir y asignar las bandas de frecuencias del espectro radioeléctrico, de manera tal que todos los países puedan compartir este recurso natural no renovable en forma equitativa y armonizada. \cite[p. 8]{b1}
 
 Además, cuenta con más de $700$ miembros de organizaciones no gubernamentales, entre ellos las Universidades. Entre los actores relevantes del sector privado y académico se destacan corporaciones tecnológicas y operadores globales (como Ericsson, Huawei, Nokia, Microsoft, Telefónica e Intelsat), organismos de la industria de las telecomunicaciones (como la GSMA o el IEEE), y diversas casas de estudios superiores y centros de investigación a nivel mundial, incluyendo representaciones de universidades argentinas que colaboran en el desarrollo de nuevos estándares tecnológicos. \cite{b4}
 
@@ -225,7 +226,7 @@ A nivel nacional la Resolución $008/15$ dejó sin efecto las atribuciones en la
     \label{fig:fig_3}
 \end{figure}
 
-A nivel regional, la gestión del ''Dividendo Digital'' ha buscado la armonización del espectro, adoptando mayoritariamente la banda de $700 \, [MHz]$ (conocida como canalización \textit{APT700}) para el despliegue de servicios móviles de cuarta generación. A continuación, se detallan $2$ ejemplos sudamericanos:
+A nivel regional, la gestión del ``Dividendo Digital'' ha buscado la armonización del espectro, adoptando mayoritariamente la banda de $700 \, [MHz]$ (conocida como canalización \textit{APT700}) para el despliegue de servicios móviles de cuarta generación. A continuación, se detallan $2$ ejemplos sudamericanos:
 \begin{itemize}
     \item \underline{Ecuador:} El organismo regulador, la Agencia de Regulación y Control de las Telecomunicaciones (\textit{ARCOTEL}), dispuso la liberación de la banda de $700 \, [MHz]$ (específicamente el segmento comprendido entre $698$ y $806 \, [MHz]$) tras el apagón analógico. Este espectro fue atribuido al Servicio Móvil Avanzado (\textit{SMA}) para expandir la cobertura de \textit{4G LTE}, especialmente en zonas rurales debido a la excelente propagación de estas frecuencias. \cite{b5.1}
     
@@ -238,7 +239,7 @@ A nivel regional, la gestión del ''Dividendo Digital'' ha buscado la armonizaci
 \label{sec_2.3.2}
 Se define como un conjunto de servicios de \textit{TICs} que el Estado debe garantizar a toda la población con determinada calidad y precios accesibles, sin importar la geografía o la condición socioeconómica.
 
-Se sostiene mediante un fideicomiso (o fondo fiduciario) al que aportan los licenciatarios de servicios de telecomunicaciones en una cantidad equivalente al $1\%$ de los ingresos totales devengados por la prestación de los servicios de \textit{TIC}. Los fondos del Servicio Universal se aplican por medio de programas específicos, definidos por \textit{ENACOM}. \cite{b6}
+Se sostiene mediante un fideicomiso (o fondo fiduciario) al que aportan los licenciatarios de servicios de telecomunicaciones en una cantidad equivalente al $1\%$ de los ingresos totales devengados por la prestación de los servicios de \textit{TIC} netos de impuestos y tasas. Los fondos del Servicio Universal se aplican por medio de programas específicos, definidos por \textit{ENACOM}. \cite{b6}
 
 Se aprobó un nuevo régimen en septiembre de 2025, el Reglamento General del Servicio Universal, derogando el marco regulatorio vigente desde 2020. Las modificaciones que destacan se enumeran a continuación:
 
@@ -349,7 +350,7 @@ En la \autoref{tab:tab_1} se resumen las principales bandas de uso libre:
 
     \textbf{27 MHz (HF)} & 
         Banda Ciudadana (CB) / ISM & 
-        Comunicaciones de voz punto a punto de corto alcance y radioafición. \\ \hline
+        Comunicaciones de voz punto a punto de corto alcance. \\ \hline
 
     \textbf{433/915 MHz (UHF)} & 
         Sub-GHz / SRD & 
@@ -379,7 +380,7 @@ En la \autoref{tab:tab_1} se resumen las principales bandas de uso libre:
 \label{sec_2.4}
 \subsubsection{Principales puntos de la Ley 27.078}
 \label{sec_2.4.1}
-La Ley 27.078, sancionada el $18$ de diciembre del $2014$ y también conocida como “Ley Argentina Digital” o “Ley de las Telecomunicaciones”, declara como interés público el desarrollo de las \textit{TICs}, las Telecomunicaciones, y sus recursos asociados, estableciendo y garantizando la completa neutralidad de las redes. \cite[p. 21]{b1}
+La Ley 27.078, sancionada el $18$ de diciembre del $2014$ y también conocida como  ``Ley Argentina Digital'' o ``Ley de las Telecomunicaciones'', declara como interés público el desarrollo de las \textit{TICs}, las Telecomunicaciones, y sus recursos asociados, estableciendo y garantizando la completa neutralidad de las redes. \cite[p. 21]{b1}
 
 Los puntos principales de la misma son:
 \begin{itemize}
@@ -517,6 +518,18 @@ En este apartado, se presenta un análisis detallado del uso del espectro radioe
 \end{longtable}
 \endgroup
 
+\subsubsection{Bandas soportadas por un teléfono real (GSMArena)}
+\label{sec_2.5.1}
+Para contrastar el servicio de telefonía $4$G con un equipo real, se consultó en \textit{GSMArena} el modelo Google Pixel 10 Pro, cuya ficha de bandas se muestra en la \autoref{fig:fig_4}.
+
+\begin{figure}[H]
+    \centering
+    \fbox{\includegraphics[width=0.9\linewidth]{pixel.png}}
+    \caption{Bandas de frecuencia del Google Pixel 10 Pro.}
+    \label{fig:fig_4}
+\end{figure}
+
+Las bandas de $4$G utilizadas en Argentina son B2, B4 (la fundamental), B7, B8 y B28 \cite[p. 49]{b1}, y este teléfono soporta todas.
 
 \section{Conclusiones}
 \label{sec_3}

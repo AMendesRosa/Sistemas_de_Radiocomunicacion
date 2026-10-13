@@ -130,7 +130,7 @@
       \begin{itemize}
         \item SFP 1000BASE-LX, 1310 nm, fibra monomodo
         \item Alcance de \textbf{10 km}, conector LC dúplex
-        \item Monitoreo digital (DOM), $-40$ a $85\,^\circ$C
+        \item $-40$ a $85\,^\circ$C
       \end{itemize}
       \vspace{0.1cm}
       \begin{tabular}{lc}
@@ -148,7 +148,7 @@
     \end{column}
     \begin{column}{0.48\textwidth}
       \centering
-      \textbf{Precios de referencia (FS.com)}\\[0.1cm]
+      \textbf{Precios de referencia}\\[0.1cm]
       \small
       \begin{tabular}{lcc}
         \toprule
@@ -173,13 +173,13 @@
       \begin{itemize}
         \item Monomodo estándar, bajo pico de agua
         \item Fibra de uso general en redes troncales
-        \item 12 a 17 US\$/km (abril 2026)
+        \item 12 a 17 US\$/km
       \end{itemize}
     \end{column}
     \begin{column}{0.5\textwidth}
       \textbf{G.657.A}
       \begin{itemize}
-        \item Insensible a curvaturas (radio de 10 / 7,5 mm)
+        \item Insensible a curvaturas pronunciadas
         \item Pensada para instalaciones internas y FTTH
         \item 16,5 a 33 US\$/km (A1 y A2)
       \end{itemize}
@@ -187,7 +187,7 @@
   \end{columns}
   \vspace{0.4cm}
   \begin{block}{Elección: G.652.D}
-    Atenuación similar a 1310 nm. En un tramo troncal en ducto los radios de curvatura son amplios, así que la ventaja de la G.657 no justifica su mayor costo. Además, es la fibra recomendada por la cátedra.
+    Ambas tienen una atenuación similar en 1310 nm. En un tramo troncal en ducto los radios de curvatura son amplios, así que la ventaja de la G.657 no justifica su mayor costo.
   \end{block}
 \end{frame}
 
@@ -198,7 +198,7 @@
         \item Dieléctrico, para \textbf{ductos}, núcleo totalmente seco
         \item Capa de fibra de vidrio contra \textbf{roedores}
         \item \textbf{4 fibras}: 2 en uso y 2 de reserva
-        \item Diámetro de 12,4 mm, carga de instalación de 2000 N
+        \item Diámetro de 12,4 mm
         \item Bobinas de \textbf{4000 m}: los 8 km requieren empalmes intermedios
       \end{itemize}
     \end{column}
@@ -208,7 +208,7 @@
         $\alpha = 0{,}38$ dB/km a 1310 nm
       \end{block}
       \small
-      La ET del cable remite a la especificación de la fibra. Se usa la atenuación máxima de fibra G.652.D cableada de Lightera, que coincide con la de Prysmian para un cable equivalente.
+      Se usa la atenuación máxima de fibra G.652.D cableada de Lightera.
     \end{column}
   \end{columns}
   \vspace{0.3cm}
@@ -232,7 +232,6 @@
         \bottomrule
       \end{tabular}\\[0.15cm]
       \normalsize
-      Empalmes: 1 en cada ODF + 2 en las cajas intermedias (IP68).\\[0.05cm]
       \footnotesize Valores típicos del apunte de la cátedra.
     \end{column}
     \begin{column}{0.48\textwidth}
@@ -263,7 +262,6 @@
       \begin{itemize}
         \item Se calcula con $P_{t,min}$ y la atenuación máxima de la fibra (peor caso).
         \item Margen de seguridad $M_s = 3$ dB: mínimo del rango de 3 a 6 dB recomendado por la cátedra.
-        \item $M_s$ no se resta en $P_r$: es una reserva que se compara con $P_r - S_r$.
       \end{itemize}
     \end{column}
   \end{columns}
@@ -310,11 +308,11 @@
         \toprule
         $P_{t,min}$ & $-9{,}50$ dBm \\
         $A_{total}$ & $5{,}04$ dB \\
-        $P_{r,min}$ & $\mathbf{-14{,}54}$ \textbf{dBm} \\
+        $P_{r,min}$ & $-14{,}54$ dBm \\
         $S_r$ & $-24{,}00$ dBm \\
         $P_{r,min} - S_r$ & $9{,}46$ dB \\
         $M_s$ & $3{,}00$ dB \\
-        \textbf{Margen sobrante} & $\mathbf{6{,}46}$ \textbf{dB} \\
+        \textbf{Margen sobrante} & $6{,}46$ dB \\
         \bottomrule
       \end{tabular}
     \end{column}
@@ -357,60 +355,128 @@
 \begin{frame}{Esquema del enlace (una fibra, A $\rightarrow$ B)}
   \centering
   \resizebox{\textwidth}{!}{%
-  \begin{tikzpicture}[font=\footnotesize,
-      equipo/.style={draw, thick, rounded corners=2pt, minimum width=1.7cm, minimum height=1.3cm, align=center, fill=blue!8},
-      odf/.style={draw, thick, minimum width=3.0cm, minimum height=1.7cm, fill=gray!12},
-      caja/.style={draw, thick, rounded corners=5pt, minimum width=1.2cm, minimum height=0.8cm, fill=orange!15},
-      empalme/.style={circle, fill=red!75!black, inner sep=1.7pt},
-      conector/.style={draw, thick, fill=white, minimum width=0.24cm, minimum height=0.24cm, inner sep=0pt},
-      perdida/.style={font=\scriptsize\bfseries, text=red!75!black}]
+    \begin{tikzpicture}[font=\footnotesize,
+        router/.style={draw, thick, rounded corners=2pt, minimum width=2.6cm, minimum height=2.0cm, fill=blue!4},
+        sfp/.style={draw, thick, rounded corners=2pt, minimum width=1.4cm, minimum height=1.2cm, align=center, fill=blue!15},
+        odf/.style={draw, thick, minimum width=4.4cm, minimum height=2.0cm, fill=gray!12},
+        adaptador/.style={draw, thick, minimum width=1.4cm, minimum height=0.5cm, fill=gray!35},
+        caja/.style={draw, thick, rounded corners=5pt, minimum width=1.2cm, minimum height=0.8cm, fill=orange!15},
+        empalme/.style={circle, fill=red!75!black, inner sep=1.7pt},
+        conector/.style={draw, thick, fill=white, minimum width=0.24cm, minimum height=0.24cm, inner sep=0pt},
+        perdida/.style={font=\scriptsize\bfseries, text=red!75!black},
+        nombre/.style={font=\scriptsize, text=black!70},
+        potencia/.style={draw=blue!60!black, thick, rounded corners=2pt, fill=white, font=\scriptsize, align=left, inner sep=3pt},
+        evento/.style={circle, draw=black!60, fill=white, font=\tiny, inner sep=0.6pt, minimum size=0.36cm}]
 
-      \node[equipo] (RA) at (0.85,0) {Router A\\[1pt]\textbf{SFP TX}};
-      \node[odf] (OA) at (4.8,0) {};
-      \node[font=\footnotesize\bfseries, above] at (OA.north) {ODF A};
-      \node[odf] (OB) at (14.2,0) {};
-      \node[font=\footnotesize\bfseries, above] at (OB.north) {ODF B};
-      \node[equipo] (RB) at (18.15,0) {Router B\\[1pt]\textbf{SFP RX}};
+        % ---------- Sitio A: Router, SFP y ODF ----------
+        \node[router] (RA) at (1.3,0) {};
+        \node[font=\footnotesize\bfseries, above] at (RA.north) {Router A};
+        \node[sfp] (SA) at (1.9,0) {\textbf{SFP}\\[1pt]TX};
 
-      \draw[line width=1.6pt, blue!60!black] (RA.east) -- (3.7,0);
-      \draw[line width=1.6pt, yellow!55!black] (3.7,0) -- (5.9,0);
-      \draw[line width=2.6pt, black!65] (5.9,0) -- (13.1,0);
-      \draw[line width=1.6pt, yellow!55!black] (13.1,0) -- (15.3,0);
-      \draw[line width=1.6pt, blue!60!black] (15.3,0) -- (RB.west);
+        \node[odf] (OA) at (6.6,0) {};
+        \node[font=\footnotesize\bfseries, above] at (OA.north) {ODF A};
 
-      \node[caja] (C1) at (8.3,0) {};
-      \node[font=\footnotesize\bfseries, above=1pt] at (C1.north) {Caja 1};
-      \node[caja] (C2) at (10.7,0) {};
-      \node[font=\footnotesize\bfseries, above=1pt] at (C2.north) {Caja 2};
+        % ---------- Sitio B: ODF, SFP y Router ----------
+        \node[odf] (OB) at (16.6,0) {};
+        \node[font=\footnotesize\bfseries, above] at (OB.north) {ODF B};
+        \node[router] (RB) at (21.9,0) {};
+        \node[font=\footnotesize\bfseries, above] at (RB.north) {Router B};
+        \node[sfp] (SB) at (21.3,0) {\textbf{SFP}\\[1pt]RX};
 
-      \node[conector] at (RA.east) {};
-      \node[conector] at (3.7,0) {};
-      \node[empalme] at (5.9,0) {};
-      \node[empalme] at (8.3,0) {};
-      \node[empalme] at (10.7,0) {};
-      \node[empalme] at (13.1,0) {};
-      \node[conector] at (15.3,0) {};
-      \node[conector] at (RB.west) {};
+        % ---------- Potencias del SFP TX y del SFP RX ----------
+        \node[potencia, anchor=north] (PA) at (1.9,-1.25) {%
+            $P_{t,\mathrm{min}} = -9{,}5$ dBm\\
+            $P_{t,\mathrm{max}} = -3$ dBm};
+        \draw[-{Stealth}, thick, blue!60!black] (SA.south) -- (PA.north);
 
-      \foreach \x/\p/\t in {2.7/0{,}4/Patchcord, 3.7/0{,}2/Adapt., 4.8/0{,}2/Pigtail, 5.9/0{,}1/Empalme,
-                            7.1/1{,}01/Tramo 1, 9.5/1{,}01/Tramo 2, 11.9/1{,}01/Tramo 3,
-                            13.1/0{,}1/Empalme, 14.2/0{,}2/Pigtail, 15.3/0{,}2/Adapt., 16.3/0{,}4/Patchcord}{
-          \node[perdida] at (\x,0.4) {$\p$};
-          \node[font=\tiny, text=black!75] at (\x,-0.42) {\t};
-      }
-      \foreach \x in {8.3, 10.7}{
-          \node[perdida] at (\x,-0.62) {$0{,}1$};
-      }
+        \node[potencia, anchor=north] (PB) at (21.3,-1.25) {%
+            $P_{r,\mathrm{min}} = -14{,}54$ dBm\\
+            $P_{r,\mathrm{max}} = -8{,}04$ dBm\\
+            $S_r = -24$ dBm};
+        \draw[{Stealth}-, thick, blue!60!black] (SB.south) -- (PB.north);
 
-      \draw[-{Stealth}, thick] (5.9,-1.45) -- (13.7,-1.45) node[right, font=\scriptsize] {$d$ [km]};
-      \foreach \x/\d in {5.9/0{,}00, 8.3/2{,}67, 10.7/5{,}33, 13.1/8{,}00}{
-          \draw[thick] (\x,-1.35) -- (\x,-1.55);
-          \node[below, font=\scriptsize] at (\x,-1.55) {$\d$};
-      }
-      \foreach \x in {5.9, 13.1}{ \draw[densely dotted, black!50] (\x,-1.35) -- (\x,-0.65); }
-      \foreach \x in {8.3, 10.7}{ \draw[densely dotted, black!50] (\x,-1.35) -- (\x,-0.85); }
-  \end{tikzpicture}%
-  }
+        % ---------- Fibras: patchcord (azul), pigtail (amarillo) y cable (gris) ----------
+        \draw[line width=1.6pt, blue!60!black] (2.6,0) -- (5.0,0);     % patchcord A
+        \draw[line width=1.6pt, yellow!55!black] (6.4,0) -- (8.0,0);   % pigtail A
+        \draw[line width=2.6pt, black!65] (8.0,0) -- (15.2,0);         % cable exterior
+        \draw[line width=1.6pt, yellow!55!black] (15.2,0) -- (16.8,0); % pigtail B
+        \draw[line width=1.6pt, blue!60!black] (18.2,0) -- (20.6,0);   % patchcord B
+
+        % ---------- Adaptadores de panel (acoplan patchcord con pigtail) ----------
+        \node[adaptador] (AA) at (5.7,0) {};
+        \node[adaptador] (AB) at (17.5,0) {};
+
+        % ---------- Cajas de empalme ----------
+        \node[caja] (C1) at (10.4,0) {};
+        \node[font=\footnotesize\bfseries, above=1pt] at (C1.north) {Caja 1};
+        \node[caja] (C2) at (12.8,0) {};
+        \node[font=\footnotesize\bfseries, above=1pt] at (C2.north) {Caja 2};
+
+        % ---------- Conectores LC/UPC ----------
+        \node[conector] at (2.6,0) {};
+        \node[conector] at (5.0,0) {};
+        \node[conector] at (6.4,0) {};
+        \node[conector] at (16.8,0) {};
+        \node[conector] at (18.2,0) {};
+        \node[conector] at (20.6,0) {};
+
+        % ---------- Empalmes por fusión (pigtail - cable) ----------
+        \node[empalme] at (8.0,0) {};
+        \node[empalme] at (10.4,0) {};
+        \node[empalme] at (12.8,0) {};
+        \node[empalme] at (15.2,0) {};
+
+        % ---------- Nombres de los elementos del ODF ----------
+        \node[nombre] at (3.8,0.75) {Patchcord};
+        \node[nombre] at (5.7,0.75) {Adaptador};
+        \node[nombre] at (7.2,0.75) {Pigtail};
+        \node[nombre] at (16.0,0.75) {Pigtail};
+        \node[nombre] at (17.5,0.75) {Adaptador};
+        \node[nombre] at (19.4,0.75) {Patchcord};
+
+        % ---------- Pérdida (arriba) y número de evento (abajo) ----------
+        \foreach \x/\p/\n in {3.8/0{,}4/1, 5.7/0{,}2/2, 7.2/0{,}2/3, 8.0/0{,}1/4,
+                              9.2/1{,}01/5, 11.6/1{,}01/7, 14.0/1{,}01/9,
+                              15.2/0{,}1/10, 16.0/0{,}2/11, 17.5/0{,}2/12, 19.4/0{,}4/13}{
+            \node[perdida] at (\x,0.4) {$\p$};
+            \node[evento] at (\x,-0.45) {\n};
+        }
+        \foreach \x/\n in {10.4/6, 12.8/8}{
+            \node[perdida] at (\x,-0.62) {$0{,}1$};
+            \node[evento] at (\x+0.45,-0.62) {\n};
+        }
+
+        % ---------- Eje de distancia acumulada ----------
+        \draw[-{Stealth}, thick] (8.0,-1.45) -- (15.8,-1.45) node[right, font=\scriptsize] {$d$ [km]};
+        \foreach \x/\d in {8.0/0{,}00, 10.4/2{,}67, 12.8/5{,}33, 15.2/8{,}00}{
+            \draw[thick] (\x,-1.35) -- (\x,-1.55);
+            \node[below, font=\scriptsize] at (\x,-1.55) {$\d$};
+        }
+        \foreach \x in {8.0, 15.2}{
+            \draw[densely dotted, black!50] (\x,-1.35) -- (\x,-0.7);
+        }
+        \foreach \x in {10.4, 12.8}{
+            \draw[densely dotted, black!50] (\x,-1.35) -- (\x,-0.85);
+        }
+
+        % ---------- Referencias ----------
+        \node[conector] at (0.5,-3.7) {};
+        \node[right, font=\scriptsize] at (0.65,-3.7) {Conector LC/UPC};
+        \node[adaptador, minimum width=0.6cm, minimum height=0.3cm] at (5.0,-3.7) {};
+        \node[right, font=\scriptsize] at (5.4,-3.7) {Adaptador de panel LC/UPC};
+        \node[empalme] at (10.6,-3.7) {};
+        \node[right, font=\scriptsize] at (10.75,-3.7) {Empalme por fusión};
+        \node[evento] at (15.5,-3.7) {n};
+        \node[right, font=\scriptsize] at (15.7,-3.7) {N° de evento};
+
+        \draw[line width=1.6pt, blue!60!black] (0.2,-4.4) -- (0.8,-4.4);
+        \node[right, font=\scriptsize] at (0.8,-4.4) {Patchcord LC/UPC};
+        \draw[line width=1.6pt, yellow!55!black] (5.0,-4.4) -- (5.6,-4.4);
+        \node[right, font=\scriptsize] at (5.7,-4.4) {Pigtail LC/UPC};
+        \draw[line width=2.6pt, black!65] (10.3,-4.4) -- (10.9,-4.4);
+        \node[right, font=\scriptsize] at (11.0,-4.4) {Cable CFOA-SM-DDR-S 04F};
+    \end{tikzpicture}%
+    }
 
   \vspace{0.4cm}
   \small
@@ -483,18 +549,19 @@
 \section[Análisis]{Preguntas de análisis}
 \begin{frame}{D.1: ¿Qué pasa si se duplica la distancia a 16 km?}
   \begin{columns}[T]
-    \begin{column}{0.48\textwidth}
+    \begin{column}{0.5\textwidth}
       \begin{itemize}
-        \item Fibra: $16 \times 0{,}38 = 6{,}08$ dB
-        \item 4 bobinas $\Rightarrow$ 5 empalmes: $0{,}5$ dB
-        \item $A_{total} = 8{,}18$ dB, $P_{r,min} = -17{,}68$ dBm
-        \item Margen sobrante: $14{,}5 - 8{,}18 - 3 = 3{,}32$ dB
+        \item Pérdidas en la fibra:\\ $16 \times 0{,}38 = 6{,}08$ dB
+        \item Más bobinas necesarias (4) $\Rightarrow$ 5 empalmes: $0{,}5$ dB
+        \item $A_{total} = 8{,}18$ dB 
+        \item $P_{r,min} = -17{,}68$ dBm
+        \item Margen sobrante:\\ $14{,}5 - 8{,}18 - 3 = 3{,}32$ dB
       \end{itemize}
       \vspace{0.1cm}
       \textbf{La potencia alcanza, pero:}
       \begin{itemize}
         \item El SFP está especificado para \textbf{10 km}.
-        \item Dispersión: $B \cdot \Delta\tau = 0{,}42 > 0{,}25$.
+        \item Peor dispersión:\\ $B \cdot \Delta\tau = 0{,}42 > 0{,}25$.
       \end{itemize}
     \end{column}
     \begin{column}{0.52\textwidth}
@@ -523,10 +590,9 @@
     \begin{column}{0.5\textwidth}
       \textbf{Ventajas:} atenuación de $0{,}25$ dB/km (34\,\% menos que a 1310 nm)
       \begin{itemize}
-        \item Enlaces largos limitados por atenuación (ZX: 80 km)
-        \item Una sola fibra (BiDi 1310/1550)
+        \item Enlaces largos limitados por atenuación
+        \item Una sola fibra (Bidireccional 1310/1550)
         \item Multiplexación CWDM/DWDM
-        \item Amplificación con EDFA ($>$ 80 a 100 km)
       \end{itemize}
       \textbf{Desventajas}
       \begin{itemize}
@@ -537,7 +603,6 @@
     \end{column}
     \begin{column}{0.5\textwidth}
       \begin{block}{En este enlace de 8 km: no conviene}
-        Con un módulo ZX:
         \begin{itemize}
           \item $A_{total} = 8(0{,}25) + 1{,}6 + 0{,}4 = 4{,}0$ dB
           \item $P_{r,max} = +5 - 4{,}0 = +1$ dBm
@@ -583,13 +648,8 @@
     VFL (650 nm) & Continuidad, roturas y curvaturas & Continuidad en las 4 fibras \\
     OLTS (fuente + medidor) & Pérdida total por fibra & $\leq 5{,}04$ dB \\
     OTDR + bobina de lanzamiento & Ubicación y pérdida de cada evento & $\leq 0{,}1$ dB/empalme, $\leq 0{,}5$ dB/conector \\
-    DOM del SFP & Potencia TX/RX en operación & $P_r$ entre $-14{,}54$ y $-8{,}04$ dBm \\
-    Analizador de BER & Integridad de los datos a 1 Gbps & BER $< 10^{-12}$ \\
     \bottomrule
   \end{tabular}
-
-  \vspace{0.3cm}
-  \normalsize Las trazas del OTDR quedan como referencia para el mantenimiento.
 \end{frame}
 
 % =====================================================
