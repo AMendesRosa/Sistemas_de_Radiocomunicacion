@@ -1,0 +1,121 @@
+\documentclass[12pt]{article}
+
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,es-tabla]{babel}
+\usepackage{graphicx}
+\usepackage{circuitikz}
+\usepackage{amsmath}
+\usepackage{subcaption}
+\usepackage{amssymb}
+\usepackage[hidelinks]{hyperref}
+\usepackage{mathtools}
+\usepackage{enumitem}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{multirow}
+\usepackage{csquotes}
+\usepackage{float}
+\usepackage{setspace}
+\usepackage{pdflscape}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usetikzlibrary{arrows.meta, decorations.pathreplacing, calc, positioning}
+\usepackage[style=ieee, backend=bibtex]{biblatex}
+\addbibresource{bibliografia.bib}
+\graphicspath{{Figuras/}{Planos/}}
+\onehalfspacing
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    citecolor=blue,
+    urlcolor=blue,
+    filecolor=blue
+}
+
+% Marca en rojo lo que falta completar. Para la entrega, buscar "\pendiente" y verificar que no quede ninguno.
+\newcommand{\pendiente}[1]{\textcolor{red}{\textit{[Pendiente: #1]}}}
+
+\begin{document}
+\renewcommand{\figureautorefname}{Fig.}
+\renewcommand{\tableautorefname}{Tab.}
+\renewcommand{\equationautorefname}{Ec.}
+
+\begin{titlepage}
+\thispagestyle{empty}
+\begin{tikzpicture}[remember picture,overlay]
+    \node[opacity=0.2,anchor=center] at (current page.center)
+        {\includegraphics[width=0.9\paperwidth]{decoracion_a.png}};
+\end{tikzpicture}
+\begin{center}
+    \includegraphics[width=15cm]{unc_fcefyn_logo.png} \\ [0.5cm]
+    \LARGE Universidad Nacional de Córdoba \\ [0.5cm]
+    \large Facultad de Ciencias Exactas, Físicas y Naturales \\
+    \vspace{40pt}
+    \large Sistemas de Radiocomunicación \\ [0.2cm]
+    \large Trabajo Práctico N°4: Parte 2\\
+    \vspace{60pt}
+    \LARGE Diseño de una Red FTTH con Tecnología GPON\\[0.3cm]
+    \large Marcos Juárez, Córdoba\\
+    \vspace{50pt}
+    \begin{table}[!h]
+        \centering
+        \begin{tabular}{ll}
+            \multicolumn{1}{c}{Nombre} & \multicolumn{1}{c}{DNI} \\
+            Arteaga Barrera, Cristian Eduardo   & 95.159.096 \\
+            Baccino, Luca                       & 45.328.380 \\
+            Mendes Rosa, Agustín                & 44.517.201 \\
+            Monja, Ernesto Joaquín              & 43.873.728
+        \end{tabular}
+    \end{table}
+    \vspace{20pt}
+    \begin{table}[!h]
+        \centering
+        \begin{tabular}{ll}
+            \multicolumn{1}{c}{Docentes} & Esp. Ing. Liendo, Carlos Guillermo \\
+                                         & Ing. Dadam, Federico Tomás \\
+        \end{tabular}
+    \end{table}
+    \vfill
+        {\small Córdoba, República Argentina\\
+                Año 2026}
+\end{center}
+\end{titlepage}
+\newpage
+
+\tableofcontents
+\newpage
+\listoffigures
+\newpage
+\listoftables
+\newpage
+
+% Un archivo por cada punto de la consigna
+\input{secciones/00_introduccion}
+\input{secciones/01_investigacion}
+\newpage
+\input{secciones/02_componentes}
+\newpage
+\input{secciones/03_laboratorio}
+\newpage
+\input{secciones/04_alcance}
+\newpage
+\input{secciones/05_arquitectura}
+\newpage
+\input{secciones/06_dimensionamiento}
+\newpage
+\input{secciones/07_mayorista}
+\newpage
+\input{secciones/08_presupuesto_optico}
+\newpage
+\input{secciones/09_diagramas_cableado}
+\newpage
+\input{secciones/10_television}
+\newpage
+\input{secciones/11_conclusiones}
+
+\newpage
+\nocite{*}
+\printbibliography[heading=bibintoc, title={Bibliografía y Referencias}]
+\end{document}
