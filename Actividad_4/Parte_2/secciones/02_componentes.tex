@@ -1,22 +1,94 @@
 \section{Análisis de catálogos y selección de componentes}
 \label{sec:componentes}
-% Fuentes iniciales sugeridas: Furukawa/Lightera, Huawei, VSOL, KOC, Wiretech (Córdoba).
-% Se pueden usar otros fabricantes, incorporando las fichas técnicas y la fuente.
+Para los componentes pasivos se adopta como proveedor principal a Lightera (marca actual de Furukawa Electric LatAm), uno de los fabricantes indicados por la cátedra, por la disponibilidad de especificaciones técnicas públicas y su presencia en el mercado regional. Para los equipos activos GPON se adopta VSOL, otro de los fabricantes sugeridos, con amplia difusión entre cooperativas y proveedores regionales. Se mantiene la coherencia con la Parte 1 del trabajo, donde ya se utilizaron cables Lightera \cite{informe_p1}.
 
 \subsection{Cables ópticos}
 \label{sec:cables}
-% Consigna 2.1: comparar cables para troncal/alimentación, distribución y acceso al abonado;
-% tendido aéreo, por ductos o directamente enterrado.
-% Para cada alternativa relevar: tipo de fibra y norma, cantidad de fibras y organización interna,
-% atenuación por longitud de onda, construcción y protección, radio mínimo de curvatura,
-% tracción máxima y demás parámetros mecánicos.
-% Explicar qué cable se usa en cada tramo y justificar.
-\pendiente{tabla comparativa de cables por tramo y justificación de la elección.}
+
+\subsubsection{Tipo de tendido}
+La red se diseña con \textbf{tendido aéreo} sobre la postería existente, que en una localidad de las características de Marcos Juárez acompaña todas las calles. El tendido aéreo es considerablemente más económico y rápido de construir que la canalización subterránea, y las calles urbanas tienen vanos de entre $30$ y $50 \, [m]$, compatibles con cables autosoportados para vanos de hasta $80 \, [m]$. El uso de la postería requiere un acuerdo con su propietario (distribuidora eléctrica o municipio), que debe verificarse (\autoref{sec:verificacion}). Los cruces de rutas, de la traza ferroviaria y la entrada al hub pueden requerir tramos subterráneos en ducto.
+
+\subsubsection{Comparación de alternativas}
+La \autoref{tab:cables} resume los cables relevados para cada tramo de la red. Todos utilizan fibra monomodo; los de troncal y distribución, fibra G.652.D \cite{g652}, y el de acometida, fibra insensible a curvaturas G.657.A (BLI-A/B) \cite{g657}.
+
+\begin{table}[H]
+    \centering
+    \scriptsize
+    \caption{Comparación de cables ópticos Lightera para los distintos tramos de la red.}
+    \label{tab:cables}
+    \begin{tabular}{|p{2.3cm}|p{2.9cm}|p{2.9cm}|p{2.9cm}|p{2.9cm}|}
+        \hline
+        \textbf{Parámetro} & \textbf{CFOA-SM-AS80-S TS} \cite{et_as_ts} & \textbf{CFOA-SM-AS80 MINI-RA} \cite{et_minira} & \textbf{Drop Fig.8 compacto} \cite{et_drop} & \textbf{CFOA-SM-DD} \cite{et_dd} \\
+        \hline
+        Tramo & Troncal / alimentación & Distribución & Acceso al abonado & Cruces en ducto \\
+        \hline
+        Instalación & Aérea autosoportada, vano $\leq 80 \, [m]$ & Aérea autosoportada, vano $\leq 80 \, [m]$ & Aérea autosoportada, vano $\leq 80 \, [m]$, y fachada & Ducto subterráneo \\
+        \hline
+        Fibra y norma & SM G.652.D; ABNT NBR 14160 & SM G.652.D; ABNT NBR 14160 & SM G.657.A (BLI-A/B) & SM G.652.D; IRAM 4225, GR-20 \\
+        \hline
+        Cantidad de fibras y organización & 2 a 144; tubos holgados secos de 2, 6 o 12 fibras alrededor de un elemento central & 2 a 24; un tubo holgado central relleno de gel & 1 a 2; fibra en el núcleo del cable & 6 a 288; tubos holgados de 6 o 12 fibras \\
+        \hline
+        Atenuación máx. [dB/km] & $0{,}38$ (1310); $0{,}25$ (1550) & $0{,}38$ (1310); $0{,}38$ (1383); $0{,}25$ (1550) & $0{,}36$ (1310); $0{,}25$ (1550) & Según la especificación de la fibra \\
+        \hline
+        Construcción y protección & Dieléctrico, núcleo seco con hilos hidroexpansibles, elemento central FRP, aramida, cubierta PE negra resistente a UV & Dieléctrico, dos elementos de FRP como sustento, cubierta termoplástica & Figura 8 con dos hilos de acero de sustento, cubierta LSZH resistente a UV & Dieléctrico, núcleo protegido contra humedad, cubierta PE \\
+        \hline
+        Diámetro & $9{,}3 \, [mm]$ (2 a 36 F) a $16{,}6 \, [mm]$ (144 F) & $6{,}8$ a $7{,}2 \, [mm]$ & Compacto & $9{,}2 \, [mm]$ (6 a 36 F) \\
+        \hline
+        Radio mínimo de curvatura & $20 \times D$ en instalación, $10 \times D$ instalado & $20 \times D$ en instalación, $10 \times D$ instalado & $148 \, [mm]$ en instalación & $20 \times D$ en instalación, $10 \times D$ instalado \\
+        \hline
+        Tracción y otros & Carga máx. de operación: $1{,}5 \times$ peso del cable por km (vano 80 m); compresión $\geq 1000 \, [N]$; fluencia máxima de 0,2\,\% en 20 años & Carga máx. de operación: $1{,}5 \times$ peso del cable por km (vano 80 m); compresión $1000 \, [N/10 \, cm]$ & Tracción soportada por el mensajero de acero & Tracción $2670 \, [N]$; compresión $2200 \, [N]$ \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\subsubsection{Cable seleccionado para cada tramo}
+\begin{itemize}
+    \item \underline{Troncal o alimentación (hub $\rightarrow$ cajas de empalme de cluster):} \textbf{CFOA-SM-AS80-S TS} de $24$ a $144$ fibras. Admite la cantidad de fibras que requieren los tramos cercanos al hub (\autoref{sec:fibras}), su núcleo seco facilita la preparación en las cajas de empalme y su versión para vanos de $80 \, [m]$ es la más liviana y económica que cubre los vanos urbanos.
+    \item \underline{Distribución (cables de cluster y de sector):} \textbf{CFOA-SM-AS80 MINI-RA} de $24$ y $12$ fibras. Con un diámetro de apenas $7{,}2 \, [mm]$ y una masa de $47 \, [kg/km]$, es adecuado para recorrer todas las calles de un sector con bajo esfuerzo sobre los postes y menor costo por metro que un cable de tubos múltiples.
+    \item \underline{Acceso al abonado:} \textbf{drop figura 8 compacto} de una fibra G.657.A. La fibra insensible a curvaturas tolera los dobleces de la acometida en fachadas y el ingreso al domicilio, y el mensajero de acero soporta el vano entre el poste de la CTO y la vivienda.
+    \item \underline{Cruces subterráneos:} \textbf{CFOA-SM-DD}, en los puntos donde el tendido aéreo no sea posible (cruces de la Ruta Nacional 9 o de la traza ferroviaria y entrada al hub), con la misma fibra G.652.D que el troncal.
+\end{itemize}
 
 \subsection{Componentes pasivos y equipos activos}
 \label{sec:pasivos_activos}
-% Consigna 2.2: cajas de empalme y cierres, cajas de distribución y terminales de acceso (NAP),
-% splitters, conectores/adaptadores/pigtails/patch cords, distribuidores ópticos (ODF),
-% OLT y ONU/ONT (los activos deben ser GPON).
-% Presentar una tabla con: fabricante, modelo, función, especificaciones relevantes y aplicación prevista.
-\pendiente{tabla de componentes pasivos y equipos activos GPON seleccionados.}
+La \autoref{tab:componentes} reúne los componentes seleccionados. Los equipos activos corresponden a GPON (UIT-T G.984): la OLT trabaja con puertos SFP, y se elige para ellos óptica Clase C+, cuya necesidad se justifica en el presupuesto óptico (\autoref{sec:presupuesto}).
+
+\begin{longtable}{|p{1.9cm}|p{2.4cm}|p{2.4cm}|p{4.4cm}|p{2.5cm}|}
+    \caption{Componentes pasivos y equipos activos seleccionados.}\label{tab:componentes}\\
+    \hline
+    \textbf{Fabricante} & \textbf{Modelo} & \textbf{Función} & \textbf{Especificaciones relevantes} & \textbf{Aplicación prevista} \\
+    \hline
+    \endfirsthead
+    \hline
+    \textbf{Fabricante} & \textbf{Modelo} & \textbf{Función} & \textbf{Especificaciones relevantes} & \textbf{Aplicación prevista} \\
+    \hline
+    \endhead
+    VSOL \cite{vsol_olt} & OLT V1600G2-B & Terminal de línea óptica & 16 puertos PON (SFP), 4 enlaces de subida de $10 \, [GE]$ (SFP+), división máxima 1:128, capa 3, $85 \, [W]$ & Hub: 6 equipos para la Región Este (96 puertos) \\
+    \hline
+    EDGEOPTIC \cite{sfp_cplus} & 2.5GPON-SFP-C & Transceptor PON de la OLT & Clase C+; Tx $1490 \, [nm]$: $+3$ a $+7 \, [dBm]$; Rx $1310 \, [nm]$: sensibilidad $-30 \, [dBm]$, sobrecarga $-12 \, [dBm]$; $2{,}488/1{,}244 \, [Gbps]$ & Un módulo por puerto PON activo \\
+    \hline
+    VSOL \cite{vsol_ont} & ONT V2802RH & Terminal de abonado & GPON Clase B+; Tx $1310 \, [nm]$: $0$ a $+4 \, [dBm]$; Rx $1490 \, [nm]$: sensibilidad $-27 \, [dBm]$, sobrecarga $-8 \, [dBm]$; puertos 2,5 GbE y GbE & Domicilio del abonado \\
+    \hline
+    VSOL \cite{vsol_catv} & ONT V2802GWT & Terminal de abonado con RF & Igual que la anterior en GPON; receptor CATV a $1550 \, [nm]$ con entrada de $+2$ a $-18 \, [dBm]$, salida RF de $47$ a $1000 \, [MHz]$ & Solo para la alternativa de video \textit{overlay} \\
+    \hline
+    Lightera \cite{dio_b144} & DIO B144 & Distribuidor óptico (ODF) & Hasta 144 empalmes en 4U, montaje en rack de $19''$, adaptadores SC/APC & Hub: terminación de los cables troncales \\
+    \hline
+    Lightera \cite{et_ceo} & FK-CEO-4M & Caja de empalme y derivación & Hasta 144 fibras en bandejas de 24 empalmes; admite splitters y WDM no conectorizados; entrada oval de $10$ a $17{,}5 \, [mm]$; aérea en poste, pared o mensajero & Derivaciones del troncal, CEO de cluster y caja de distribución con el splitter 1:4 \\
+    \hline
+    Lightera \cite{et_splitter} & Splitter PLC 1x4 no conectorizado & Divisor primario & Pérdida de inserción máx. $7{,}1 \, [dB]$ (1260 a $1650 \, [nm]$), uniformidad $0{,}6 \, [dB]$ & Caja de distribución de cada sector \\
+    \hline
+    Lightera \cite{et_cto, et_splitter} & FK-CTO-16MC con splitter 1x16 conectorizado & Caja terminal (NAP) & IP55; 16 salidas SC/APC; splitter 1x16 PLC con pérdida máx. $13{,}7 \, [dB] + 0{,}3 \, [dB]$ por la conectorización; cable de entrada hasta $15 \, [mm]$; montaje en poste, fachada o mensajero & Una por cada grupo de hasta 17 viviendas \\
+    \hline
+    Lightera \cite{et_splitter} & Conectores y adaptadores SC/APC & Conexión desmontable & Atenuación típ. $0{,}15 \, [dB]$, máx. $0{,}30 \, [dB]$; pulido angulado (APC) para alta pérdida de retorno & ODF, salidas de CTO y roseta del abonado \\
+    \hline
+    Genérico & Pigtails SC/APC $1{,}5 \, [m]$ y patch cords SC/APC--SC/UPC y SC/APC--SC/APC & Terminación y conexión & Fibra G.657.A, conectores de las mismas características que los adaptadores & Pigtails en el ODF; patch cords entre ODF y OLT y entre roseta y ONT \\
+    \hline
+    VSOL \cite{vsol_edfa} & EYDFA V8816W-32P-19 & Amplificador óptico con WDM & 32 salidas de $+19 \, [dBm]$ a $1545$--$1565 \, [nm]$; WDM incorporado para combinar con la señal GPON (pérdida de paso $0{,}8 \, [dB]$); entrada $-8$ a $+10 \, [dBm]$ & Solo para la alternativa de video \textit{overlay} \\
+    \hline
+\end{longtable}
+
+Observaciones sobre la selección:
+\begin{itemize}
+    \item La caja FK-CEO-4M figura como discontinuada en el catálogo de Lightera; al momento de la compra debe verificarse su disponibilidad o adoptarse el modelo que la reemplace, con capacidad equivalente y aptitud para alojar splitters.
+    \item Los conectores son SC/APC en toda la red pasiva, ya que el pulido angulado minimiza la reflexión, requisito necesario si en el futuro se agrega video por RF a $1550 \, [nm]$ (\autoref{sec:television}). Los puertos de la OLT y del EDFA tienen conectores SC/UPC, por lo que se usan patch cords híbridos SC/APC--SC/UPC en el hub.
+\end{itemize}

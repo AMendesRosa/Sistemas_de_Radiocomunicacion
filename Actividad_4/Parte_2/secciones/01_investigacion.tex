@@ -3,26 +3,82 @@
 
 \subsection{REFEFO y ARSAT}
 \label{sec:refefo}
-% Consigna 1.1:
-% - Significado de la sigla y objetivos de la red.
-% - Desarrollo, cobertura y servicios que ofrece.
-% - Función de la REFEFO como infraestructura de transporte y conectividad mayorista.
-% - Relación con los operadores que brindan servicios de acceso a los usuarios.
-% - Actividades de ARSAT vinculadas con fibra óptica, televisión digital y servicios satelitales.
-% - Indicar fuentes y FECHA DE CONSULTA.
-% Fuente útil: material de cátedra, "Libro Cap 1 a 5 parte II", sección 1.7.
-\pendiente{síntesis sobre la REFEFO y ARSAT, con fuentes y fecha de consulta.}
+
+\subsubsection{La Red Federal de Fibra Óptica}
+REFEFO es la sigla de \textbf{Red Federal de Fibra Óptica}, la red troncal de fibra óptica de alcance nacional que opera la empresa estatal ARSAT (Empresa Argentina de Soluciones Satelitales). Se lanzó en 2010 como uno de los pilares del Plan Nacional de Telecomunicaciones \textit{Argentina Conectada}, con el objetivo de reducir la brecha digital llevando conectividad de banda ancha a localidades del interior que habían quedado fuera de los despliegues comerciales \cite{libro_catedra, arsat_refefo}.
+
+\begin{itemize}
+    \item \underline{Desarrollo y cobertura:} según la bibliografía de la cátedra, ARSAT desplegó más de $34.000 \, [km]$ de fibra óptica en todo el país \cite{libro_catedra}. La red se organiza en 13 regiones geográficas interconectadas con las redes provinciales, y el tráfico se encamina desde los puntos de acceso provinciales hasta el ``km 0'', ubicado en el centro de datos de la Estación Terrena Benavídez \cite{arsat_refefo}. El listado de puntos de conexión publicado por ARSAT en su portal de datos abiertos registra \textbf{1.163 localidades conectadas} en febrero de 2026, de las cuales 94 están en la provincia de Córdoba \cite{arsat_nodos}.
+    \item \underline{Servicios:} transporte de tráfico IP, provisión de capacidad en cada nodo para conectar la última milla, soluciones con valor agregado y monitoreo permanente desde el centro de operaciones de red (NOC) de ARSAT \cite{arsat_refefo}. ARSAT ofrece capacidad mayorista con tarifas publicadas que varían según la capacidad contratada y la ubicación \cite{libro_catedra}.
+    \item \underline{Infraestructura de transporte y conectividad mayorista:} la REFEFO es una red de transporte, no de acceso. Llega hasta un nodo o punto de presencia (PoP) en cada localidad y allí vende capacidad a otros operadores; no llega al domicilio del usuario. Su diseño troncal es redundante, con rutas alternativas para mantener el servicio ante cortes \cite{libro_catedra}.
+    \item \underline{Relación con los operadores de acceso:} en los nodos se conectan los proveedores locales, principalmente pymes y cooperativas de telecomunicaciones, que construyen la red de acceso (por ejemplo, una red FTTH) y brindan el servicio al usuario final \cite{arsat_refefo}. De este modo, un operador pequeño accede a capacidad de transporte nacional sin tener que construir su propio enlace hasta un gran centro urbano, y la REFEFO favorece la competencia en localidades donde los grandes operadores no tienen presencia \cite{libro_catedra}.
+\end{itemize}
+
+Este último punto es central para este proyecto: \textbf{Marcos Juárez figura entre las localidades con nodo REFEFO activo} \cite{arsat_nodos}, por lo que la red FTTH propuesta puede conectarse a la REFEFO como proveedor mayorista (\autoref{sec:mayorista}).
+
+\subsubsection{Actividades de ARSAT}
+ARSAT es la empresa estatal responsable de la infraestructura de telecomunicaciones del Estado nacional. Sus actividades se agrupan en \cite{arsat_refefo, libro_catedra}:
+\begin{itemize}
+    \item \underline{Fibra óptica (conectividad terrestre):} operación y expansión de la REFEFO y venta de capacidad mayorista a cooperativas, pymes, municipios y operadores.
+    \item \underline{Servicios satelitales:} operación de los satélites geoestacionarios ARSAT-1 y ARSAT-2 (fabricados en el país) y servicios de conectividad satelital para zonas sin infraestructura terrestre.
+    \item \underline{Televisión digital:} operación de la plataforma de Televisión Digital Abierta (TDA), con transmisión terrestre y satelital.
+    \item \underline{Centro de datos y nube:} servicios de alojamiento, nube y ciberseguridad desde su centro de datos de Benavídez.
+\end{itemize}
 
 \subsection{Fundamentos de fibra óptica}
 \label{sec:fundamentos}
-% Consigna 1.2: síntesis integrada de los 5 videos indicados por la cátedra y
-% explicación de qué conceptos son relevantes para el diseño FTTH y la selección de componentes.
-\pendiente{síntesis integrada de los videos y su relevancia para el diseño FTTH.}
+Los cinco videos indicados por la cátedra recorren la cadena completa de la fibra óptica: el principio físico, la fabricación, el cable y la infraestructura que conecta al país con el mundo.
 
-\subsection{Cables submarinos}
+\begin{enumerate}
+    \item \underline{Reflexión interna total} \cite{video1}: la luz queda confinada en un medio cuando incide sobre la interfaz con un medio de menor índice de refracción con un ángulo mayor que el crítico. Es el principio que guía la luz en el núcleo de la fibra, cuyo índice $n_1$ es mayor que el del revestimiento $n_2$.
+    \item \underline{Fabricación de la fibra} \cite{video2}: se fabrica una preforma de sílice de alta pureza con el perfil de índice deseado, que luego se estira en una torre a alta temperatura hasta obtener un hilo de $125 \, [\mu m]$, al que se le aplica el recubrimiento primario de acrilato. La pureza del vidrio determina la atenuación y el control del perfil de índice determina el comportamiento modal y la dispersión.
+    \item \underline{Cables de fibra óptica} \cite{video3}: las fibras se protegen en tubos holgados o en estructuras ajustadas, se agrupan alrededor de un elemento central y se refuerzan con elementos de tracción y cubiertas adecuadas al tipo de instalación (aérea, ducto o enterrada).
+    \item \underline{Cables submarinos} \cite{video4}: la mayor parte del tráfico intercontinental de Internet viaja por cables de fibra óptica tendidos en el lecho marino, con repetidores amplificadores alimentados eléctricamente desde las estaciones de amarre.
+    \item \underline{Cómo entra Internet al país} \cite{video5}: Argentina se conecta al mundo a través de los cables submarinos que amarran en Las Toninas, desde donde el tráfico se distribuye por las redes troncales terrestres hacia el resto del país.
+\end{enumerate}
+
+\textbf{Relevancia para el diseño FTTH y la selección de componentes:}
+\begin{itemize}
+    \item La reflexión interna total y el radio mínimo de curvatura explican por qué las curvaturas excesivas producen pérdidas: esto condiciona el manejo de fibras en cajas y la elección de fibra insensible a curvaturas (G.657) en los drops y cajas terminales.
+    \item La atenuación por longitud de onda, que depende de la pureza del vidrio, define las pérdidas por kilómetro que se usan en el presupuesto óptico a $1310$, $1490$ y $1550 \, [nm]$.
+    \item La construcción del cable determina su aptitud para cada tramo: tracción admisible y vano para el tendido aéreo, protección contra humedad y roedores para ductos, y diámetro y peso para el acceso al abonado.
+    \item Los cables submarinos y las redes troncales muestran que la red de acceso es el último eslabón de una cadena: la capacidad que se ofrece al abonado depende también de la conectividad mayorista que se contrate.
+\end{itemize}
+
+\pendiente{verificar la síntesis contra el contenido de los videos. Se redactó a partir de sus títulos y del material de la cátedra, que cubre los mismos temas.}
+
+\subsection{Cables submarinos con llegada a Las Toninas}
 \label{sec:submarinos}
-% Consigna 1.3: mapa de cables submarinos con llegada a Las Toninas.
-% - Sistemas representados, destinos principales y estado informado.
-% - Función en la conectividad internacional de Argentina y relación con las redes terrestres.
-% Fuente útil: material de cátedra, "Libro Cap 1 a 5 parte II", sección 1.8.
-\pendiente{sistemas que llegan a Las Toninas, destinos, estado y su rol en la conectividad.}
+Las Toninas, en la costa de la provincia de Buenos Aires, es el principal punto de amarre (\textit{landing point}) de cables submarinos de la Argentina. Según el mapa de cables submarinos de TeleGeography, consultado el 13/10/2026, amarran allí siete sistemas, todos informados como en servicio (\autoref{tab:submarinos}).
+
+\begin{table}[H]
+    \centering
+    \footnotesize
+    \caption{Cables submarinos con amarre en Las Toninas \cite{submarine_map}.}
+    \label{tab:submarinos}
+    \begin{tabular}{|l|p{5.6cm}|r|c|p{2.6cm}|}
+        \hline
+        \textbf{Sistema} & \textbf{Destinos principales} & \textbf{Longitud} & \textbf{En servicio} & \textbf{Propietarios} \\
+        \hline
+        Firmina & Brasil (Praia Grande), Uruguay (Punta del Este), Rep. Dominicana, EE.\,UU. (Myrtle Beach) & 14.517 km & 2025 & Google \\
+        \hline
+        Malbec & Brasil (Río de Janeiro, Praia Grande, Porto Alegre) & 2.880 km & 2021 & Meta, V.tal \\
+        \hline
+        Tannat & Brasil (Santos), Uruguay (Maldonado) & 2.000 km & 2018 & Antel, Google \\
+        \hline
+        Bicentenario & Uruguay (Maldonado) & 250 km & 2011 & Antel, Telecom Argentina \\
+        \hline
+        SAm-1 & Brasil, Chile, Perú, Ecuador, Colombia, Guatemala, Rep. Dominicana, Puerto Rico, EE.\,UU. (Boca Ratón) & 25.000 km & 2001 & Telxius \\
+        \hline
+        SAC & Brasil, Chile, Perú, Colombia, Panamá, Venezuela, Islas Vírgenes (EE.\,UU.) & 20.000 km & 2000 & Cirion, Sparkle \\
+        \hline
+        Unisur & Uruguay (Maldonado) & 265 km & 1995 & Antel, Telxius \\
+        \hline
+    \end{tabular}
+\end{table}
+
+La bibliografía de la cátedra menciona también el sistema Atlantis-2 (Brasil, Senegal, Europa) \cite{libro_catedra}, que no figura en el mapa consultado con amarre en Las Toninas, posiblemente porque fue retirado de servicio.
+
+\textbf{Función en la conectividad internacional:} prácticamente todo el tráfico de Internet que la Argentina intercambia con el exterior pasa por estos cables \cite{libro_catedra}. Los sistemas largos (SAm-1, SAC, Firmina) vinculan al país con los grandes centros de contenidos e intercambio de EE.\,UU., mientras que los cortos (Bicentenario, Unisur, Tannat, Malbec) lo conectan con Uruguay y Brasil, que a su vez tienen otros cables hacia el resto del mundo. La diversidad de sistemas y rutas aporta redundancia ante cortes.
+
+\textbf{Relación con las redes terrestres:} desde las estaciones de amarre, el tráfico se transporta por las redes troncales terrestres (de operadores privados y de la REFEFO) hacia los centros de intercambio y desde allí hacia los nodos de cada localidad. La red FTTH de Marcos Juárez es el extremo de esta cadena: el tráfico de un abonado recorre la red de acceso hasta el hub, el enlace mayorista hasta el nodo REFEFO local, la red troncal nacional y, si su destino está en el exterior, los cables submarinos de Las Toninas. Por eso, la instalación de cachés de contenido en el hub o en el nodo mayorista reduce el tráfico que debe transportarse por toda esta cadena.

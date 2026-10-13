@@ -1,0 +1,7 @@
+# Datos intermedios y salidas generadas por los scripts
+*.osm
+*.json
+*.pkl
+*.pdf
+*.png
+!area_cobertura_consigna.png

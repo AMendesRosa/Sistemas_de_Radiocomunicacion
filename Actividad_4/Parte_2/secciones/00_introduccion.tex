@@ -1,14 +1,28 @@
 \section{Introducción}
 \label{sec:introduccion}
-La fibra óptica constituye un medio fundamental para las redes de telecomunicaciones: se utiliza en enlaces de transporte, en conexiones punto a punto y en redes de acceso FTTH (\textit{Fiber to the Home}, fibra hasta el hogar). Las redes FTTH con tecnología GPON permiten brindar acceso a Internet, telefonía, televisión y otros servicios mediante una infraestructura óptica compartida, cuyo diseño requiere integrar criterios de cobertura, capacidad, distribución de fibras, selección de componentes y presupuesto óptico.
+La fibra óptica constituye un medio fundamental para las redes de telecomunicaciones: se utiliza en enlaces de transporte, en conexiones punto a punto y en redes de acceso FTTH (\textit{Fiber to the Home}, fibra hasta el hogar). Las redes FTTH con tecnología GPON permiten brindar acceso a Internet, telefonía, televisión y otros servicios mediante una infraestructura óptica compartida. Su diseño requiere integrar criterios de cobertura, capacidad, distribución de fibras, selección de componentes y presupuesto óptico \cite{consigna_p2}.
 
-En este trabajo se desarrolla una propuesta de red FTTH GPON para la localidad de Marcos Juárez, provincia de Córdoba, tomando como referencia el área de cobertura indicada por la cátedra (\autoref{fig:area_cobertura}). El nodo cabecera se ubica en la Cooperativa COYSPU (9 de Julio 99-149) y el área se divide en las regiones Este y Oeste según la traza de la Ruta Nacional 12.
+En este trabajo se desarrolla una propuesta de red FTTH GPON para la localidad de Marcos Juárez, provincia de Córdoba, tomando como referencia el área de cobertura indicada por la cátedra (\autoref{fig:area_cobertura}). El nodo cabecera se ubica en la Cooperativa COYSPU (9 de Julio 99), y el área se divide en las regiones Este y Oeste según la traza de la ruta 12. Este informe desarrolla en detalle la \textbf{Región Este}.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.85\textwidth]{area_cobertura.png}
-    \caption{Área de cobertura de la red en la localidad de Marcos Juárez. Fuente: consigna de la cátedra.}
+    \caption{Área de cobertura de la red en la localidad de Marcos Juárez. Fuente: consigna de la cátedra \cite{consigna_p2}.}
     \label{fig:area_cobertura}
 \end{figure}
 
-\pendiente{describir la organización del informe una vez completadas las secciones.}
+El informe se organiza siguiendo los puntos de la consigna:
+\begin{itemize}
+    \item \textbf{Investigación (\autoref{sec:investigacion}):} infraestructura óptica nacional e internacional.
+    \item \textbf{Componentes (\autoref{sec:componentes}):} selección de cables, componentes pasivos y equipos.
+    \item \textbf{Laboratorio (\autoref{sec:laboratorio}):} reconocimiento de los elementos.
+    \item \textbf{Alcance (\autoref{sec:alcance}):} casas pasadas, abonados y supuestos.
+    \item \textbf{Arquitectura (\autoref{sec:arquitectura}):} organización de la red, trazas y desarrollo de dos sectores.
+    \item \textbf{Dimensionamiento (\autoref{sec:dimensionamiento}):} fibras, puertos y ancho de banda.
+    \item \textbf{Conectividad mayorista (\autoref{sec:mayorista}).}
+    \item \textbf{Presupuesto óptico (\autoref{sec:presupuesto}):} en ambos sentidos.
+    \item \textbf{Cableado (\autoref{sec:cableado}):} diagramas y asignación de fibras.
+    \item \textbf{Televisión (\autoref{sec:television}):} alternativas de distribución.
+\end{itemize}
+
+El diseño territorial se elaboró con datos reales: la red de calles de OpenStreetMap \cite{osm}, el Censo 2022 \cite{indec_censo} y el listado de nodos de la REFEFO \cite{arsat_nodos}. Las longitudes de cable, la ubicación de las cajas y los planos se obtuvieron con scripts de Python, incluidos en el repositorio para que el diseño sea reproducible.

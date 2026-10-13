@@ -1,10 +1,39 @@
 \section{Reconocimiento de elementos en laboratorio}
 \label{sec:laboratorio}
-% Consigna 3: observar y manipular cables, conectores, splitters, cajas de empalme y terminación.
-% Para cada elemento:
-% - Función y ubicación dentro de la red.
-% - Relación con las fichas técnicas analizadas en la sección de componentes.
-% - Condiciones básicas de instalación y manipulación.
-% Completar las prácticas indicadas por la cátedra y vincularlas con la Actividad N.° 3.
-% Fotos del laboratorio: guardarlas en Figuras/ con nombres descriptivos (ej. lab_splitter_1x8.jpg).
-\pendiente{relevamiento de los elementos del laboratorio con fotos y vínculo con la Actividad 3.}
+La \autoref{tab:laboratorio} relaciona los elementos disponibles en el laboratorio con su función, su ubicación dentro de la red diseñada y los componentes seleccionados en la \autoref{sec:componentes}.
+
+\begin{longtable}{|p{2.4cm}|p{3.5cm}|p{3.2cm}|p{4.6cm}|}
+    \caption{Elementos del laboratorio, su función y su ubicación en la red.}\label{tab:laboratorio}\\
+    \hline
+    \textbf{Elemento} & \textbf{Función} & \textbf{Ubicación en la red} & \textbf{Instalación y manipulación} \\
+    \hline
+    \endfirsthead
+    \hline
+    \textbf{Elemento} & \textbf{Función} & \textbf{Ubicación en la red} & \textbf{Instalación y manipulación} \\
+    \hline
+    \endhead
+    Cable troncal de tubos holgados & Transportar las fibras desde el hub hasta los clusters & Postes, desde el hub hasta las CEO de cluster & Respetar el radio de curvatura ($20 \times D$ durante el tendido) y la tracción máxima; dejar rulos de reserva en las cajas \\
+    \hline
+    Cable de distribución (tubo central) & Llevar las fibras de la caja de distribución a las CTO & Postes dentro de cada sector & Abrir el tubo solo en la ventana de la caja (sangría) sin dañar las fibras que siguen de paso \\
+    \hline
+    Cable drop & Conectar la CTO con la vivienda & Entre el poste de la CTO y la fachada & Retirar el mensajero de acero solo en los extremos; fibra G.657.A, tolera curvaturas cerradas \\
+    \hline
+    Conectores y adaptadores SC/APC & Unión desmontable entre fibras & ODF, CTO, roseta y ONT & Inspeccionar y limpiar la férula antes de cada conexión; no mezclar APC (verde) con UPC (azul) \\
+    \hline
+    Pigtails y patch cords & Terminar fibras en paneles y conectar equipos & ODF del hub y domicilio & Empalmar los pigtails por fusión; no exceder el radio de curvatura en los organizadores \\
+    \hline
+    Splitter PLC & Dividir la potencia óptica entre varias salidas & Caja de distribución (1:4) y CTO (1:16) & Su pérdida aumenta con la relación de división (aprox. $10 \log N$ más la pérdida en exceso) \\
+    \hline
+    Caja de empalme (CEO) & Proteger empalmes y derivaciones & Derivaciones del troncal y cajas de distribución & Cierre hermético; ordenar las fibras en bandejas y respetar el radio mínimo de $30 \, [mm]$ \\
+    \hline
+    Caja terminal (CTO/NAP) & Punto de conexión de los drops & Postes, una por cada grupo de hasta 17 viviendas & Identificar cada salida; sellar los pasacables no utilizados \\
+    \hline
+    Empalmadora por fusión & Unir fibras con baja pérdida & Todas las cajas de empalme & Pelado, limpieza con alcohol isopropílico y corte con cortadora de precisión; descartar los restos de fibra en un recipiente \\
+    \hline
+    Localizador visual de fallas (VFL) & Verificar continuidad e identificar fibras & Mantenimiento y puesta en servicio & No mirar directamente el haz \\
+    \hline
+\end{longtable}
+
+\textbf{Vínculo con la Actividad N.° 3:} en esa actividad se comprobó que la potencia que llega al receptor disminuye con la longitud de la fibra y con los acoplamientos imperfectos, y que el receptor digital deja de recuperar la señal cuando esta no supera su umbral. En una red GPON el mismo principio se cuantifica con el presupuesto óptico: los splitters, conectores y empalmes que se reconocen en el laboratorio son los eventos de pérdida que se suman en la \autoref{sec:presupuesto} y que deben mantener la potencia recibida por encima de la sensibilidad de la ONT y de la OLT.
+
+\pendiente{agregar fotos del laboratorio (guardarlas en Figuras/ con nombres descriptivos), las observaciones de la práctica y los resultados de las prácticas indicadas por la cátedra.}

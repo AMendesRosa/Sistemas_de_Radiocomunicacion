@@ -25,3 +25,7 @@
 *.nav
 *.snm
 *.vrb
+
+# Excepciones: planos del informe y consignas de la cátedra (son fuentes, no PDF generados)
+!Actividad_4/Parte_2/Planos/*.pdf
+!Actividad_4/Consigna/*.pdf

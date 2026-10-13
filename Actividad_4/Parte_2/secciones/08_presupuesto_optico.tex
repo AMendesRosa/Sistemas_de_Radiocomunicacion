@@ -1,26 +1,138 @@
 \section{Presupuesto óptico}
 \label{sec:presupuesto}
-% Consigna 8: sentido descendente (OLT -> ONT, 1490 nm) y ascendente (ONT -> OLT, 1310 nm),
-% con las especificaciones de los equipos seleccionados. Incluir:
-% - Potencias mínima y máxima de transmisión.
-% - Sensibilidad y nivel máximo admisible de los receptores.
-% - Atenuación de la fibra para cada longitud de onda.
-% - Pérdidas de splitters, conectores y empalmes.
-% - Margen de ingeniería (envejecimiento, reparaciones, incertidumbres).
-% Verificar en ambos sentidos:
-% 1. Recorrido de MAYOR pérdida -> potencia recibida suficiente.
-% 2. Recorrido de MENOR pérdida -> no superar el nivel máximo del receptor.
-% Identificar estos recorridos en el plano, presentar tablas y proponer correcciones si algo no cumple.
-% Se puede reutilizar la metodología y el formato de tablas de la Parte 1 (Parte_1/parteB.tex).
+Se verifica el presupuesto óptico en sentido descendente (OLT $\rightarrow$ ONT, $1490 \, [nm]$) y ascendente (ONT $\rightarrow$ OLT, $1310 \, [nm]$), con la misma formulación de la Parte 1 \cite{libro_presupuesto, informe_p1}:
+\begin{equation}
+    P_r = P_t - A_{total}, \qquad P_r - S_r \geq M_s, \qquad P_r \leq P_{sat}
+\end{equation}
+donde $A_{total}$ es la suma de las pérdidas de fibra, splitters, conectores y empalmes, $S_r$ la sensibilidad del receptor, $P_{sat}$ su nivel máximo admisible y $M_s$ el margen de ingeniería.
 
 \subsection{Parámetros de los equipos y de la ODN}
 \label{sec:parametros_presupuesto}
-\pendiente{potencias, sensibilidades y pérdidas unitarias por longitud de onda.}
 
-\subsection{Sentido descendente (OLT $\rightarrow$ ONT)}
+\begin{table}[H]
+    \centering
+    \footnotesize
+    \caption{Parámetros ópticos de los equipos seleccionados.}
+    \label{tab:param_equipos}
+    \begin{tabular}{|l|c|c|c|c|}
+        \hline
+        \textbf{Equipo} & \textbf{$\lambda$ Tx / Rx} & \textbf{$P_t$ mín. / máx.} & \textbf{$S_r$} & \textbf{$P_{sat}$} \\
+        \hline
+        OLT, SFP Clase C+ \cite{sfp_cplus} & $1490 / 1310 \, [nm]$ & $+3 / +7 \, [dBm]$ & $-30 \, [dBm]$ & $-12 \, [dBm]$ \\
+        ONT VSOL V2802RH \cite{vsol_ont} & $1310 / 1490 \, [nm]$ & $0 / +4 \, [dBm]$ & $-27 \, [dBm]$ & $-8 \, [dBm]$ \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \footnotesize
+    \caption{Pérdidas adoptadas para los elementos de la ODN.}
+    \label{tab:param_odn}
+    \begin{tabular}{|l|p{3.6cm}|p{3.6cm}|l|}
+        \hline
+        \textbf{Elemento} & \textbf{Recorrido de mayor pérdida} & \textbf{Recorrido de menor pérdida} & \textbf{Fuente} \\
+        \hline
+        Fibra G.652.D cableada & $0{,}38 \, [dB/km]$ a 1310 y $1490 \, [nm]$ & $0{,}25 \, [dB/km]$ & \cite{et_minira} \\
+        Fibra del drop (G.657.A) & $0{,}36 \, [dB/km]$ & $0{,}25 \, [dB/km]$ & \cite{et_drop} \\
+        Splitter 1:4 & $7{,}1 \, [dB]$ (máximo) & $6{,}02 \, [dB]$ ($10 \log 4$) & \cite{et_splitter} \\
+        Splitter 1:16 & $13{,}7 \, [dB]$ (máximo) & $12{,}04 \, [dB]$ ($10 \log 16$) & \cite{et_splitter} \\
+        Conexión SC/APC & $0{,}30 \, [dB]$ (máximo) & $0$ & \cite{et_splitter} \\
+        Empalme por fusión & $0{,}1 \, [dB]$ & $0$ & \cite{libro_presupuesto} \\
+        Margen de ingeniería $M_s$ & $3 \, [dB]$ & -- & \cite{libro_presupuesto} \\
+        \hline
+    \end{tabular}
+\end{table}
+
+Criterios adoptados:
+\begin{itemize}
+    \item \underline{Atenuación de la fibra:} la especificación de Lightera da la atenuación máxima a 1310 y $1550 \, [nm]$. Como en la fibra G.652.D la atenuación a $1490 \, [nm]$ es menor que a $1310 \, [nm]$, usar $0{,}38 \, [dB/km]$ en ambos sentidos es conservador.
+    \item \underline{Recorrido de menor pérdida:} para verificar que el receptor no se sature se toman cotas inferiores de las pérdidas. Para los splitters se usa la división ideal de potencia, sin pérdida en exceso, y se anulan conectores y empalmes.
+    \item \underline{Conexiones (cinco por recorrido):} puerto de la OLT y patch cord, adaptador del ODF, salida de la CTO, roseta y patch cord de la ONT.
+    \item \underline{Empalmes (seis como base):} pigtail del ODF, CEO de cluster, entrada y salida del splitter 1:4, entrada de la CTO y roseta. A estos se suma uno por cada caja de derivación del troncal que atraviesa el recorrido.
+    \item \underline{Margen de ingeniería:} $3 \, [dB]$, el mínimo del rango recomendado por la cátedra \cite{libro_presupuesto}. Cubre envejecimiento, reparaciones (cada una agrega al menos dos empalmes) e incertidumbres. Se adopta el mínimo porque el resto del cálculo ya es conservador: valores máximos de pérdida y potencias mínimas de transmisión.
+\end{itemize}
+
+\subsection{Recorridos verificados}
+Las longitudes de todos los recorridos (hub $\rightarrow$ CEO $\rightarrow$ caja de distribución $\rightarrow$ CTO $\rightarrow$ vivienda) se calcularon sobre la red de calles. Los recorridos extremos se identifican en el plano de la \autoref{fig:troncal}:
+\begin{itemize}
+    \item \textbf{Mayor pérdida:} CTO-91.1, en el barrio aislado del noreste (sector 91, cluster C12). Tiene $3.896 \, [m]$ de red (troncal, cable de cluster y distribución) más un drop de $183 \, [m]$, y atraviesa cinco cajas de derivación del troncal (D1, D2, CEO-C5, D4 y CEO-C6).
+    \item \textbf{Menor pérdida:} CTO-28.3, junto al hub (sector 28, cluster C3), con $170 \, [m]$ de red y un drop de $93 \, [m]$.
+\end{itemize}
+
+\begin{table}[H]
+    \centering
+    \footnotesize
+    \caption{Pérdidas de los recorridos extremos.}
+    \label{tab:perdidas_recorridos}
+    \begin{tabular}{|l|r|r|}
+        \hline
+        \textbf{Elemento} & \textbf{Mayor pérdida (CTO-91.1)} & \textbf{Menor pérdida (CTO-28.3)} \\
+        \hline
+        Fibra de la red & $3{,}896 \times 0{,}38 = 1{,}48 \, [dB]$ & \multirow{2}{*}{$0{,}263 \times 0{,}25 = 0{,}07 \, [dB]$} \\
+        Fibra del drop & $0{,}183 \times 0{,}36 = 0{,}07 \, [dB]$ & \\
+        Splitters 1:4 y 1:16 & $7{,}1 + 13{,}7 = 20{,}80 \, [dB]$ & $6{,}02 + 12{,}04 = 18{,}06 \, [dB]$ \\
+        Conexiones & $5 \times 0{,}30 = 1{,}50 \, [dB]$ & $0$ \\
+        Empalmes & $11 \times 0{,}1 = 1{,}10 \, [dB]$ & $0$ \\
+        \hline
+        \textbf{Pérdida total $A_{total}$} & $\mathbf{24{,}95 \, [dB]}$ & $\mathbf{18{,}13 \, [dB]}$ \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\subsection{Sentido descendente (OLT $\rightarrow$ ONT, $1490 \, [nm]$)}
 \label{sec:descendente}
-\pendiente{recorridos de mayor y menor pérdida en sentido descendente.}
+\begin{table}[H]
+    \centering
+    \footnotesize
+    \caption{Presupuesto óptico descendente.}
+    \label{tab:descendente}
+    \begin{tabular}{|l|c|c|}
+        \hline
+        \textbf{Verificación} & \textbf{Mayor pérdida} & \textbf{Menor pérdida} \\
+        \hline
+        Potencia de transmisión de la OLT & $P_{t,min} = +3 \, [dBm]$ & $P_{t,max} = +7 \, [dBm]$ \\
+        Pérdida total & $24{,}95 \, [dB]$ & $18{,}13 \, [dB]$ \\
+        Potencia recibida en la ONT & $-21{,}95 \, [dBm]$ & $-11{,}13 \, [dBm]$ \\
+        Referencia del receptor & $S_r = -27 \, [dBm]$ & $P_{sat} = -8 \, [dBm]$ \\
+        Diferencia & $5{,}05 \, [dB]$ sobre $S_r$ & $3{,}13 \, [dB]$ bajo $P_{sat}$ \\
+        Margen sobrante (descontado $M_s = 3 \, [dB]$) & $\mathbf{2{,}05 \, [dB]}$ & -- \\
+        \hline
+        \textbf{Resultado} & \textbf{Cumple} & \textbf{Cumple} \\
+        \hline
+    \end{tabular}
+\end{table}
 
-\subsection{Sentido ascendente (ONT $\rightarrow$ OLT)}
+\subsection{Sentido ascendente (ONT $\rightarrow$ OLT, $1310 \, [nm]$)}
 \label{sec:ascendente}
-\pendiente{recorridos de mayor y menor pérdida en sentido ascendente.}
+\begin{table}[H]
+    \centering
+    \footnotesize
+    \caption{Presupuesto óptico ascendente.}
+    \label{tab:ascendente}
+    \begin{tabular}{|l|c|c|}
+        \hline
+        \textbf{Verificación} & \textbf{Mayor pérdida} & \textbf{Menor pérdida} \\
+        \hline
+        Potencia de transmisión de la ONT & $P_{t,min} = 0 \, [dBm]$ & $P_{t,max} = +4 \, [dBm]$ \\
+        Pérdida total & $24{,}95 \, [dB]$ & $18{,}13 \, [dB]$ \\
+        Potencia recibida en la OLT & $-24{,}95 \, [dBm]$ & $-14{,}13 \, [dBm]$ \\
+        Referencia del receptor & $S_r = -30 \, [dBm]$ & $P_{sat} = -12 \, [dBm]$ \\
+        Diferencia & $5{,}05 \, [dB]$ sobre $S_r$ & $2{,}13 \, [dB]$ bajo $P_{sat}$ \\
+        Margen sobrante (descontado $M_s = 3 \, [dB]$) & $\mathbf{2{,}05 \, [dB]}$ & -- \\
+        \hline
+        \textbf{Resultado} & \textbf{Cumple} & \textbf{Cumple} \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\subsection{Análisis y correcciones}
+El diseño cumple en ambos sentidos y en ambos recorridos extremos, por lo que no se requieren correcciones. Los resultados confirman las siguientes decisiones:
+\begin{itemize}
+    \item \underline{Óptica Clase C+ en la OLT:} con un SFP Clase B+ ($P_t$ de $+1{,}5$ a $+5 \, [dBm]$; $S_r = -28 \, [dBm]$ \cite{g984_2}), el recorrido de mayor pérdida quedaría con un margen sobrante de apenas $0{,}05 \, [dB]$ en sentido ascendente, sin holgura para imprecisiones del diseño.
+    \item \underline{Un puerto por sector:} compartir un puerto entre dos sectores con un splitter 1:2 en el hub agregaría $3{,}7 \, [dB]$ más un conector, y el margen sobrante del recorrido de mayor pérdida pasaría a $-1{,}95 \, [dB]$ (no cumple).
+    \item \underline{Sin atenuadores:} en el recorrido de menor pérdida la potencia recibida queda por debajo del nivel de saturación en ambos sentidos, aun con pérdidas nulas de conectores y empalmes. En cambio, no deben instalarse módulos de mayor potencia (Clase C++, con hasta $+10 \, [dBm]$) sin verificar este caso: con $+10 \, [dBm]$ la ONT más cercana recibiría $-8{,}1 \, [dBm]$, en el límite de su saturación.
+    \item \underline{Video overlay:} si se agrega (\autoref{sec:television}), el WDM del amplificador suma $0{,}8 \, [dB]$ al recorrido GPON y el margen sobrante pasa a $1{,}25 \, [dB]$, que sigue cumpliendo.
+\end{itemize}
+
+\pendiente{Región Oeste: recorridos de mayor y menor pérdida propios, a cargo de Mendes Rosa y Monja.}

@@ -3,20 +3,118 @@
 
 \subsection{Fibras y cables}
 \label{sec:fibras}
-% Consigna 6.1: fibras necesarias en cada tramo para la cobertura final. Diferenciar:
-% primera etapa, crecimiento, reserva y otras aplicaciones.
-% Seleccionar capacidades comerciales de cable y presentar una tabla por tramo con
-% longitud, cantidad de fibras y asignación.
-\pendiente{tabla por tramo: longitud, fibras y asignación (uso, crecimiento, reserva).}
+
+\subsubsection{Asignación de fibras por cluster}
+Cada cluster recibe un bloque de 24 fibras del troncal. La asignación de las fibras dentro del bloque, para la cobertura final, se muestra en la \autoref{tab:asignacion_cluster}.
+
+\begin{table}[H]
+    \centering
+    \footnotesize
+    \caption{Asignación de las 24 fibras del troncal de cada cluster.}
+    \label{tab:asignacion_cluster}
+    \begin{tabular}{|p{6.0cm}|c|c|p{2.6cm}|}
+        \hline
+        \textbf{Uso} & \textbf{8 sectores} & \textbf{7 sectores} & \textbf{Fibras} \\
+        \hline
+        Primera etapa (una por sector, al splitter 1:4) & 8 & 7 & F1 a F8 \\
+        Crecimiento (segunda fibra por sector) & 8 & 7 & F9 a F16 \\
+        Otras aplicaciones (enlaces punto a punto) & 2 & 2 & F17 y F18 \\
+        Reserva & 6 & 8 & F19 a F24 y las no usadas \\
+        \hline
+        \textbf{Total} & \textbf{24} & \textbf{24} & \\
+        \hline
+    \end{tabular}
+\end{table}
+
+En la primera etapa se utilizan las mismas fibras que en la cobertura final (una por sector), ya que la red pasiva se construye completa desde el inicio. Lo que crece entre etapas es la ocupación de las CTO y la cantidad de ONT, no la cantidad de fibras del troncal.
+
+En los cables de distribución de cada sector (12 fibras) se asignan:
+\begin{itemize}
+    \item F1 a F4: una por cada CTO.
+    \item F5 a F8: crecimiento, por ejemplo para agregar una CTO o dividir una existente.
+    \item F9 a F12: reserva.
+\end{itemize}
+
+\subsubsection{Capacidad de los cables por tramo}
+La cantidad de fibras de cada tramo del troncal es la suma de los bloques de los clusters que alimenta, y se cubre con las capacidades comerciales del cable CFOA-SM-AS80-S TS: 24, 48, 72, 96 y 144 fibras \cite{et_as_ts}. El tramo de salida del hub (CT-01) concentra 240 fibras, por lo que se resuelve con dos cables de 144 fibras. La capacidad de cada tramo figura en la \autoref{tab:tramos}. La \autoref{tab:cantidades} resume las cantidades de cable y de cajas de la Región Este.
+
+\begin{table}[H]
+    \centering
+    \footnotesize
+    \caption{Cantidades de cables y cajas de la Región Este.}
+    \label{tab:cantidades}
+    \begin{tabular}{|p{6.2cm}|r|r|}
+        \hline
+        \textbf{Elemento} & \textbf{Traza} & \textbf{Con 10\,\% adicional} \\
+        \hline
+        Troncal AS80-S TS 144 F (2 cables en CT-01) & $0{,}14 \, [km]$ & $0{,}15 \, [km]$ \\
+        Troncal AS80-S TS 96 F & $0{,}40 \, [km]$ & $0{,}44 \, [km]$ \\
+        Troncal AS80-S TS 72 F & $0{,}42 \, [km]$ & $0{,}47 \, [km]$ \\
+        Troncal AS80-S TS 48 F & $1{,}46 \, [km]$ & $1{,}61 \, [km]$ \\
+        Troncal AS80-S TS 24 F & $4{,}81 \, [km]$ & $5{,}29 \, [km]$ \\
+        Cable de cluster MINI-RA 24 F & $26{,}25 \, [km]$ & $28{,}87 \, [km]$ \\
+        Cable de distribución MINI-RA 12 F & $33{,}40 \, [km]$ & $36{,}74 \, [km]$ \\
+        Drop Fig.8 1 F, primera etapa ($2.771 \times 83 \, [m]$) & -- & $230 \, [km]$ \\
+        \hline
+        \textbf{Cajas y equipos pasivos} & \multicolumn{2}{r|}{\textbf{Cantidad}} \\
+        \hline
+        ODF DIO B144 en el hub & \multicolumn{2}{r|}{2} \\
+        Cajas FK-CEO-4M: derivaciones D1 a D4 y cajas de distribución (12 de ellas también son CEO de cluster) & \multicolumn{2}{r|}{96} \\
+        Splitters PLC 1:4 & \multicolumn{2}{r|}{92} \\
+        CTO FK-CTO-16MC con splitter 1:16 & \multicolumn{2}{r|}{365} \\
+        \hline
+    \end{tabular}
+\end{table}
+
+La longitud de cada drop se estima como el recorrido medio entre la CTO y la vivienda ($68 \, [m]$) más $15 \, [m]$ para la bajada del poste y el ingreso al domicilio. A los rulos de reserva de $20 \, [m]$ por caja de empalme y $10 \, [m]$ por CTO (\autoref{sec:trazas}) corresponden unos $2 \, [km]$ adicionales de cable de cluster y $5{,}5 \, [km]$ de cable de distribución.
 
 \subsection{Puertos GPON y ancho de banda}
 \label{sec:puertos}
-% Consigna 6.2: definir y justificar:
-% - Máximo de abonados por puerto GPON.
-% - Relación de división total y etapas de división.
-% - Puertos necesarios en la primera etapa y en la cobertura final.
-% - Capacidad compartida y demanda estimada en hora pico.
-% - Criterio de simultaneidad o sobrecontratación.
-% Distinguir la relación de división óptica del criterio de sobrecontratación y explicar
-% cómo ambos condicionan la capacidad ofrecida.
-\pendiente{abonados por puerto, relación de división, cantidad de puertos y demanda en hora pico.}
+
+\subsubsection{Abonados por puerto y relación de división}
+\begin{itemize}
+    \item \underline{Relación de división:} dos etapas, 1:4 en la caja de distribución y 1:16 en la CTO, que dan una relación total de \textbf{1:64}. La OLT admite hasta 1:128 \cite{vsol_olt}, pero 1:64 deja margen en el presupuesto óptico (\autoref{sec:presupuesto}) y mayor capacidad por abonado.
+    \item \underline{Abonados por puerto:} hasta 64 por diseño físico. Con 68 viviendas por sector y una adopción del 90\,\%, cada puerto atiende como máximo \textbf{61 abonados} en la cobertura final. En la primera etapa el promedio es de $2.771 / 92 \approx 30$ abonados por puerto.
+\end{itemize}
+
+\subsubsection{Cantidad de puertos}
+Cada sector se alimenta con una fibra del troncal que se conecta a un puerto PON, por lo que la Región Este requiere \textbf{92 puertos PON tanto en la primera etapa como en la cobertura final}. Para reducir los puertos de la primera etapa podría conectarse cada puerto a dos sectores mediante un splitter 1:2 en el hub. Sin embargo, esa división adicional ($3{,}7 \, [dB]$ más un conector) haría que el recorrido de mayor pérdida no cumpla el presupuesto óptico por $1{,}95 \, [dB]$ (\autoref{sec:presupuesto}), por lo que se descarta.
+
+Se instalan \textbf{6 OLT VSOL V1600G2-B} de 16 puertos (96 puertos), cada una a cargo de dos clusters: la OLT-E1 atiende C1 y C2, la OLT-E2 atiende C3 y C4, y así sucesivamente hasta la OLT-E6 con C11 y C12. Quedan 4 puertos libres.
+
+\subsubsection{Capacidad compartida y demanda en la hora de mayor tráfico}
+Cada puerto GPON ofrece $2{,}488 \, [Gbps]$ de bajada y $1{,}244 \, [Gbps]$ de subida, compartidos entre todos los abonados del sector \cite{g984_2}.
+
+Para estimar la demanda se toma el consumo promedio informado por OpenVault para el segundo trimestre de 2025: $664 \, [GB]$ por mes y por abonado \cite{openvault}. Este dato corresponde a EE.\,UU. y resulta conservador para la Argentina. Suponiendo que la hora de mayor tráfico concentra el 10\,\% del tráfico diario:
+\begin{equation}
+    D_{hp} = \frac{664 \, [GB]}{30 \, [\text{días}]} \times 0{,}10 \times \frac{8 \, [bit/byte]}{3600 \, [s]} \approx 4{,}9 \, [Mbps] \approx 5 \, [Mbps] \text{ por abonado}
+    \label{eq:demanda}
+\end{equation}
+
+\begin{table}[H]
+    \centering
+    \caption{Demanda en la hora de mayor tráfico por puerto GPON (bajada).}
+    \label{tab:demanda_puerto}
+    \begin{tabular}{|l|c|c|}
+        \hline
+        \textbf{Concepto} & \textbf{Primera etapa} & \textbf{Cobertura final} \\
+        \hline
+        Abonados por puerto & 30 & 61 \\
+        Demanda en hora pico ($\times 5 \, [Mbps]$) & $150 \, [Mbps]$ & $305 \, [Mbps]$ \\
+        Ocupación de la capacidad de bajada ($2{,}488 \, [Gbps]$) & 6\,\% & 12\,\% \\
+        Suma de planes contratados ($\times 300 \, [Mbps]$) & $9{,}0 \, [Gbps]$ & $18{,}3 \, [Gbps]$ \\
+        Sobrecontratación (suma de planes / capacidad) & $3{,}6:1$ & $7{,}4:1$ \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\subsubsection{Relación de división frente a sobrecontratación}
+Se trata de dos conceptos distintos:
+\begin{itemize}
+    \item La \textbf{relación de división óptica} (1:64) es una característica física de la ODN. Fija cuántas ONT comparten una fibra y un puerto, y determina la pérdida de los splitters, y con ella el presupuesto óptico.
+    \item La \textbf{sobrecontratación} es un criterio comercial y de tráfico: relaciona la suma de las velocidades contratadas con la capacidad real disponible. Es posible porque los abonados no usan su velocidad máxima al mismo tiempo.
+\end{itemize}
+
+Ambas condicionan la capacidad ofrecida. La relación de división limita la capacidad garantizada en el peor caso: si los 61 abonados de un puerto transmitieran a la vez, cada uno dispondría de $2.488 / 61 \approx 41 \, [Mbps]$. La sobrecontratación define si esa limitación se percibe: con una demanda simultánea de $305 \, [Mbps]$ por puerto, un abonado puede alcanzar la velocidad de su plan, incluso el de $600 \, [Mbps]$, durante la hora pico. La sobrecontratación de $7{,}4:1$ es moderada para una red residencial. Si la demanda creciera, la capacidad se amplía usando las fibras de crecimiento para dividir sectores o para incorporar XGS-PON ($10 \, [Gbps]$) sobre la misma ODN, sin modificar la relación de división física.
+
+\pendiente{Región Oeste: fibras por tramo y puertos, a cargo de Mendes Rosa y Monja.}

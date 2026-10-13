@@ -1,19 +1,100 @@
 \section{Alternativas para distribuir televisión}
 \label{sec:television}
+Para estimar el tráfico de televisión se supone un paquete de $100$ canales en alta definición, codificados a $8 \, [Mbps]$ cada uno. Se trata de un supuesto de diseño. La COYSPU ya brinda televisión por cable sobre su red HFC \cite{coyspu}, por lo que cuenta con una cabecera de televisión que puede reutilizarse en cualquiera de las dos alternativas.
 
 \subsection{Televisión sobre IP}
 \label{sec:iptv}
-% Diferenciar distribución multicast y unicast; efecto sobre la capacidad GPON y la conectividad mayorista.
-\pendiente{IPTV multicast vs. unicast y su efecto en GPON y en el enlace mayorista.}
+Los canales se transmiten como flujos IP dentro de la capacidad GPON, y cada vivienda los recibe en un decodificador (\textit{set-top box}) o en una aplicación del televisor. El tráfico depende del modo de distribución:
+\begin{itemize}
+    \item \underline{Multicast (canales en vivo):} cada canal se envía una sola vez por la red, y la OLT y los switches lo replican solo hacia los puertos donde hay al menos un espectador, mediante el protocolo IGMP. En un puerto GPON la carga depende de la cantidad de canales distintos que se miran en el sector, no de la cantidad de espectadores: aun si los 61 abonados miraran 30 canales distintos, el tráfico sería de $30 \times 8 = 240 \, [Mbps]$, el 10\,\% del puerto.
+    \item \underline{Unicast (video a demanda, programación diferida, plataformas OTT):} cada espectador recibe su propio flujo. Si 30 abonados de un sector miran contenido a demanda, el puerto transporta $30 \times 8 = 240 \, [Mbps]$, y la carga crece linealmente con los espectadores.
+\end{itemize}
+
+\textbf{Efecto sobre la conectividad mayorista:}
+\begin{itemize}
+    \item Si la cabecera IPTV se instala en el hub (por ejemplo, transcodificando las señales que ya recibe la cooperativa), el multicast no consume capacidad mayorista.
+    \item Si los canales llegan desde un proveedor externo, el multicast agrega una carga fija de $100 \times 8 = 800 \, [Mbps]$, independiente de la cantidad de abonados.
+    \item El unicast, en cambio, viaja por el enlace mayorista salvo que se use una caché local. Con el 40\,\% de los abonados de la primera etapa de ambas regiones mirando contenido a demanda en la hora pico, serían $0{,}4 \times 5.463 \times 8 \, [Mbps] \approx 17{,}5 \, [Gbps]$ adicionales.
+\end{itemize}
 
 \subsection{Video overlay óptico}
 \label{sec:overlay}
-% Equipos y componentes adicionales (transmisor de video a 1550 nm, EDFA, WDM), compatibilidad con la ODN
-% y necesidad de un presupuesto óptico específico.
-\pendiente{video overlay a 1550 nm: equipos, compatibilidad y presupuesto óptico.}
+La señal de televisión por radiofrecuencia (la misma grilla de canales de la red HFC) se transmite en una tercera longitud de onda, en la banda de $1550$ a $1560 \, [nm]$ reservada para video \cite{g983_3}, por la misma ODN que la señal GPON.
+
+\textbf{Equipos y componentes adicionales:}
+\begin{itemize}
+    \item Un \textbf{transmisor óptico de $1550 \, [nm]$} en el hub, que modula la grilla de RF de la cabecera existente.
+    \item \textbf{Amplificadores ópticos (EDFA) con WDM incorporado}, que combinan la señal de video con la GPON de cada puerto. Con el modelo VSOL V8816W-32P-19, de 32 salidas de $+19 \, [dBm]$ \cite{vsol_edfa}, la Región Este requiere 3 equipos para sus 92 puertos.
+    \item \textbf{ONT con receptor de RF} (VSOL V2802GWT), con salida coaxial para el televisor \cite{vsol_catv}.
+\end{itemize}
+
+\textbf{Compatibilidad con la ODN:} los splitters PLC trabajan entre 1260 y $1650 \, [nm]$ \cite{et_splitter}, por lo que la ODN no se modifica. Los conectores SC/APC adoptados en toda la red son necesarios para el video por RF, que es sensible a las reflexiones.
+
+\textbf{Presupuesto óptico específico:} el receptor de RF de la ONT requiere una potencia de entrada de entre $+2$ y $-18 \, [dBm]$. Su mejor desempeño se da en el rango de control automático de ganancia, de $0$ a $-10 \, [dBm]$, donde la relación de error de modulación (MER) es de $35 \, [dB]$ \cite{vsol_catv}. A $1550 \, [nm]$ la fibra atenúa $0{,}25 \, [dB/km]$ \cite{et_minira}.
+
+\begin{table}[H]
+    \centering
+    \footnotesize
+    \caption{Presupuesto óptico del video overlay a $1550 \, [nm]$.}
+    \label{tab:overlay}
+    \begin{tabular}{|l|c|c|}
+        \hline
+        \textbf{Concepto} & \textbf{Mayor pérdida (CTO-91.1)} & \textbf{Menor pérdida (CTO-28.3)} \\
+        \hline
+        Salida del EDFA & $+19 \, [dBm]$ & $+19 \, [dBm]$ \\
+        Paso por el WDM del EDFA & $0{,}8 \, [dB]$ & $0$ \\
+        Splitters, conexiones y empalmes & $20{,}8 + 1{,}5 + 1{,}1 = 23{,}4 \, [dB]$ & $18{,}06 \, [dB]$ \\
+        Fibra ($4{,}08$ y $0{,}26 \, [km] \times 0{,}25$) & $1{,}02 \, [dB]$ & $0{,}07 \, [dB]$ \\
+        \hline
+        \textbf{Potencia en el receptor de RF} & $\mathbf{-6{,}2 \, [dBm]}$ & $\mathbf{+0{,}9 \, [dBm]}$ \\
+        Rango admisible & \multicolumn{2}{c|}{$-18$ a $+2 \, [dBm]$ (óptimo: $0$ a $-10 \, [dBm]$)} \\
+        \hline
+        \textbf{Resultado} & Cumple, dentro del rango óptimo & Cumple \\
+        \hline
+    \end{tabular}
+\end{table}
+
+Además, el WDM del EDFA agrega $0{,}8 \, [dB]$ al recorrido GPON, que sigue cumpliendo con un margen sobrante de $1{,}25 \, [dB]$ (\autoref{sec:presupuesto}).
 
 \subsection{Comparación y elección}
 \label{sec:tv_eleccion}
-% Qué tráfico genera cada alternativa, por dónde circula, qué recursos usa.
-% Justificar cuál se elige para el proyecto y bajo qué condiciones.
-\pendiente{comparación de ambas alternativas y elección justificada.}
+
+\begin{table}[H]
+    \centering
+    \footnotesize
+    \caption{Comparación de las alternativas de distribución de televisión.}
+    \label{tab:tv_comparacion}
+    \begin{tabular}{|p{3.0cm}|p{5.6cm}|p{5.6cm}|}
+        \hline
+        \textbf{Aspecto} & \textbf{Televisión sobre IP} & \textbf{Video overlay a $1550 \, [nm]$} \\
+        \hline
+        Tráfico generado & Flujos IP: multicast (fijo por canal) y unicast (proporcional a los espectadores) & Señal de RF analógica o digital (DVB-C), independiente de la cantidad de espectadores \\
+        \hline
+        Por dónde circula & Cabecera o proveedor $\rightarrow$ enlace mayorista (si es externo) $\rightarrow$ switch $\rightarrow$ OLT $\rightarrow$ puerto GPON $\rightarrow$ ONT & Cabecera $\rightarrow$ transmisor $\rightarrow$ EDFA $\rightarrow$ WDM $\rightarrow$ ODN $\rightarrow$ receptor de RF de la ONT \\
+        \hline
+        Recursos que usa & Capacidad de los puertos GPON y, en unicast o con proveedor externo, del enlace mayorista & Una longitud de onda propia; no usa capacidad GPON ni mayorista \\
+        \hline
+        Equipamiento adicional & Cabecera IPTV, OLT y ONT con IGMP, decodificador por televisor & Transmisor, EDFA, ONT con RF (más costosas) \\
+        \hline
+        Servicios & Interactivos: guía, programación diferida, video a demanda & Grilla lineal; los televisores existentes se conectan sin decodificador \\
+        \hline
+        Impacto en la ODN & Ninguno & Consume $0{,}8 \, [dB]$ de margen GPON y exige conectores APC \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\textbf{Elección:} se propone \textbf{televisión sobre IP con distribución multicast} desde una cabecera instalada en el hub, por las siguientes razones:
+\begin{itemize}
+    \item Su impacto en la capacidad es pequeño: 10\,\% de un puerto GPON en el peor caso, y nulo sobre el enlace mayorista si la cabecera es local.
+    \item No requiere amplificadores ni ONT especiales.
+    \item Preserva el margen óptico de la ODN.
+    \item Permite ofrecer servicios interactivos.
+\end{itemize}
+El contenido a demanda (unicast) debe dimensionarse en el enlace mayorista o resolverse con cachés locales.
+
+El \textbf{video overlay} sería preferible bajo dos condiciones:
+\begin{itemize}
+    \item La cooperativa quiere migrar a sus abonados de la red HFC sin entregar decodificadores, conectando los televisores existentes a la salida coaxial de la ONT.
+    \item La capacidad del enlace mayorista o de la cabecera IPTV resulta limitante.
+\end{itemize}
+El presupuesto óptico verificado muestra que la red diseñada admite esta alternativa sin modificar la ODN, por lo que puede incorporarse en el futuro.

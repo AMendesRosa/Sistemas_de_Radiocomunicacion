@@ -3,30 +3,173 @@
 
 \subsection{Diagrama general}
 \label{sec:diagrama_general}
-% Consigna 5.1: diagrama desde el proveedor mayorista hasta los abonados.
-% Identificar equipos activos, distribuidores ópticos, cables, empalmes, divisores y terminales.
-% Señalar el límite de la ODN.
-\pendiente{diagrama general proveedor mayorista -- OLT -- ODN -- ONT, con el límite de la ODN.}
+La \autoref{fig:diagrama_general} representa la red desde el proveedor mayorista hasta el abonado. La red de distribución óptica (ODN, \textit{Optical Distribution Network}) es la parte pasiva comprendida entre la interfaz óptica del puerto PON de la OLT y la interfaz óptica de la ONT \cite{g984_2}. Incluye los patch cords y el ODF del hub, los cables, las cajas de empalme, los splitters, las cajas terminales, la acometida y la roseta del abonado. Los equipos activos (OLT y ONT) quedan fuera de la ODN.
+
+\begin{figure}[H]
+    \centering
+    \resizebox{\textwidth}{!}{%
+    \begin{tikzpicture}[font=\footnotesize, node distance=0.5cm,
+        activo/.style={draw, thick, rounded corners=2pt, fill=blue!10, minimum height=1.1cm, align=center, text width=2.1cm},
+        pasivo/.style={draw, thick, fill=gray!10, minimum height=1.1cm, align=center, text width=2.1cm},
+        caja/.style={draw, thick, rounded corners=5pt, fill=orange!15, minimum height=1.1cm, align=center, text width=2.1cm},
+        flecha/.style={-{Stealth}, thick}]
+        % Fila superior: transporte y hub
+        \node[activo] (refefo) at (0,3.2) {\textbf{Nodo REFEFO}\\ARSAT\\Marcos Juárez};
+        \node[activo] (router) at (4.2,3.2) {\textbf{Router de borde}\\BNG, cachés};
+        \node[activo] (sw) at (7.6,3.2) {\textbf{Switch de}\\\textbf{agregación}\\$10 \, [GE]$};
+        \node[activo] (olt) at (11.0,3.2) {\textbf{OLT}\\VSOL V1600G2-B\\SFP Clase C+};
+        \node[pasivo] (odf) at (14.4,3.2) {\textbf{ODF}\\DIO B144\\SC/APC};
+        \draw[flecha] (refefo) -- node[above, font=\scriptsize]{Enlace P2P} node[below, font=\scriptsize]{10GBASE-LR} (router);
+        \draw[flecha] (router) -- (sw);
+        \draw[flecha] (sw) -- node[above, font=\scriptsize]{LAG $2 \times 10G$} (olt);
+        \draw[flecha] (olt) -- node[above, font=\scriptsize]{patch cord} (odf);
+        % Fila inferior: planta externa
+        \node[caja] (ceo) at (14.4,0) {\textbf{CEO de cluster}\\FK-CEO-4M\\(derivación)};
+        \node[caja] (cd) at (11.0,0) {\textbf{Caja de}\\\textbf{distribución}\\splitter 1:4};
+        \node[caja] (cto) at (7.6,0) {\textbf{CTO}\\FK-CTO-16MC\\splitter 1:16};
+        \node[pasivo] (roseta) at (4.2,0) {\textbf{Roseta}\\óptica\\SC/APC};
+        \node[activo] (ont) at (0,0) {\textbf{ONT}\\VSOL V2802RH};
+        \draw[flecha] (odf) -- node[right, font=\scriptsize, align=left]{Troncal\\AS80-S TS\\24 a 144 F} (ceo);
+        \draw[flecha] (ceo) -- node[above, font=\scriptsize]{Cable de cluster} node[below, font=\scriptsize]{MINI-RA 24 F} (cd);
+        \draw[flecha] (cd) -- node[above, font=\scriptsize]{Distribución} node[below, font=\scriptsize]{MINI-RA 12 F} (cto);
+        \draw[flecha] (cto) -- node[above, font=\scriptsize]{Drop} node[below, font=\scriptsize]{Fig.8 G.657.A} (roseta);
+        \draw[flecha] (roseta) -- node[above, font=\scriptsize]{patch cord} (ont);
+        % Límite de la ODN
+        \draw[very thick, dashed, red!70!black, rounded corners=8pt] (12.55,4.3) -- (16.1,4.3) -- (16.1,-1.2) -- (1.75,-1.2) -- (1.75,1.05) -- (12.55,1.05) -- cycle;
+        \node[red!70!black, font=\small\bfseries] at (8.6,1.35) {ODN (red de distribución óptica pasiva)};
+        % Referencias de sitio
+        \node[font=\scriptsize, gray] at (9.3,4.4) {Hub COYSPU (9 de Julio 99)};
+        \node[font=\scriptsize, gray] at (0,-1.0) {Domicilio};
+        \node[font=\scriptsize, gray] at (0,4.4) {Proveedor mayorista};
+    \end{tikzpicture}%
+    }
+    \caption{Diagrama general de la red: desde el proveedor mayorista hasta el abonado. La línea de trazos delimita la ODN.}
+    \label{fig:diagrama_general}
+\end{figure}
+
+La división se realiza en dos niveles: un splitter 1:4 en la caja de distribución de cada sector y un splitter 1:16 en cada caja terminal. La relación total es de 1:64 por puerto PON. Se eligió división distribuida en dos niveles porque reduce la cantidad de fibras del troncal (una por sector en lugar de una por caja terminal) y permite ubicar la caja terminal a pocos metros de las viviendas.
 
 \subsection{Organización del área de cobertura}
 \label{sec:organizacion}
-% Consigna 5.2: hub en la Cooperativa COYSPU (9 de Julio 99-149, Marcos Juárez).
-% Dividir el área en regiones, clusters y sectores de diseño según la metodología de la asignatura.
-% Explicitar la relación entre estas unidades e indicar, para cada una, viviendas y capacidad.
-% Trabajar en detalle DOS sectores de diseño por equipo.
-\pendiente{ubicación del hub y división en regiones, clusters y sectores con viviendas y capacidad.}
+El hub (nodo cabecera) se ubica en la sede de la Cooperativa COYSPU, en 9 de Julio 99, Marcos Juárez. Allí se instalan la OLT, el ODF, el equipamiento de borde y la terminación del enlace mayorista. El área se organiza en cuatro niveles jerárquicos:
+
+\begin{table}[H]
+    \centering
+    \footnotesize
+    \caption{Unidades de diseño y su relación.}
+    \label{tab:unidades}
+    \begin{tabular}{|l|p{6.4cm}|p{5.0cm}|}
+        \hline
+        \textbf{Unidad} & \textbf{Definición} & \textbf{Capacidad prevista} \\
+        \hline
+        Región & Mitad del área de cobertura a cada lado de la RP12 & Este: $6.153$ viviendas, 12 clusters, 92 sectores \\
+        \hline
+        Cluster & Grupo contiguo de hasta 8 sectores alimentado por un bloque de 24 fibras del troncal, que se deriva en una caja de empalme (CEO) & 7 u 8 sectores: entre 439 y 540 viviendas \\
+        \hline
+        Sector de diseño & Zona atendida por un puerto PON: un splitter 1:4 en su caja de distribución y hasta 4 CTO 1:16 & Hasta 68 viviendas, 64 salidas: 61 abonados al 90\,\% \\
+        \hline
+        Área de CTO & Grupo de viviendas atendido por una caja terminal & Hasta 17 viviendas, 16 salidas \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\textbf{Metodología de sectorización.} Las viviendas de cada manzana se representan como puntos sobre su perímetro (\autoref{sec:casas}). Sobre ellos se aplica el siguiente procedimiento, implementado en Python con los datos de calles de OpenStreetMap:
+\begin{enumerate}
+    \item Se identifican los grupos de viviendas conexos, separados entre sí por más de $100 \, [m]$, para que ningún sector abarque zonas sin viviendas. En la Región Este resultan tres grupos: el casco urbano ($6.074$ viviendas) y dos barrios aislados al noreste (45 y 34 viviendas).
+    \item Cada grupo se divide por bisecciones sucesivas en sectores contiguos de hasta 68 viviendas.
+    \item Dentro de cada sector, las viviendas se asignan a hasta 4 CTO con capacidad de 17. Cada CTO se ubica en la esquina que minimiza la longitud de acometida más larga.
+    \item Los sectores se agrupan en clusters contiguos de hasta 8 sectores.
+\end{enumerate}
+
+Resultan \textbf{12 clusters, 92 sectores y 365 cajas terminales} en la Región Este (\autoref{fig:sectores} y \autoref{tab:clusters}). Los 90 sectores del casco urbano tienen 4 CTO y entre 67 y 68 viviendas; los dos barrios aislados forman los sectores 91 (34 viviendas, 2 CTO) y 92 (45 viviendas, 3 CTO). El detalle de cada sector se presenta en el \autoref{anexo:sectores}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{plano_este_sectores.pdf}
+    \caption{Región Este: clusters (C1 a C12) y sectores de diseño (1 a 92).}
+    \label{fig:sectores}
+\end{figure}
+
+\input{secciones/tablas/clusters}
 
 \subsection{Trazas generales}
 \label{sec:trazas}
-% Consigna 5.3: recorridos desde el hub hasta los clusters y las terminales de acceso.
-% Indicar: tipo de tendido y longitudes, capacidad de cables por tramo, ubicación de cajas de empalme,
-% distribución y terminación, ubicación y relación de división de splitters, reservas.
-% Identificar los aspectos que requerirían verificación de campo.
-\pendiente{trazas, tipo de tendido, longitudes y ubicación de cajas y splitters.}
+Los cables se tienden en forma aérea sobre la postería, siguiendo los recorridos más cortos por la red de calles. Las longitudes se calcularon sobre el grafo de calles de OpenStreetMap \cite{osm}. Se distinguen tres niveles de cable:
+
+\begin{itemize}
+    \item \underline{Troncal o alimentación:} desde el ODF del hub hasta la caja de empalme (CEO) de cada cluster. Cada cluster tiene asignadas 24 fibras, por lo que la capacidad de cada tramo es la suma de los clusters que alimenta. La traza total es de $7{,}22 \, [km]$ (\autoref{fig:troncal} y \autoref{tab:tramos}).
+    \item \underline{Cable de cluster:} cable MINI-RA de 24 fibras que parte de la CEO de cluster y recorre las cajas de distribución de sus sectores. En cada caja se abre el tubo y se derivan las fibras del sector sin cortar las que siguen de paso (sangría). Longitud total: $26{,}25 \, [km]$.
+    \item \underline{Distribución de sector:} cable MINI-RA de 12 fibras desde la caja de distribución (splitter 1:4) hasta las CTO del sector. Longitud total: $33{,}40 \, [km]$.
+    \item \underline{Acometida (drop):} desde la CTO hasta cada vivienda. Su longitud media es de $68 \, [m]$, el 90\,\% de las viviendas queda a menos de $129 \, [m]$ de su CTO y la máxima es de $270 \, [m]$.
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{plano_este_troncal.pdf}
+    \caption{Región Este: traza del cable troncal, cajas de empalme de cluster y recorridos de mayor y menor pérdida óptica.}
+    \label{fig:troncal}
+\end{figure}
+
+\input{secciones/tablas/tramos_troncal}
+\input{secciones/tablas/nodos_troncal}
+
+\textbf{Ubicación de cajas y splitters:}
+\begin{itemize}
+    \item \underline{Cajas de empalme del troncal (FK-CEO-4M):} en las 12 CEO de cluster y en los 4 puntos de derivación D1 a D4 (\autoref{tab:nodos}), donde cambia la capacidad del cable.
+    \item \underline{Cajas de distribución (FK-CEO-4M con splitter 1:4):} una por sector (92 en total), en la esquina que minimiza el recorrido de distribución hasta sus CTO. Su ubicación se lista en el \autoref{anexo:sectores}.
+    \item \underline{Cajas terminales (FK-CTO-16MC con splitter 1:16):} 365 cajas en postes de esquina, cada una para hasta 17 viviendas.
+\end{itemize}
+
+\textbf{Reservas de cable:} se deja un rulo de reserva de $20 \, [m]$ en cada CEO y caja de distribución y de $10 \, [m]$ en cada CTO. Esto permite reabrir los empalmes y reubicar las cajas sin reemplazar el cable. Además, se adiciona un 10\,\% a las longitudes de traza por catenaria, bajadas y desvíos en los postes.
+
+\subsubsection{Aspectos que requieren verificación de campo}
+\label{sec:verificacion}
+\begin{itemize}
+    \item \underline{Postería:} propiedad, estado, altura y vanos reales, y acuerdo de uso con su propietario (la COYSPU no figura como distribuidora eléctrica \cite{coyspu}, por lo que el permiso debe gestionarse con la distribuidora o el municipio).
+    \item \underline{Cruces especiales:} cruces de la RN9, de la RP12 y de la traza ferroviaria, que pueden requerir tendido subterráneo o permisos de Vialidad y del concesionario ferroviario.
+    \item \underline{Viviendas reales:} cantidad de viviendas por manzana, en especial en el centro, donde los edificios de departamentos requieren un diseño vertical propio, y en los barrios en expansión de la periferia, donde OpenStreetMap puede no estar actualizado.
+    \item \underline{Calles sin nombre y loteos nuevos} en el noreste de la región (sectores 91 y 92).
+    \item \underline{Ubicación exacta del nodo REFEFO} y de la red de fibra existente de la COYSPU, que podría reutilizarse para el enlace mayorista.
+\end{itemize}
 
 \subsection{Desarrollo de dos sectores}
 \label{sec:sectores}
-% Consigna 5.4: planos ampliados de dos sectores con recorridos, cajas, splitters,
-% viviendas atendidas, longitudes de tramos e identificación de fibras y conexiones.
-% Los planos van en Planos/ y deben tener escala, referencias e identificación coherente con tablas.
-\pendiente{planos ampliados de los dos sectores de diseño.}
+Se desarrollan en detalle dos sectores representativos:
+\begin{itemize}
+    \item El \textbf{sector 28} (cluster C3), en el centro, junto al hub, que contiene el recorrido de menor pérdida de la región.
+    \item El \textbf{sector 90} (cluster C12), en la periferia noreste: es el sector completo, con 4 CTO, más alejado del hub.
+\end{itemize}
+
+En ambos casos las fibras del cable de distribución de 12 fibras se asignan así:
+\begin{itemize}
+    \item F1 a F4: salidas 1 a 4 del splitter 1:4, una para cada CTO.
+    \item F5 a F8: crecimiento.
+    \item F9 a F12: reserva.
+\end{itemize}
+En cada CTO, el splitter 1:16 conectorizado tiene sus salidas numeradas del 1 al 16, y cada salida corresponde a una vivienda.
+
+\subsubsection{Sector 28}
+El sector 28 tiene 67 viviendas en las manzanas comprendidas entre 9 de Julio, Av. San Martín, Av. Belgrano y Pasaje Maipú (\autoref{fig:sector28}). Su caja de distribución CD-28 está en 9 de Julio y Av. San Martín, en el mismo poste que la CEO del cluster C3, por lo que ambas funciones pueden resolverse en una única caja FK-CEO-4M. El cable de distribución mide $230 \, [m]$ y la acometida más larga es de $109 \, [m]$ (\autoref{tab:sector28}).
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{plano_sector_28.pdf}
+    \caption{Plano ampliado del sector 28 (cluster C3).}
+    \label{fig:sector28}
+\end{figure}
+
+\input{secciones/tablas/sector_28}
+
+\subsubsection{Sector 90}
+El sector 90 tiene 67 viviendas en el noreste de la región, alrededor de Hermanas Vicentinas y Soberanía Nacional Este (\autoref{fig:sector90}). Su caja de distribución CD-90 está en Hermanas Vicentinas y Soberanía Nacional Este, a $2{,}92 \, [km]$ del hub por el troncal y el cable de cluster. Por la menor densidad de viviendas, el cable de distribución es más largo ($633 \, [m]$) y la acometida más larga alcanza $227 \, [m]$ (\autoref{tab:sector90}). Es aceptable para un drop autosoportado, pero la ubicación de la CTO-90.4 debe revisarse en campo para acortarla.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{plano_sector_90.pdf}
+    \caption{Plano ampliado del sector 90 (cluster C12).}
+    \label{fig:sector90}
+\end{figure}
+
+\input{secciones/tablas/sector_90}
+
+\pendiente{Región Oeste: organización en clusters y sectores, trazas y desarrollo de sus dos sectores, a cargo de Mendes Rosa y Monja.}

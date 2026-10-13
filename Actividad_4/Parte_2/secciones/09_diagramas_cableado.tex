@@ -1,8 +1,76 @@
 \section{Diagramas de cableado y asignación de fibras}
 \label{sec:cableado}
-% Consigna 9: diagramas para seguir la continuidad óptica desde la OLT hasta las terminales de abonado.
-% - Diferenciar tramos de alimentación/troncal, distribución y acceso al abonado.
-% - Si se usan los términos dispersión, drop y acometida, definir el alcance de cada uno.
-% - Identificar cables, fibras, cajas, empalmes, splitters y puertos de salida,
-%   con correspondencia con los planos.
-\pendiente{diagramas de continuidad óptica y asignación de fibras.}
+
+\subsection{Tramos de la red y denominaciones}
+\begin{itemize}
+    \item \underline{Alimentación o troncal:} desde el ODF del hub hasta la caja de empalme (CEO) de cada cluster. Cables CT-01 a CT-16 (\autoref{tab:tramos}).
+    \item \underline{Distribución:} desde la CEO de cluster hasta las CTO. Se divide en el \textbf{cable de cluster} (CL-C1 a CL-C12, 24 fibras), que llega a las cajas de distribución de los sectores, y el \textbf{cable de distribución de sector} o de dispersión (DS-1 a DS-92, 12 fibras), que va desde el splitter 1:4 hasta las CTO.
+    \item \underline{Acceso al abonado:} el \textbf{drop} es el cable de una fibra entre la salida de la CTO y la vivienda. La \textbf{acometida} es su ingreso al domicilio, que termina en la roseta óptica, donde se conecta la ONT con un patch cord.
+\end{itemize}
+
+\subsection{Identificación}
+\begin{itemize}
+    \item \underline{Equipos y puertos:} OLT-E1 a OLT-E6, puertos PON 1 a 16. Cada OLT atiende dos clusters consecutivos: la OLT-E$n$ atiende los clusters C$(2n-1)$ y C$(2n)$. Los puertos se asignan en orden, primero los sectores del cluster impar y luego los del par.
+    \item \underline{ODF:} ODF-E1 (clusters C1 a C6) y ODF-E2 (clusters C7 a C12), con 24 posiciones consecutivas por cluster. Por ejemplo, C3 ocupa las posiciones 49 a 72 del ODF-E1.
+    \item \underline{Fibras:} se identifican por cluster y número de fibra dentro del bloque de 24 (C3-F6). En cada cable se sigue el código de colores ABNT de la especificación del fabricante \cite{et_minira}: 1 verde, 2 amarillo, 3 blanco, 4 azul, 5 rojo, 6 violeta, 7 marrón, 8 rosa, 9 negro, 10 gris, 11 naranja y 12 aqua. Las fibras 13 a 24 repiten la secuencia en el segundo tubo.
+    \item \underline{Cajas:} CEO-C$k$ (cluster), D1 a D4 (derivaciones del troncal), CD-$s$ (caja de distribución del sector $s$) y CTO-$s.j$ (caja terminal $j$ del sector $s$). Las salidas de cada CTO se numeran del 1 al 16.
+    \item \underline{Fibras dentro de cada cluster:} la fibra F$k$ alimenta al sector que ocupa el lugar $k$ del cluster (ordenados por número), y la F$(8+k)$ es su fibra de crecimiento (\autoref{tab:asignacion_cluster}).
+\end{itemize}
+
+\subsection{Diagrama de continuidad óptica}
+La \autoref{fig:continuidad} muestra la continuidad óptica completa de un abonado del sector 28, desde el puerto PON hasta la ONT, y la \autoref{tab:continuidad} detalla los dos sectores desarrollados.
+
+\begin{figure}[H]
+    \centering
+    \resizebox{\textwidth}{!}{%
+    \begin{tikzpicture}[font=\scriptsize,
+        eq/.style={draw, thick, rounded corners=2pt, fill=blue!10, minimum height=1.3cm, align=center, text width=1.75cm},
+        cj/.style={draw, thick, rounded corners=4pt, fill=orange!15, minimum height=1.3cm, align=center, text width=1.75cm},
+        cb/.style={midway, align=center, font=\tiny}]
+        \node[eq] (olt) at (0,0) {\textbf{OLT-E2}\\PON 6\\(SFP C+)};
+        \node[cj] (odf) at (2.6,0) {\textbf{ODF-E1}\\posición 54\\(C3-F6)};
+        \node[cj] (d1) at (5.2,0) {\textbf{D1}\\9 de Julio y\\Lardizábal};
+        \node[cj] (ceo) at (7.8,0) {\textbf{CEO-C3 / CD-28}\\9 de Julio y\\Av. San Martín};
+        \node[cj, fill=red!10] (sp4) at (10.4,0) {\textbf{Splitter 1:4}\\entrada: C3-F6\\salidas 1 a 4};
+        \node[cj] (cto) at (13.0,0) {\textbf{CTO-28.$j$}\\splitter 1:16\\salidas 1 a 16};
+        \node[cj] (ros) at (15.6,0) {\textbf{Roseta}\\SC/APC};
+        \node[eq] (ont) at (18.2,0) {\textbf{ONT}\\V2802RH};
+        \draw[-{Stealth}, thick] (olt) -- node[cb, above=6pt]{patch cord\\SC/UPC-APC} (odf);
+        \draw[-{Stealth}, thick] (odf) -- node[cb, above=6pt]{CT-01\\2 $\times$ 144 F} (d1);
+        \draw[-{Stealth}, thick] (d1) -- node[cb, above=6pt]{CT-04\\72 F} (ceo);
+        \draw[-{Stealth}, thick] (ceo) -- node[cb, above=6pt]{empalme} (sp4);
+        \draw[-{Stealth}, thick] (sp4) -- node[cb, above=6pt]{DS-28 (12 F)\\F$j$ $\rightarrow$ CTO-28.$j$} (cto);
+        \draw[-{Stealth}, thick] (cto) -- node[cb, above=6pt]{drop\\1 F} (ros);
+        \draw[-{Stealth}, thick] (ros) -- node[cb, above=6pt]{patch cord} (ont);
+        \draw[decorate, decoration={brace, amplitude=5pt, mirror}, thick] (-0.9,-0.95) -- (6.1,-0.95) node[midway, below=6pt]{Alimentación (troncal)};
+        \draw[decorate, decoration={brace, amplitude=5pt, mirror}, thick] (6.9,-0.95) -- (13.9,-0.95) node[midway, below=6pt]{Distribución};
+        \draw[decorate, decoration={brace, amplitude=5pt, mirror}, thick] (14.1,-0.95) -- (19.1,-0.95) node[midway, below=6pt]{Acceso al abonado};
+    \end{tikzpicture}%
+    }
+    \caption{Continuidad óptica de un abonado del sector 28: del puerto PON 6 de la OLT-E2 a la ONT, pasando por la fibra C3-F6.}
+    \label{fig:continuidad}
+\end{figure}
+
+\begin{table}[H]
+    \centering
+    \footnotesize
+    \caption{Asignación de puertos, fibras y cajas de los sectores desarrollados.}
+    \label{tab:continuidad}
+    \begin{tabular}{|l|p{5.6cm}|p{5.6cm}|}
+        \hline
+        \textbf{Elemento} & \textbf{Sector 28 (cluster C3)} & \textbf{Sector 90 (cluster C12)} \\
+        \hline
+        Puerto PON & OLT-E2, PON 6 & OLT-E6, PON 14 \\
+        Posición en el ODF & ODF-E1, 54 (crecimiento: 62) & ODF-E2, 126 (crecimiento: 134) \\
+        Fibra del troncal & C3-F6 (tubo 1, violeta) & C12-F6 (tubo 1, violeta) \\
+        Tramos del troncal & CT-01, CT-04 & CT-01, CT-03, CT-07, CT-13, CT-14, CT-16 \\
+        Empalmes en derivaciones & D1 & D1, D2, CEO-C5, D4, CEO-C6 \\
+        Cable de cluster & CL-C3, fibra 6 (la CD-28 está en la CEO-C3) & CL-C12, fibra 6, sangría en la CD-90 \\
+        Caja de distribución & CD-28: 9 de Julio y Av. San Martín & CD-90: Hermanas Vicentinas y Soberanía Nacional Este \\
+        Cable de distribución & DS-28: F1 a F4 a CTO-28.1 a 28.4 & DS-90: F1 a F4 a CTO-90.1 a 90.4 \\
+        Cajas terminales & \autoref{tab:sector28} & \autoref{tab:sector90} \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\pendiente{Región Oeste: diagramas de cableado y asignación de fibras propios, a cargo de Mendes Rosa y Monja. Se sugiere numerar sus OLT como OLT-O1 en adelante y sus ODF como ODF-O1 en adelante.}

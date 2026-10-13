@@ -1,9 +1,45 @@
 \section{Conectividad mayorista}
 \label{sec:mayorista}
-% Consigna 7 (acordar con el otro equipo):
-% - Punto de interconexión, tecnología del enlace, recorrido y equipos.
-% - Si el punto no puede verificarse, indicarlo como supuesto de diseño.
-% - Ancho de banda para la primera etapa: abonados, servicios, demanda simultánea y margen de crecimiento.
-% - Distinguir esta capacidad de la disponible en los puertos GPON.
-% Vínculo con la Parte 1: el enlace hub--proveedor puede dimensionarse como un enlace P2P.
-\pendiente{punto de interconexión, tecnología, equipos y ancho de banda de la primera etapa.}
+
+\subsection{Punto de interconexión y tecnología}
+Marcos Juárez cuenta con un nodo activo de la Red Federal de Fibra Óptica, según el listado de puntos de conexión de ARSAT de febrero de 2026 \cite{arsat_nodos}. Se propone conectar el hub de la COYSPU a ese nodo como proveedor mayorista de tránsito IP. La ubicación exacta del nodo no se publica, por lo que se adopta como \textbf{supuesto de diseño} que se encuentra dentro del ejido urbano, a no más de $4 \, [km]$ de recorrido del hub. Debe verificarse con ARSAT al momento de contratar el servicio.
+
+\begin{itemize}
+    \item \underline{Tecnología del enlace:} enlace punto a punto de fibra óptica con interfaces Ethernet de $10 \, [Gbps]$ (10GBASE-LR, $1310 \, [nm]$). Se dimensiona con la misma metodología que el enlace de la Parte 1 \cite{informe_p1}.
+    \item \underline{Recorrido:} cable aéreo CFOA-SM-AS80-S TS de 24 fibras desde el hub hasta el nodo REFEFO. Si la ubicación del nodo lo permite, puede aprovecharse la red de fibra existente de la cooperativa, que cuenta con un anillo de cuatro nodos en la ciudad \cite{coyspu}. Las fibras restantes quedan para un segundo vínculo redundante o para otros servicios.
+    \item \underline{Equipos:} en el hub, un router de borde con funciones de BNG (autenticación y gestión de sesiones de los abonados) y un switch de agregación al que se conectan las 6 OLT de la Región Este, cada una con dos enlaces de $10 \, [GE]$ en agregación (LAG). La OLT V1600G2-B dispone de cuatro puertos SFP+ de $10 \, [GE]$ de subida \cite{vsol_olt}. Se recomienda incorporar en el hub cachés de contenido de los principales proveedores, que sirven localmente parte del tráfico y reducen la capacidad mayorista necesaria.
+\end{itemize}
+
+\textbf{Verificación del enlace:} con módulos SFP+ 10GBASE-LR (Tx de $-8{,}2$ a $+0{,}5 \, [dBm]$; sensibilidad $< -14{,}4 \, [dBm]$) \cite{fs_10glr}, el presupuesto óptico es de $6{,}2 \, [dB]$. Reservando $3 \, [dB]$ de margen de seguridad y descontando cuatro conectores ($1{,}2 \, [dB]$) y dos empalmes ($0{,}2 \, [dB]$), quedan $1{,}8 \, [dB]$ para la fibra. Con $0{,}38 \, [dB/km]$, el enlace admite hasta $4{,}7 \, [km]$, lo que cubre la distancia supuesta. Si el nodo estuviera más lejos, se reemplazarían los módulos por 10GBASE-ER ($40 \, [km]$).
+
+\subsection{Ancho de banda requerido}
+El enlace mayorista es compartido por las dos regiones, por lo que se dimensiona para la red completa. Para la Región Oeste se usa la estimación de este informe, a confirmar por el otro equipo. Se aplica la demanda en la hora de mayor tráfico de $5 \, [Mbps]$ por abonado (\autoref{eq:demanda}) y un margen de crecimiento del 30\,\%:
+
+\begin{table}[H]
+    \centering
+    \caption{Ancho de banda mayorista requerido (bajada).}
+    \label{tab:mayorista}
+    \begin{tabular}{|l|r|r|}
+        \hline
+        \textbf{Concepto} & \textbf{Primera etapa} & \textbf{Cobertura final} \\
+        \hline
+        Abonados Región Este & $2.771$ & $5.541$ \\
+        Abonados Región Oeste (estimado) & $2.692$ & $5.384$ \\
+        Total de abonados & $5.463$ & $10.925$ \\
+        Demanda en hora pico ($\times 5 \, [Mbps]$) & $27{,}3 \, [Gbps]$ & $54{,}6 \, [Gbps]$ \\
+        Con margen de crecimiento del 30\,\% & $35{,}5 \, [Gbps]$ & $71{,}0 \, [Gbps]$ \\
+        \hline
+        \textbf{Capacidad a contratar} & $4 \times 10 \, [Gbps]$ & $100 \, [Gbps]$ \\
+        \hline
+    \end{tabular}
+\end{table}
+
+Para la primera etapa se propone contratar \textbf{$40 \, [Gbps]$ como cuatro enlaces de $10 \, [Gbps]$ en LAG}, sobre dos pares de fibras, o mediante multiplexación CWDM sobre un par. En la cobertura final la demanda requiere migrar a una interfaz de $100 \, [Gbps]$ o ampliar el LAG. El tráfico que resuelvan las cachés locales reduce estas cifras. Si la televisión se brinda sobre IP, debe sumarse su tráfico (\autoref{sec:television}).
+
+\subsection{Capacidad mayorista frente a capacidad de los puertos GPON}
+La suma de la capacidad de los puertos GPON de la Región Este es de $92 \times 2{,}488 \approx 229 \, [Gbps]$, muy superior al ancho de banda mayorista requerido. No hay contradicción:
+\begin{itemize}
+    \item La capacidad de un puerto GPON se comparte solo entre los abonados de su sector (hasta 61). Debe alcanzar para la demanda simultánea de ese grupo y para las ráfagas de un abonado que use su plan completo.
+    \item La capacidad mayorista agrega el tráfico de todos los abonados de la red. Como no todos los sectores tienen su pico al mismo tiempo ni todos los abonados están activos, se dimensiona con la demanda promedio en la hora pico (multiplexación estadística).
+\end{itemize}
+En consecuencia, el cuello de botella de la red en la hora pico no son los puertos GPON (12\,\% de ocupación), sino el enlace mayorista, que es además el costo recurrente más importante del operador.
