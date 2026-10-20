@@ -18,8 +18,8 @@ Cada cluster recibe un bloque de 24 fibras del troncal. La asignación de las fi
         \hline
         Primera etapa (una por sector, al splitter 1:4) & 8 & 7 & F1 a F8 \\
         Crecimiento (segunda fibra por sector) & 8 & 7 & F9 a F16 \\
-        Otras aplicaciones (enlaces punto a punto) & 2 & 2 & F17 y F18 \\
-        Reserva & 6 & 8 & F19 a F24 y las no usadas \\
+        Instituciones (una por institución, \autoref{sec:instituciones}) & 0 a 3 & 0 a 5 & F17 en adelante \\
+        Reserva y otras aplicaciones & 5 a 8 & 5 a 10 & Las restantes \\
         \hline
         \textbf{Total} & \textbf{24} & \textbf{24} & \\
         \hline
@@ -32,7 +32,7 @@ En los cables de distribución de cada sector (12 fibras) se asignan:
 \begin{itemize}
     \item F1 a F4: una por cada CTO.
     \item F5 a F8: crecimiento, por ejemplo para agregar una CTO o dividir una existente.
-    \item F9 a F12: reserva.
+    \item F9 a F12: reserva. Las fibras dedicadas a instituciones del sector ocupan F9 y siguientes (como máximo dos por sector).
 \end{itemize}
 
 \subsubsection{Capacidad de los cables por tramo}
@@ -55,6 +55,7 @@ La cantidad de fibras de cada tramo del troncal es la suma de los bloques de los
         Cable de cluster MINI-RA 24 F & $26{,}25 \, [km]$ & $22{,}82 \, [km]$ & $53{,}98 \, [km]$ \\
         Cable de distribución MINI-RA 12 F & $33{,}40 \, [km]$ & $32{,}02 \, [km]$ & $71{,}96 \, [km]$ \\
         Drop Fig.8 1 F, primera etapa & $230 \, [km]$ & $227 \, [km]$ & $457 \, [km]$ \\
+        Drop Fig.8 1 F, instituciones & $1{,}16 \, [km]$ & $1{,}13 \, [km]$ & $2{,}52 \, [km]$ \\
         \hline
         \textbf{Cajas y equipos pasivos} & \textbf{Este} & \textbf{Oeste} & \textbf{Total} \\
         \hline

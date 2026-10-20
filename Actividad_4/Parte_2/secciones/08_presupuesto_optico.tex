@@ -136,6 +136,19 @@ En la Región Oeste el recorrido más desfavorable tiene más fibra pero atravie
     \end{tabular}
 \end{table}
 
+\subsection{Fibras dedicadas a instituciones}
+\label{sec:presupuesto_inst}
+Las fibras de las instituciones (\autoref{sec:instituciones}) no pasan por splitters, por lo que su pérdida es mucho menor. Se calcula con los mismos valores de la \autoref{tab:param_odn}, con cuatro conexiones (equipo y adaptador del ODF en el hub, roseta y equipo en la institución) y cinco empalmes base (pigtail del ODF, CEO de cluster, paso en la caja de distribución, drop en la CTO y roseta) más uno por cada derivación del troncal. La pérdida de cada institución figura en la \autoref{tab:instituciones}.
+
+El recorrido de mayor pérdida es el de la Escuela ``Juan Bautista Alberdi'' (I-15, CTO-O71.2): $2.931 \, [m]$ de red y $60 \, [m]$ de drop, con cuatro derivaciones. Su pérdida es de $1{,}11 + 0{,}02 \, [dB]$ de fibra, $1{,}20 \, [dB]$ de conexiones y $0{,}90 \, [dB]$ de empalmes, en total $3{,}24 \, [dB]$. El de menor pérdida es el de la Escuela ``J.M. de Zambruno'' (I-04, CTO-15.3), con $446 \, [m]$ en total y $0{,}11 \, [dB]$ con los valores mínimos.
+
+Para el servicio se propone un enlace Ethernet punto a punto de $1 \, [Gbps]$ con módulos 1000BASE-LX de $10 \, [km]$ (Tx de $-9$ a $-3 \, [dBm]$; sensibilidad $-18 \, [dBm]$; saturación $-3 \, [dBm]$) \cite{sfp_1glx}:
+\begin{itemize}
+    \item \underline{Mayor pérdida:} $P_r = -9 - 3{,}24 = -12{,}24 \, [dBm]$, $5{,}76 \, [dB]$ sobre la sensibilidad. Descontado el margen de $3 \, [dB]$ quedan $2{,}76 \, [dB]$ (cumple).
+    \item \underline{Menor pérdida:} $P_r = -3 - 0{,}11 = -3{,}11 \, [dBm]$, apenas por debajo del nivel de saturación (cumple). Al poner en servicio los enlaces más cortos conviene medir la potencia recibida y, si supera los $-5 \, [dBm]$, agregar un atenuador fijo.
+\end{itemize}
+Con módulos 10GBASE-LR (\autoref{sec:mayorista}) todos los enlaces cumplen salvo el de la Escuela Alberdi, al que le faltarían $0{,}04 \, [dB]$, por lo que para $10 \, [Gbps]$ en ese caso se requiere un módulo de mayor alcance. Si en cambio la fibra se conecta a un puerto PON propio con la óptica Clase C+, el margen es amplio, pero en los recorridos cortos la ONT recibiría hasta $+6{,}9 \, [dBm]$, muy por encima de su saturación ($-8 \, [dBm]$): esa opción exige un atenuador de al menos $15 \, [dB]$.
+
 \subsection{Análisis y correcciones}
 El diseño cumple en ambos sentidos y en los recorridos extremos de las dos regiones, por lo que no se requieren correcciones. Los resultados confirman las siguientes decisiones:
 \begin{itemize}

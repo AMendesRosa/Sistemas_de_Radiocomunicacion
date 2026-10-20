@@ -23,6 +23,9 @@ python tablas.py     # tramos del troncal y clusters
 python budget.py     # presupuesto óptico de los recorridos extremos
 python planos.py     # planos en PDF (copiarlos luego a ../Planos/)
 python gen_tex.py    # tablas LaTeX para el informe (sufijo _O para el Oeste)
+
+# Después de correr ambas regiones:
+python instituciones.py   # instituciones con fibra dedicada (ambas regiones)
 ```
 
 ## Supuestos principales (ver sección 4 del informe)
@@ -31,6 +34,10 @@ python gen_tex.py    # tablas LaTeX para el informe (sufijo _O para el Oeste)
 - Sector de diseño: 1 puerto PON, splitter 1:4 + 4 CTO 1:16 (1:64), máximo 68 viviendas.
 - CTO: máximo 17 viviendas (16 abonados al 90 %).
 - Cluster: hasta 8 sectores, alimentados por 24 fibras del troncal.
+- Manzana urbanizada: entre 0,25 y 2,5 ha y menos del 50 % de su superficie con usos no residenciales
+  (rural, industrial, parques, deportes, cementerio, escuelas y hospitales), ver `classify.py`.
+- Instituciones (educación, salud, seguridad, gobierno y biblioteca): una fibra dedicada desde el ODF,
+  F17 en adelante del bloque del cluster y F9 en adelante del cable de distribución, sin splitters.
 
 `geo.py` define la proyección local (origen en el hub, coordenadas en metros).
 `georef.py` contiene los puntos de control y el borde del área de cobertura digitalizado de la consigna.
