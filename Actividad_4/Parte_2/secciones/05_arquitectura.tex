@@ -19,9 +19,9 @@ La \autoref{fig:diagrama_general} representa la red desde el proveedor mayorista
         \node[activo] (sw) at (7.6,3.2) {\textbf{Switch de}\\\textbf{agregación}\\$10 \, [GE]$};
         \node[activo] (olt) at (11.0,3.2) {\textbf{OLT}\\VSOL V1600G2-B\\SFP Clase C+};
         \node[pasivo] (odf) at (14.4,3.2) {\textbf{ODF}\\DIO B144\\SC/APC};
-        \draw[flecha] (refefo) -- node[above, font=\scriptsize]{Enlace P2P} node[below, font=\scriptsize]{10GBASE-LR} (router);
+        \draw[flecha] (refefo) -- node[above, font=\scriptsize]{Enlace P2P} node[below, font=\scriptsize]{100GBASE-LR4} (router);
         \draw[flecha] (router) -- (sw);
-        \draw[flecha] (sw) -- node[above, font=\scriptsize]{LAG $2 \times 10G$} (olt);
+        \draw[flecha] (sw) -- node[above, font=\scriptsize]{$4 \times 10G$} (olt);
         \draw[flecha] (olt) -- node[above, font=\scriptsize]{patch cord} (odf);
         % Fila inferior: planta externa
         \node[caja] (ceo) at (14.4,0) {\textbf{CEO de cluster}\\FK-CEO-4M\\(derivación)};

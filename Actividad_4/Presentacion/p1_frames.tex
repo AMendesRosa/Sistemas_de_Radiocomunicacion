@@ -1,0 +1,594 @@
+% Generado a partir de ../Parte_1/Presentacion/presentacion.tex con orador y guion.
+\orador{Grupo Este}{Cristian Arteaga Barrera}
+\begin{frame}{Planteo del problema}
+  Interconectar dos edificios de un campus universitario mediante un enlace óptico punto a punto.
+
+  \vspace{0.3cm}
+  \begin{columns}[T]
+    \begin{column}{0.5\textwidth}
+      \textbf{Requerimientos}
+      \begin{itemize}
+        \item Distancia: \textbf{8 km}
+        \item Velocidad: \textbf{1 Gbps} full dúplex
+        \item Bidireccional con \textbf{dos fibras monomodo}
+        \item Longitud de onda: \textbf{1310 nm}
+        \item Tendido \textbf{subterráneo} con 2 cajas de empalme
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      \textbf{Etapas del trabajo}
+      \begin{enumerate}
+        \item[A.] Selección de elementos
+        \item[B.] Presupuesto de potencia
+        \item[C.] Representación gráfica
+        \item[D.] Preguntas de análisis
+      \end{enumerate}
+      \vspace{0.2cm}
+      \textbf{Criterio:} cumplir técnicamente con la \textbf{opción más económica} que cubra el enlace.
+    \end{column}
+  \end{columns}
+  \note{\textbf{Cristian Arteaga Barrera:} Arrancamos con la Parte 1: un enlace punto a punto de fibra entre dos edificios de un campus, a 8 km, a 1 Gbps full dúplex, con dos fibras monomodo a 1310 nm y tendido subterráneo con dos cajas de empalme. El trabajo tuvo cuatro etapas: elegir los elementos, hacer el presupuesto de potencia, representarlo gráficamente y responder las preguntas de análisis. El criterio que usamos en todo el trabajo fue cumplir técnicamente con la opción más económica.}
+\end{frame}
+
+\orador{Grupo Este}{Cristian Arteaga Barrera}
+\begin{frame}{Transceptor: ProLabs SFP-1000BASE-LX-I-C}
+  \begin{columns}[T]
+    \begin{column}{0.52\textwidth}
+      \begin{itemize}
+        \item SFP 1000BASE-LX, 1310 nm, fibra monomodo
+        \item Alcance de \textbf{10 km}, conector LC dúplex
+        \item $-40$ a $85\,^\circ$C
+      \end{itemize}
+      \vspace{0.1cm}
+      \begin{tabular}{lc}
+        \toprule
+        $P_t$ & $-9{,}5$ a $-3$ dBm \\
+        $S_r$ (BER $10^{-12}$) & $-24$ dBm \\
+        Sobrecarga & $0$ dBm \\
+        \bottomrule
+      \end{tabular}
+      \vspace{0.2cm}
+      \begin{block}{Optical Budget (peor caso)}
+        \centering
+        $OB = P_{t,min} - S_r = -9{,}5 - (-24) = \mathbf{14{,}5\ dB}$
+      \end{block}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \centering
+      \textbf{Precios de referencia}\\[0.1cm]
+      \small
+      \begin{tabular}{lcc}
+        \toprule
+        \textbf{Tipo} & \textbf{Alcance} & \textbf{US\$} \\
+        \midrule
+        LX 1310 nm & 10 km & 8 \\
+        LX 1310 nm & 20 km & 8 \\
+        EX 1310 nm & 40 km & 16 \\
+        EX 1550 nm & 40 km & 27 \\
+        ZX 1550 nm & 80 km & 27 \\
+        \bottomrule
+      \end{tabular}\\[0.2cm]
+      \normalsize La categoría de 10 km es la \textbf{más económica} que cubre los 8 km y no necesita atenuadores.
+    \end{column}
+  \end{columns}
+  \note{\textbf{Cristian Arteaga Barrera:} Para el transceptor elegimos un SFP 1000BASE-LX de ProLabs, a 1310 nm, con alcance de 10 km. Lo importante son tres números: potencia de transmisión mínima de -9,5 dBm, sensibilidad de -24 dBm y sobrecarga de 0 dBm. Con eso el optical budget en el peor caso es de 14,5 dB. En la tabla de precios se ve que la categoría de 10 km es la más barata que cubre los 8 km, y además no necesita atenuadores.}
+\end{frame}
+
+\orador{Grupo Este}{Cristian Arteaga Barrera}
+\begin{frame}{Fibra: G.652.D frente a G.657}
+  \begin{columns}[T]
+    \begin{column}{0.5\textwidth}
+      \textbf{G.652.D}
+      \begin{itemize}
+        \item Monomodo estándar, bajo pico de agua
+        \item Fibra de uso general en redes troncales
+        \item 12 a 17 US\$/km
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      \textbf{G.657.A}
+      \begin{itemize}
+        \item Insensible a curvaturas pronunciadas
+        \item Pensada para instalaciones internas y FTTH
+        \item 16,5 a 33 US\$/km (A1 y A2)
+      \end{itemize}
+    \end{column}
+  \end{columns}
+  \vspace{0.4cm}
+  \begin{block}{Elección: G.652.D}
+    Ambas tienen una atenuación similar en 1310 nm. En un tramo troncal en ducto los radios de curvatura son amplios, así que la ventaja de la G.657 no justifica su mayor costo.
+  \end{block}
+  \note{\textbf{Cristian Arteaga Barrera:} Para la fibra comparamos G.652.D con G.657.A. A 1310 nm las dos atenúan prácticamente lo mismo; la G.657 tiene la ventaja de tolerar curvaturas cerradas, que sirve en instalaciones internas o FTTH. En un tramo troncal en ducto los radios de curvatura son amplios, así que esa ventaja no justifica su mayor costo. Por eso elegimos G.652.D.}
+\end{frame}
+
+\orador{Grupo Este}{Cristian Arteaga Barrera}
+\begin{frame}{Cable: Lightera CFOA-SM-DDR-S 04F TS G-652D}
+  \begin{columns}[T]
+    \begin{column}{0.55\textwidth}
+      \begin{itemize}
+        \item Dieléctrico, para \textbf{ductos}, núcleo totalmente seco
+        \item Capa de fibra de vidrio contra \textbf{roedores}
+        \item \textbf{4 fibras}: 2 en uso y 2 de reserva
+        \item Diámetro de 12,4 mm
+        \item Bobinas de \textbf{4000 m}: los 8 km requieren empalmes intermedios
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.45\textwidth}
+      \begin{block}{Atenuación adoptada}
+        \centering
+        $\alpha = 0{,}38$ dB/km a 1310 nm
+      \end{block}
+      \small
+      Se usa la atenuación máxima de fibra G.652.D cableada de Lightera.
+    \end{column}
+  \end{columns}
+  \vspace{0.3cm}
+  \small Fabricado según ABNT NBR 14773. En Argentina, la norma de referencia para cables exteriores es la IRAM 4225.
+  \note{\textbf{Cristian Arteaga Barrera:} El cable es el Lightera CFOA-SM-DDR-S de 4 fibras: dieléctrico, para ductos, de núcleo seco y con protección contra roedores. Usamos 2 fibras y dejamos 2 de reserva. Viene en bobinas de 4 km, por lo que los 8 km necesitan empalmes intermedios. Para el cálculo adoptamos 0,38 dB/km, que es la atenuación máxima que da Lightera para G.652.D cableada. En Argentina la norma de referencia para cables exteriores es la IRAM 4225.}
+\end{frame}
+
+\orador{Grupo Este}{Cristian Arteaga Barrera}
+\begin{frame}{Conectores, empalmes y ODF}
+  \begin{columns}[T]
+    \begin{column}{0.52\textwidth}
+      \textbf{Por fibra (un sentido)}\\[0.1cm]
+      \small
+      \begin{tabular}{lcc}
+        \toprule
+        \textbf{Elemento} & \textbf{Cant.} & \textbf{Pérdida} \\
+        \midrule
+        Fibra G.652.D & 8 km & 0,38 dB/km \\
+        Patchcord LC/UPC & 2 & 0,4 dB \\
+        Pigtail LC/UPC & 2 & 0,2 dB \\
+        Adaptador de panel & 2 & 0,2 dB \\
+        Empalme por fusión & 4 & 0,1 dB \\
+        \bottomrule
+      \end{tabular}\\[0.15cm]
+      \normalsize
+      \footnotesize Valores típicos del apunte de la cátedra.
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \textbf{ODF: Lightera DIO BW12}
+      \begin{itemize}
+        \item Hasta 12 empalmes y 12 adaptadores LC dúplex
+        \item Admite cables \emph{loose tube} de hasta 14 mm
+        \item Montaje en rack de 19 pulgadas o en pared
+        \item Es el modelo de \textbf{menor capacidad} que admite el cable de 4 fibras
+      \end{itemize}
+    \end{column}
+  \end{columns}
+  \note{\textbf{Cristian Arteaga Barrera:} Esta tabla resume todos los eventos de pérdida de una fibra en un sentido: la fibra, dos patchcords, dos pigtails, dos adaptadores de panel y cuatro empalmes por fusión, con los valores típicos del apunte de la cátedra. Para terminar los cables usamos el ODF Lightera DIO BW12, que es el de menor capacidad que admite el cable de 4 fibras. Con esto le paso a Luca, que va a mostrar el presupuesto de potencia.}
+\end{frame}
+
+\orador{Grupo Este}{Luca Baccino}
+\begin{frame}{Ecuaciones del presupuesto}
+  \begin{columns}[T]
+    \begin{column}{0.5\textwidth}
+      \textbf{Pérdida total}
+      \[ A_{total} = A_f \cdot L + P_c + P_{em} \]
+      \textbf{Potencia recibida}
+      \[ P_r = P_t - A_{total} \]
+      \textbf{Condición de viabilidad}
+      \[ P_t - S_r \geq A_{total} + M_s \]
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      \begin{itemize}
+        \item Se calcula con $P_{t,min}$ y la atenuación máxima de la fibra (peor caso).
+        \item Margen de seguridad $M_s = 3$ dB: mínimo del rango de 3 a 6 dB recomendado por la cátedra.
+      \end{itemize}
+    \end{column}
+  \end{columns}
+  \note{\textbf{Luca Baccino:} Gracias, Cristian. El presupuesto se arma con tres ecuaciones: la pérdida total es la fibra por la longitud más conectores y empalmes; la potencia recibida es la transmitida menos esa pérdida; y el enlace es viable si la diferencia entre la potencia transmitida y la sensibilidad cubre la pérdida total más el margen de seguridad. Calculamos siempre en el peor caso, con la potencia mínima del transmisor y la atenuación máxima de la fibra, y usamos un margen de 3 dB, el mínimo del rango que recomienda la cátedra.}
+\end{frame}
+
+\orador{Grupo Este}{Luca Baccino}
+\begin{frame}{Cálculo de las pérdidas}
+  \begin{columns}[c]
+    \begin{column}{0.55\textwidth}
+      \begin{align*}
+        A_{fibra} &= 0{,}38 \times 8 = 3{,}04 \text{ dB} \\[0.1cm]
+        P_c &= 2(0{,}4) + 2(0{,}2) + 2(0{,}2) = 1{,}60 \text{ dB} \\[0.1cm]
+        P_{em} &= 4 \times 0{,}1 = 0{,}40 \text{ dB} \\[0.1cm]
+        \hline
+        A_{total} &= \mathbf{5{,}04 \text{ dB}}
+      \end{align*}
+    \end{column}
+    \begin{column}{0.45\textwidth}
+      \centering
+      \begin{tikzpicture}
+        \begin{axis}[
+          xbar stacked, width=\textwidth, height=3.6cm,
+          xmin=0, xmax=5.5, ytick=\empty, axis y line=none,
+          xlabel={Pérdida [dB]}, tick label style={font=\scriptsize},
+          label style={font=\scriptsize}, bar width=0.6cm,
+          legend style={font=\scriptsize, at={(0.5,-0.55)}, anchor=north, legend columns=1, draw=none},
+          area legend
+        ]
+          \addplot[fill=unc verde, draw=none] coordinates {(3.04,0)};
+          \addplot[fill=unc verdeclaro, draw=none] coordinates {(1.6,0)};
+          \addplot[fill=orange!80, draw=none] coordinates {(0.4,0)};
+          \legend{Fibra (60\,\%), Conexiones (32\,\%), Empalmes (8\,\%)}
+        \end{axis}
+      \end{tikzpicture}
+    \end{column}
+  \end{columns}
+  \vspace{0.3cm}
+  La \textbf{fibra} concentra la mayor parte de la pérdida: la distancia es la variable que más pesa en el presupuesto.
+  \note{\textbf{Luca Baccino:} La fibra aporta 3,04 dB, las conexiones 1,6 dB y los empalmes 0,4 dB: en total 5,04 dB. En el gráfico se ve que la fibra concentra el 60 por ciento de la pérdida, así que en este enlace la variable que más pesa es la distancia.}
+\end{frame}
+
+\orador{Grupo Este}{Luca Baccino}
+\begin{frame}{Resultado: el enlace es viable}
+  \begin{columns}[T]
+    \begin{column}{0.5\textwidth}
+      \begin{tabular}{lr}
+        \toprule
+        $P_{t,min}$ & $-9{,}50$ dBm \\
+        $A_{total}$ & $5{,}04$ dB \\
+        $P_{r,min}$ & $-14{,}54$ dBm \\
+        $S_r$ & $-24{,}00$ dBm \\
+        $P_{r,min} - S_r$ & $9{,}46$ dB \\
+        $M_s$ & $3{,}00$ dB \\
+        \textbf{Margen sobrante} & $6{,}46$ dB \\
+        \bottomrule
+      \end{tabular}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      \begin{block}{Condición de viabilidad}
+        \centering
+        $OB = 14{,}5 \geq 5{,}04 + 3 = 8{,}04$ dB \checkmark
+      \end{block}
+      \begin{block}{Sobrecarga del receptor}
+        \centering
+        $P_{r,max} = -3 - 5{,}04 = -8{,}04$ dBm $< 0$ dBm \checkmark
+      \end{block}
+      \small Aun con $M_s = 6$ dB quedarían 3,46 dB de holgura.
+    \end{column}
+  \end{columns}
+  \note{\textbf{Luca Baccino:} Con -9,5 dBm transmitidos y 5,04 dB de pérdida llegan -14,54 dBm, contra una sensibilidad de -24 dBm. Descontando los 3 dB de margen todavía sobran 6,46 dB, así que el enlace es viable. También verificamos el otro extremo: con la potencia máxima llegan -8,04 dBm, por debajo de la sobrecarga de 0 dBm, así que no hace falta atenuador. Incluso con un margen de 6 dB sobraría potencia.}
+\end{frame}
+
+\orador{Grupo Este}{Luca Baccino}
+\begin{frame}{Verificación de la dispersión cromática}
+  \begin{columns}[T]
+    \begin{column}{0.52\textwidth}
+      \begin{itemize}
+        \item G.652: $\lambda_0 = 1300$ a $1324$ nm, $S_0 \leq 0{,}092$ ps/(nm$^2\cdot$km)
+        \[ D(\lambda) = \frac{S_0}{4}\left(\lambda - \frac{\lambda_0^4}{\lambda^3}\right) \]
+        \item Peor caso en el rango del láser (1270 a 1355 nm): $|D| = 5{,}29$ ps/(nm$\cdot$km)
+        \item Ancho espectral RMS del láser LX: $\sigma_\lambda = 4$ nm
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \[ \Delta\tau = |D| \cdot L \cdot \sigma_\lambda = 169 \text{ ps} \]
+      \[ B \cdot \Delta\tau = 1{,}25\text{ Gbps} \times 169 \text{ ps} = 0{,}21 \]
+      \begin{block}{Criterio $B \cdot \Delta\tau \leq 0{,}25$ \checkmark}
+        El enlace está limitado por \textbf{atenuación}, no por dispersión.
+      \end{block}
+    \end{column}
+  \end{columns}
+  \note{\textbf{Luca Baccino:} Además de la potencia verificamos la dispersión cromática. Con los parámetros de la G.652 y el rango de longitudes de onda del láser, el peor coeficiente es de 5,29 ps por nm y km. Con el ancho espectral del láser LX, el ensanchamiento del pulso es de 169 ps, y el producto con la tasa de bits da 0,21, por debajo del criterio de 0,25. Conclusión: el enlace está limitado por atenuación y no por dispersión.}
+\end{frame}
+
+\orador{Grupo Este}{Luca Baccino}
+\begin{frame}{Esquema del enlace (una fibra, A $\rightarrow$ B)}
+  \centering
+  \resizebox{\textwidth}{!}{%
+    \begin{tikzpicture}[font=\footnotesize,
+        router/.style={draw, thick, rounded corners=2pt, minimum width=2.6cm, minimum height=2.0cm, fill=blue!4},
+        sfp/.style={draw, thick, rounded corners=2pt, minimum width=1.4cm, minimum height=1.2cm, align=center, fill=blue!15},
+        odf/.style={draw, thick, minimum width=4.4cm, minimum height=2.0cm, fill=gray!12},
+        adaptador/.style={draw, thick, minimum width=1.4cm, minimum height=0.5cm, fill=gray!35},
+        caja/.style={draw, thick, rounded corners=5pt, minimum width=1.2cm, minimum height=0.8cm, fill=orange!15},
+        empalme/.style={circle, fill=red!75!black, inner sep=1.7pt},
+        conector/.style={draw, thick, fill=white, minimum width=0.24cm, minimum height=0.24cm, inner sep=0pt},
+        perdida/.style={font=\scriptsize\bfseries, text=red!75!black},
+        nombre/.style={font=\scriptsize, text=black!70},
+        potencia/.style={draw=blue!60!black, thick, rounded corners=2pt, fill=white, font=\scriptsize, align=left, inner sep=3pt},
+        evento/.style={circle, draw=black!60, fill=white, font=\tiny, inner sep=0.6pt, minimum size=0.36cm}]
+
+        % ---------- Sitio A: Router, SFP y ODF ----------
+        \node[router] (RA) at (1.3,0) {};
+        \node[font=\footnotesize\bfseries, above] at (RA.north) {Router A};
+        \node[sfp] (SA) at (1.9,0) {\textbf{SFP}\\[1pt]TX};
+
+        \node[odf] (OA) at (6.6,0) {};
+        \node[font=\footnotesize\bfseries, above] at (OA.north) {ODF A};
+
+        % ---------- Sitio B: ODF, SFP y Router ----------
+        \node[odf] (OB) at (16.6,0) {};
+        \node[font=\footnotesize\bfseries, above] at (OB.north) {ODF B};
+        \node[router] (RB) at (21.9,0) {};
+        \node[font=\footnotesize\bfseries, above] at (RB.north) {Router B};
+        \node[sfp] (SB) at (21.3,0) {\textbf{SFP}\\[1pt]RX};
+
+        % ---------- Potencias del SFP TX y del SFP RX ----------
+        \node[potencia, anchor=north] (PA) at (1.9,-1.25) {%
+            $P_{t,\mathrm{min}} = -9{,}5$ dBm\\
+            $P_{t,\mathrm{max}} = -3$ dBm};
+        \draw[-{Stealth}, thick, blue!60!black] (SA.south) -- (PA.north);
+
+        \node[potencia, anchor=north] (PB) at (21.3,-1.25) {%
+            $P_{r,\mathrm{min}} = -14{,}54$ dBm\\
+            $P_{r,\mathrm{max}} = -8{,}04$ dBm\\
+            $S_r = -24$ dBm};
+        \draw[{Stealth}-, thick, blue!60!black] (SB.south) -- (PB.north);
+
+        % ---------- Fibras: patchcord (azul), pigtail (amarillo) y cable (gris) ----------
+        \draw[line width=1.6pt, blue!60!black] (2.6,0) -- (5.0,0);     % patchcord A
+        \draw[line width=1.6pt, yellow!55!black] (6.4,0) -- (8.0,0);   % pigtail A
+        \draw[line width=2.6pt, black!65] (8.0,0) -- (15.2,0);         % cable exterior
+        \draw[line width=1.6pt, yellow!55!black] (15.2,0) -- (16.8,0); % pigtail B
+        \draw[line width=1.6pt, blue!60!black] (18.2,0) -- (20.6,0);   % patchcord B
+
+        % ---------- Adaptadores de panel (acoplan patchcord con pigtail) ----------
+        \node[adaptador] (AA) at (5.7,0) {};
+        \node[adaptador] (AB) at (17.5,0) {};
+
+        % ---------- Cajas de empalme ----------
+        \node[caja] (C1) at (10.4,0) {};
+        \node[font=\footnotesize\bfseries, above=1pt] at (C1.north) {Caja 1};
+        \node[caja] (C2) at (12.8,0) {};
+        \node[font=\footnotesize\bfseries, above=1pt] at (C2.north) {Caja 2};
+
+        % ---------- Conectores LC/UPC ----------
+        \node[conector] at (2.6,0) {};
+        \node[conector] at (5.0,0) {};
+        \node[conector] at (6.4,0) {};
+        \node[conector] at (16.8,0) {};
+        \node[conector] at (18.2,0) {};
+        \node[conector] at (20.6,0) {};
+
+        % ---------- Empalmes por fusión (pigtail - cable) ----------
+        \node[empalme] at (8.0,0) {};
+        \node[empalme] at (10.4,0) {};
+        \node[empalme] at (12.8,0) {};
+        \node[empalme] at (15.2,0) {};
+
+        % ---------- Nombres de los elementos del ODF ----------
+        \node[nombre] at (3.8,0.75) {Patchcord};
+        \node[nombre] at (5.7,0.75) {Adaptador};
+        \node[nombre] at (7.2,0.75) {Pigtail};
+        \node[nombre] at (16.0,0.75) {Pigtail};
+        \node[nombre] at (17.5,0.75) {Adaptador};
+        \node[nombre] at (19.4,0.75) {Patchcord};
+
+        % ---------- Pérdida (arriba) y número de evento (abajo) ----------
+        \foreach \x/\p/\n in {3.8/0{,}4/1, 5.7/0{,}2/2, 7.2/0{,}2/3, 8.0/0{,}1/4,
+                              9.2/1{,}01/5, 11.6/1{,}01/7, 14.0/1{,}01/9,
+                              15.2/0{,}1/10, 16.0/0{,}2/11, 17.5/0{,}2/12, 19.4/0{,}4/13}{
+            \node[perdida] at (\x,0.4) {$\p$};
+            \node[evento] at (\x,-0.45) {\n};
+        }
+        \foreach \x/\n in {10.4/6, 12.8/8}{
+            \node[perdida] at (\x,-0.62) {$0{,}1$};
+            \node[evento] at (\x+0.45,-0.62) {\n};
+        }
+
+        % ---------- Eje de distancia acumulada ----------
+        \draw[-{Stealth}, thick] (8.0,-1.45) -- (15.8,-1.45) node[right, font=\scriptsize] {$d$ [km]};
+        \foreach \x/\d in {8.0/0{,}00, 10.4/2{,}67, 12.8/5{,}33, 15.2/8{,}00}{
+            \draw[thick] (\x,-1.35) -- (\x,-1.55);
+            \node[below, font=\scriptsize] at (\x,-1.55) {$\d$};
+        }
+        \foreach \x in {8.0, 15.2}{
+            \draw[densely dotted, black!50] (\x,-1.35) -- (\x,-0.7);
+        }
+        \foreach \x in {10.4, 12.8}{
+            \draw[densely dotted, black!50] (\x,-1.35) -- (\x,-0.85);
+        }
+
+        % ---------- Referencias ----------
+        \node[conector] at (0.5,-3.7) {};
+        \node[right, font=\scriptsize] at (0.65,-3.7) {Conector LC/UPC};
+        \node[adaptador, minimum width=0.6cm, minimum height=0.3cm] at (5.0,-3.7) {};
+        \node[right, font=\scriptsize] at (5.4,-3.7) {Adaptador de panel LC/UPC};
+        \node[empalme] at (10.6,-3.7) {};
+        \node[right, font=\scriptsize] at (10.75,-3.7) {Empalme por fusión};
+        \node[evento] at (15.5,-3.7) {n};
+        \node[right, font=\scriptsize] at (15.7,-3.7) {N° de evento};
+
+        \draw[line width=1.6pt, blue!60!black] (0.2,-4.4) -- (0.8,-4.4);
+        \node[right, font=\scriptsize] at (0.8,-4.4) {Patchcord LC/UPC};
+        \draw[line width=1.6pt, yellow!55!black] (5.0,-4.4) -- (5.6,-4.4);
+        \node[right, font=\scriptsize] at (5.7,-4.4) {Pigtail LC/UPC};
+        \draw[line width=2.6pt, black!65] (10.3,-4.4) -- (10.9,-4.4);
+        \node[right, font=\scriptsize] at (11.0,-4.4) {Cable CFOA-SM-DDR-S 04F};
+    \end{tikzpicture}%
+    }
+
+  \vspace{0.4cm}
+  \small
+  \begin{itemize}
+    \item Pérdidas en dB (en rojo). Los elementos internos de cada sitio están fuera de escala.
+    \item Se suponen 3 tramos iguales de 2,67 km, cada uno menor que una bobina de 4 km.
+  \end{itemize}
+  \note{\textbf{Luca Baccino:} Este es el esquema de una fibra de A a B. Se ve cada elemento con su pérdida en rojo y numerado como evento: patchcord, adaptador, pigtail, empalme, los tres tramos de cable de 2,67 km con las dos cajas de empalme, y lo mismo del lado B. Abajo está el eje de distancia acumulada y en los extremos las potencias del transmisor y del receptor. Los elementos internos de cada sitio están fuera de escala.}
+\end{frame}
+
+\orador{Grupo Este}{Luca Baccino}
+\begin{frame}{Gráfico del presupuesto óptico}
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+        width=\textwidth, height=0.82\textheight,
+        xmin=-1.5, xmax=11.4, ymin=-26, ymax=-1,
+        xlabel={Distancia acumulada [km]},
+        ylabel={Potencia óptica [dBm]},
+        xtick={0,2.667,5.333,8}, xticklabels={$0{,}00$,$2{,}67$,$5{,}33$,$8{,}00$},
+        ytick={-24,-20,-16,-12,-8,-4},
+        grid=major, grid style={black!12},
+        tick label style={font=\scriptsize},
+        label style={font=\scriptsize},
+        clip=false,
+        legend style={font=\tiny, at={(axis cs:0.3,-15.2)}, anchor=north west, fill=white, fill opacity=0.9, text opacity=1},
+        legend cell align=left
+    ]
+        \fill[blue!5] (axis cs:-1.5,-26) rectangle (axis cs:0,-1);
+        \fill[blue!5] (axis cs:8,-26) rectangle (axis cs:9.5,-1);
+        \node[font=\tiny, align=center] at (axis cs:-0.75,-2.2) {Sitio A};
+        \node[font=\tiny, align=center] at (axis cs:8.75,-2.2) {Sitio B};
+
+        \addplot[very thick, blue!70!black, mark=none] coordinates {
+            (-1.2,-9.50) (-0.9,-9.50) (-0.9,-9.90) (-0.6,-9.90) (-0.6,-10.10)
+            (-0.3,-10.10) (-0.3,-10.30) (0,-10.30) (0,-10.40)
+            (2.667,-11.413) (2.667,-11.513) (5.333,-12.527) (5.333,-12.627)
+            (8,-13.640) (8,-13.740) (8.3,-13.740) (8.3,-13.940) (8.6,-13.940)
+            (8.6,-14.140) (8.9,-14.140) (8.9,-14.540) (9.2,-14.540)};
+        \addlegendentry{Nivel con $P_{t,min} = -9{,}5$ dBm}
+
+        \addplot[thick, dashed, black!55, mark=none] coordinates {
+            (-1.2,-3.00) (-0.9,-3.00) (-0.9,-3.40) (-0.6,-3.40) (-0.6,-3.60)
+            (-0.3,-3.60) (-0.3,-3.80) (0,-3.80) (0,-3.90)
+            (2.667,-4.913) (2.667,-5.013) (5.333,-6.027) (5.333,-6.127)
+            (8,-7.140) (8,-7.240) (8.3,-7.240) (8.3,-7.440) (8.6,-7.440)
+            (8.6,-7.640) (8.9,-7.640) (8.9,-8.040) (9.2,-8.040)};
+        \addlegendentry{Nivel con $P_{t,max} = -3$ dBm}
+
+        \addplot[thick, red, dashed, domain=-1.5:9.5, samples=2] {-24};
+        \addlegendentry{Sensibilidad $S_r = -24$ dBm}
+        \addplot[very thick, orange, dotted, domain=-1.5:9.5, samples=2] {-21};
+        \addlegendentry{Umbral de diseño $S_r + M_s = -21$ dBm}
+
+        \node[circle, fill=blue!70!black, inner sep=1.3pt] at (axis cs:-1.2,-9.5) {};
+        \node[font=\tiny, above right, fill=white, inner sep=1pt] at (axis cs:-1.25,-9.3) {$P_{t} = -9{,}5$};
+        \node[circle, fill=blue!70!black, inner sep=1.3pt] at (axis cs:9.2,-14.54) {};
+        \node[font=\tiny, below left] at (axis cs:9.2,-14.54) {$P_{r} = -14{,}54$};
+
+        \draw[{Stealth}-{Stealth}, thick, blue!70!black] (axis cs:9.75,-9.5) -- (axis cs:9.75,-14.54)
+            node[midway, right, font=\tiny, align=left] {$\Sigma$ pérdidas\\$5{,}04$ dB};
+        \draw[densely dotted, blue!70!black] (axis cs:-1.2,-9.5) -- (axis cs:9.75,-9.5);
+        \draw[{Stealth}-{Stealth}, thick, green!50!black] (axis cs:9.75,-14.54) -- (axis cs:9.75,-21)
+            node[midway, right, font=\tiny, align=left] {Margen\\sobrante\\$6{,}46$ dB};
+        \draw[{Stealth}-{Stealth}, thick, orange!85!black] (axis cs:9.75,-21) -- (axis cs:9.75,-24)
+            node[midway, right, font=\tiny, align=left] {$M_s$\\$3$ dB};
+    \end{axis}
+  \end{tikzpicture}
+  \note{\textbf{Luca Baccino:} Este gráfico muestra cómo cae la potencia a lo largo del enlace: los escalones son los conectores y empalmes, y las pendientes son la fibra. La curva azul es el peor caso y la punteada el mejor. Abajo están la sensibilidad, en rojo, y el umbral de diseño, que es la sensibilidad más el margen. A la derecha se leen las tres cantidades: 5,04 dB de pérdidas, 6,46 dB de margen sobrante y los 3 dB de margen de seguridad. Le devuelvo la palabra a Cristian para las preguntas de análisis.}
+\end{frame}
+
+\orador{Grupo Este}{Cristian Arteaga Barrera}
+\begin{frame}{D.1: ¿Qué pasa si se duplica la distancia a 16 km?}
+  \begin{columns}[T]
+    \begin{column}{0.5\textwidth}
+      \begin{itemize}
+        \item Pérdidas en la fibra:\\ $16 \times 0{,}38 = 6{,}08$ dB
+        \item Más bobinas necesarias (4) $\Rightarrow$ 5 empalmes: $0{,}5$ dB
+        \item $A_{total} = 8{,}18$ dB 
+        \item $P_{r,min} = -17{,}68$ dBm
+        \item Margen sobrante:\\ $14{,}5 - 8{,}18 - 3 = 3{,}32$ dB
+      \end{itemize}
+      \vspace{0.1cm}
+      \textbf{La potencia alcanza, pero:}
+      \begin{itemize}
+        \item El SFP está especificado para \textbf{10 km}.
+        \item Peor dispersión:\\ $B \cdot \Delta\tau = 0{,}42 > 0{,}25$.
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.52\textwidth}
+      \small
+      \setlength{\tabcolsep}{4pt}
+      \begin{tabular}{lccc}
+        \toprule
+        & \textbf{LX 10} & \textbf{LX 20} & \textbf{EX 40} \\
+        \midrule
+        Láser & FP & FP & DFB \\
+        $OB$ [dB] & 14,5 & 13,5 & 19 \\
+        Margen sobr. [dB] & 3,32 & 2,32 & 7,82 \\
+        US\$ c/u & 8 & 8 & 16 \\
+        \bottomrule
+      \end{tabular}\\[0.2cm]
+      \normalsize
+      \begin{block}{Recomendación}
+        Módulo \textbf{EX de 40 km con láser DFB}: sin limitación por dispersión y con 7,82 dB de margen sobrante. Sobrecosto de $\approx$ US\$ 16 por el par, despreciable frente al cable y la obra.
+      \end{block}
+    \end{column}
+  \end{columns}
+  \note{\textbf{Cristian Arteaga Barrera:} Primera pregunta: qué pasa si la distancia se duplica a 16 km. La pérdida sube a 8,18 dB y todavía sobran 3,32 dB de potencia, pero aparecen dos problemas: el SFP está especificado para 10 km, y la dispersión da 0,42, por encima de 0,25. Comparando opciones, recomendamos un módulo EX de 40 km con láser DFB: no tiene limitación por dispersión, deja 7,82 dB de margen y cuesta unos 16 dólares más por el par, que es despreciable frente al cable y la obra.}
+\end{frame}
+
+\orador{Grupo Este}{Cristian Arteaga Barrera}
+\begin{frame}{D.2: ¿Cuándo conviene 1550 nm?}
+  \begin{columns}[T]
+    \begin{column}{0.5\textwidth}
+      \textbf{Ventajas:} atenuación de $0{,}25$ dB/km (34\,\% menos que a 1310 nm)
+      \begin{itemize}
+        \item Enlaces largos limitados por atenuación
+        \item Una sola fibra (Bidireccional 1310/1550)
+        \item Multiplexación CWDM/DWDM
+      \end{itemize}
+      \textbf{Desventajas}
+      \begin{itemize}
+        \item Dispersión de 16,7 a 18 ps/(nm$\cdot$km): requiere láser DFB
+        \item Más sensible a las curvaturas
+        \item Mayor costo (US\$ 27 vs.\ 8)
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      \begin{block}{En este enlace de 8 km: no conviene}
+        \begin{itemize}
+          \item $A_{total} = 8(0{,}25) + 1{,}6 + 0{,}4 = 4{,}0$ dB
+          \item $P_{r,max} = +5 - 4{,}0 = +1$ dBm
+          \item Sobrecarga del receptor: $-3$ dBm
+        \end{itemize}
+        Requiere un atenuador de al menos \textbf{4 dB}, que anula la ventaja y suma costo.
+      \end{block}
+    \end{column}
+  \end{columns}
+  \note{\textbf{Cristian Arteaga Barrera:} Segunda: cuándo conviene 1550 nm. Atenúa 0,25 dB/km, un tercio menos que 1310, así que conviene en enlaces largos limitados por atenuación, en enlaces bidireccionales sobre una fibra o con multiplexación. Pero tiene más dispersión, requiere láser DFB y es más cara. En nuestro enlace de 8 km no conviene: llegarían +1 dBm, por encima de la sobrecarga del receptor, y habría que agregar un atenuador de al menos 4 dB, que anula la ventaja.}
+\end{frame}
+
+\orador{Grupo Este}{Cristian Arteaga Barrera}
+\begin{frame}{D.3: Importancia del margen de seguridad}
+  \begin{columns}[T]
+    \begin{column}{0.55\textwidth}
+      \textbf{Qué consume el margen durante la vida útil}
+      \begin{itemize}
+        \item Envejecimiento del láser y desgaste de conectores
+        \item Reparaciones: cada corte agrega $\geq 2$ empalmes
+        \item Suciedad en conectores: principal causa de fallas
+        \item Temperatura: hasta $0{,}1$ dB/km en ciclado térmico ($0{,}8$ dB en 8 km)
+        \item Curvaturas o compresiones por obras posteriores
+        \item Diferencias entre valores típicos y reales
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.45\textwidth}
+      \begin{block}{Sin margen}
+        El enlace funciona el primer día, pero cualquier degradación lo lleva por debajo de $S_r$: la tasa de errores sube rápido y aparecen cortes intermitentes.
+      \end{block}
+      \begin{block}{Con margen excesivo}
+        Transceptores más caros y riesgo de saturar el receptor.
+      \end{block}
+    \end{column}
+  \end{columns}
+  \note{\textbf{Cristian Arteaga Barrera:} Tercera: la importancia del margen de seguridad. Durante la vida útil el margen se consume por envejecimiento del láser, desgaste y suciedad de conectores, reparaciones que agregan empalmes, temperatura y curvaturas por obras. Sin margen el enlace funciona el primer día pero cualquier degradación lo deja por debajo de la sensibilidad y aparecen errores y cortes. Con un margen excesivo, en cambio, se pagan transceptores más caros y se corre el riesgo de saturar el receptor.}
+\end{frame}
+
+\orador{Grupo Este}{Cristian Arteaga Barrera}
+\begin{frame}{D.4: Instrumentos para validar el enlace}
+  \small
+  \begin{tabular}{>{\raggedright\arraybackslash}p{3.2cm}>{\raggedright\arraybackslash}p{3.9cm}>{\raggedright\arraybackslash}p{3.3cm}}
+    \toprule
+    \textbf{Instrumento} & \textbf{Qué verifica} & \textbf{Aceptación} \\
+    \midrule
+    Microscopio y limpieza & Cara de los conectores & Limpios y sin daños \\
+    VFL (650 nm) & Continuidad, roturas y curvaturas & Continuidad en las 4 fibras \\
+    OLTS (fuente + medidor) & Pérdida total por fibra & $\leq 5{,}04$ dB \\
+    OTDR + bobina de lanzamiento & Ubicación y pérdida de cada evento & $\leq 0{,}1$ dB/empalme, $\leq 0{,}5$ dB/conector \\
+    \bottomrule
+  \end{tabular}
+  \note{\textbf{Cristian Arteaga Barrera:} Cuarta: con qué instrumentos validar el enlace. Primero microscopio y limpieza de conectores; después el localizador visual de fallas para continuidad; el kit de fuente y medidor para medir la pérdida total, que no debe superar los 5,04 dB; y el OTDR con bobina de lanzamiento para ubicar y medir cada evento: hasta 0,1 dB por empalme y 0,5 dB por conector.}
+\end{frame}
+
+\orador{Grupo Este}{Cristian Arteaga Barrera}
+\begin{frame}{Conclusiones de la Parte 1}
+  \begin{itemize}
+    \item El enlace de 8 km a 1 Gbps es \textbf{viable}: en el peor caso llegan $-14{,}54$ dBm, con \textbf{6,46 dB} de margen sobrante además de los 3 dB de seguridad.
+    \item La selección combinó criterios \textbf{técnicos y económicos}: SFP LX de 10 km, fibra G.652.D, cable Lightera de 4 fibras y ODF de 12 fibras.
+    \item La fibra concentra el 60\,\% de las pérdidas: la \textbf{distancia} es la variable crítica.
+    \item Al duplicar la distancia conviene un módulo DFB de 40 km, con un costo marginal frente a la infraestructura.
+    \item 1550 nm sólo se justifica en enlaces largos, sobre una fibra o con multiplexación.
+    \item El margen de seguridad garantiza la vida útil del enlace y debe verificarse en campo.
+  \end{itemize}
+  \note{\textbf{Cristian Arteaga Barrera:} Cerrando la Parte 1: el enlace es viable con 6,46 dB de margen sobrante; la selección combinó criterios técnicos y económicos; la distancia es la variable crítica; si se duplicara conviene un módulo DFB de 40 km; 1550 nm sólo se justifica en enlaces largos; y el margen de seguridad es lo que garantiza la vida útil. Ahora pasamos a la Parte 2, que es el diseño de la red FTTH de Marcos Juárez.}
+\end{frame}

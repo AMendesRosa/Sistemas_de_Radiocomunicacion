@@ -1,0 +1,69 @@
+% Preámbulo compartido por presentacion.tex (diapositivas) y guion.tex (notas de cada orador).
+\documentclass[aspectratio=1610]{beamer}
+
+% ---------- Tema estilo "sidebar" (Berkeley) en verde oscuro, como en la Parte 1 ----------
+\usetheme{Berkeley}
+\usecolortheme{default}
+
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{array}
+\usepackage{multirow}
+
+\usepackage{tikz}
+\usetikzlibrary{shadows.blur, arrows.meta}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+
+\graphicspath{{../Parte_1/Figuras/}{../Parte_2/Figuras/}{../Parte_2/Planos/}}
+
+% Paleta verde oscuro
+\definecolor{unc verde}{RGB}{27,58,48}
+\definecolor{unc verdeclaro}{RGB}{60,110,90}
+\definecolor{grupo este}{RGB}{27,58,48}
+\definecolor{grupo oeste}{RGB}{120,60,30}
+
+\setbeamercolor{palette primary}{bg=unc verde,fg=white}
+\setbeamercolor{palette secondary}{bg=unc verde,fg=white}
+\setbeamercolor{palette tertiary}{bg=unc verde,fg=white}
+\setbeamercolor{palette quaternary}{bg=unc verde,fg=white}
+\setbeamercolor{structure}{fg=unc verde}
+\setbeamercolor{title}{bg=unc verde,fg=white}
+\setbeamercolor{frametitle}{bg=unc verde,fg=white}
+\setbeamercolor{sidebar}{bg=unc verde}
+\setbeamercolor{section in sidebar}{fg=white}
+\setbeamercolor{section in sidebar shaded}{fg=unc verdeclaro}
+\setbeamercolor{subsection in sidebar}{fg=white}
+\setbeamercolor{subsection in sidebar shaded}{fg=unc verdeclaro}
+\setbeamercolor{title in sidebar}{fg=white}
+\setbeamercolor{author in sidebar}{fg=white}
+\setbeamerfont{section in sidebar}{series=\bfseries, size=\fontsize{5.5}{6.5}\selectfont}
+
+\title[TP4: Fibra óptica]{Actividad 4: Fibra óptica}
+\subtitle{Parte 1: enlace P2P -- Parte 2: red FTTH GPON}
+\author[Arteaga, Baccino, Mendes Rosa, Monja]{\texorpdfstring{Arteaga Barrera, Cristian Eduardo \\ Baccino, Luca \\ Mendes Rosa, Agustín \\ Monja, Ernesto Joaquín}{Arteaga Barrera, Cristian Eduardo; Baccino, Luca; Mendes Rosa, Agustín; Monja, Ernesto Joaquín}}
+\institute[FCEFyN -- UNC]{Facultad de Ciencias Exactas, Físicas y Naturales \\ Universidad Nacional de Córdoba}
+\date{Córdoba, 2026}
+
+% ---------- Orador de cada diapositiva ----------
+% \orador{Grupo}{Nombre} fija quién expone desde esa diapositiva en adelante; se muestra en el pie.
+\newcommand{\oradorgrupo}{}
+\newcommand{\oradornombre}{}
+\newcommand{\oradorcolor}{grupo este}
+\newcommand{\orador}[2]{%
+  \gdef\oradorgrupo{#1}\gdef\oradornombre{#2}%
+  \ifnum\pdfstrcmp{#1}{Grupo Oeste}=0 \gdef\oradorcolor{grupo oeste}\else\gdef\oradorcolor{grupo este}\fi}
+
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{footline}{%
+  \ifx\oradornombre\empty\else
+  \hfill\colorbox{\oradorcolor}{\color{white}\scriptsize\bfseries \oradorgrupo\ --\ Expone: \oradornombre}%
+  \fi
+  \hspace{2mm}{\scriptsize\color{unc verde}\insertframenumber}\hspace{2mm}\vspace{1.5mm}}
+
+% Notas del guion: tipografía legible
+\setbeamerfont{note page}{size=\small}

@@ -1,0 +1,17 @@
+% Guion de la presentación: una página por diapositiva, con la miniatura y lo que dice quien expone.
+\input{estilo}
+\setbeameroption{show only notes}
+\setbeamertemplate{note page}{%
+  \vspace{0.15cm}
+  \begin{center}
+    \insertslideintonotes{0.42}
+  \end{center}
+  \vspace{-0.2cm}
+  \hspace{0.4cm}\begin{minipage}[t]{0.94\textwidth}
+    {\scriptsize\color{unc verde}\bfseries Diapositiva \insertframenumber\ -- \oradorgrupo}\\[0.1cm]
+    \small\raggedright\insertnote
+  \end{minipage}}
+
+\begin{document}
+\input{contenido}
+\end{document}

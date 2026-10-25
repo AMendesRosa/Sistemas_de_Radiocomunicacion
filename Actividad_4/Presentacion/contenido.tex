@@ -1,0 +1,698 @@
+% Contenido de la presentación del TP4 (Partes 1 y 2). Lo usan presentacion.tex y guion.tex.
+% Cada diapositiva indica quién expone (\orador) y lo que dice (\note).
+
+% =====================================================
+% ---------- Portada ----------
+% =====================================================
+\begin{frame}[plain]
+  \begin{tikzpicture}[remember picture, overlay]
+    \node[anchor=east, xshift=1.2cm, yshift=-0.5cm, opacity=0.65] at (current page.east) {
+      \includegraphics[height=0.9\paperheight]{decoracion_a.png}
+    };
+    \fill[unc verde] (current page.north west) rectangle ([yshift=-1.6cm]current page.north east);
+    \node[
+      fill=unc verde, text=white, rounded corners=3pt,
+      blur shadow={shadow blur steps=5, shadow xshift=0pt, shadow yshift=-3pt, shadow opacity=40},
+      inner sep=12pt, minimum width=0.88\paperwidth, align=center, font=\Large\bfseries
+    ] at ([yshift=-2.6cm]current page.north) {
+      Sistemas de Radiocomunicación \\ Actividad 4: Fibra óptica
+    };
+    \node[anchor=center, text width=0.85\paperwidth, align=center] at ([yshift=-1.4cm]current page.center) {
+      {\large\bfseries Parte 1: enlace punto a punto de 8 km\\Parte 2: red FTTH GPON para Marcos Juárez}\\[0.25cm]
+      {\normalsize Arteaga Barrera, Cristian Eduardo\\Baccino, Luca\\ Mendes Rosa, Agustín\\ Monja, Ernesto Joaquín}\\[0.25cm]
+      {\small Facultad de Ciencias Exactas, Físicas y Naturales -- Universidad Nacional de Córdoba}\\[0.15cm]
+      {\small Córdoba, 2026}
+    };
+    \node[anchor=south] at ([yshift=0.1cm]current page.south) {
+      \includegraphics[height=1.2cm]{unc_fcefyn_logo.png}
+    };
+  \end{tikzpicture}
+  \note{\textbf{Cristian Arteaga Barrera (apertura):} Buenas. Somos Cristian Arteaga Barrera, Luca Baccino, Agustín Mendes Rosa y Joaquín Monja, y vamos a presentar la Actividad 4 de fibra óptica: en la Parte 1, un enlace punto a punto de 8 km, y en la Parte 2, el diseño de una red FTTH GPON para Marcos Juárez.}
+\end{frame}
+
+% =====================================================
+\section[Organización]{Organización}
+\orador{Grupo Este}{Cristian Arteaga Barrera}
+\begin{frame}{Organización de la exposición}
+  \begin{columns}[T]
+    \begin{column}{0.5\textwidth}
+      \begin{block}{Grupo Este}
+        \small
+        \textbf{Arteaga Barrera}
+        \begin{itemize}
+          \item P1: planteo y selección de elementos
+          \item P1: preguntas de análisis y conclusiones
+          \item P2: investigación (REFEFO, videos, cables submarinos)
+        \end{itemize}
+        \textbf{Baccino}
+        \begin{itemize}
+          \item P1: presupuesto de potencia y gráficos
+          \item P2: componentes, laboratorio, alcance
+          \item P2: arquitectura y diseño de la Región Este
+        \end{itemize}
+      \end{block}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      \setbeamercolor{block title}{bg=grupo oeste,fg=white}
+      \setbeamercolor{block body}{bg=grupo oeste!8}
+      \begin{block}{Grupo Oeste}
+        \small
+        \textbf{Mendes Rosa}
+        \begin{itemize}
+          \item P2: diseño de la Región Oeste y criterio de trazado del troncal
+          \item P2: instituciones y plazas, fibras y puertos, cableado
+        \end{itemize}
+        \textbf{Monja}
+        \begin{itemize}
+          \item P2: conectividad mayorista con la calculadora de la cátedra
+          \item P2: presupuesto óptico, televisión y conclusiones
+        \end{itemize}
+      \end{block}
+    \end{column}
+  \end{columns}
+  \note{\textbf{Cristian Arteaga Barrera:} Nos dividimos en dos grupos, igual que en el trabajo. El Grupo Este, Luca y yo, presenta la Parte 1 completa y el comienzo de la Parte 2: la investigación, los componentes, el laboratorio, el alcance, la arquitectura y el diseño de la Región Este. El Grupo Oeste, Agustín y Joaquín, presenta el diseño de la Región Oeste y todo el dimensionamiento y la verificación de la red: instituciones, fibras, puertos, conectividad mayorista con la calculadora de la cátedra, presupuesto óptico y televisión. En el pie de cada diapositiva figura quién expone.}
+\end{frame}
+
+% =====================================================
+% ================= PARTE 1 ===========================
+% =====================================================
+\section[P1: Enlace P2P]{Parte 1: enlace P2P}
+\input{p1_frames}
+
+% =====================================================
+% ================= PARTE 2 ===========================
+% =====================================================
+\section[P2: Contexto]{Parte 2: contexto}
+\orador{Grupo Este}{Cristian Arteaga Barrera}
+\begin{frame}{Parte 2: red FTTH GPON para Marcos Juárez}
+  \begin{columns}[c]
+    \begin{column}{0.48\textwidth}
+      \begin{itemize}
+        \item Hub en la Cooperativa \textbf{COYSPU} (9 de Julio 99)
+        \item Área indicada por la cátedra: $14{,}6$ km$^2$
+        \item Dos regiones separadas por la \textbf{RP12}
+        \item GPON (UIT-T G.984): Internet, telefonía y TV
+        \item Datos reales: OpenStreetMap, Censo 2022, nodos REFEFO
+        \item Diseño reproducible con scripts de Python
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.52\textwidth}
+      \centering
+      \includegraphics[height=0.72\textheight]{plano_regiones.pdf}
+    \end{column}
+  \end{columns}
+  \note{\textbf{Cristian Arteaga Barrera:} La Parte 2 es el diseño de una red FTTH GPON para Marcos Juárez, con el hub en la Cooperativa COYSPU. El área de cobertura es la que indicó la cátedra, unos 14,6 kilómetros cuadrados, y se divide en dos regiones según la traza de la ruta 12: el Este lo diseñamos Luca y yo, y el Oeste Agustín y Joaquín, con los mismos criterios. Trabajamos con datos reales: las calles de OpenStreetMap, el censo 2022 y el listado de nodos de ARSAT, y todo el diseño se hizo con scripts de Python que están en el repositorio, así que se puede reproducir.}
+\end{frame}
+
+\orador{Grupo Este}{Cristian Arteaga Barrera}
+\begin{frame}{REFEFO y ARSAT}
+  \begin{columns}[T]
+    \begin{column}{0.55\textwidth}
+      \textbf{Red Federal de Fibra Óptica}
+      \begin{itemize}
+        \item Lanzada en 2010 (\emph{Argentina Conectada}), operada por ARSAT
+        \item Más de $34.000$ km de fibra, 13 regiones, ``km 0'' en Benavídez
+        \item \textbf{1.163 localidades conectadas} (feb.\ 2026)
+        \item Red de \textbf{transporte}: vende capacidad mayorista a cooperativas y pymes, no llega al domicilio
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.45\textwidth}
+      \textbf{Otras actividades de ARSAT}
+      \begin{itemize}
+        \item Satélites ARSAT-1 y ARSAT-2
+        \item Televisión Digital Abierta
+        \item Centro de datos y nube
+      \end{itemize}
+      \begin{block}{Para el proyecto}
+        \textbf{Marcos Juárez tiene nodo REFEFO activo}: la COYSPU puede contratar ahí el tránsito IP.
+      \end{block}
+    \end{column}
+  \end{columns}
+  \note{\textbf{Cristian Arteaga Barrera:} La REFEFO es la red troncal de fibra del Estado, que opera ARSAT desde 2010. Tiene más de 34.000 km y, según los datos abiertos de ARSAT, 1.163 localidades conectadas. Lo importante es que es una red de transporte: llega a un nodo en cada localidad y ahí vende capacidad a cooperativas y pymes, que construyen la red de acceso. ARSAT además opera los satélites, la televisión digital abierta y un centro de datos. Para nuestro proyecto el dato clave es que Marcos Juárez tiene un nodo REFEFO activo, así que la cooperativa puede contratar ahí la conectividad mayorista.}
+\end{frame}
+
+\orador{Grupo Este}{Cristian Arteaga Barrera}
+\begin{frame}{Fundamentos: los cinco videos de la cátedra}
+  \small
+  \begin{enumerate}
+    \item \textbf{Reflexión interna total:} láser y fluoresceína; más allá del ángulo límite el haz avanza por reflexiones sucesivas.
+    \item \textbf{Fabricación:} deposición de silicio y germanio dentro de un tubo a $\approx 2000\,^\circ$C, preforma y estirado a $125\ \mu$m.
+    \item \textbf{Cables (Siemens):} fibras coloreadas, tubo holgado con sobrelongitud, tendido en ductos y empalme por fusión.
+    \item \textbf{Cables submarinos:} el 97\,\% del tráfico de Internet viaja por ellos; los satélites quedan para lugares aislados.
+    \item \textbf{Cómo entra Internet al país:} amarre en Las Toninas y venta a mayoristas y operadores locales.
+  \end{enumerate}
+  \begin{block}{Relevancia para el diseño}
+    Radio de curvatura (fibra G.657 en drops), atenuación por longitud de onda (presupuesto), colores y empalme por fusión (cableado) y dependencia de la conectividad mayorista.
+  \end{block}
+  \note{\textbf{Cristian Arteaga Barrera:} Los cinco videos recorren toda la cadena: el principio físico de la reflexión interna total; la fabricación de la fibra por deposición dentro de un tubo y el estirado de la preforma hasta 125 micrones; la construcción del cable, con fibras coloreadas en tubos holgados; los cables submarinos, por donde pasa el 97 por ciento del tráfico de Internet; y cómo entra Internet al país por Las Toninas. Todo esto se aplica al diseño: por el radio de curvatura usamos fibra G.657 en los drops, la atenuación por longitud de onda define el presupuesto, el código de colores y el empalme por fusión se usan en el cableado, y la red de acceso depende de la conectividad mayorista.}
+\end{frame}
+
+\orador{Grupo Este}{Cristian Arteaga Barrera}
+\begin{frame}{Cables submarinos en Las Toninas}
+  \begin{columns}[T]
+    \begin{column}{0.56\textwidth}
+      \scriptsize
+      \begin{tabular}{llr}
+        \toprule
+        \textbf{Sistema} & \textbf{Destino} & \textbf{Año} \\
+        \midrule
+        Firmina & Brasil, Uruguay, EE.\,UU. & 2025 \\
+        Malbec & Brasil & 2021 \\
+        Tannat & Brasil, Uruguay & 2018 \\
+        Bicentenario & Uruguay & 2011 \\
+        SAm-1 & Sudamérica, EE.\,UU. & 2001 \\
+        SAC & Sudamérica, EE.\,UU. & 2000 \\
+        Unisur & Uruguay & 1995 \\
+        \bottomrule
+      \end{tabular}\\[0.1cm]
+      Fuente: TeleGeography (oct.\ 2026).
+    \end{column}
+    \begin{column}{0.44\textwidth}
+      \begin{itemize}
+        \item \textbf{Siete sistemas} en servicio
+        \item Largos (SAm-1, SAC, Firmina): conexión con EE.\,UU.
+        \item Cortos: Uruguay y Brasil
+        \item Diversidad de rutas = \textbf{redundancia}
+      \end{itemize}
+      \begin{block}{Cadena completa}
+        Abonado $\rightarrow$ red FTTH $\rightarrow$ hub $\rightarrow$ nodo REFEFO $\rightarrow$ troncal nacional $\rightarrow$ Las Toninas
+      \end{block}
+    \end{column}
+  \end{columns}
+  \note{\textbf{Cristian Arteaga Barrera:} En Las Toninas amarran siete sistemas, todos en servicio según el mapa de TeleGeography. Los largos, como SAm-1, SAC y Firmina, nos conectan con Estados Unidos, y los cortos con Uruguay y Brasil; tener varias rutas da redundancia ante cortes. Nuestra red es el último eslabón de esa cadena: el tráfico de un abonado va por la red FTTH hasta el hub, de ahí al nodo REFEFO, por la troncal nacional y, si va al exterior, por estos cables. Le paso a Luca, que sigue con los componentes.}
+\end{frame}
+
+\orador{Grupo Este}{Luca Baccino}
+\begin{frame}{Selección de componentes}
+  \small
+  \begin{columns}[T]
+    \begin{column}{0.5\textwidth}
+      \textbf{Cables Lightera (tendido aéreo)}
+      \begin{itemize}
+        \item Troncal: \textbf{AS80-S TS} 24 a 144 F, G.652.D
+        \item Distribución: \textbf{MINI-RA} 24 y 12 F, $7{,}2$ mm
+        \item Acometida: \textbf{drop Fig.\,8} G.657.A
+        \item Cruces en ducto: CFOA-SM-DD
+      \end{itemize}
+      \textbf{Pasivos Lightera}
+      \begin{itemize}
+        \item ODF DIO B144, caja FK-CEO-4M
+        \item Splitter PLC 1:4 ($\leq 7{,}1$ dB)
+        \item CTO FK-CTO-16MC con 1:16 ($\leq 13{,}7$ dB)
+        \item Conectores SC/APC ($\leq 0{,}3$ dB)
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      \textbf{Activos VSOL}
+      \begin{itemize}
+        \item OLT \textbf{V1600G2-B}: 16 PON, 4 SFP+ de 10 GE
+        \item SFP \textbf{Clase C+}: Tx $+3/+7$ dBm, $S_r=-30$ dBm
+        \item ONT \textbf{V2802RH}: Tx $0/+4$ dBm, $S_r=-27$ dBm
+        \item Overlay: ONT V2802GWT y EDFA de $+19$ dBm
+      \end{itemize}
+      \begin{block}{Criterio}
+        Aéreo sobre la postería: más barato y rápido que canalizar. Vanos urbanos de 30 a 50 m, cables para 80 m.
+      \end{block}
+    \end{column}
+  \end{columns}
+  \note{\textbf{Luca Baccino:} Para los pasivos usamos Lightera y para los activos VSOL, dos de los fabricantes que sugirió la cátedra. El tendido es aéreo sobre la postería, porque es mucho más barato y rápido que canalizar, y los vanos urbanos de 30 a 50 metros entran en cables para 80 metros. El troncal es AS80-S TS de 24 a 144 fibras; la distribución, MINI-RA de 24 y 12 fibras, que es muy liviano; y la acometida, drop figura 8 con fibra G.657. En activos, la OLT V1600G2-B de 16 puertos con módulos Clase C+, cuya necesidad vamos a ver en el presupuesto, y la ONT V2802RH. Todos los conectores son SC/APC, para dejar abierta la opción de video por RF.}
+\end{frame}
+
+\orador{Grupo Este}{Luca Baccino}
+\begin{frame}{Laboratorio: prácticas de instalación (TP3)}
+  \begin{columns}[c]
+    \begin{column}{0.27\textwidth}
+      \centering
+      \includegraphics[height=0.42\textheight]{lab_vfl_continuidad.jpg}\\[0.05cm]
+      \scriptsize VFL y medidor
+    \end{column}
+    \begin{column}{0.25\textwidth}
+      \centering
+      \includegraphics[height=0.42\textheight]{lab_conector_sc_apc.jpg}\\[0.05cm]
+      \scriptsize Conector SC/APC
+    \end{column}
+    \begin{column}{0.46\textwidth}
+      \small
+      \begin{itemize}
+        \item \textbf{VFL:} continuidad; el medidor no mide bien a 650 nm (calibrado desde 800 nm)
+        \item \textbf{Conector y empalme mecánico:} varios intentos; sin potencia por una rotura del cable
+      \end{itemize}
+      \begin{block}{Lo que aplicamos al diseño}
+        \footnotesize Empalmes por fusión en planta externa, rulos de reserva y margen de 3 dB, medidor calibrado en 1310/1490/1550 nm y OTDR para certificar.
+      \end{block}
+    \end{column}
+  \end{columns}
+  \note{\textbf{Luca Baccino:} En el laboratorio, que documentamos en el TP3, hicimos tres prácticas: verificación de continuidad con el VFL, armado de un conector mecánico SC/APC y un empalme mecánico. Aprendimos tres cosas que llevamos al diseño. El medidor no da una lectura válida fuera de su longitud de onda de calibración, así que hay que usar uno calibrado en las de la red. La fibra es muy frágil: después de varios intentos el enlace quedó sin potencia por una rotura que el VFL no pudo ubicar dentro del cable; por eso usamos empalmes por fusión, dejamos rulos de reserva y un margen de 3 dB, y proponemos certificar con OTDR.}
+\end{frame}
+
+\section[P2: Alcance]{Alcance y arquitectura}
+\orador{Grupo Este}{Luca Baccino}
+\begin{frame}{Casas pasadas y abonados}
+  \begin{columns}[T]
+    \begin{column}{0.52\textwidth}
+      \small
+      \begin{itemize}
+        \item Censo 2022: \textbf{12.135 viviendas}
+        \item Manzanas urbanizadas: entre $0{,}25$ y $2{,}5$ ha y menos del 50\,\% de usos no residenciales
+        \item Densidad uniforme: $17$ viv/ha, viviendas sobre el frente de cada manzana
+      \end{itemize}
+      \vspace{0.1cm}
+      \footnotesize
+      \begin{tabular}{lrrr}
+        \toprule
+        & \textbf{Este} & \textbf{Oeste} & \textbf{Total} \\
+        \midrule
+        Casas pasadas & 6.153 & 5.982 & 12.135 \\
+        1.ª etapa (45\,\%) & 2.771 & 2.697 & 5.468 \\
+        Final (90\,\%) & 5.541 & 5.388 & 10.929 \\
+        \bottomrule
+      \end{tabular}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \small
+      \textbf{Servicios}
+      \begin{itemize}
+        \item Planes de 100, 300 y 600 Mbps (30/50/20\,\%), subida 10\,\%
+        \item TV y telefonía sobre IP
+      \end{itemize}
+      \textbf{Crecimiento y reserva}
+      \begin{itemize}
+        \item Red pasiva construida para la cobertura final
+        \item Una fibra de crecimiento por sector
+        \item Fibras dedicadas a instituciones y plazas
+      \end{itemize}
+      \footnotesize El 45\,\% se apoya en los $\approx 4.500$ usuarios ADSL que tuvo la COYSPU.
+    \end{column}
+  \end{columns}
+  \note{\textbf{Luca Baccino:} Las casas pasadas salen del censo 2022: 12.135 viviendas. Como no hay datos por manzana, las repartimos en forma uniforme sobre las manzanas urbanizadas, que son las que miden entre un cuarto de hectárea y dos hectáreas y media y no están ocupadas mayormente por campos, industrias, parques, escuelas u hospitales. Resultan 6.153 casas pasadas en el Este y 5.982 en el Oeste. Suponemos una adopción del 45 por ciento el primer año, que es exigente pero razonable porque la cooperativa llegó a tener unos 4.500 usuarios de ADSL, y del 90 por ciento en la cobertura final. Los planes son de 100, 300 y 600 megas, y la red pasiva se construye desde el inicio para la cobertura final.}
+\end{frame}
+
+\orador{Grupo Este}{Luca Baccino}
+\begin{frame}{Arquitectura de la red}
+  \centering
+  \resizebox{0.95\textwidth}{!}{%
+    \begin{tikzpicture}[font=\footnotesize,
+        activo/.style={draw, thick, rounded corners=2pt, fill=blue!10, minimum height=1.1cm, align=center, text width=2.1cm},
+        pasivo/.style={draw, thick, fill=gray!10, minimum height=1.1cm, align=center, text width=2.1cm},
+        caja/.style={draw, thick, rounded corners=5pt, fill=orange!15, minimum height=1.1cm, align=center, text width=2.1cm},
+        flecha/.style={-{Stealth}, thick}]
+        \node[activo] (refefo) at (0,3.2) {\textbf{Nodo REFEFO}\\ARSAT};
+        \node[activo] (router) at (4.2,3.2) {\textbf{Router de borde}\\BNG, cachés};
+        \node[activo] (sw) at (7.6,3.2) {\textbf{Switch de}\\\textbf{agregación}};
+        \node[activo] (olt) at (11.0,3.2) {\textbf{OLT}\\V1600G2-B\\SFP Clase C+};
+        \node[pasivo] (odf) at (14.4,3.2) {\textbf{ODF}\\DIO B144};
+        \draw[flecha] (refefo) -- node[above, font=\scriptsize]{100GBASE-LR4} (router);
+        \draw[flecha] (router) -- (sw);
+        \draw[flecha] (sw) -- node[above, font=\scriptsize]{$4 \times 10G$} (olt);
+        \draw[flecha] (olt) -- (odf);
+        \node[caja] (ceo) at (14.4,0) {\textbf{CEO de cluster}\\FK-CEO-4M};
+        \node[caja] (cd) at (11.0,0) {\textbf{Caja de distrib.}\\splitter 1:4};
+        \node[caja] (cto) at (7.6,0) {\textbf{CTO}\\splitter 1:16};
+        \node[pasivo] (roseta) at (4.2,0) {\textbf{Roseta}\\SC/APC};
+        \node[activo] (ont) at (0,0) {\textbf{ONT}\\V2802RH};
+        \draw[flecha] (odf) -- node[right, font=\scriptsize, align=left]{Troncal\\AS80-S TS} (ceo);
+        \draw[flecha] (ceo) -- node[above, font=\scriptsize]{MINI-RA 24 F} (cd);
+        \draw[flecha] (cd) -- node[above, font=\scriptsize]{MINI-RA 12 F} (cto);
+        \draw[flecha] (cto) -- node[above, font=\scriptsize]{Drop G.657} (roseta);
+        \draw[flecha] (roseta) -- (ont);
+        \draw[very thick, dashed, red!70!black, rounded corners=8pt] (12.55,4.3) -- (16.1,4.3) -- (16.1,-1.0) -- (1.75,-1.0) -- (1.75,1.05) -- (12.55,1.05) -- cycle;
+        \node[red!70!black, font=\small\bfseries] at (8.6,1.35) {ODN};
+    \end{tikzpicture}}
+  \vspace{0.15cm}
+
+  \footnotesize
+  \begin{tabular}{lll}
+    \toprule
+    \textbf{Unidad} & \textbf{Definición} & \textbf{Capacidad} \\
+    \midrule
+    Sector & 1 puerto PON: splitter 1:4 + 4 CTO 1:16 (\textbf{1:64}) & Hasta 68 viviendas \\
+    Cluster & Hasta 8 sectores, bloque de \textbf{24 fibras} del troncal & 439 a 543 viviendas \\
+    Área de CTO & Caja terminal de 16 salidas & Hasta 17 viviendas \\
+    \bottomrule
+  \end{tabular}
+  \note{\textbf{Luca Baccino:} Este es el diagrama general. Del nodo REFEFO se llega al router de borde del hub, al switch de agregación y a las OLT; de ahí, por el ODF, sale la red pasiva: el troncal hasta la caja de empalme de cada cluster, el cable de cluster hasta la caja de distribución de cada sector, donde está el splitter 1:4, la distribución hasta las cajas terminales con el splitter 1:16, y el drop hasta la vivienda. La división en dos niveles da 1:64 y hace que el troncal necesite una sola fibra por sector. Las unidades de diseño son el sector, que es un puerto PON con hasta 68 viviendas; el cluster, de hasta 8 sectores con un bloque de 24 fibras; y el área de cada caja terminal, de hasta 17 viviendas.}
+\end{frame}
+
+\orador{Grupo Este}{Luca Baccino}
+\begin{frame}{Región Este: sectores y troncal}
+  \begin{columns}[c]
+    \begin{column}{0.5\textwidth}
+      \centering
+      \includegraphics[height=0.78\textheight]{plano_este_sectores.pdf}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      \centering
+      \includegraphics[height=0.78\textheight]{plano_este_troncal.pdf}
+    \end{column}
+  \end{columns}
+  \note{\textbf{Luca Baccino:} En la Región Este quedaron 12 clusters, 92 sectores y 365 cajas terminales. Los sectores se obtuvieron por bisecciones sucesivas sobre las viviendas, y cada cluster agrupa hasta 8 sectores contiguos. A la derecha está el troncal: 5,3 km de traza que salen del hub por 9 de Julio. En verde está el recorrido de menor pérdida, junto al hub, y en rojo el de mayor pérdida, que llega al barrio aislado del noreste. La acometida media es de 68 metros.}
+\end{frame}
+
+\orador{Grupo Este}{Luca Baccino}
+\begin{frame}{Región Este: sectores desarrollados}
+  \begin{columns}[c]
+    \begin{column}{0.36\textwidth}
+      \centering
+      \includegraphics[width=\textwidth]{plano_sector_28.pdf}\\
+      \scriptsize Sector 28 (cluster C3)
+    \end{column}
+    \begin{column}{0.36\textwidth}
+      \centering
+      \includegraphics[width=\textwidth]{plano_sector_90.pdf}\\
+      \scriptsize Sector 90 (cluster C12)
+    \end{column}
+    \begin{column}{0.28\textwidth}
+      \scriptsize
+      \textbf{Sector 28}: 67 viviendas en el centro; caja de distribución en el mismo poste que la CEO de C3; distribución de 230 m, drop máx.\ 109 m.\\[0.2cm]
+      \textbf{Sector 90}: 67 viviendas en la periferia noreste, a 3,1 km del hub; distribución de 633 m, drop máx.\ 227 m.\\[0.2cm]
+      Totales Este: troncal 5,29 km, cluster 26,25 km, distribución 33,40 km.
+    \end{column}
+  \end{columns}
+  \note{\textbf{Luca Baccino:} Desarrollamos en detalle dos sectores del Este. El sector 28 está en el centro, junto al hub, y su caja de distribución coincide con la caja de empalme del cluster, así que las dos funciones se resuelven en una sola caja; tiene 230 metros de distribución. El sector 90 está en la periferia noreste, a 3,1 km del hub, y por la menor densidad necesita 633 metros de distribución y una acometida de hasta 227 metros, que habría que revisar en campo. Con esto termina la parte del Grupo Este; le paso a Agustín, que presenta la Región Oeste.}
+\end{frame}
+
+\orador{Grupo Oeste}{Agustín Mendes Rosa}
+\begin{frame}{Región Oeste: sectores}
+  \begin{columns}[c]
+    \begin{column}{0.48\textwidth}
+      \centering
+      \includegraphics[height=0.8\textheight]{plano_oeste_sectores.pdf}
+    \end{column}
+    \begin{column}{0.52\textwidth}
+      \begin{itemize}
+        \item 5.982 casas pasadas
+        \item \textbf{12 clusters, 89 sectores, 354 CTO}
+        \item Mismos criterios que el Este
+        \item Prefijo O: clusters O1--O12, sectores O1--O89
+        \item Cluster de cable: 22,82 km; distribución: 32,02 km
+        \item Drop medio de 69 m
+      \end{itemize}
+      \begin{block}{Particularidad}
+        El hub está \textbf{fuera} de la región: todos los cables cruzan la RP12.
+      \end{block}
+    \end{column}
+  \end{columns}
+  \note{\textbf{Agustín Mendes Rosa:} Gracias, Luca. La Región Oeste tiene 5.982 casas pasadas y quedó organizada en 12 clusters, 89 sectores y 354 cajas terminales, con los mismos criterios que el Este. Para distinguir los elementos les agregamos el prefijo O. La particularidad es que el hub queda del lado Este, así que todos los cables del Oeste cruzan la ruta 12, y la región se extiende bastante hacia el noroeste y el sur.}
+\end{frame}
+
+\orador{Grupo Oeste}{Agustín Mendes Rosa}
+\begin{frame}{Troncal: reaprovechar el cable tendido}
+  \begin{columns}[c]
+    \begin{column}{0.46\textwidth}
+      \centering
+      \includegraphics[height=0.8\textheight]{plano_oeste_troncal.pdf}
+    \end{column}
+    \begin{column}{0.54\textwidth}
+      \small
+      \textbf{Corrección de la cátedra:} el ramal a O8 doblaba en muchas calles.
+      \begin{block}{Nuevo criterio de trazado}
+        \footnotesize
+        \begin{itemize}
+          \item Cada cluster se deriva del \textbf{troncal ya tendido}
+          \item Cada giro ($>35^\circ$) cuesta como 150 m de cable
+        \end{itemize}
+      \end{block}
+      O8 ahora sale de la CEO de O6 y \textbf{sube derecho por Santiago del Estero}, que sigue hasta DO3 (O9 a O12).\\[0.15cm]
+      \footnotesize
+      \begin{tabular}{lrr}
+        \toprule
+        \textbf{Troncal} & \textbf{Antes} & \textbf{Ahora} \\
+        \midrule
+        Este & 7,22 km & 5,29 km \\
+        Oeste & 10,50 km & 6,73 km \\
+        \bottomrule
+      \end{tabular}
+    \end{column}
+  \end{columns}
+  \note{\textbf{Agustín Mendes Rosa:} Acá aplicamos la corrección que nos hizo la cátedra. Antes cada cluster tenía su propio camino mínimo desde el hub, y el ramal a O8 zigzagueaba por muchas calles, lo que en la práctica es más difícil y caro de tender. Cambiamos el criterio: el troncal se arma como un árbol que reaprovecha el cable ya tendido, y cada giro se penaliza como si fueran 150 metros de cable. Ahora O8 se deriva de la caja de O6 y sube derecho por Santiago del Estero, y esa misma calle lleva el troncal hasta la derivación de los clusters del norte. Aplicado a las dos regiones, el troncal bajó de 7,2 a 5,3 km en el Este y de 10,5 a 6,7 km en el Oeste.}
+\end{frame}
+
+\orador{Grupo Oeste}{Agustín Mendes Rosa}
+\begin{frame}{Región Oeste: sectores desarrollados}
+  \begin{columns}[c]
+    \begin{column}{0.36\textwidth}
+      \centering
+      \includegraphics[width=\textwidth]{plano_sector_O42.pdf}\\
+      \scriptsize Sector O42 (cluster O6)
+    \end{column}
+    \begin{column}{0.36\textwidth}
+      \centering
+      \includegraphics[width=\textwidth]{plano_sector_O77.pdf}\\
+      \scriptsize Sector O77 (cluster O10)
+    \end{column}
+    \begin{column}{0.28\textwidth}
+      \scriptsize
+      \textbf{Sector O42}: 68 viviendas sobre Bv.\ Lardizábal; caja de distribución en la CEO de O6, a 664 m del hub; recorrido de \textbf{menor pérdida} del Oeste.\\[0.2cm]
+      \textbf{Sector O77}: 67 viviendas en el noroeste, a 3,85 km del hub; distribución de 991 m; la CTO-O77.3 es el recorrido de \textbf{mayor pérdida}.
+    \end{column}
+  \end{columns}
+  \note{\textbf{Agustín Mendes Rosa:} En el Oeste desarrollamos el sector O42, sobre el bulevar Lardizábal, cuya caja de distribución está en el mismo poste que la caja del cluster O6, a 664 metros del hub, y que contiene el recorrido de menor pérdida de la región. Y el sector O77, en el noroeste, a 3,85 km del hub, con 991 metros de distribución; su caja terminal O77.3 es el recorrido de mayor pérdida del Oeste, que después usa Joaquín en el presupuesto óptico.}
+\end{frame}
+
+\section[P2: Dimension.]{Dimensionamiento}
+\orador{Grupo Oeste}{Agustín Mendes Rosa}
+\begin{frame}{Instituciones y plazas con fibra dedicada}
+  \begin{columns}[T]
+    \begin{column}{0.55\textwidth}
+      \small
+      \begin{itemize}
+        \item \textbf{27 instituciones}: escuelas, salud, policía, bomberos, municipalidad, tribunales y biblioteca
+        \item \textbf{13 plazas} de al menos 1.000 m$^2$ (Wi-Fi público, cámaras)
+        \item Una fibra por institución o plaza, \textbf{sin splitters}
+        \item \textbf{Hospitales: 4 fibras} con un cable MINI-RA propio desde la caja de distribución
+        \item Total: \textbf{49 fibras dedicadas}
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.45\textwidth}
+      \begin{block}{Recorrido de la fibra dedicada}
+        \footnotesize
+        Troncal y cable de cluster: F17 en adelante\\
+        Caja de distribución: empalme directo\\
+        Distribución: fibras de reserva F9+\\
+        CTO: empalme a un drop propio
+      \end{block}
+      \footnotesize Enlace Ethernet de 1 Gbps (1000BASE-LX): el peor caso tiene 3,64 dB de pérdida y \textbf{2,36 dB} sobre el margen.
+    \end{column}
+  \end{columns}
+  \note{\textbf{Agustín Mendes Rosa:} Otra indicación de la cátedra fue dejar un pelo extra para las instituciones. Identificamos en OpenStreetMap 27 instituciones, entre escuelas, centros de salud, policía, bomberos, la municipalidad, tribunales y la biblioteca, y 13 plazas de al menos mil metros cuadrados. Cada una recibe una fibra propia, sin splitters, desde el ODF, y los hospitales reciben cuatro con un cable propio desde la caja de distribución. En total son 49 fibras dedicadas, que entran en las fibras libres de cada cluster y de cada cable de distribución. Con un enlace Ethernet de 1 Gbps, el caso más desfavorable conserva 2,36 dB sobre el margen.}
+\end{frame}
+
+\orador{Grupo Oeste}{Agustín Mendes Rosa}
+\begin{frame}{Asignación de fibras, puertos y cantidades}
+  \begin{columns}[T]
+    \begin{column}{0.5\textwidth}
+      \footnotesize
+      \textbf{Bloque de 24 fibras de cada cluster}
+      \begin{itemize}
+        \item F1--F8: una por sector (al splitter 1:4)
+        \item F9--F16: crecimiento
+        \item F17+: instituciones y plazas
+        \item Resto: reserva (al menos 2)
+      \end{itemize}
+      \textbf{Puertos}
+      \begin{itemize}
+        \item 92 + 89 = \textbf{181 puertos PON}
+        \item \textbf{12 OLT} de 16 puertos (6 por región), 11 libres
+        \item Splitter 1:2 en el hub: descartado (no cumple el presupuesto)
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      \scriptsize
+      \begin{tabular}{lr}
+        \toprule
+        \textbf{Elemento (total + 10\,\%)} & \textbf{Cantidad} \\
+        \midrule
+        Troncal AS80-S TS (24 a 144 F) & 14,3 km \\
+        Cable de cluster MINI-RA 24 F & 54,0 km \\
+        Distribución MINI-RA 12 F & 72,0 km \\
+        Drops, primera etapa & 457 km \\
+        \midrule
+        Cajas FK-CEO-4M & 188 \\
+        Splitters 1:4 & 181 \\
+        CTO con splitter 1:16 & 719 \\
+        ODF DIO B144 & 4 \\
+        \bottomrule
+      \end{tabular}
+    \end{column}
+  \end{columns}
+  \note{\textbf{Agustín Mendes Rosa:} Cada cluster recibe un bloque de 24 fibras: las primeras ocho van una a cada sector, las ocho siguientes son de crecimiento, después vienen las de instituciones y plazas, y el resto queda de reserva. Como cada sector usa un puerto PON, la red necesita 181 puertos, que se cubren con 12 OLT de 16 puertos, seis por región, y quedan 11 libres. Evaluamos compartir puertos con un splitter 1:2 en el hub, pero el recorrido más largo dejaría de cumplir el presupuesto óptico. A la derecha está el resumen de cantidades: unos 14 km de troncal, 54 de cable de cluster, 72 de distribución, 719 cajas terminales y 457 km de drop en la primera etapa.}
+\end{frame}
+
+\orador{Grupo Oeste}{Agustín Mendes Rosa}
+\begin{frame}{Identificación y continuidad óptica}
+  \footnotesize
+  \begin{itemize}
+    \item OLT-E1..E6 y OLT-O1..O6: la OLT $n$ atiende los clusters $2n-1$ y $2n$
+    \item ODF de 144 posiciones: 24 consecutivas por cluster; fibras con código de colores ABNT
+    \item Tramos CT-01..CT-16 (Este) y CT-O01..CT-O15 (Oeste); cajas D1--D4 y DO1--DO3
+  \end{itemize}
+  \vspace{0.1cm}
+  \scriptsize
+  \begin{tabular}{lll}
+    \toprule
+    \textbf{Elemento} & \textbf{Sector 28 (C3)} & \textbf{Sector O77 (O10)} \\
+    \midrule
+    Puerto PON & OLT-E2, PON 6 & OLT-O5, PON 15 \\
+    Posición en el ODF & ODF-E1, 54 & ODF-O2, 80 \\
+    Fibra del troncal & C3-F6 (violeta) & O10-F8 (rosa) \\
+    Tramos del troncal & CT-01, CT-03 & CT-O01, O02, O04, O05, O08, O13 \\
+    Derivaciones & D1 & DO1, CEO-O6, DO2, CEO-O8, DO3 \\
+    Caja de distribución & 9 de Julio y Av.\ San Martín & 19 de Octubre y El Porvenir \\
+    Distribución & DS-28, F1--F4 & DS-O77, F1--F4 \\
+    \bottomrule
+  \end{tabular}
+  \note{\textbf{Agustín Mendes Rosa:} Para el cableado definimos una identificación coherente con los planos y las tablas: cada OLT atiende dos clusters consecutivos, cada cluster ocupa 24 posiciones consecutivas del ODF y las fibras siguen el código de colores del fabricante. La tabla muestra la continuidad completa de dos sectores: por ejemplo, el sector O77 sale del puerto 15 de la OLT-O5, ocupa la posición 80 del ODF-O2, usa la fibra 8 del bloque de O10, que es la rosa, y recorre seis tramos del troncal pasando por cinco cajas de derivación hasta su caja de distribución. Le paso a Joaquín, que sigue con la conectividad mayorista.}
+\end{frame}
+
+\orador{Grupo Oeste}{Joaquín Monja}
+\begin{frame}{Conectividad mayorista: procedimiento de la cátedra}
+  \begin{columns}[T]
+    \begin{column}{0.5\textwidth}
+      \small
+      \begin{enumerate}
+        \item Suma comercial: $C_{com} = \sum N_{plan}\, v_{plan}$
+        \item Simultaneidad $F_s$; overbooking $OB = 1/F_s$
+        \item $C_{pico} = C_{com} \cdot F_s$
+        \item $C_{obj} = C_{pico}\,(1 + M)$, con $M = 25$\,\%
+      \end{enumerate}
+      \textbf{Escenarios:} $F_s = 5$\,\% (diseño, 20:1) y $10$\,\% (conservador, 10:1)\\[0.15cm]
+      \footnotesize El overbooking no es la división óptica 1:64.
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      \centering
+      \includegraphics[width=\textwidth]{calculadora_parametros.png}\\
+      \scriptsize Calculadora de la cátedra: \textbf{una configuración por OLT y etapa} (24), con los abonados reales de cada sector.
+    \end{column}
+  \end{columns}
+  \note{\textbf{Joaquín Monja:} Gracias, Agustín. La conectividad mayorista la dimensionamos con el procedimiento y la calculadora que nos dio la cátedra. Se suma la velocidad comercial de todos los planes, se multiplica por un factor de simultaneidad, cuya inversa es el overbooking, y se agrega un margen operativo del 25 por ciento. Como la red es nueva y no hay mediciones, evaluamos los dos escenarios que recomienda la cátedra: 5 por ciento, que es overbooking 20 a 1, como diseño, y 10 por ciento como escenario conservador. La calculadora admite hasta 32 puertos, así que cargamos una configuración por OLT y por etapa, 24 en total, con los abonados reales de cada sector, y sumamos los resultados.}
+\end{frame}
+
+\orador{Grupo Oeste}{Joaquín Monja}
+\begin{frame}{Resultados de la calculadora}
+  \begin{columns}[T]
+    \begin{column}{0.48\textwidth}
+      \centering
+      \includegraphics[width=\textwidth]{calculadora_resultados.png}\\
+      \scriptsize OLT-E1, cobertura final, $F_s = 5$\,\%
+    \end{column}
+    \begin{column}{0.52\textwidth}
+      \scriptsize
+      \begin{tabular}{lrr}
+        \toprule
+        \textbf{Backhaul de bajada} & $F_s = 5$\,\% & $F_s = 10$\,\% \\
+        \midrule
+        1.ª etapa (5.468 ab.) & \textbf{102,5 Gbps} & 205 Gbps \\
+        Final (10.929 ab.) & \textbf{204,9 Gbps} & 410 Gbps \\
+        \bottomrule
+      \end{tabular}\\[0.15cm]
+      \small
+      \begin{itemize}
+        \item Contrato: \textbf{2$\times$100 GbE} (51\,\%), luego \textbf{3$\times$100 GbE} (68\,\%)
+        \item Enlace \textbf{100GBASE-LR4}: 2,92 dB + 3 dB $\leq$ 6,3 dB
+        \item Uplinks: \textbf{4$\times$10 GE por OLT} (con 2 llegaba al 96\,\%)
+        \item Puertos PON: 45\,\% de uso en la cobertura final
+      \end{itemize}
+      \footnotesize Contraste OpenVault (5 Mbps por abonado): 34 Gbps. Permite contratar por etapas.
+    \end{column}
+  \end{columns}
+  \note{\textbf{Joaquín Monja:} Estos son los resultados. Con la simultaneidad de diseño, la red necesita 102,5 Gbps en la primera etapa y unos 205 en la cobertura final; en el escenario conservador, el doble. Por eso proponemos contratar dos interfaces de 100 Gbps al principio, con un uso del 51 por ciento, y pasar a tres en la cobertura final. El enlace al nodo REFEFO es 100GBASE-LR4, que admite 6,3 dB y en nuestro caso tiene 2,92 más los 3 de margen. La calculadora también mostró que con dos uplinks por OLT llegábamos al 96 por ciento, así que usamos los cuatro. Como contraste, con el consumo medio de OpenVault la demanda sería tres veces menor, lo que permite contratar por etapas y ajustar con mediciones.}
+\end{frame}
+
+\section[P2: Verificación]{Verificación}
+\orador{Grupo Oeste}{Joaquín Monja}
+\begin{frame}{Presupuesto óptico: recorridos extremos}
+  \scriptsize
+  \begin{tabular}{lrrrr}
+    \toprule
+    & \multicolumn{2}{c}{\textbf{Mayor pérdida}} & \multicolumn{2}{c}{\textbf{Menor pérdida}} \\
+    \cmidrule(lr){2-3}\cmidrule(lr){4-5}
+    \textbf{Elemento} & CTO-91.1 & CTO-O77.3 & CTO-28.3 & CTO-O42.4 \\
+    \midrule
+    Fibra (red + drop) & 1,62 dB & 1,75 dB & 0,07 dB & 0,19 dB \\
+    Splitters 1:4 y 1:16 & 20,80 dB & 20,80 dB & 18,06 dB & 18,06 dB \\
+    Conexiones & 1,50 dB & 1,50 dB & 0 & 0 \\
+    Empalmes & 1,30 dB & 1,10 dB & 0 & 0 \\
+    \midrule
+    \textbf{Pérdida total} & \textbf{25,22 dB} & \textbf{25,15 dB} & \textbf{18,13 dB} & \textbf{18,25 dB} \\
+    \bottomrule
+  \end{tabular}
+  \vspace{0.2cm}
+
+  \small
+  \begin{columns}[T]
+    \begin{column}{0.5\textwidth}
+      \begin{block}{Peor caso (con $P_{t,min}$)}
+        Bajada: $-22{,}22$ dBm vs.\ $S_r = -27$\\
+        Subida: $-25{,}22$ dBm vs.\ $S_r = -30$\\
+        Sobrante sobre $M_s$: \textbf{1,78 dB} (Este), 1,85 dB (Oeste)
+      \end{block}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      \begin{block}{Mejor caso (con $P_{t,max}$)}
+        Bajada: $-11{,}13$ dBm $< -8$ dBm\\
+        Subida: $-14{,}13$ dBm $< -12$ dBm\\
+        Ningún receptor se satura
+      \end{block}
+    \end{column}
+  \end{columns}
+  \note{\textbf{Joaquín Monja:} El presupuesto óptico lo verificamos en los dos sentidos y en los recorridos extremos de cada región. Los de mayor pérdida son la CTO 91.1 en el Este y la O77.3 en el Oeste: los splitters se llevan casi 21 dB, y con fibra, conexiones y empalmes se llega a unos 25,2 dB. Aun así, con la potencia mínima de transmisión quedan 1,78 dB por encima del margen de 3 dB en el Este y 1,85 en el Oeste. En los recorridos más cortos, con la potencia máxima, ni la ONT ni la OLT se saturan.}
+\end{frame}
+
+\orador{Grupo Oeste}{Joaquín Monja}
+\begin{frame}{Lo que justificó el presupuesto}
+  \begin{itemize}
+    \item \textbf{Óptica Clase C+:} con Clase B+ el peor caso no cumpliría en subida ($-0{,}22$ dB)
+    \item \textbf{Un puerto por sector:} un splitter 1:2 en el hub dejaría $-2{,}22$ dB (no cumple)
+    \item \textbf{Sin atenuadores} con C+; con C++ (+10 dBm) la ONT más cercana quedaría al límite de saturación
+    \item \textbf{Troncal reaprovechado:} más cajas atravesadas, pero el diseño sigue cumpliendo
+    \item \textbf{Video overlay:} el WDM suma 0,8 dB y todavía sobran 0,98 dB
+  \end{itemize}
+  \note{\textbf{Joaquín Monja:} El presupuesto justificó varias decisiones. La óptica Clase C+ es necesaria: con Clase B+ el recorrido más largo no cumpliría en subida. No conviene compartir puertos con un splitter 1:2 en el hub, porque faltarían más de 2 dB. Con C+ no hacen falta atenuadores, pero no habría que pasar a módulos C++ sin revisar los recorridos cortos. El cambio de trazado del troncal hace pasar las fibras por más cajas de derivación, pero el diseño sigue cumpliendo. Y si en el futuro se agrega video por RF, el WDM suma 0,8 dB y todavía sobra casi 1 dB.}
+\end{frame}
+
+\orador{Grupo Oeste}{Joaquín Monja}
+\begin{frame}{Alternativas para distribuir televisión}
+  \small
+  \begin{tabular}{>{\raggedright\arraybackslash}p{2.4cm}>{\raggedright\arraybackslash}p{4.6cm}>{\raggedright\arraybackslash}p{4.4cm}}
+    \toprule
+    & \textbf{IPTV} & \textbf{Video overlay (1550 nm)} \\
+    \midrule
+    Tráfico & Multicast fijo por canal; unicast proporcional a los espectadores & RF, independiente de los espectadores \\
+    Recursos & Puerto GPON; mayorista si es unicast o externa & Longitud de onda propia \\
+    Equipos & Cabecera IPTV, decodificador & Transmisor, 6 EDFA, ONT con RF \\
+    Presupuesto & No afecta la ODN & $-6{,}5$ dBm en el peor caso (óptimo: 0 a $-10$) \\
+    \bottomrule
+  \end{tabular}
+  \vspace{0.2cm}
+  \begin{block}{Elección: IPTV multicast con cabecera local}
+    Según la calculadora: 0,19 Gbps por puerto y 0,8 Gbps por OLT, \textbf{nulo sobre el mayorista}. El overlay queda como opción para migrar la red HFC sin decodificadores.
+  \end{block}
+  \note{\textbf{Joaquín Monja:} Para la televisión comparamos dos alternativas. La televisión sobre IP viaja dentro de la capacidad GPON: en multicast cada canal se envía una sola vez, y en unicast cada espectador tiene su propio flujo. El video overlay transmite la grilla de RF en una tercera longitud de onda, a 1550 nm, con transmisor y amplificadores, y la ONT necesita receptor de RF; verificamos que llegan -6,5 dBm en el peor caso, dentro del rango óptimo. Elegimos IPTV multicast con cabecera local en el hub: según la calculadora consume 0,19 Gbps por puerto y nada del enlace mayorista. El overlay queda como opción si la cooperativa quiere migrar sus abonados de cable sin entregar decodificadores.}
+\end{frame}
+
+\section[Conclusiones]{Conclusiones}
+\orador{Grupo Oeste}{Joaquín Monja}
+\begin{frame}{Conclusiones de la Parte 2}
+  \small
+  \begin{itemize}
+    \item Red FTTH GPON para \textbf{12.135 casas pasadas}: 24 clusters, 181 sectores, 719 CTO y 12 OLT
+    \item División 1:4 + 1:16: \textbf{una fibra de troncal por sector}
+    \item Troncal de \textbf{12 km} que reaprovecha el cable tendido y evita giros
+    \item Presupuesto óptico: cumple en ambos sentidos con \textbf{óptica Clase C+}
+    \item \textbf{49 fibras dedicadas} a instituciones, hospitales y plazas
+    \item Mayorista: nodo REFEFO local, \textbf{2--3$\times$100 GbE} según la calculadora de la cátedra
+    \item TV: IPTV multicast desde una cabecera local
+  \end{itemize}
+  \begin{block}{Limitaciones}
+    \footnotesize Viviendas estimadas con densidad uniforme, cartografía de OSM, ubicación del nodo REFEFO y postería a verificar en campo, y valores de catálogo a validar con mediciones y OTDR.
+  \end{block}
+  \note{\textbf{Joaquín Monja:} Para cerrar: diseñamos una red FTTH GPON para las 12.135 viviendas de Marcos Juárez, con 24 clusters, 181 sectores y 12 OLT. La división en dos niveles hace que el troncal necesite una sola fibra por sector, y con el criterio de reaprovechar el cable tendido el troncal quedó en unos 12 km. El presupuesto cumple en ambos sentidos con óptica Clase C+, las instituciones y plazas tienen 49 fibras dedicadas, y la conectividad mayorista se resuelve en el nodo REFEFO local con dos a tres interfaces de 100 Gbps. Las principales limitaciones son que las viviendas se estimaron con densidad uniforme y que varios supuestos, como la postería y la ubicación del nodo, hay que verificarlos en campo. Muchas gracias.}
+\end{frame}
+
+\orador{}{}
+\begin{frame}
+  \centering
+  \Large ¡Gracias!\\[0.4cm]
+  \normalsize ¿Preguntas?
+  \note{\textbf{Todos:} Quedamos a disposición para las preguntas. Cada integrante responde sobre su parte: Cristian sobre la selección de elementos y la investigación, Luca sobre el presupuesto de la Parte 1 y el diseño del Este, Agustín sobre el Oeste, el troncal y las instituciones, y Joaquín sobre la conectividad mayorista, el presupuesto óptico y la televisión.}
+\end{frame}
