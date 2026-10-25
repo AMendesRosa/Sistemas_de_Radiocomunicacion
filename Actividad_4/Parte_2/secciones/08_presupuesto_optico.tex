@@ -56,8 +56,8 @@ Criterios adoptados:
 \subsection{Recorridos verificados}
 Las longitudes de todos los recorridos (hub $\rightarrow$ CEO $\rightarrow$ caja de distribución $\rightarrow$ CTO $\rightarrow$ vivienda) se calcularon sobre la red de calles. En cada región se verifican los dos recorridos extremos, que se identifican en los planos de la \autoref{fig:troncal} y la \autoref{fig:troncal_O}:
 \begin{itemize}
-    \item \textbf{Mayor pérdida, Región Este:} CTO-91.1, en el barrio aislado del noreste (sector 91, cluster C12). Tiene $3.896 \, [m]$ de red (troncal, cable de cluster y distribución) más un drop de $183 \, [m]$, y atraviesa cinco cajas de derivación del troncal (D1, D2, CEO-C5, D4 y CEO-C6).
-    \item \textbf{Mayor pérdida, Región Oeste:} CTO-O77.3, en el noroeste (sector O77, cluster O10). Tiene $4.364 \, [m]$ de red más un drop de $237 \, [m]$, y atraviesa tres cajas de derivación (DO1, DO3 y DO5).
+    \item \textbf{Mayor pérdida, Región Este:} CTO-91.1, en el barrio aislado del noreste (sector 91, cluster C12). Tiene $4.077 \, [m]$ de red (troncal, cable de cluster y distribución) más un drop de $183 \, [m]$, y atraviesa siete cajas de derivación del troncal (D1, D2, CEO-C4, CEO-C5, D3, D4 y CEO-C11).
+    \item \textbf{Mayor pérdida, Región Oeste:} CTO-O77.3, en el noroeste (sector O77, cluster O10). Tiene $4.381 \, [m]$ de red más un drop de $237 \, [m]$, y atraviesa cinco cajas de derivación (DO1, CEO-O6, DO2, CEO-O8 y DO3).
     \item \textbf{Menor pérdida, Región Este:} CTO-28.3, junto al hub (sector 28, cluster C3), con $170 \, [m]$ de red y un drop de $93 \, [m]$.
     \item \textbf{Menor pérdida, Región Oeste:} CTO-O42.4 (sector O42, cluster O6), con $664 \, [m]$ de red y un drop de $104 \, [m]$.
 \end{itemize}
@@ -73,13 +73,13 @@ Las longitudes de todos los recorridos (hub $\rightarrow$ CEO $\rightarrow$ caja
         \cline{2-5}
         \textbf{Elemento} & \textbf{CTO-91.1} & \textbf{CTO-O77.3} & \textbf{CTO-28.3} & \textbf{CTO-O42.4} \\
         \hline
-        Fibra de la red ($\times 0{,}38$ o $0{,}25$) & $1{,}48 \, [dB]$ & $1{,}66 \, [dB]$ & \multirow{2}{*}{$0{,}07 \, [dB]$} & \multirow{2}{*}{$0{,}19 \, [dB]$} \\
+        Fibra de la red ($\times 0{,}38$ o $0{,}25$) & $1{,}55 \, [dB]$ & $1{,}66 \, [dB]$ & \multirow{2}{*}{$0{,}07 \, [dB]$} & \multirow{2}{*}{$0{,}19 \, [dB]$} \\
         Fibra del drop ($\times 0{,}36$ o $0{,}25$) & $0{,}07 \, [dB]$ & $0{,}09 \, [dB]$ & & \\
         Splitters 1:4 y 1:16 & $20{,}80 \, [dB]$ & $20{,}80 \, [dB]$ & $18{,}06 \, [dB]$ & $18{,}06 \, [dB]$ \\
         Conexiones ($5 \times 0{,}30$) & $1{,}50 \, [dB]$ & $1{,}50 \, [dB]$ & $0$ & $0$ \\
-        Empalmes ($\times 0{,}1$) & $11$: $1{,}10 \, [dB]$ & $9$: $0{,}90 \, [dB]$ & $0$ & $0$ \\
+        Empalmes ($\times 0{,}1$) & $13$: $1{,}30 \, [dB]$ & $11$: $1{,}10 \, [dB]$ & $0$ & $0$ \\
         \hline
-        \textbf{Pérdida total $A_{total}$} & $\mathbf{24{,}95 \, [dB]}$ & $\mathbf{24{,}94 \, [dB]}$ & $\mathbf{18{,}13 \, [dB]}$ & $\mathbf{18{,}25 \, [dB]}$ \\
+        \textbf{Pérdida total $A_{total}$} & $\mathbf{25{,}22 \, [dB]}$ & $\mathbf{25{,}15 \, [dB]}$ & $\mathbf{18{,}13 \, [dB]}$ & $\mathbf{18{,}25 \, [dB]}$ \\
         \hline
     \end{tabular}
 \end{table}
@@ -100,11 +100,11 @@ En la Región Oeste el recorrido más desfavorable tiene más fibra pero atravie
         \textbf{Verificación} & \textbf{CTO-91.1} & \textbf{CTO-O77.3} & \textbf{CTO-28.3} & \textbf{CTO-O42.4} \\
         \hline
         Potencia de la OLT & \multicolumn{2}{c|}{$P_{t,min} = +3 \, [dBm]$} & \multicolumn{2}{c|}{$P_{t,max} = +7 \, [dBm]$} \\
-        Pérdida total [dB] & $24{,}95$ & $24{,}94$ & $18{,}13$ & $18{,}25$ \\
-        Potencia en la ONT [dBm] & $-21{,}95$ & $-21{,}94$ & $-11{,}13$ & $-11{,}25$ \\
+        Pérdida total [dB] & $25{,}22$ & $25{,}15$ & $18{,}13$ & $18{,}25$ \\
+        Potencia en la ONT [dBm] & $-22{,}22$ & $-22{,}15$ & $-11{,}13$ & $-11{,}25$ \\
         Referencia del receptor & \multicolumn{2}{c|}{$S_r = -27 \, [dBm]$} & \multicolumn{2}{c|}{$P_{sat} = -8 \, [dBm]$} \\
-        Diferencia [dB] & $5{,}05$ sobre $S_r$ & $5{,}06$ sobre $S_r$ & $3{,}13$ bajo $P_{sat}$ & $3{,}25$ bajo $P_{sat}$ \\
-        Sobrante ($M_s = 3 \, [dB]$) [dB] & $\mathbf{2{,}05}$ & $\mathbf{2{,}06}$ & -- & -- \\
+        Diferencia [dB] & $4{,}78$ sobre $S_r$ & $4{,}85$ sobre $S_r$ & $3{,}13$ bajo $P_{sat}$ & $3{,}25$ bajo $P_{sat}$ \\
+        Sobrante ($M_s = 3 \, [dB]$) [dB] & $\mathbf{1{,}78}$ & $\mathbf{1{,}85}$ & -- & -- \\
         \hline
         \textbf{Resultado} & \textbf{Cumple} & \textbf{Cumple} & \textbf{Cumple} & \textbf{Cumple} \\
         \hline
@@ -125,35 +125,35 @@ En la Región Oeste el recorrido más desfavorable tiene más fibra pero atravie
         \textbf{Verificación} & \textbf{CTO-91.1} & \textbf{CTO-O77.3} & \textbf{CTO-28.3} & \textbf{CTO-O42.4} \\
         \hline
         Potencia de la ONT & \multicolumn{2}{c|}{$P_{t,min} = 0 \, [dBm]$} & \multicolumn{2}{c|}{$P_{t,max} = +4 \, [dBm]$} \\
-        Pérdida total [dB] & $24{,}95$ & $24{,}94$ & $18{,}13$ & $18{,}25$ \\
-        Potencia en la OLT [dBm] & $-24{,}95$ & $-24{,}94$ & $-14{,}13$ & $-14{,}25$ \\
+        Pérdida total [dB] & $25{,}22$ & $25{,}15$ & $18{,}13$ & $18{,}25$ \\
+        Potencia en la OLT [dBm] & $-25{,}22$ & $-25{,}15$ & $-14{,}13$ & $-14{,}25$ \\
         Referencia del receptor & \multicolumn{2}{c|}{$S_r = -30 \, [dBm]$} & \multicolumn{2}{c|}{$P_{sat} = -12 \, [dBm]$} \\
-        Diferencia [dB] & $5{,}05$ sobre $S_r$ & $5{,}06$ sobre $S_r$ & $2{,}13$ bajo $P_{sat}$ & $2{,}25$ bajo $P_{sat}$ \\
-        Sobrante ($M_s = 3 \, [dB]$) [dB] & $\mathbf{2{,}05}$ & $\mathbf{2{,}06}$ & -- & -- \\
+        Diferencia [dB] & $4{,}78$ sobre $S_r$ & $4{,}85$ sobre $S_r$ & $2{,}13$ bajo $P_{sat}$ & $2{,}25$ bajo $P_{sat}$ \\
+        Sobrante ($M_s = 3 \, [dB]$) [dB] & $\mathbf{1{,}78}$ & $\mathbf{1{,}85}$ & -- & -- \\
         \hline
         \textbf{Resultado} & \textbf{Cumple} & \textbf{Cumple} & \textbf{Cumple} & \textbf{Cumple} \\
         \hline
     \end{tabular}
 \end{table}
 
-\subsection{Fibras dedicadas a instituciones}
+\subsection{Fibras dedicadas a instituciones y plazas}
 \label{sec:presupuesto_inst}
-Las fibras de las instituciones (\autoref{sec:instituciones}) no pasan por splitters, por lo que su pérdida es mucho menor. Se calcula con los mismos valores de la \autoref{tab:param_odn}, con cuatro conexiones (equipo y adaptador del ODF en el hub, roseta y equipo en la institución) y cinco empalmes base (pigtail del ODF, CEO de cluster, paso en la caja de distribución, drop en la CTO y roseta) más uno por cada derivación del troncal. La pérdida de cada institución figura en la \autoref{tab:instituciones}.
+Las fibras de las instituciones y las plazas (\autoref{sec:instituciones}) no pasan por splitters, por lo que su pérdida es mucho menor. Se calcula con los mismos valores de la \autoref{tab:param_odn}, con cuatro conexiones (equipo y adaptador del ODF en el hub, roseta y equipo en la institución o la plaza) y cinco empalmes base (pigtail del ODF, CEO de cluster, paso en la caja de distribución, drop en la CTO y roseta) más uno por cada derivación del troncal. En los hospitales, que se conectan con un cable propio desde la caja de distribución, los empalmes base son cuatro, porque no pasan por una CTO. La pérdida de cada recorrido figura en la \autoref{tab:instituciones}.
 
-El recorrido de mayor pérdida es el de la Escuela ``Juan Bautista Alberdi'' (I-15, CTO-O71.2): $2.931 \, [m]$ de red y $60 \, [m]$ de drop, con cuatro derivaciones. Su pérdida es de $1{,}11 + 0{,}02 \, [dB]$ de fibra, $1{,}20 \, [dB]$ de conexiones y $0{,}90 \, [dB]$ de empalmes, en total $3{,}24 \, [dB]$. El de menor pérdida es el de la Escuela ``J.M. de Zambruno'' (I-04, CTO-15.3), con $446 \, [m]$ en total y $0{,}11 \, [dB]$ con los valores mínimos.
+El recorrido de mayor pérdida es el de la Escuela ``Juan Bautista Alberdi'' (I-16, CTO-O71.2): $3.504 \, [m]$ de red y $24 \, [m]$ de drop, con seis derivaciones. Su pérdida es de $1{,}33 + 0{,}01 \, [dB]$ de fibra, $1{,}20 \, [dB]$ de conexiones y $1{,}10 \, [dB]$ de empalmes, en total $3{,}64 \, [dB]$. Le sigue el IPEM 93 (I-20), con $3{,}50 \, [dB]$. El de menor pérdida es el de la Escuela ``J.M. de Zambruno'' (I-04, CTO-15.3), con $415 \, [m]$ en total y $0{,}10 \, [dB]$ con los valores mínimos.
 
 Para el servicio se propone un enlace Ethernet punto a punto de $1 \, [Gbps]$ con módulos 1000BASE-LX de $10 \, [km]$ (Tx de $-9$ a $-3 \, [dBm]$; sensibilidad $-18 \, [dBm]$; saturación $-3 \, [dBm]$) \cite{sfp_1glx}:
 \begin{itemize}
-    \item \underline{Mayor pérdida:} $P_r = -9 - 3{,}24 = -12{,}24 \, [dBm]$, $5{,}76 \, [dB]$ sobre la sensibilidad. Descontado el margen de $3 \, [dB]$ quedan $2{,}76 \, [dB]$ (cumple).
-    \item \underline{Menor pérdida:} $P_r = -3 - 0{,}11 = -3{,}11 \, [dBm]$, apenas por debajo del nivel de saturación (cumple). Al poner en servicio los enlaces más cortos conviene medir la potencia recibida y, si supera los $-5 \, [dBm]$, agregar un atenuador fijo.
+    \item \underline{Mayor pérdida:} $P_r = -9 - 3{,}64 = -12{,}64 \, [dBm]$, $5{,}36 \, [dB]$ sobre la sensibilidad. Descontado el margen de $3 \, [dB]$ quedan $2{,}36 \, [dB]$ (cumple).
+    \item \underline{Menor pérdida:} $P_r = -3 - 0{,}10 = -3{,}10 \, [dBm]$, apenas por debajo del nivel de saturación (cumple). Al poner en servicio los enlaces más cortos conviene medir la potencia recibida y, si supera los $-5 \, [dBm]$, agregar un atenuador fijo.
 \end{itemize}
-Con módulos 10GBASE-LR (\autoref{sec:mayorista}) todos los enlaces cumplen salvo el de la Escuela Alberdi, al que le faltarían $0{,}04 \, [dB]$, por lo que para $10 \, [Gbps]$ en ese caso se requiere un módulo de mayor alcance. Si en cambio la fibra se conecta a un puerto PON propio con la óptica Clase C+, el margen es amplio, pero en los recorridos cortos la ONT recibiría hasta $+6{,}9 \, [dBm]$, muy por encima de su saturación ($-8 \, [dBm]$): esa opción exige un atenuador de al menos $15 \, [dB]$.
+Con módulos 10GBASE-LR (presupuesto de $6{,}2 \, [dB]$ \cite{fs_10glr}) solo cumplen los enlaces de hasta $3{,}2 \, [dB]$: los 8 más alejados (tres escuelas, un centro de salud y cuatro plazas de la periferia) requieren módulos de mayor alcance para $10 \, [Gbps]$. Si en cambio la fibra se conecta a un puerto PON propio con la óptica Clase C+, el margen es amplio, pero en los recorridos cortos la ONT recibiría hasta $+6{,}9 \, [dBm]$, muy por encima de su saturación ($-8 \, [dBm]$): esa opción exige un atenuador de al menos $15 \, [dB]$.
 
 \subsection{Análisis y correcciones}
 El diseño cumple en ambos sentidos y en los recorridos extremos de las dos regiones, por lo que no se requieren correcciones. Los resultados confirman las siguientes decisiones:
 \begin{itemize}
-    \item \underline{Óptica Clase C+ en la OLT:} con un SFP Clase B+ ($P_t$ de $+1{,}5$ a $+5 \, [dBm]$; $S_r = -28 \, [dBm]$ \cite{g984_2}), el recorrido de mayor pérdida quedaría en sentido ascendente con un margen sobrante de apenas $0{,}05 \, [dB]$ en el Este y $0{,}06 \, [dB]$ en el Oeste, sin holgura para imprecisiones del diseño.
-    \item \underline{Un puerto por sector:} compartir un puerto entre dos sectores con un splitter 1:2 en el hub agregaría $3{,}7 \, [dB]$ más un conector, y el margen sobrante del recorrido de mayor pérdida pasaría a $-1{,}95 \, [dB]$ en el Este y $-1{,}94 \, [dB]$ en el Oeste (no cumple).
+    \item \underline{Óptica Clase C+ en la OLT:} con un SFP Clase B+ ($P_t$ de $+1{,}5$ a $+5 \, [dBm]$; $S_r = -28 \, [dBm]$ \cite{g984_2}), el recorrido de mayor pérdida no cumpliría en sentido ascendente: el margen sobrante sería de $-0{,}22 \, [dB]$ en el Este y $-0{,}15 \, [dB]$ en el Oeste.
+    \item \underline{Un puerto por sector:} compartir un puerto entre dos sectores con un splitter 1:2 en el hub agregaría $3{,}7 \, [dB]$ más un conector, y el margen sobrante del recorrido de mayor pérdida pasaría a $-2{,}22 \, [dB]$ en el Este y $-2{,}15 \, [dB]$ en el Oeste (no cumple).
     \item \underline{Sin atenuadores:} en el recorrido de menor pérdida la potencia recibida queda por debajo del nivel de saturación en ambos sentidos, aun con pérdidas nulas de conectores y empalmes. En cambio, no deben instalarse módulos de mayor potencia (Clase C++, con hasta $+10 \, [dBm]$) sin verificar este caso: con $+10 \, [dBm]$ la ONT más cercana recibiría $-8{,}1 \, [dBm]$ en el Este y $-8{,}3 \, [dBm]$ en el Oeste, en el límite de su saturación.
-    \item \underline{Video overlay:} si se agrega (\autoref{sec:television}), el WDM del amplificador suma $0{,}8 \, [dB]$ al recorrido GPON y el margen sobrante pasa a $1{,}25 \, [dB]$ en el Este y $1{,}26 \, [dB]$ en el Oeste, que sigue cumpliendo.
+    \item \underline{Video overlay:} si se agrega (\autoref{sec:television}), el WDM del amplificador suma $0{,}8 \, [dB]$ al recorrido GPON y el margen sobrante pasa a $0{,}98 \, [dB]$ en el Este y $1{,}05 \, [dB]$ en el Oeste, que sigue cumpliendo.
 \end{itemize}

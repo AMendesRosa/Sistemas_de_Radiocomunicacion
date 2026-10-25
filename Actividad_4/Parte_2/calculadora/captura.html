@@ -1,0 +1,15 @@
+<!doctype html><html><head><meta charset="utf-8"><title>captura</title>
+<style>html,body{margin:0}iframe{border:0;width:1200px;height:5200px}</style></head><body>
+<iframe id="f" src="../../../Calculadora_FTTH_GPON_XGSPON_TV_v8.html"></iframe>
+<script>
+// Abre la calculadora original e importa una configuración (parámetro ?cfg=archivo.json&simd=5&agg=4&bh=25).
+const q = new URLSearchParams(location.search);
+document.getElementById('f').onload = async () => {
+  const w = document.getElementById('f').contentWindow;
+  const cfg = await fetch(q.get('cfg')).then(r => r.json());
+  cfg.parameters.simd = cfg.parameters.simu = q.get('simd') || '5';
+  cfg.parameters.aggCount = q.get('agg') || cfg.parameters.aggCount;
+  cfg.parameters.backhaul = q.get('bh') || cfg.parameters.backhaul;
+  w.restore(cfg);
+};
+</script></body></html>

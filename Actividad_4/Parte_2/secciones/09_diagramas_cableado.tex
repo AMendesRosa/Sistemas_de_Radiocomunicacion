@@ -3,7 +3,7 @@
 
 \subsection{Tramos de la red y denominaciones}
 \begin{itemize}
-    \item \underline{Alimentación o troncal:} desde el ODF del hub hasta la caja de empalme (CEO) de cada cluster. Cables CT-01 a CT-16 en la Región Este (\autoref{tab:tramos}) y CT-O01 a CT-O18 en la Oeste (\autoref{tab:tramos_O}).
+    \item \underline{Alimentación o troncal:} desde el ODF del hub hasta la caja de empalme (CEO) de cada cluster. Cables CT-01 a CT-16 en la Región Este (\autoref{tab:tramos}) y CT-O01 a CT-O15 en la Oeste (\autoref{tab:tramos_O}).
     \item \underline{Distribución:} desde la CEO de cluster hasta las CTO. Se divide en el \textbf{cable de cluster} (CL-C1 a CL-C12 y CL-O1 a CL-O12, 24 fibras), que llega a las cajas de distribución de los sectores, y el \textbf{cable de distribución de sector} o de dispersión (DS-1 a DS-92 y DS-O1 a DS-O89, 12 fibras), que va desde el splitter 1:4 hasta las CTO.
     \item \underline{Acceso al abonado:} el \textbf{drop} es el cable de una fibra entre la salida de la CTO y la vivienda. La \textbf{acometida} es su ingreso al domicilio, que termina en la roseta óptica, donde se conecta la ONT con un patch cord.
 \end{itemize}
@@ -13,8 +13,8 @@
     \item \underline{Equipos y puertos:} OLT-E1 a OLT-E6, puertos PON 1 a 16. Cada OLT atiende dos clusters consecutivos: la OLT-E$n$ atiende los clusters C$(2n-1)$ y C$(2n)$. Los puertos se asignan en orden, primero los sectores del cluster impar y luego los del par. En la Región Oeste se aplica el mismo criterio con OLT-O1 a OLT-O6 y los clusters O1 a O12.
     \item \underline{ODF:} ODF-E1 (clusters C1 a C6) y ODF-E2 (clusters C7 a C12), con 24 posiciones consecutivas por cluster. Por ejemplo, C3 ocupa las posiciones 49 a 72 del ODF-E1. En la Región Oeste, ODF-O1 (clusters O1 a O6) y ODF-O2 (O7 a O12).
     \item \underline{Fibras:} se identifican por cluster y número de fibra dentro del bloque de 24 (C3-F6). En cada cable se sigue el código de colores ABNT de la especificación del fabricante \cite{et_minira}: 1 verde, 2 amarillo, 3 blanco, 4 azul, 5 rojo, 6 violeta, 7 marrón, 8 rosa, 9 negro, 10 gris, 11 naranja y 12 aqua. Las fibras 13 a 24 repiten la secuencia en el segundo tubo.
-    \item \underline{Cajas:} CEO-C$k$ (cluster), D1 a D4 (derivaciones del troncal), CD-$s$ (caja de distribución del sector $s$) y CTO-$s.j$ (caja terminal $j$ del sector $s$). Las salidas de cada CTO se numeran del 1 al 16. En la Región Oeste se antepone la letra O: CEO-O$k$, DO1 a DO6, CD-O$s$ y CTO-O$s.j$.
-    \item \underline{Fibras dentro de cada cluster:} la fibra F$k$ alimenta al sector que ocupa el lugar $k$ del cluster (ordenados por número), y la F$(8+k)$ es su fibra de crecimiento (\autoref{tab:asignacion_cluster}). Las fibras F17 en adelante se asignan a las instituciones del cluster, identificadas como I-01 a I-26 (\autoref{tab:instituciones}).
+    \item \underline{Cajas:} CEO-C$k$ (cluster), D1 a D4 (derivaciones del troncal), CD-$s$ (caja de distribución del sector $s$) y CTO-$s.j$ (caja terminal $j$ del sector $s$). Las salidas de cada CTO se numeran del 1 al 16. En la Región Oeste se antepone la letra O: CEO-O$k$, DO1 a DO3, CD-O$s$ y CTO-O$s.j$.
+    \item \underline{Fibras dentro de cada cluster:} la fibra F$k$ alimenta al sector que ocupa el lugar $k$ del cluster (ordenados por número), y la F$(8+k)$ es su fibra de crecimiento (\autoref{tab:asignacion_cluster}). Las fibras F17 en adelante se asignan a las instituciones (I-01 a I-27) y las plazas (P-01 a P-13) del cluster (\autoref{tab:instituciones}).
 \end{itemize}
 
 \subsection{Diagrama de continuidad óptica}
@@ -29,7 +29,7 @@ La \autoref{fig:continuidad} muestra la continuidad óptica completa de un abona
         cb/.style={midway, align=center, font=\tiny}]
         \node[eq] (olt) at (0,0) {\textbf{OLT-E2}\\PON 6\\(SFP C+)};
         \node[cj] (odf) at (2.6,0) {\textbf{ODF-E1}\\posición 54\\(C3-F6)};
-        \node[cj] (d1) at (5.2,0) {\textbf{D1}\\9 de Julio y\\Lardizábal};
+        \node[cj] (d1) at (5.2,0) {\textbf{D1}\\9 de Julio y\\P. Maipú};
         \node[cj] (ceo) at (7.8,0) {\textbf{CEO-C3 / CD-28}\\9 de Julio y\\Av. San Martín};
         \node[cj, fill=red!10] (sp4) at (10.4,0) {\textbf{Splitter 1:4}\\entrada: C3-F6\\salidas 1 a 4};
         \node[cj] (cto) at (13.0,0) {\textbf{CTO-28.$j$}\\splitter 1:16\\salidas 1 a 16};
@@ -37,7 +37,7 @@ La \autoref{fig:continuidad} muestra la continuidad óptica completa de un abona
         \node[eq] (ont) at (18.2,0) {\textbf{ONT}\\V2802RH};
         \draw[-{Stealth}, thick] (olt) -- node[cb, above=6pt]{patch cord\\SC/UPC-APC} (odf);
         \draw[-{Stealth}, thick] (odf) -- node[cb, above=6pt]{CT-01\\2 $\times$ 144 F} (d1);
-        \draw[-{Stealth}, thick] (d1) -- node[cb, above=6pt]{CT-04\\72 F} (ceo);
+        \draw[-{Stealth}, thick] (d1) -- node[cb, above=6pt]{CT-03\\48 F} (ceo);
         \draw[-{Stealth}, thick] (ceo) -- node[cb, above=6pt]{empalme} (sp4);
         \draw[-{Stealth}, thick] (sp4) -- node[cb, above=6pt]{DS-28 (12 F)\\F$j$ $\rightarrow$ CTO-28.$j$} (cto);
         \draw[-{Stealth}, thick] (cto) -- node[cb, above=6pt]{drop\\1 F} (ros);
@@ -63,8 +63,8 @@ La \autoref{fig:continuidad} muestra la continuidad óptica completa de un abona
         Puerto PON & OLT-E2, PON 6 & OLT-E6, PON 14 \\
         Posición en el ODF & ODF-E1, 54 (crecimiento: 62) & ODF-E2, 126 (crecimiento: 134) \\
         Fibra del troncal & C3-F6 (tubo 1, violeta) & C12-F6 (tubo 1, violeta) \\
-        Tramos del troncal & CT-01, CT-04 & CT-01, CT-03, CT-07, CT-13, CT-14, CT-16 \\
-        Empalmes en derivaciones & D1 & D1, D2, CEO-C5, D4, CEO-C6 \\
+        Tramos del troncal & CT-01, CT-03 & CT-01, CT-04, CT-06, CT-09, CT-11, CT-13, CT-15, CT-16 \\
+        Empalmes en derivaciones & D1 & D1, D2, CEO-C4, CEO-C5, D3, D4, CEO-C11 \\
         Cable de cluster & CL-C3, fibra 6 (la CD-28 está en la CEO-C3) & CL-C12, fibra 6, sangría en la CD-90 \\
         Caja de distribución & CD-28: 9 de Julio y Av. San Martín & CD-90: Hermanas Vicentinas y Soberanía Nacional Este \\
         Cable de distribución & DS-28: F1 a F4 a CTO-28.1 a 28.4 & DS-90: F1 a F4 a CTO-90.1 a 90.4 \\
@@ -85,12 +85,12 @@ La \autoref{fig:continuidad} muestra la continuidad óptica completa de un abona
         Puerto PON & OLT-O3, PON 13 & OLT-O5, PON 15 \\
         Posición en el ODF & ODF-O1, 125 (crecimiento: 133) & ODF-O2, 80 (crecimiento: 88) \\
         Fibra del troncal & O6-F5 (tubo 1, rojo) & O10-F8 (tubo 1, rosa) \\
-        Tramos del troncal & CT-O01, CT-O03, CT-O06 & CT-O01, CT-O04, CT-O13, CT-O16 \\
-        Empalmes en derivaciones & DO1, DO2 & DO1, DO3, DO5 \\
+        Tramos del troncal & CT-O01, CT-O02 & CT-O01, CT-O02, CT-O04, CT-O05, CT-O08, CT-O13 \\
+        Empalmes en derivaciones & DO1 & DO1, CEO-O6, DO2, CEO-O8, DO3 \\
         Cable de cluster & CL-O6, fibra 5 (la CD-O42 está en la CEO-O6) & CL-O10, fibra 8, sangría en la CD-O77 \\
         Caja de distribución & CD-O42: Bv. Lardizábal y Santiago del Estero & CD-O77: 19 de Octubre y El Porvenir \\
         Cable de distribución & DS-O42: F1 a F4 a CTO-O42.1 a O42.4 & DS-O77: F1 a F4 a CTO-O77.1 a O77.4 \\
-        Fibras dedicadas a instituciones & I-20, jardín de infantes: O6-F17 y DS-O42 F9 hasta la CTO-O42.4. I-25, Sanatorio San Roque: O6-F20 y DS-O42 F10 hasta la CTO-O42.2 & Ninguna \\
+        Fibras dedicadas & I-21, jardín de infantes: O6-F17 y DS-O42 F9 hasta la CTO-O42.4 & Ninguna \\
         Cajas terminales & \autoref{tab:sectorO42} & \autoref{tab:sectorO77} \\
         \hline
     \end{tabular}

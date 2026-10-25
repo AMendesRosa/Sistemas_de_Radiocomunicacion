@@ -107,7 +107,7 @@ Resultan \textbf{12 clusters (O1 a O12), 89 sectores y 354 cajas terminales} (\a
 
 \subsection{Trazas generales}
 \label{sec:trazas}
-Los cables se tienden en forma aérea sobre la postería, siguiendo los recorridos más cortos por la red de calles. Las longitudes se calcularon sobre el grafo de calles de OpenStreetMap \cite{osm}. Se distinguen tres niveles de cable:
+Los cables se tienden en forma aérea sobre la postería, por la red de calles. Las longitudes se calcularon sobre el grafo de calles de OpenStreetMap \cite{osm}. Se distinguen tres niveles de cable:
 
 \begin{itemize}
     \item \underline{Troncal o alimentación:} desde el ODF del hub hasta la caja de empalme (CEO) de cada cluster. Cada cluster tiene asignadas 24 fibras, por lo que la capacidad de cada tramo es la suma de los clusters que alimenta.
@@ -125,7 +125,7 @@ Los cables se tienden en forma aérea sobre la postería, siguiendo los recorrid
         \hline
         \textbf{Nivel} & \textbf{Región Este} & \textbf{Región Oeste} \\
         \hline
-        Troncal (traza) & $7{,}22 \, [km]$ & $10{,}50 \, [km]$ \\
+        Troncal (traza) & $5{,}29 \, [km]$ & $6{,}73 \, [km]$ \\
         Cables de cluster (24 F) & $26{,}25 \, [km]$ & $22{,}82 \, [km]$ \\
         Cables de distribución (12 F) & $33{,}40 \, [km]$ & $32{,}02 \, [km]$ \\
         Drop: media / 90\,\% de las viviendas / máximo & $68 / 129 / 270 \, [m]$ & $69 / 138 / 415 \, [m]$ \\
@@ -133,9 +133,15 @@ Los cables se tienden en forma aérea sobre la postería, siguiendo los recorrid
     \end{tabular}
 \end{table}
 
-La Región Oeste requiere más troncal porque el hub está del lado Este. Sus cables cruzan la RP12 a pocas cuadras del hub y recorren más distancia hasta los clusters del noroeste y del sur.
+\textbf{Criterio de trazado del troncal:} el troncal no se arma con un camino mínimo independiente para cada cluster, porque eso genera ramales paralelos y recorridos que doblan en muchas esquinas. Cada giro implica retenciones en los postes, más herrajes y un tendido más difícil. En cambio, el troncal se construye como un árbol que \textbf{reaprovecha el cable ya tendido}:
+\begin{enumerate}
+    \item Los clusters se conectan en orden de distancia al hub.
+    \item Cada cluster se deriva del punto del troncal existente desde el que llega con menor costo, sea el hub, una caja de derivación o la CEO de otro cluster.
+    \item El costo de un recorrido es su longitud más una penalización de $150 \, [m]$ por cada giro, es decir, por cada cambio de dirección mayor que $35^{\circ}$. Seguir derecho por la misma calle no se penaliza.
+\end{enumerate}
+Por ejemplo, en la Región Oeste el cluster O8 ya no tiene un ramal propio que zigzaguea desde el hub: se deriva en la CEO del cluster O6 (Bv. Lardizábal y Santiago del Estero) y sube derecho por Santiago del Estero. Esa misma calle lleva luego el troncal hasta DO3, en Av. Intendente Loinas, donde se derivan los clusters O9 a O12. Frente a la versión con caminos mínimos independientes, la traza del troncal se reduce de $7{,}22$ a $5{,}29 \, [km]$ en el Este y de $10{,}50$ a $6{,}73 \, [km]$ en el Oeste. A cambio, los clusters más alejados atraviesan más cajas de derivación, lo que agrega algunos empalmes al presupuesto óptico (\autoref{sec:presupuesto}).
 
-Ambos troncales salen del hub por 9 de Julio hasta la esquina con Bv. Lardizábal (derivaciones D1 y DO1), con $240 + 192 = 432$ fibras. En ese primer tramo se tienden tres cables de 144 fibras, y como cada FK-CEO-4M admite hasta 144 fibras, D1 y DO1 son cajas separadas en el mismo poste.
+La Región Oeste requiere más troncal porque el hub está del lado Este. Su cable sale del hub por Bv. Lardizábal con las 288 fibras de los 12 clusters (dos cables de 144 fibras) hasta la derivación DO1, en Tucumán, donde cruza la RP12. El troncal del Este sale por 9 de Julio con 240 fibras, también en dos cables de 144 fibras, hasta la derivación D1 en Pasaje Maipú.
 
 \subsubsection{Región Este}
 
@@ -163,29 +169,33 @@ Ambos troncales salen del hub por 9 de Julio hasta la esquina con Bv. Lardizába
 
 \subsubsection{Ubicación de cajas y splitters}
 \begin{itemize}
-    \item \underline{Cajas de empalme del troncal (FK-CEO-4M):} en las CEO de cluster (12 por región) y en los puntos de derivación donde cambia la capacidad del cable: D1 a D4 en el Este (\autoref{tab:nodos}) y DO1 a DO6 en el Oeste (\autoref{tab:nodos_O}).
+    \item \underline{Cajas de empalme del troncal (FK-CEO-4M):} en las CEO de cluster (12 por región) y en los puntos de derivación donde cambia la capacidad del cable: D1 a D4 en el Este (\autoref{tab:nodos}) y DO1 a DO3 en el Oeste (\autoref{tab:nodos_O}). Las CEO de cluster que alimentan a otros clusters también funcionan como derivación.
     \item \underline{Cajas de distribución (FK-CEO-4M con splitter 1:4):} una por sector (92 en el Este y 89 en el Oeste), en la esquina que minimiza el recorrido de distribución hasta sus CTO. En cada cluster, una de ellas coincide con la CEO. Su ubicación se lista en los anexos.
     \item \underline{Cajas terminales (FK-CTO-16MC con splitter 1:16):} 365 en el Este y 354 en el Oeste, en postes de esquina, cada una para hasta 17 viviendas.
 \end{itemize}
 
 \textbf{Reservas de cable:} se deja un rulo de reserva de $20 \, [m]$ en cada CEO y caja de distribución y de $10 \, [m]$ en cada CTO. Esto permite reabrir los empalmes y reubicar las cajas sin reemplazar el cable. Además, se adiciona un 10\,\% a las longitudes de traza por catenaria, bajadas y desvíos en los postes.
 
-\subsubsection{Instituciones con fibra dedicada}
+\subsubsection{Instituciones y plazas con fibra dedicada}
 \label{sec:instituciones}
-Las instituciones reciben una fibra propia (un ``pelo extra''), independiente de la red GPON de los hogares. De esta forma pueden tener un enlace simétrico y con capacidad garantizada, y no comparten el puerto PON ni los splitters con los abonados del sector, por lo que una falla en esos elementos no los afecta. Se consideran instituciones los establecimientos educativos (escuelas, jardines, institutos y universidades), de salud (hospitales, sanatorios y centros de salud), de seguridad y emergencias (policía y bomberos), de gobierno (municipalidad y tribunales) y la biblioteca popular. Se identificaron en OpenStreetMap \cite{osm} y se fusionaron los registros duplicados de un mismo edificio. Resultan \textbf{26 instituciones}: 12 en la Región Este y 14 en la Oeste (\autoref{tab:instituciones}).
+Las instituciones y las plazas reciben fibras propias (``pelos extra''), independientes de la red GPON de los hogares. Las instituciones pueden así tener un enlace simétrico y con capacidad garantizada, y no comparten el puerto PON ni los splitters con los abonados del sector, por lo que una falla en esos elementos no las afecta. En las plazas, la fibra permite instalar puntos de acceso Wi-Fi públicos y cámaras de seguridad.
+\begin{itemize}
+    \item \underline{Instituciones:} establecimientos educativos (escuelas, jardines, institutos y universidades), de salud (hospitales, sanatorios y centros de salud), de seguridad y emergencias (policía y bomberos), de gobierno (municipalidad y tribunales) y la biblioteca popular. Se asigna \textbf{una fibra por institución}, salvo en los \textbf{hospitales y sanatorios, que reciben cuatro}: permiten enlaces redundantes y separar servicios críticos, como la red de equipamiento médico o la telemedicina.
+    \item \underline{Plazas:} los espacios verdes públicos (plazas, plazoletas y parques) de al menos $1.000 \, [m^2]$. Por debajo de ese tamaño quedan los canteros de bulevares y los espacios residuales de los cruces. Se asigna \textbf{una fibra por plaza}.
+\end{itemize}
+Ambos grupos se identificaron en OpenStreetMap \cite{osm}, y se fusionaron los registros que corresponden a un mismo edificio o predio. Resultan \textbf{27 instituciones} (13 en la Región Este y 14 en la Oeste), de las cuales tres son hospitales o sanatorios, y \textbf{13 plazas} (7 y 6), con un total de \textbf{49 fibras dedicadas}: 23 en el Este y 26 en el Oeste (\autoref{tab:instituciones}).
 
 Cada fibra dedicada sigue el mismo recorrido que las fibras de su sector, pero sin pasar por los splitters:
 \begin{itemize}
-    \item \underline{Troncal y cable de cluster:} usa las fibras F17 en adelante del bloque de 24 del cluster, que quedan fuera de las fibras de uso y crecimiento. El cluster O6, el más cargado, tiene 5 instituciones (F17 a F21), y aun así le quedan 5 fibras libres.
-    \item \underline{Caja de distribución:} la fibra se empalma directamente al cable de distribución del sector, sin entrar al splitter 1:4.
-    \item \underline{Cable de distribución:} usa las fibras de reserva F9 y siguientes. Ningún sector tiene más de dos instituciones, por lo que quedan al menos dos fibras de reserva en cada cable.
-    \item \underline{Acometida:} en la CTO más cercana por la red de calles, la fibra se empalma en la bandeja a un drop propio hasta la roseta del edificio, sin pasar por el splitter 1:16.
+    \item \underline{Troncal y cable de cluster:} usa las fibras F17 en adelante del bloque de 24 del cluster, que quedan fuera de las fibras de uso y crecimiento. El cluster O6, el más cargado, usa 8 fibras dedicadas (F17 a F24, cuatro de ellas para el Sanatorio San Roque) y aun así le quedan libres las F8 y F16, que no usan sus 7 sectores.
+    \item \underline{Instituciones y plazas con una fibra:} en la caja de distribución la fibra se empalma directamente al cable de distribución del sector, sin entrar al splitter 1:4, y viaja por las fibras de reserva F9 y siguientes. Ningún sector usa más de dos, por lo que quedan al menos dos de reserva en cada cable. En la CTO más cercana por la red de calles se empalma en la bandeja a un drop propio hasta la roseta del edificio o el gabinete de la plaza, sin pasar por el splitter 1:16.
+    \item \underline{Hospitales:} las cuatro fibras se empalman en la caja de distribución más cercana a un \textbf{cable MINI-RA de 4 fibras propio} \cite{et_minira}, que llega directamente al hospital sin pasar por el cable de distribución ni por una CTO. Así no consumen las reservas de los cables de distribución y su acometida queda separada de la de los vecinos.
 \end{itemize}
-En el hub, la fibra termina en su posición del ODF y puede conectarse a un puerto del switch de agregación, como enlace Ethernet punto a punto, o a un puerto PON propio. Su presupuesto óptico se verifica en la \autoref{sec:presupuesto_inst}.
+En el hub, cada fibra termina en su posición del ODF y puede conectarse a un puerto del switch de agregación, como enlace Ethernet punto a punto, o a un puerto PON propio. Su presupuesto óptico se verifica en la \autoref{sec:presupuesto_inst}.
 
 \input{secciones/tablas/instituciones}
 
-La identificación en la \autoref{tab:instituciones} sigue el criterio de la \autoref{sec:cableado}. Por ejemplo, la Municipalidad (I-09) usa la fibra C7-F17, que ocupa la posición 17 del ODF-E2, y la fibra F9 del cable de distribución DS-26 hasta la CTO-26.1.
+La identificación en la \autoref{tab:instituciones} sigue el criterio de la \autoref{sec:cableado}. Por ejemplo, la Municipalidad (I-10) usa la fibra C7-F17, que ocupa la posición 17 del ODF-E2, y la fibra F9 del cable de distribución DS-26 hasta la CTO-26.1. El Hospital Abel Ayerza (I-12) usa las fibras C5-F17 a F20, que en la caja de distribución CD-55 se empalman a su cable propio de 4 fibras, de $139 \, [m]$. En la tabla, la columna CTO indica la caja de distribución en el caso de los hospitales, y la de drop, la longitud de su cable propio.
 
 \subsubsection{Aspectos que requieren verificación de campo}
 \label{sec:verificacion}
@@ -218,7 +228,7 @@ En todos los casos las fibras del cable de distribución de 12 fibras se asignan
 \begin{itemize}
     \item F1 a F4: salidas 1 a 4 del splitter 1:4, una para cada CTO.
     \item F5 a F8: crecimiento.
-    \item F9 a F12: reserva. Si el sector tiene instituciones, sus fibras dedicadas ocupan F9 y siguientes (\autoref{sec:instituciones}).
+    \item F9 a F12: reserva. Si el sector tiene instituciones o plazas, sus fibras dedicadas ocupan F9 y siguientes (\autoref{sec:instituciones}).
 \end{itemize}
 En cada CTO, el splitter 1:16 conectorizado tiene sus salidas numeradas del 1 al 16, y cada salida corresponde a una vivienda.
 
@@ -235,7 +245,7 @@ El sector 28 tiene 67 viviendas en las manzanas comprendidas entre 9 de Julio, A
 \input{secciones/tablas/sector_28}
 
 \subsubsection{Sector 90}
-El sector 90 tiene 67 viviendas en el noreste de la región, alrededor de Hermanas Vicentinas y Soberanía Nacional Este (\autoref{fig:sector90}). Su caja de distribución CD-90 está en Hermanas Vicentinas y Soberanía Nacional Este, a $2{,}92 \, [km]$ del hub por el troncal y el cable de cluster. Por la menor densidad de viviendas, el cable de distribución es más largo ($633 \, [m]$) y la acometida más larga alcanza $227 \, [m]$ (\autoref{tab:sector90}). Es aceptable para un drop autosoportado, pero la ubicación de la CTO-90.4 debe revisarse en campo para acortarla.
+El sector 90 tiene 67 viviendas en el noreste de la región, alrededor de Hermanas Vicentinas y Soberanía Nacional Este (\autoref{fig:sector90}). Su caja de distribución CD-90 está en Hermanas Vicentinas y Soberanía Nacional Este, a $3{,}10 \, [km]$ del hub por el troncal y el cable de cluster. Por la menor densidad de viviendas, el cable de distribución es más largo ($633 \, [m]$) y la acometida más larga alcanza $227 \, [m]$ (\autoref{tab:sector90}). Es aceptable para un drop autosoportado, pero la ubicación de la CTO-90.4 debe revisarse en campo para acortarla.
 
 \begin{figure}[H]
     \centering
@@ -259,7 +269,7 @@ El sector O42 tiene 68 viviendas en torno a Bv. Lardizábal, entre Santiago del 
 \input{secciones/tablas/sector_O42}
 
 \subsubsection{Sector O77}
-El sector O77 tiene 67 viviendas en el noroeste de la región, alrededor de 19 de Octubre y El Porvenir (\autoref{fig:sectorO77}). Su caja de distribución CD-O77 está en 19 de Octubre y El Porvenir, a $3{,}84 \, [km]$ del hub: $2{,}77 \, [km]$ de troncal y $1{,}06 \, [km]$ de cable de cluster. El cable de distribución mide $991 \, [m]$ y la acometida más larga es de $237 \, [m]$, en la CTO-O77.3, que es además el recorrido de mayor pérdida de la Región Oeste (\autoref{tab:sectorO77}).
+El sector O77 tiene 67 viviendas en el noroeste de la región, alrededor de 19 de Octubre y El Porvenir (\autoref{fig:sectorO77}). Su caja de distribución CD-O77 está en 19 de Octubre y El Porvenir, a $3{,}85 \, [km]$ del hub: $2{,}79 \, [km]$ de troncal y $1{,}06 \, [km]$ de cable de cluster. El cable de distribución mide $991 \, [m]$ y la acometida más larga es de $237 \, [m]$, en la CTO-O77.3, que es además el recorrido de mayor pérdida de la Región Oeste (\autoref{tab:sectorO77}).
 
 \begin{figure}[H]
     \centering

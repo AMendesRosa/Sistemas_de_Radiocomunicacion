@@ -25,8 +25,26 @@ python planos.py     # planos en PDF (copiarlos luego a ../Planos/)
 python gen_tex.py    # tablas LaTeX para el informe (sufijo _O para el Oeste)
 
 # Después de correr ambas regiones:
-python instituciones.py   # instituciones con fibra dedicada (ambas regiones)
+python instituciones.py   # instituciones y plazas con fibra dedicada (ambas regiones)
+python calculadora.py     # configuraciones JSON por OLT para la calculadora de la cátedra (../calculadora/)
 ```
+
+## Calculadora de backhaul de la cátedra
+
+`calculadora.py` genera en `../calculadora/` un JSON por OLT y por etapa (`OLT-E1_etapa1.json`, ...)
+con los abonados de cada sector y la mezcla de planes. Se cargan en
+`Calculadora_FTTH_GPON_XGSPON_TV_v8.html` (raíz del repo) con "Importar JSON"; la simultaneidad se
+cambia en el campo de la calculadora (5 % diseño, 10 % conservador). `../calculadora/resultados.csv`
+resume los resultados de las 24 configuraciones en ambos escenarios. `../calculadora/captura.html`
+abre la calculadora original con una configuración cargada, para las capturas del informe
+(servir la raíz del repo con `python -m http.server` y abrir
+`/Actividad_4/Parte_2/calculadora/captura.html?cfg=OLT-E1_final.json&simd=5&agg=4&bh=25`).
+
+## Troncal
+
+`routing.py` arma el troncal como un árbol que reaprovecha el cable ya tendido: cada cluster se
+deriva del punto del troncal existente desde el que llega con menor costo, con una penalización de
+150 m por cada giro mayor que 35° (`GIRO_M`, `GIRO_ANG`).
 
 ## Supuestos principales (ver sección 4 del informe)
 - Viviendas: 12.135 (Censo 2022, localidad de Marcos Juárez), repartidas en forma uniforme
@@ -36,7 +54,8 @@ python instituciones.py   # instituciones con fibra dedicada (ambas regiones)
 - Cluster: hasta 8 sectores, alimentados por 24 fibras del troncal.
 - Manzana urbanizada: entre 0,25 y 2,5 ha y menos del 50 % de su superficie con usos no residenciales
   (rural, industrial, parques, deportes, cementerio, escuelas y hospitales), ver `classify.py`.
-- Instituciones (educación, salud, seguridad, gobierno y biblioteca): una fibra dedicada desde el ODF,
+- Instituciones (educación, salud, seguridad, gobierno y biblioteca) y plazas de 1000 m2 o más: fibras dedicadas
+  desde el ODF (4 por hospital con cable MINI-RA propio desde la CD, 1 en los demás casos),
   F17 en adelante del bloque del cluster y F9 en adelante del cable de distribución, sin splitters.
 
 `geo.py` define la proyección local (origen en el hub, coordenadas en metros).

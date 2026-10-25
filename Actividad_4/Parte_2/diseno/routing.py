@@ -22,10 +22,44 @@ for c in C:
 FIBRAS_CLUSTER=24
 def asignacion(n):   # fibras por cluster: uso, crecimiento, reserva, otras aplicaciones
     uso=n; crec=n; otras=2; res=FIBRAS_CLUSTER-uso-crec-otras; return dict(uso=uso,crec=crec,res=res,otras=otras)
-# Troncal: árbol de caminos mínimos hub -> CEO, fibras acumuladas por arista
+# Troncal: árbol que reutiliza el cable ya tendido y evita los giros.
+# Los clusters se conectan en orden de distancia al hub; cada uno se empalma en el punto del troncal
+# existente desde el que llega con menor costo, donde cada giro (cambio de dirección mayor que GIRO_ANG)
+# equivale a GIRO_M metros de cable adicional (más retenciones en postes y más trabajo de tendido).
+GIRO_M=150.0; GIRO_ANG=35.0
+XY={n:np.asarray(G.nodes[n]['xy']) for n in G.nodes}
+def giro(a,b,c):
+    u=XY[b]-XY[a]; v=XY[c]-XY[b]; nu=np.linalg.norm(u); nv=np.linalg.norm(v)
+    if nu==0 or nv==0: return False
+    return math.degrees(math.acos(max(-1,min(1,float(u@v)/(nu*nv)))))>GIRO_ANG
+def ruta_troncal(arbol,destino):
+    """Camino de costo mínimo desde cualquier nodo del árbol hasta destino (estado = nodo y nodo previo)."""
+    import heapq
+    if destino in arbol['nodos']: return [destino]
+    heap=[]; best={}
+    for n in arbol['nodos']:
+        prevs=[m for m in arbol['ady'].get(n,())] or [None]   # continuar en la dirección del cable existente
+        for pv in prevs:
+            heapq.heappush(heap,(0.0,n,pv,(n,))); best[(n,pv)]=0.0
+    while heap:
+        cost,n,pv,path=heapq.heappop(heap)
+        if n==destino: return list(path)
+        if cost>best.get((n,pv),9e18): continue
+        for m in G[n]:
+            if m in path: continue
+            c2=cost+G[n][m]['length']+(GIRO_M if pv is not None and giro(pv,n,m) else 0)
+            if c2<best.get((m,n),9e18):
+                best[(m,n)]=c2; heapq.heappush(heap,(c2,m,n,path+(m,)))
+arbol={'nodos':{HUB},'ady':collections.defaultdict(set)}
+for ci in sorted(range(len(C)),key=lambda i:dist_hub[C[i]['nodo_ceo']]):
+    p=ruta_troncal(arbol,C[ci]['nodo_ceo'])
+    for a,b in zip(p,p[1:]): arbol['ady'][a].add(b); arbol['ady'][b].add(a)
+    arbol['nodos']|=set(p)
+T=nx.Graph(); [T.add_edge(a,b,length=G[a][b]['length']) for a in arbol['ady'] for b in arbol['ady'][a]]
 carga=collections.Counter()
 for ci,c in enumerate(C):
-    p=paths_hub[c['nodo_ceo']]; c['L_troncal']=plen(p)
+    p=nx.shortest_path(T,HUB,c['nodo_ceo'],weight='length'); c['L_troncal']=plen(p)
+    c['giros_troncal']=sum(giro(a,b,d) for a,b,d in zip(p,p[1:],p[2:]))
     for a,b in zip(p,p[1:]): carga[frozenset((a,b))]+=FIBRAS_CLUSTER
 tron_edges=[(tuple(e),f,G[tuple(e)[0]][tuple(e)[1]]['length']) for e,f in carga.items()]
 L_tron=sum(l for *_,l in tron_edges)

@@ -4,42 +4,93 @@
 \subsection{Punto de interconexión y tecnología}
 Marcos Juárez cuenta con un nodo activo de la Red Federal de Fibra Óptica, según el listado de puntos de conexión de ARSAT de febrero de 2026 \cite{arsat_nodos}. Se propone conectar el hub de la COYSPU a ese nodo como proveedor mayorista de tránsito IP. La ubicación exacta del nodo no se publica, por lo que se adopta como \textbf{supuesto de diseño} que se encuentra dentro del ejido urbano, a no más de $4 \, [km]$ de recorrido del hub. Debe verificarse con ARSAT al momento de contratar el servicio.
 
+La cadena funcional es: proveedor mayorista $\rightarrow$ router de borde (BNG) $\rightarrow$ switch de agregación y uplinks Ethernet $\rightarrow$ OLT $\rightarrow$ puertos GPON $\rightarrow$ ODN $\rightarrow$ ONT \cite{doc_backhaul}. El enlace mayorista, los uplinks de cada OLT y los puertos GPON son recursos distintos y se verifican por separado.
+
 \begin{itemize}
-    \item \underline{Tecnología del enlace:} enlace punto a punto de fibra óptica con interfaces Ethernet de $10 \, [Gbps]$ (10GBASE-LR, $1310 \, [nm]$). Se dimensiona con la misma metodología que el enlace de la Parte 1 \cite{informe_p1}.
-    \item \underline{Recorrido:} cable aéreo CFOA-SM-AS80-S TS de 24 fibras desde el hub hasta el nodo REFEFO. Si la ubicación del nodo lo permite, puede aprovecharse la red de fibra existente de la cooperativa, que cuenta con un anillo de cuatro nodos en la ciudad \cite{coyspu}. Las fibras restantes quedan para un segundo vínculo redundante o para otros servicios.
-    \item \underline{Equipos:} en el hub, un router de borde con funciones de BNG (autenticación y gestión de sesiones de los abonados) y un switch de agregación al que se conectan las 12 OLT (6 por región), cada una con dos enlaces de $10 \, [GE]$ en agregación (LAG). La OLT V1600G2-B dispone de cuatro puertos SFP+ de $10 \, [GE]$ de subida \cite{vsol_olt}. Se recomienda incorporar en el hub cachés de contenido de los principales proveedores, que sirven localmente parte del tráfico y reducen la capacidad mayorista necesaria.
+    \item \underline{Tecnología del enlace:} enlace punto a punto de fibra óptica con interfaces Ethernet de $100 \, [Gbps]$ (100GBASE-LR4, cuatro longitudes de onda en la banda de $1310 \, [nm]$ sobre un par de fibras). La cantidad de interfaces surge del dimensionamiento de la \autoref{sec:bw_mayorista}.
+    \item \underline{Recorrido:} cable aéreo CFOA-SM-AS80-S TS de 24 fibras desde el hub hasta el nodo REFEFO. Cada interfaz de $100 \, [Gbps]$ usa un par de fibras, por lo que el cable admite hasta 12 interfaces, incluido un segundo vínculo redundante. Si la ubicación del nodo lo permite, puede aprovecharse la red de fibra existente de la cooperativa, que cuenta con un anillo de cuatro nodos en la ciudad \cite{coyspu}.
+    \item \underline{Equipos:} en el hub, un router de borde con funciones de BNG (autenticación y gestión de sesiones de los abonados) e interfaces de $100 \, [Gbps]$, y un switch de agregación al que se conectan las 12 OLT (6 por región). Cada OLT V1600G2-B usa sus \textbf{cuatro puertos SFP+ de $10 \, [GE]$} de subida \cite{vsol_olt} (\autoref{sec:uplinks}), por lo que el switch necesita 48 puertos de $10 \, [GE]$ y puertos de $100 \, [GE]$ hacia el router. Se recomienda incorporar en el hub cachés de contenido de los principales proveedores, que sirven localmente parte del tráfico y reducen la capacidad mayorista necesaria.
 \end{itemize}
 
-\textbf{Verificación del enlace:} con módulos SFP+ 10GBASE-LR (Tx de $-8{,}2$ a $+0{,}5 \, [dBm]$; sensibilidad $< -14{,}4 \, [dBm]$) \cite{fs_10glr}, el presupuesto óptico es de $6{,}2 \, [dB]$. Reservando $3 \, [dB]$ de margen de seguridad y descontando cuatro conectores ($1{,}2 \, [dB]$) y dos empalmes ($0{,}2 \, [dB]$), quedan $1{,}8 \, [dB]$ para la fibra. Con $0{,}38 \, [dB/km]$, el enlace admite hasta $4{,}7 \, [km]$, lo que cubre la distancia supuesta. Si el nodo estuviera más lejos, se reemplazarían los módulos por 10GBASE-ER ($40 \, [km]$).
+\textbf{Verificación del enlace:} el estándar 100GBASE-LR4 admite una pérdida máxima del canal de $6{,}3 \, [dB]$ para $10 \, [km]$ \cite{lr4_ieee}. Con $4 \, [km]$ de fibra a $0{,}38 \, [dB/km]$ ($1{,}52 \, [dB]$), cuatro conectores ($1{,}2 \, [dB]$) y dos empalmes ($0{,}2 \, [dB]$), la pérdida es de $2{,}92 \, [dB]$. Sumado el margen de seguridad de $3 \, [dB]$, se llega a $5{,}92 \, [dB]$, menos que los $6{,}3 \, [dB]$ admisibles: el enlace cumple hasta unos $5 \, [km]$. Si el nodo estuviera más lejos, se usarían módulos 100GBASE-ER4 ($40 \, [km]$).
 
 \subsection{Ancho de banda requerido}
-El enlace mayorista es compartido por las dos regiones, por lo que se dimensiona para la red completa. Se aplica la demanda en la hora de mayor tráfico de $5 \, [Mbps]$ por abonado (\autoref{eq:demanda}) y un margen de crecimiento del 30\,\%:
+\label{sec:bw_mayorista}
+
+\subsubsection{Procedimiento y calculadora de la cátedra}
+El enlace mayorista es compartido por las dos regiones, por lo que se dimensiona el tráfico agregado de toda la red. Se sigue el procedimiento indicado por la cátedra \cite{doc_backhaul}, con la calculadora de backhaul provista \cite{calc_catedra}:
+\begin{enumerate}
+    \item \underline{Abonados y planes:} los de la primera etapa y la cobertura final (\autoref{tab:abonados}), con los planes de $100$, $300$ y $600 \, [Mbps]$ de bajada y $10$, $30$ y $60 \, [Mbps]$ de subida, en proporción 30, 50 y 20\,\% (\autoref{sec:servicios}).
+    \item \underline{Suma de velocidades comerciales} por sentido: $C_{com} = \sum N_{plan} \times v_{plan}$. No es tráfico efectivo, sino la suma teórica de los máximos contratados.
+    \item \underline{Factor de simultaneidad} $F_s$: cociente entre la demanda agregada en hora pico y la suma comercial. Su inversa es el \textbf{overbooking} $OB = 1/F_s$, que no debe confundirse con la relación de división óptica 1:64.
+    \item \underline{Demanda y margen:} $C_{pico} = C_{com} \times F_s$, y la capacidad objetivo es $C_{obj} = C_{pico} \times (1 + M)$, con un margen operativo $M = 25$\,\%.
+\end{enumerate}
+Como la red es nueva y no tiene historial de tráfico, se evalúan los dos escenarios que recomienda la cátedra: $F_s = 5$\,\% (overbooking 20:1) como \textbf{escenario de diseño} y $F_s = 10$\,\% (10:1) como \textbf{escenario conservador}. Los mismos valores se aplican a la subida.
+
+La calculadora admite hasta 32 puertos PON por vez, por lo que se cargó \textbf{una configuración por OLT} y por etapa, 24 en total. Cada configuración tiene los 14 a 16 puertos de la OLT con los abonados reales del sector conectado a cada uno y la mezcla de planes indicada. Como servicio de televisión se cargó IPTV multicast desde una cabecera local (\autoref{sec:television}): consume capacidad de los puertos y de los uplinks, pero no del enlace mayorista. Las configuraciones (archivos JSON importables en la calculadora) y los resultados se incluyen en la carpeta \texttt{calculadora/} del repositorio. Como el cálculo es lineal, la demanda de la red es la suma de la de las 12 OLT. La \autoref{fig:calc_param} y la \autoref{fig:calc_result} muestran la calculadora con la configuración de la OLT-E1, la más cargada, en la cobertura final.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.92\textwidth]{calculadora_parametros.png}
+    \caption{Calculadora de la cátedra \cite{calc_catedra}: parámetros de ingeniería y planes cargados para la OLT-E1 en la cobertura final ($F_s = 5$\,\%, margen 25\,\%, 4 uplinks de $10 \, [Gbps]$).}
+    \label{fig:calc_param}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.92\textwidth]{calculadora_resultados.png}
+    \caption{Resultados de la calculadora para la OLT-E1 en la cobertura final: 972 abonados en 16 puertos, $18{,}23 \, [Gbps]$ de backhaul de bajada y $19{,}23 \, [Gbps]$ de uplink con la IPTV local. La capacidad mayorista cargada ($25 \, [Gbps]$) es la parte de esta OLT en un contrato de $300 \, [Gbps]$.}
+    \label{fig:calc_result}
+\end{figure}
+
+\subsubsection{Resultados para la red completa}
 
 \begin{table}[H]
     \centering
-    \caption{Ancho de banda mayorista requerido (bajada).}
+    \footnotesize
+    \caption{Backhaul mayorista requerido según la calculadora de la cátedra (suma de las 12 OLT, con margen del 25\,\%).}
     \label{tab:mayorista}
-    \begin{tabular}{|l|r|r|}
+    \begin{tabular}{|l|r|r|r|r|}
         \hline
-        \textbf{Concepto} & \textbf{Primera etapa} & \textbf{Cobertura final} \\
+        & \multicolumn{2}{c|}{\textbf{Primera etapa}} & \multicolumn{2}{c|}{\textbf{Cobertura final}} \\
+        \cline{2-5}
+        \textbf{Concepto} & \textbf{$F_s = 5$\,\%} & \textbf{$F_s = 10$\,\%} & \textbf{$F_s = 5$\,\%} & \textbf{$F_s = 10$\,\%} \\
         \hline
-        Abonados Región Este & $2.771$ & $5.541$ \\
-        Abonados Región Oeste & $2.697$ & $5.388$ \\
-        Total de abonados & $5.468$ & $10.929$ \\
-        Demanda en hora pico ($\times 5 \, [Mbps]$) & $27{,}3 \, [Gbps]$ & $54{,}6 \, [Gbps]$ \\
-        Con margen de crecimiento del 30\,\% & $35{,}5 \, [Gbps]$ & $71{,}0 \, [Gbps]$ \\
+        Abonados (Este + Oeste) & \multicolumn{2}{c|}{$2.771 + 2.697 = 5.468$} & \multicolumn{2}{c|}{$5.541 + 5.388 = 10.929$} \\
+        Suma comercial de bajada & \multicolumn{2}{c|}{$1.640 \, [Gbps]$} & \multicolumn{2}{c|}{$3.278 \, [Gbps]$} \\
+        Overbooking equivalente & $20:1$ & $10:1$ & $20:1$ & $10:1$ \\
+        \textbf{Backhaul de bajada} & $\mathbf{102{,}5 \, [Gbps]}$ & $205{,}0 \, [Gbps]$ & $\mathbf{204{,}9 \, [Gbps]}$ & $409{,}7 \, [Gbps]$ \\
+        Backhaul de subida & $10{,}3 \, [Gbps]$ & $20{,}5 \, [Gbps]$ & $20{,}5 \, [Gbps]$ & $41{,}0 \, [Gbps]$ \\
         \hline
-        \textbf{Capacidad a contratar} & $4 \times 10 \, [Gbps]$ & $100 \, [Gbps]$ \\
+        \textbf{Capacidad a contratar} & $\mathbf{2 \times 100 \, [GbE]}$ & $3 \times 100 \, [GbE]$ & $\mathbf{3 \times 100 \, [GbE]}$ & $6 \times 100 \, [GbE]$ \\
+        Utilización del enlace contratado & 51\,\% & 68\,\% & 68\,\% & 68\,\% \\
         \hline
     \end{tabular}
 \end{table}
 
-Para la primera etapa se propone contratar \textbf{$40 \, [Gbps]$ como cuatro enlaces de $10 \, [Gbps]$ en LAG}, sobre dos pares de fibras, o mediante multiplexación CWDM sobre un par. En la cobertura final la demanda requiere migrar a una interfaz de $100 \, [Gbps]$ o ampliar el LAG. El tráfico que resuelvan las cachés locales reduce estas cifras. Si la televisión se brinda sobre IP, debe sumarse su tráfico (\autoref{sec:television}).
+La capacidad simétrica a contratar la fija la bajada, que es diez veces mayor que la subida. Se adopta el \textbf{escenario de diseño} ($F_s = 5$\,\%):
+\begin{itemize}
+    \item \underline{Primera etapa:} \textbf{$2 \times 100 \, [Gbps]$} sobre dos pares de fibras, con una utilización del 51\,\% en la hora pico.
+    \item \underline{Cobertura final:} \textbf{$3 \times 100 \, [Gbps]$}, con una utilización del 68\,\%.
+    \item \underline{Escenario conservador:} si las mediciones mostraran una simultaneidad cercana al 10\,\%, la primera etapa requeriría $3 \times 100 \, [Gbps]$ y la cobertura final del orden de $6 \times 100 \, [Gbps]$. Con 5 interfaces la utilización sería del 82\,\%, por encima del umbral de revisión del 80\,\% que usa la calculadora.
+\end{itemize}
+La documentación de la cátedra advierte que dos enlaces agregados no entregan el doble de capacidad útil garantizada, por el overhead y el balanceo de flujos \cite{doc_backhaul}. Por eso la cantidad de interfaces se eligió con una utilización máxima cercana al 70\,\% y no al 100\,\%.
+
+\textbf{Contraste con el método de tráfico por abonado:} la cátedra propone verificar el resultado con un método alternativo, sin sumarlos \cite{doc_backhaul}. Con el consumo medio de OpenVault (\autoref{eq:demanda}), $5 \, [Mbps]$ por abonado en la hora pico, la demanda sería de $5.468 \times 5 \, [Mbps] \times 1{,}25 = 34{,}2 \, [Gbps]$ en la primera etapa y $68{,}3 \, [Gbps]$ en la cobertura final. Equivale a $F_s \approx 5 / 300 = 1{,}7$\,\% (overbooking 60:1). Este método da una demanda tres veces menor, por lo que el escenario de diseño es holgado respecto del consumo medio actual. La diferencia permite contratar la capacidad por etapas: se comienza con lo indicado y se amplía según las mediciones de la red (percentil 95 de los uplinks y del borde mayorista, utilización en la hora pico), como recomienda la cátedra. El tráfico que resuelvan las cachés locales reduce estas cifras.
+
+\subsection{Uplinks de las OLT}
+\label{sec:uplinks}
+La calculadora verifica también los uplinks Ethernet de cada OLT, que deben transportar la demanda de sus abonados más la IPTV multicast local ($0{,}8 \, [Gbps]$ por OLT con 100 canales de $8 \, [Mbps]$):
+\begin{itemize}
+    \item \underline{Primera etapa:} la OLT más cargada requiere $10{,}1 \, [Gbps]$ ($F_s = 5$\,\%), el 51\,\% de dos uplinks de $10 \, [Gbps]$.
+    \item \underline{Cobertura final:} requiere $19{,}2 \, [Gbps]$. Con dos uplinks la utilización sería del 96\,\%, por lo que \textbf{se usan los cuatro puertos SFP+ de la OLT} ($40 \, [Gbps]$, 48\,\%) desde la primera etapa.
+    \item \underline{Escenario conservador ($F_s = 10$\,\%):} en la cobertura final la demanda llega a $37{,}5 \, [Gbps]$, el 94\,\% de los cuatro uplinks. Si las mediciones se acercaran a este escenario, habría que reemplazar las OLT por modelos con uplinks de $100 \, [Gbps]$ o repartir los sectores en más equipos.
+\end{itemize}
 
 \subsection{Capacidad mayorista frente a capacidad de los puertos GPON}
-La suma de la capacidad de los puertos GPON de la red es de $181 \times 2{,}488 \approx 450 \, [Gbps]$, muy superior al ancho de banda mayorista requerido. No hay contradicción:
+La suma de la capacidad de los puertos GPON de la red es de $181 \times 2{,}488 \approx 450 \, [Gbps]$, mayor que el backhaul de diseño. No hay contradicción:
 \begin{itemize}
-    \item La capacidad de un puerto GPON se comparte solo entre los abonados de su sector (hasta 61). Debe alcanzar para la demanda simultánea de ese grupo y para las ráfagas de un abonado que use su plan completo.
-    \item La capacidad mayorista agrega el tráfico de todos los abonados de la red. Como no todos los sectores tienen su pico al mismo tiempo ni todos los abonados están activos, se dimensiona con la demanda promedio en la hora pico (multiplexación estadística).
+    \item La capacidad de un puerto GPON se comparte solo entre los abonados de su sector (hasta 62). Debe alcanzar para la demanda simultánea de ese grupo y para las ráfagas de un abonado que use su plan completo.
+    \item La capacidad mayorista agrega el tráfico de todos los abonados de la red. Como no todos los sectores tienen su pico al mismo tiempo ni todos los abonados están activos, se dimensiona con la simultaneidad estadística.
 \end{itemize}
-En consecuencia, el cuello de botella de la red en la hora pico no son los puertos GPON (12\,\% de ocupación), sino el enlace mayorista, que es además el costo recurrente más importante del operador.
+Según la calculadora, en el escenario de diseño cada puerto GPON tiene una utilización de bajada del 45\,\% en la cobertura final (\autoref{sec:puertos}), mientras que el enlace mayorista es además el costo recurrente más importante del operador.

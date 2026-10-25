@@ -48,9 +48,10 @@ for (a,b),f,l in D['tron_edges']:
 for i,c in enumerate(C):
     x,y=XY(c['nodo_ceo']); ax.plot(x,y,'o',color='#7d3c98',mec='k',ms=6,zorder=8); ax.text(x+40,y+40,f'{PC}{i+1}',fontsize=8,weight='bold',color='#4a235a',zorder=9,bbox=dict(fc='w',ec='none',alpha=.7,pad=.5))
 r=D['recorridos']
+TR=nx.Graph(); [TR.add_edge(a,b,length=l) for (a,b),f,l in D['tron_edges']]   # el recorrido sigue el troncal tendido
 for rr,col,lab in ((r[-1],'#e74c3c','mayor'),(r[0],'#27ae60','menor')):
     s=S[rr['sector']]; c=C[s['cluster']]; cto=s['ctos'][rr['cto']]
-    p=nx.shortest_path(G,HUB,c['nodo_ceo'],weight='length')+nx.shortest_path(G,c['nodo_ceo'],s['nodo_cd'],weight='length')[1:]+nx.shortest_path(G,s['nodo_cd'],cto['nodo'],weight='length')[1:]
+    p=nx.shortest_path(TR,HUB,c['nodo_ceo'],weight='length')+nx.shortest_path(G,c['nodo_ceo'],s['nodo_cd'],weight='length')[1:]+nx.shortest_path(G,s['nodo_cd'],cto['nodo'],weight='length')[1:]
     xs,ys=zip(*[XY(n) for n in p]); ax.plot(xs,ys,color=col,lw=2.2,alpha=.85,zorder=7)
     x,y=XY(cto['nodo']); ax.plot(x,y,'s',color=col,mec='k',ms=7,zorder=9)
 divisoria(ax); hub(ax)
