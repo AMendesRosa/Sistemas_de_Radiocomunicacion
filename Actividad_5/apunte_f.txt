@@ -1,0 +1,1212 @@
+Introducci´on
+Efectos de la propagaci´on
+Introducci´on a Radares
+Sistemas de Radiocomunicaci´on
+Facultad de Ciencias Exactas, F´ısicas y Naturales Universidad Nacional de Co´rdoba 19 de octubre de 2026
+Contenidos
+1 Introducci´on
+2 Conceptos previos
+Introducci´on 3 Ecuaci´on del Radar
+Efectos de la propagaci´on
+4 Efectos de la propagaci´on 5 Radar Cross Section 6 Detecci´on de blancos 7 Compresi´on de pulsos 8 Clutter y Chaff
+9 Rechazo de Clutter
+10 Antenas 11 Estimaci´on de par´ametros y seguimiento
+Rechazo de 12 Transmisores y receptores
+Clutter 13 Bibliograf´ıa
+Contenidos
+1 Introducci´on
+2 Conceptos previos
+Introducci´on 3 Ecuaci´on del Radar
+Efectos de la propagaci´on
+4 Efectos de la propagaci´on 5 Radar Cross Section 6 Detecci´on de blancos 7 Compresi´on de pulsos 8 Clutter y Chaff
+9 Rechazo de Clutter
+10 Antenas 11 Estimaci´on de par´ametros y seguimiento
+Rechazo de 12 Transmisores y receptores
+Clutter 13 Bibliograf´ıa
+¿Qu´e es RADAR?
+Introducci´on
+Efectos de la propagaci´on
+• RADAR es un acr´onimo del ingl´es Radio Detection And Ranging • Los instrumentos y/o plataformas que utilizan esta tecnolog´ıa tambi´en son
+llamados radares • Tipos de radares:
+• Militares: De vigilancia, de deteccio´n y prevencio´n o en armamento. En tierra, en barcos, en aviones, en sat´elites o en proyectiles.
+• Civiles: Control de tr´afico a´ereo, meteorol´ogicos, control de velocidad de autom´oviles o de objetos.
+• Cient´ıficos: Observaci´on de la tierra, radiotelescopios, sondas interplanetarias y espaciales.
+Principio b´asico de funcionamiento
+Introducci´on
+Efectos de la propagaci´on
+• El transmisor env´ıa una serie de pulsos
+• La onda electromagn´etica (EM) se propaga
+hasta el blanco (target)
+• En el blanco se producen reflexiones (ecos)
+• Los ecos viajan nuevamente al radar
+• Procesando los ecos se obtiene:
+• La distancia al blanco
+Antena
+• Los ´angulos de blanco (azimut y elevaci´on)
+• El taman˜o del blanco (a partir de la Radar
+Cross Section)
+• La velocidad relativa del blanco (con el
+efecto Doppler)
+• Las caracter´ısticas del blanco (con
+procesamiento de im´agenes)
+Puls io tido
+nsm
+ción
+r t o ra paga
+P
+Target
+lso (eco) ido Pu recib
+Rango
+Radar en avio´n de combate
+Airborne Early Warning and Control
+Sonda Cassini
+Radar Meteorolo´gico
+Radar Meteorolo´gico en Co´rdoba
+Radar Naval
+Radar Primario
+Radar Secundario
+Radar Terrestre
+Radares en vehiculos o industrias
+Radar de Apertura Sint´etica - SAOCOM 1A
+Contenidos
+Introducci´on
+Efectos de la propagaci´on
+1 Introducci´on 2 Conceptos previos 3 Ecuaci´on del Radar 4 Efectos de la propagaci´on 5 Radar Cross Section 6 Detecci´on de blancos 7 Compresi´on de pulsos 8 Clutter y Chaff 9 Rechazo de Clutter 10 Antenas 11 Estimaci´on de par´ametros y seguimiento 12 Transmisores y receptores 13 Bibliograf´ıa
+Espectro Electromagn´etico
+Introducci´on
+Efectos de la propagaci´on
+VHF UHF
+Visible
+Rayos cósmicos
+Rayos gamma
+Rayos X
+UVC/B/A Ultravioleta
+Infrarrojo
+Radar Microondas
+UHF VHF
+Longitud de onda (m)
+1 fm
+1 pm
+1 Å
+10–15 10–14 10–13 10–12 10–11 10–10
+1 nm 10–9
+10–8
+10–7
+1 µm 10–6
+10–5
+1 mm 1 cm 10–4 10–3 10–2
+10–1
+1 m 100
+Frecuencia (Hz)
+1023
+1022 1021 1020 (1 Zetta-Hz)
+1019 1018 1017 (1 Exa-Hz)
+1016 1015 1014 (1 Peta-Hz)
+1013 1012 1011 (1 Tera-Hz)
+1010 109 108 (1 Giga-Hz)
+Onda media Onda corta Onda larga
+Radio
+Frecuencia extremadamente baja
+1 km
+1 Mm
+101 102 103 104 105 106 107
+107 106 105 (1 Mega-Hz)
+104 103 102 (1 Kilo-Hz)
+L
+S
+C
+X
+Ku
+K
+Ka
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 27
+f (GHz)
+Espectro Electromagn´etico
+Introducci´on
+Efectos de la propagaci´on
+• Las ondas EM se propagan (casi) a la velocidad de la
+luz en la atm´osfera c0 = 299, 792, 458 m/s.
+naire = 1,0003 ⇒ caire = 0,9997 c0
+• Una onda senoidal peri´odica tiene:
+• Amplitud A
+• Longitud de onda λ
+•
+Frecuencia f
+=
+c λ
+• Fase ϑ
+• C´alculo r´apido: λ[m] = 300/f [MHz]
+• 100 MHz ⇔ 3 m • 1000 MHz ⇔ 0,3 m • 30000 MHz ⇔ 0,01 m
+f(t)
+A t
+ϑ
+λ
+Diagrama en bloques de un radar
+Introducci´on
+Efectos de la propagaci´on
+Antenna
+Target
+Propagation Medium
+Pulse Modulator
+Duplexer RF Pulse
+Power Amplifier
+IF Pulse
+Waveform Generator
+Video Pulse
+Low-Noise RF Amplifier
+Mixer
+IF Amplifier & Matched
+Filter
+2nd Detector (Demodulator)
+Video Amplifier
+Local Oscillator
+Threshold Detection
+Output
+Ecuacio´n del radar
+Introducci´on
+Efectos de la propagaci´on
+4πA
+1
+1
+1
+PR = PT · λ2 · 4πR2 · L · [σ] · 4πR2 · [A] · [τ ]
+La ecuaci´on del radar conecta: • Las propiedades del target: la reflectividad, a trav´es de la Radar Cross Section. • Las caracter´ısticas del radar: Potencia Transmitida, Apertura de Antena. • La distancia entre el Radar y el target. • Propiedades del medio: atenuaci´on atmosf´erica.
+• PR : Potencia de recepci´on
+• PT : Potencia de transmisi´on
+• λ2 4πA : Ganancia de transmisi´on
+•
+1 4πR 2
+:
+Spread
+Factor
+• 1L : P´erdidas
+• σ: Target Radar Cross Section
+• A: Apertura del receptor
+• τ : Dwell Time
+Pulsos del Radar
+Introducci´on
+Efectos de la propagaci´on
+El radar transmite ondas moduladas por una acci´on de Encendido y Apagado comandadas por el Pulse Modulator
+Power (W)
+t
+Las ondas dentro de los pulsos pueden ser moduladas en frecuencia o en fase, por ejemplo, se puede modular linealmente en frecuencia.
+t
+t 22/180
+Freq (Hz)
+Freq (Hz)
+Pulsos del Radar
+Introducci´on
+Efectos de la propagaci´on
+Las secuencias de pulsos definen algunos par´ametros:
+• PRI : Pulse Repetition Interval
+• PRF = PRI −1: Pulse Repetition Frequency
+• pL: Pulse lenght • δ = PRI pL : Ciclo de trabajo
+(Duty Cycle) • Pˆ: Peak Power • Pav = Pˆδ: Average Power
+Power (W)
+1 MW
+Peak Power
+Pulse Length 100 μs
+Target 1 μW Echo
+Pulse Repetition Interval 1 ms
+t
+Pulsos del Radar
+Contenidos
+Introducci´on
+Efectos de la propagaci´on
+1 Introducci´on 2 Conceptos previos 3 Ecuaci´on del Radar 4 Efectos de la propagaci´on 5 Radar Cross Section 6 Detecci´on de blancos 7 Compresi´on de pulsos 8 Clutter y Chaff 9 Rechazo de Clutter 10 Antenas 11 Estimaci´on de par´ametros y seguimiento 12 Transmisores y receptores 13 Bibliograf´ıa
+Ganancia de antena
+Introducci´on
+Efectos de la propagaci´on
+• Densidad de potencia radiada por una antena isotr´opica
+PD = 4πR2 Pt • Densidad de potencia radiada por
+una antena directiva PD = 4πR2 Pt Gt
+• G es la ganancia de antena:
+G = λ2 4πAe = λ2 4πηA
+Radar Cross Section (RCS)
+Introducci´on
+Efectos de la propagaci´on
+La Radar Cross Section (σ) es una medida de la energ´ıa que el target del radar intercepta y retro-dispersa (backscatter ) hacia el radar. Se mide en m2.
+• Potencia de la sen˜al reflejada en el target:
+Pt Gt σ 4πR 2 • Densidad de potencia de la sen˜al en el radar:
+Pt Gt σ 4πR2 4πR2
+• La potencia recibida en el radar se multiplica por la apertura de la antena
+receptora:
+Pr = 4πR2 4πR2 Pt Gt σAe
+Ecuacio´n del Radar
+Introducci´on
+Efectos de la propagaci´on
+• Simplificando la ecuaci´on del radar
+Pr = (4π)2R4 Pt Gt Ae σ
+• Reemplazando la potencia recibida por la sensibilidad del receptor, se obtiene el rango m´aximo del radar
+Rmax =
+Pt GAe σ 1/4 (4π)2Smin
+• Recordando la relaci´on entre la ganancia de la antena, su ´area efectiva y la
+longitud
+de
+onda
+G
+=
+4πAe λ2
+=
+4π ηa A λ2
+se
+obtienen
+dos
+ecuaciones
+de
+rango
+m´aximo:
+Rmax =
+Pt G 2λ2σ 1/4 (4π)3Smin
+Rmax =
+2
+1/4
+Pt Ae σ
+4πλ2Smin
+Ecuacio´n del Radar
+Introducci´on
+Efectos de la propagaci´on
+Rmax =
+Pt G 2λ2σ 1/4 (4π)3Smin
+Rmax =
+2
+1/4
+Pt Ae σ
+4πλ2Smin
+• A la izquierda se supone que la ganancia se mantiene constante con el cambio
+de longitud de onda
+• A la derecha se supone que el ´area efectiva se mantiene constante con el
+cambio de longitud de onda
+Ruido y SNR
+Introducci´on
+Efectos de la propagaci´on
+Las fuentes de ruido que afectan al radar pueden ser • Ruido gal´actico (e.g.: Radiaci´on de fondo de microondas, ruido de estrellas) • Ruido solar • Ruido atmosf´erico • Interferencia y ruido generado por el hombre (e.g.: Otros radares, estaciones de radio, etc.) • Ruido del suelo • Ruido del receptor, de la gu´ıa de onda y del duplexer
+La potencia de ruido en el receptor est´a dado por
+N = kBnTs
+Donde k es la constante de Boltzmann, Ts es la temperatura de ruido del sistema y
+Bn es el ancho de banda de ruido del receptor.
+Ruido y SNR
+Introducci´on
+Efectos de la propagaci´on
+• La relaci´on sen˜al ruido se define como:
+SNR = Pr =
+Pt G 2λ2σ
+34
+N (4π) R kTs BnL
+• La SNR es la medida est´andar de la habilidad del radar de detectar un blanco a
+cierto rango.
+• La temperatura de ruido del sistema Ts = Ta + Tr + Lr Te se compone de:
+• El ruido que aporta la antena, Ta (temperatura aparente del cielo y p´erdidas de la antena)
+• El ruido que aportan los componentes de RF entre la antena y el receptor Tr • La temperatura efectiva del receptor Te (dependiente de la figura de ruido) y Lr ,
+las p´erdidas de entrada del receptor.
+P´erdidas del radar
+Introducci´on
+Efectos de la propagaci´on
+P´erdidas de Tranmisi´on • Radomo • Gu´ıa de onda y adaptadores • Circulador • Filtros pasa bajo • Juntas Rotativas • Eficiencia de Antena • Forma del haz • Escaneo • Cuantizaci´on • P´erdidas atmosf´ericas (propagaci´on) • Degradaci´on de campo
+P´erdidas de Recepcio´n • Radomo • Gu´ıa de onda y adaptadores • Circulador • Combinador • Filtros pasa bajo • Juntas rotativas • Protector de receptor • Switch Tx/Rx • Eficiencia de Antena • Forma del haz • Escaneo • Cuantizaci´on • Doppler Straddling • Range Straddling • CFAR • P´erdidas atmosf´ericas (propagaci´on) • Degradaci´on de campo
+Ecuacio´n de seguimiento y de bu´squeda
+Introducci´on
+Efectos de la propagaci´on
+• Tracking Radar Equation: Utilizada cuando la ubicacio´n del target es conocida y la antena se apunta al target
+SNR =
+Pt G 2λ2σ
+34
+(4π) R kTs BnL
+• Search Radar Equation: Utilizada cuando la ubicacio´n del target es desconocida
+y el radar tiene que buscarlo en un ´angulo s´olido Ω, durante el tiempo de
+escaneo ts
+SNR = 4πΩR4 Pav Ae ts σ kTs L
+• Se la puede reordenar con par´ametros de disen˜o y par´ametros de desempen˜o
+Pav Ae = 4πΩR4(SNR)
+kTs L
+σts
+Ecuacio´n de bu´squeda
+Introducci´on
+Efectos de la propagaci´on
+• Se la puede reordenar para explicitar la potencia requerida para un radio R:
+4πR4ΩkTs L(SNR) Pav =
+Ae ts σ
+• La potencia requerida es independiente de la longitud de onda • La potencia requerida depende de R4, pero es lineal respecto a los dem´as
+par´ametros • Para duplicar el rango del radar (3 dB) se debe:
+• Incrementar la potencia 16 veces (12 dB). • Incrementar ´area de la antena por 12 dB (el di´ametro por 6 dB) • Incrementar ts por 12 dB • Decrementar Ω por 12 dB • Incrementar σ por 12 dB
+Contenidos
+Introducci´on
+Efectos de la propagaci´on
+1 Introducci´on 2 Conceptos previos 3 Ecuaci´on del Radar 4 Efectos de la propagaci´on 5 Radar Cross Section 6 Detecci´on de blancos 7 Compresi´on de pulsos 8 Clutter y Chaff 9 Rechazo de Clutter 10 Antenas 11 Estimaci´on de par´ametros y seguimiento 12 Transmisores y receptores 13 Bibliograf´ıa
+Efectos de propagacio´n en el desempen˜o del radar
+Introducci´on
+Efectos de la propagaci´on
+Casi todos los tipos de radar operan a trav´es de la atmo´sfera y cerca de la superficie terrestre, y sufren los siguientes efectos:
+• Atenuaci´on atmosf´erica • Reflecci´on de la superficie de la tierra • Difracci´on sobre el horizonte • Refracci´on atmosf´erica
+Los par´ametros atmosf´ericos var´ıan con la altitud
+• La densidad del aire • La humedad del aire • La cantidad de lluvias • El ´ındice de refracci´on
+Los par´ametros de superficie terrestre var´ıan en diferentes sitios
+• Material de la superficie • Densidad de la superficie • Rugosidad de la superficie • Curvatura de la tierra
+Atenuaciones atmosf´ericas
+Introducci´on
+Efectos de la propagaci´on
+• La energ´ıa electromagn´etica tiene dos picos de absorci´on: • el vapor de agua en suspensi´on • oxigeno gaseoso
+• Las altas frecuencias no son convenientes para radares de baja altitud y rango extenso
+• La atenuaci´on atmosf´erica forma parte de las p´erdidas de la variable L
+Atenuacio´n por lluvia
+Introducci´on
+Efectos de la propagaci´on
+• El desempen˜o del radar es muy dependiente del clima
+Reflexio´n de la superficie de la tierra
+Introducci´on
+Efectos de la propagaci´on
+• La interferencia del multipath puede interferir constructiva o destructivamente. • El voltaje de una onda senoidal puede variar entre 0 a 2 veces su valor original.
+La potencia del radar varia entre 0 y 4 veces, y como se produce interferencia en ambos sentidos se puede generar entre 0 a 16 veces la potencia por la interferencia. • La reflexi´on de la superficie terrestre genera interferencia de multipath.
+Reflexio´n de la superficie de la tierra
+Introducci´on
+Efectos de la propagaci´on
+• El coeficiente de reflexio´n de la superficie Γ determina la amplitud de las sen˜ales • Γ depende del material de la superficie y su rugosidad, de la polarizaci´on y la
+frecuencia de la onda • Γ ≈ 1 en aguas calmas y Γ ≈ 0 para tierra muy rugosa • La fase relativa lo determina la longitud del multipath y el cambio de fase en la
+reflexi´on, por lo tanto depende de la altura, el rango y la longitud de onda.
+Reflexio´n de la superficie de la tierra
+Introducci´on
+Efectos de la propagaci´on
+• El multipath causa que la cobertura de elevaci´on tenga un patr´on con l´obulos • Un blanco ubicado en el m´aximo de un lo´bulo, puede ser detectado en el doble
+de rango que el rango de detecci´on de espacio libre. • Un blanco ubicado en una regi´on nula del patr´on produce ecos de multipath
+tales que no se recibe ninguna sen˜al
+Reflexio´n de la superficie de la tierra
+Introducci´on
+Efectos de la propagaci´on
+• Aumentando la frecuencia de trabajo se incrementa la densidad de l´obulos de cobertura.
+Difraccio´n sobre el horizonte
+Introducci´on
+Efectos de la propagaci´on
+• Las ondas electromagn´eticas sufren difracci´on en la curvatura de la tierra • La capacidad de un radar de propagarse m´as all´a de la linea de vista del
+horizonte depende de la frecuencia de trabajo y la altura del radar • Las sen˜ales difractadas sufren grandes atenuaciones • La detecci´on por multipath es mejor a mayor frecuencia • La detecci´on por difracci´on es mejor a menor frecuencia
+Refraccio´n atmosf´erica
+Introducci´on
+Efectos de la propagaci´on
+• El haz del radar se curva hacia abajo por la variaci´on del ´ındice de refracci´on a medida que aumenta la altitud
+• Se puede simular este efecto haciendo los c´alculos con un radio de tierra Re mayor, afect´andolo por un factor k
+• T´ıpicamente se utiliza k = 4/3
+• Cuando K̸ = 4/3 se produce superrefraccio´n (extiende el horizonte del radar), subrefraccio´n (lo limita) o ducting (atrapa el haz sobre la superficie)
+Contenidos
+Introducci´on
+Efectos de la propagaci´on
+1 Introducci´on 2 Conceptos previos 3 Ecuaci´on del Radar 4 Efectos de la propagaci´on 5 Radar Cross Section 6 Detecci´on de blancos 7 Compresi´on de pulsos 8 Clutter y Chaff 9 Rechazo de Clutter 10 Antenas 11 Estimaci´on de par´ametros y seguimiento 12 Transmisores y receptores 13 Bibliograf´ıa
+Definicio´n de la RCS
+Introducci´on
+Efectos de la propagaci´on
+• La Radar Cross Section (σ o RCS) es un ´area ficticia que intercepta parte de la potencia incidente en el target y que, si esa ´area dispersase esa potencia incidente uniformemente en todas direcciones (isotro´picamente), producir´ıa una potencia de eco en el radar igual a la que producir´ıa el target real
+• Se define matema´ticamente co´mo la relacio´n entre la potencia reflejada hacia la fuente por unidad de ´angulo so´lido (en t´erminos de campo el´ectrico radiado, Er ) y la potencia incidente al target (en t´erminos de campo el´ectrico incidente, Ei )
+2 |Er |2 σ = 4πR 2
+|Ei |
+• Desde el punto de vista del target, la RCS es lo u´nico que se puede controlar.
+Factores que afectan a la RCS
+Introducci´on
+Efectos de la propagaci´on
+• Frecuencia • Polarizaci´on • Taman˜o, forma, material y orientaci´on del target • Direcci´on de la retrodispersi´on (en sistemas monoest´aticos o biest´aticos) • Distancia al target (diferencias entre campo cercano o lejano)
+RCS de una esfera met´alica
+Introducci´on
+Efectos de la propagaci´on
+• Regi´on de Rayleigh: 2πa/λ ≪ 1, la RCS es proporcional a 1/f 4 • Regi´on O´ ptica: 2πa/λ ≫ 1 la RCS se acerca al ´area geom´etrica a medida que
+la frecuencia incrementa • Regi´on de Resonancia: La RCS oscila en funci´on de la frecuencia por la
+interferencia de la backscattered wave y la creeping wave
+Retrodispersi´on de un pulso corto de una esfera
+RCS de una cono-esfera desde diferentes puntos
+Introducci´on
+Efectos de la propagaci´on
+• La linea azul representa un gr´afico en coordenadas polares de la RCS del cono-esfera en rojo
+• Los c´ırculos en lineas de puntos son zonas donde la RCS aumenta 10 veces, est´an referenciado a dB metro cuadrado (dBm2)
+Ejemplos de RCS
+Introducci´on
+Efectos de la propagaci´on
+Objeto Avi´on pequen˜o de un solo motor Jet de cuatro pasajeros Avi´on de combate grande Jet de pasajeros mediano Jet Jumbo Helicoptero Bote pequen˜o Lancha pequen˜a Crucero con cabina Barco (5k toneladas de desplazamiento) Automovil/Cami´on Pequen˜o Bicicleta Hombre Aves Insectos
+RCS [m2] 1 2 6 40 100 3
+0.02 2 10
+10000 100-200
+2 1 10−3 - 10−2 10−5 - 10−4
+Medicio´n de la RCS en escala real
+Introducci´on
+Efectos de la propagaci´on
+• Se monta un objeto a escala real en una columna de espuma de poliestireno, con propiedades diel´ectricas similares al espacio libre.
+• Se puede montar en una columna de metal con una forma especial para reducir reflexiones, y se puede sustraer la RCS de la medici´on.
+Johnson Generic Aircraft Model (JGAM)
+Introducci´on
+Efectos de la propagaci´on
+• Se puede aproximar un objeto real en secciones de objetos con RCS conocida.
+Medicio´n de RCS en rango compacto
+Introducci´on
+Efectos de la propagaci´on
+• Se mide un modelo dentro de una c´amara anecoica.
+Medicio´n con modelos a escala
+Introducci´on
+Efectos de la propagaci´on
+Par´ametro Longitud Tiempo Frecuencia Longitud de onda Conductividad Permitividad Permeabilidad RCS
+Escala Real L t f λ g ϵ µ σ
+Escalado
+L’ = L/S
+t’=t/S
+f’=Sf λ′ = λ/S
+g’=Sg ϵ′ = ϵ µ′ = µ σ′ = σ/S2
+Dispersi´on Electromagn´etica
+Introducci´on
+Efectos de la propagaci´on
+• Para determinar el campo dispersado se deben resolver las Ecuaciones de Maxwell, en todo el objeto en cada instante de tiempo, para esto se sabe que: • Se inducen corrientes superficiales variantes en el tiempo, debido al impacto de una onda EM en el objeto. • Las corrientes superficiales cambian en el tiempo, induciando un campo EM, que se irradia y se propaga. Este campo EM radiado debe ser calculado.
+Predicciones Teo´ricas de la RCS
+Introducci´on
+Efectos de la propagaci´on
+• Teor´ıa f´ısica de la difracci´on
+• Aproximaciones de alta frecuencia • Ventajas: Costo computacional
+reducido, Adecuado para geometr´ıas complejas y arbitrarias • Desventajas: Omite algunas dispersiones, Aplicable solo a geometr´ıas grandes y lisas • C´odigos: XPatch
+• M´etodo de los momentos
+• Aproximaci´on num´erica exacta • Ventajas: Formulaci´on exacta • Desventajas: Computacionalmente
+intensiva • C´odigos: CARLOS, CICERO, FISC,
+FERM
+Contenidos
+Introducci´on
+Efectos de la propagaci´on
+1 Introducci´on 2 Conceptos previos 3 Ecuaci´on del Radar 4 Efectos de la propagaci´on 5 Radar Cross Section 6 Detecci´on de blancos 7 Compresi´on de pulsos 8 Clutter y Chaff 9 Rechazo de Clutter 10 Antenas 11 Estimaci´on de par´ametros y seguimiento 12 Transmisores y receptores 13 Bibliograf´ıa
+Sen˜al y Ruido
+Introducci´on
+Efectos de la propagaci´on
+• Los ecos del radar est´an muestreados a intervalos regulares con ADC • Las muestras contienen sen˜al del target y ruido • Se utiliza un umbral (threshold) para rechazar el ruido
+Probabilidad de Falsa Alarma
+Introducci´on
+Efectos de la propagaci´on
+• El ´area bajo la curva de la funci´on de densidad de probabilidad (PDF en ingl´es) desde el umbral de detecci´on (detection threshold) hasta el infinito es la probabilidad de falsa alarma
+• El ´area bajo la curva completa es 1
+Probabilidad de Deteccio´n
+Ejemplos de deteccio´n con diferentes SNR
+Introducci´on
+Efectos de la propagaci´on
+• Para un umbral fijo, una SNR mayor resulta en mayor probabilidad de detectar el blanco
+Probabilidad de Deteccio´n vs SNR y Probabilidad de Falsa Alarma
+Introducci´on
+Efectos de la propagaci´on
+PD = 0,9: • Pfa = 10−6 • SNR = 13,2 dB • para un target fijo
+Integracio´n de pulsos de radar
+Introducci´on
+Efectos de la propagaci´on
+• La habilidad del radar para detectar blancos se puede mejorar combinando los ecos de mu´ltiples pulsos, hay dos tipos de integraci´on: • Integracio´n coherente: Sin p´erdida de la informacio´n de la sen˜al (amplitud y fase) • T´ecnicas de integraci´on no coherente: P´erdida parcial de la informaci´on (fase), pero es m´as eficiente que la integraci´on coherente
+• Integracio´n no coherente de pulsos (integracio´n de v´ıdeo) • Integracio´n binaria • Integracio´n acumulativa
+Integracio´n coherente
+Introducci´on
+Efectos de la propagaci´on
+• Las partes de la sen˜al compleja del eco del radar -Real e Imaginarias o In-phase (I) y Quadrature (Q)- se suman y la magnitud de la tensi´on se calcula c´omo: V = (I 2 + Q2)
+• Esta tensi´on se pasa por un umbral (thresholding ) • La ganancia de integracio´n coherente es igual a la cantidad de pulsos integrados
+coherentemente: • 2 Pulsos: Gint = 3 dB • 10 Pulsos: Gint = 10 dB • 20 Pulsos: Gint = 13 dB
+• Para que esta ganancia se produzca, las muestras del ruido deben ser independientes entre pulsos, esto es posible porque el ruido que capta el radar es aditivo, blanco y gausseano (AWGN)
+Integracio´n no coherente de un target fijo
+Introducci´on
+Efectos de la propagaci´on
+La varianza de ruido se reduce luego de la integraci´on, lo que permite usar menor umbral, la SNR se mantiene constante
+Tipos de integracio´n no coherente
+Introducci´on
+Efectos de la propagaci´on
+• Integraci´on no coherente (integraci´on de v´ıdeo) • Se obtiene la magnitud de los N pulsos • Se suman las magnitudes y se aplica el umbral
+• Integraci´on binaria • Se obtiene la magnitud de los N pulsos y se aplica el umbral • Se requieren al menos M detecciones en N escaneos
+• Integraci´on Acumulativa • Se obtiene la magnitud de los N pulsos y se aplica el umbral • Se requiere al menos una detecci´on en N escaneos
+Fluctuaciones de RCS
+Introducci´on
+Efectos de la propagaci´on
+• Pequen˜os cambios en la orientaci´on del target con respecto al radar pueden generar enormes cambios en su RCS.
+• Los targets complejos est´an conformados por mu´ltiples puntos de retrodispersi´on o scatterers.
+• Los ecos de cada scatterer tienen diferentes amplitudes y fases que, en general, son independientes de la amplitud y fase de los ecos de otros scatterers.
+• En el radar, todos los ecos se suman e interfieren entre s´ı, generando una amplitud y una fase resultante.
+N
+sr (t) = ai sin (2πft + ϕi ) = A sin (2πft + Φ)
+i =1
+Modelos de Swerling
+Introducci´on
+Efectos de la propagaci´on
+• Las p´erdidas por fluctuaciones de la energ´ıa de retrodispersi´on del blanco, debido a los movimientos del blanco o por el cambio de su orientaci´on fueron estudiados la d´ecada de 1950 por Peter Swerling
+• Existen 4 modelos a partir que calculan la SNR necesaria para obtener cierta probabilidad de deteccio´n Pd , probabilidad de falsa alarma Pfa y la cantidad de pulsos integrados n.
+Tipo de scatterer
+En el target hay scatterers independientes de ´areas simulares
+que producen ecos similares En el target hay un scatterer que
+produce un eco importante y otros scatterers
+que producen un eco menor
+PDF de la RCS
+p(σ) =
+1 −σ
+σav e σav
+σ≥0
+p(σ) =
+4σ − 2σ
+σa2v e σav
+σ≥0
+Intervalo de fluctuaci´on de la RCS
+Fluctuaciones lentas. Los ecos recibidos son independientes entre scans
+(aunque existan mu´ltiples pulsos por scan).
+Fluctuaciones r´apidas. Los ecos recibidos son independientes pulso a pulso
+Swerling I
+Swerling II
+Swerling III
+Serling IV
+Probabilidad de deteccio´n para blancos con RCS fluctuante
+Introducci´on
+Efectos de la propagaci´on
+Los blancos con RCS fluctuante requieren mayor SNR que los blancos que no fluctuan para conseguir altas probabilidades de detecci´on.
+Para una detecci´on con un u´nico pulso:
+Thresholding Adaptativo
+Introducci´on
+Efectos de la propagaci´on
+• Un umbral adaptativo estima el piso de ruido usando muestras de ruido.
+• Esto permite establecer un umbral adaptativo, ya que el nivel de ruido puede cambiar en funci´on del tiempo (por condiciones clim´aticas, ciclos solares, d´ıa y noche) o por la direcci´on de apuntamiento (diferentes tipos de clutter).
+Mean Level Constant False Alarm Rate (CFAR) Thresholding
+Introducci´on
+Efectos de la propagaci´on
+• Se divide la adquisici´on en celdas de rango • Se establece una celda bajo prueba (Cell Under Test) • Se usa el valor medio de las celdas circundantes, en una ventana, para
+determinar el valor del umbral para la celda bajo prueba. • La ventana de celdas se mueve para calcular el valor de cada celda bajo prueba. • Las celdas de guarda no se tienen en cuenta, ya que blancos cercanos pueden
+hacer que el valor del umbral sea mayor y no se produzca una detecci´on.
+Efectos de la lluvia en Mean Level CFAR Thresholding
+CFAR Greatest-Mean Thresholding
+Introducci´on
+Efectos de la propagaci´on
+• Se pueden encontrar dos valores medios para N/2 celdas antes y N/2 celdas despu´es de la celda bajo prueba.
+• Se utiliza la media m´as grande para determinar el umbral • Esto permite reducir las falsas alarmas cerca de zonas de clutter brusco, o
+fronteras de interferencia. • Los blancos cercanos au´n pueden subir el umbral y suprimir la detecci´on
+Contenidos
+Introducci´on
+Efectos de la propagaci´on
+1 Introducci´on 2 Conceptos previos 3 Ecuaci´on del Radar 4 Efectos de la propagaci´on 5 Radar Cross Section 6 Detecci´on de blancos 7 Compresi´on de pulsos 8 Clutter y Chaff 9 Rechazo de Clutter 10 Antenas 11 Estimaci´on de par´ametros y seguimiento 12 Transmisores y receptores 13 Bibliograf´ıa
+Ancho de banda y resolucio´n de rango
+Introducci´on
+Efectos de la propagaci´on
+La resolucio´n en rango ∆R es proporcional al ancho de pulso e inversamente proporcional al ancho de banda del pulso.
+Resoluci´on en rango
+c·T c
+∆R =
+=
+2 2B
+Ancho de banda y resolucio´n de rango
+Introducci´on
+Efectos de la propagaci´on
+• El ancho temporal del pulso es directamente proporcional al ancho espacial del pulso, o longitud del pulso (pulse width).
+• Si la longitud de pulso es m´as grande que las dimensiones del blanco, no se pueden resolver caracter´ısticas del blanco
+• Si la longitud de pulso es m´as pequen˜o que las dimensiones del blanco, se pueden resolver caracter´ısticas del blanco
+• Los pulsos cortos tienen mayor ancho de banda y mejor resoluci´on.
+Motivacio´n para la compresi´on de pulsos
+Introducci´on
+Efectos de la propagaci´on
+• Existe una relaci´on de compromiso entre la potencia media del pulso y la resoluci´on del pulso. • La potencia media es directamente proporcional a la longitud del pulso • La resoluci´on en rango es inversamente proporcional a la longitud del pulso.
+• Un pulso largo puede tener el mismo ancho de banda que un pulso corto si se utiliza modulaci´on en frecuencia o en fase.
+• Estas t´ecnicas de compresio´n de pulso permiten obtener la potencia de un pulso largo con la resoluci´on de un pulso corto.
+Concepto del filtro apareado
+Introducci´on
+Efectos de la propagaci´on
+• Un filtro apareado maximiza la relaci´on entre la SNR pico y el ruido medio
+SNˆR N¯0
+• Para un pulso rectangular, un filtro apareado es un filtro pasabanda
+Filtro apareado
+Introducci´on
+Efectos de la propagaci´on
+Se pueden demostrar las siguientes propiedades de los filtros apareados (demostradas para ruido gausseano, aditivo y blanco -AWGN-)
+• Funci´on de respuesta en frecuencia: S∗(f ) • M´axima SNR de salida: 2E /N0 • Magnitud de respuesta en frecuencia: |H(f )| = |S(f )| • Fase de la respuesta en frecuencia: ϕm(f ) = −ϕs (f ) • Respuesta al impulso: s(−t) • Sen˜al de salida para una SNR alta: se aproxima a la autocorrelacio´n de la sen˜al
+de entrada s(t) • Relacio´n entre en ancho de banda y el ancho del pulso de un pulso rectangular y
+un filtro convencional: Bτ ≈ 1 • Respuesta en frecuencia para un ruido no blanco: S∗(f )/[Ni (f )]2
+Modulaci´on en fase y en frecuencia de pulsos
+Introducci´on
+Efectos de la propagaci´on
+• La resoluci´on de un pulso corto se puede obtener modulando un pulso largo, incrementando el producto tiempo-ancho de banda (t · BW ).
+• La sen˜al debe ser procesada en el receptor para realizar la compresio´n del pulso.
+Formas de onda con codificaci´on binaria
+Introducci´on
+Efectos de la propagaci´on
+• Los cambios de fase pueden usarse para incrementar el ancho de banda
+• Un pulso de duraci´on T se divide en N subpulsos, con duraci´on TCHIP
+• La fase de cada subpulso depende de una c´odigo binario, y cambia entre una senoidal con fase 0 o π radianes
+• La salida del filtro de compresi´on de pulsos ser´a un pulso comprimido de ancho TCHIP y un pico N veces mayor al del pulso no comprimido
+Ejemplo con Co´digo de Barker de 3 bits
+Ejemplo con Co´digo de Barker de 13 bits
+Formas de onda con modulaci´on en frecuencia lineal
+Introducci´on
+Efectos de la propagaci´on
+• La frecuencia modulada pulsada tambi´en es conocida como Chirp o chirping, es una t´ecnica de espectro expandido.
+• Como el rango es medido por un cambio en la frecuencia de Doppler, hay un acoplamiento entre la medici´on de rango y de velocidad.
+Otras formas de onda codificadas
+Introducci´on
+Efectos de la propagaci´on
+• Linear FM sidelobe weighting • Linear recursive sequences • Quadriphase codes • Polyphase codes • Costas codes • Non-linear FM pulse compression • Non-linear binary phase coded sequences • Doppler tolerant pulse compression • Complementary (Golay) Codes • Welti codes • Huffman Codes • Barker Codes variants
+Contenidos
+Introducci´on
+Efectos de la propagaci´on
+1 Introducci´on 2 Conceptos previos 3 Ecuaci´on del Radar 4 Efectos de la propagaci´on 5 Radar Cross Section 6 Detecci´on de blancos 7 Compresi´on de pulsos 8 Clutter y Chaff 9 Rechazo de Clutter 10 Antenas 11 Estimaci´on de par´ametros y seguimiento 12 Transmisores y receptores 13 Bibliograf´ıa
+¿Qu´e es el Clutter?
+Introducci´on
+Efectos de la propagaci´on
+El eco en el receptor del radar est´a conformado por diferentes objetos
+• Backscatter del target de inter´es
+• Ruido del receptor • Ruido atmosf´erico • Interferencia (de otros
+radares o de jammers) • Backscatter de otros objetos:
+Tierra, Mar, Lluvia, Chaff, Aves e insectos, Tr´afico
+Clutter de tierra
+Introducci´on
+Efectos de la propagaci´on
+• El valor medio del backscatter del clutter de tierra: • Es relativamente mucho m´as grande al del target (50 dB o 60 dB) • Var´ıa estad´ısticamente (dependiendo de la frecuencia, la resoluci´on espacial, la geometr´ıa y el tipo de terreno)
+• Las propiedades de Doppler del clutter de tierra: • Tiene un bajo Doppler Spread (introducido por ´arboles, pastizales o m´astiles. Antenas que giran introducen au´n m´as) • El Doppler Shift es precedible a partir de la velocidad de la plataforma que carga el radar.
+Geometr´ıa del Clutter de Radar
+Introducci´on
+Efectos de la propagaci´on
+• El largo de la celda de resoluci´on del radar depende del ´angulo de incidencia ϕ y T el ancho de pulso.
+ℓ = cT sec ϕ 2
+• El ancho de la celda de resolucio´n del radar depende del rango R y el ancho del haz θB :
+w = RθB
+A = w ℓ = RθB cT sec ϕ 2
+• El coeficiente de backscatter por unidad de ´area, o coeficiente de clutter:
+σ0 = σ/A
+C´alculo del clutter de tierra
+Introducci´on
+Efectos de la propagaci´on
+• Valor t´ıpico de σ0 = −20 dB = 0,01m2m2
+•
+σclutter
+=
+σ0A
+=
+σ0
+cT 2
+R θB
+• Se toman valores t´ıpicos para un radar de vigilancia aerea:
+• cT2 = 100 m • R = 60 km
+• θB = 1,5◦ = 0,026 rad • σclutter = 1500 m2
+• Para un target con σtarget = 1 m2 (un avi´on pequen˜o de un solo motor): σtarget σclutter = 1 1500
+• Para asegurar una buena detecci´on es requiere: σσtarget clutter = 20
+Se debe suprimir el clutter por un factor de 1500 · 20 = 30000 ≡ 45 dB
+F´ısica del clutter de tierra
+Introducci´on
+Efectos de la propagaci´on
+• Par´ametros del radar: frecuencia y resoluci´on espacial
+• Geometr´ıa: ´angulo de depresi´on, rango, altura, multipath e interferencias en side lobes
+• Tipo de terreno: Coeficiente de clutter σ0, factor de propagaci´on
+F´ısica del clutter de tierra
+Clutter de mar
+Introducci´on
+Efectos de la propagaci´on
+• La RCS media del clutter de mar es alrededor de 100 veces m´as pequen˜a que la del clutter de tierra y depende de:
+• El viento y el clima (estado del
+mar) • Frecuencia del radar • Polarizaci´on del radar • Resoluci´on espacial del radar • A´ngulo de incidencia (grazing
+angle) • Muchas otras variables
+Estado del mar
+Introducci´on
+Efectos de la propagaci´on
+Definiciones por parte de la World Meteorological Organization
+Picos del mar
+Introducci´on
+Efectos de la propagaci´on
+• A bajos ´angulos de incidencia, cada cierta cantidad de segundos, la RCS del mar sube precipidamente y vuelve a bajar
+• Esto puede causar excesivas falsas alarmas
+Clutter de lluvia
+Introducci´on
+Efectos de la propagaci´on
+• La lluvia atenu´a y refleja la sen˜al del radar • Los problemas causados por la lluvia decrecen drama´ticamente a baja frecuencia
+(mayor longitud de onda). T´ıpicamente no es un problema en banda L. • La lluvia es un clutter difuso, tiene gran extensi´on geogr´afica
+• Viaja horizontalmente con el viento • Tiene un Doppler shift y un Doppler spread
+Reflectividad de lluvia uniforme
+Introducci´on
+Efectos de la propagaci´on
+• La reflectividad de la lluvia incrementa proporcionalmente a f 4 • Es un problema en Banda S y un factor significativo en banda X o frecuencias mayores
+σ [dBm2/m3]
+Tipo de Lluvia
+Llovizna 0.25 mm/h Lluvia ligera
+1 mm/h Lluvia moderada
+4 mm/h Lluvia intensa
+16 mm/h
+Banda S 3 GHz -102
+-92
+-83
+-73
+Frecuencia Banda C Banda X 5.6 GHz 9.3 GHz
+-91
+-81
+-81.5
+-72
+-72
+-62
+-62
+-53
+Banda Ka 35 GHz -58
+-49
+-41
+-33
+Espectro Doppler de lluvia en banda S
+Introducci´on
+Efectos de la propagaci´on
+• En esta medicio´n la lluvia era intensa (20 mm/h), el viento a nivel del suelo de 55 km/h y de 90 km/h a 1.8 km de altura
+• El espectro Doppler de la lluvia no sigue un patr´on gausseano • La velocidad media var´ıa a medida que la tormenta se aleja del radar
+Chaff
+Introducci´on
+Efectos de la propagaci´on
+• El chaff est´a compuesto de una gran cantidad de dipolos (met´alicos macizos o recubiertos), con una longitud de λ/2
+• Estos objetos tienen gran reflectividad y se mueven con el viento.
+• El chaff se puede utilizar para enmascarar aviones o misiles cerca de la nube o en la nube.
+• El chaff se puede utilizar para emular la presencia de aviones o misiles con detecciones falsas, alejando al rastreador del radar del blanco real
+Reflectividad del Chaff
+Introducci´on
+Efectos de la propagaci´on
+• Dipolos met´alicos resonantes
+• RCS media por dipolo: σ = 0,18λ2 [m2] • BW: 10 % a 15 % de f0 • Tasa de ca´ıda: 0.5 m/s a 3 m/s
+• Dipolos de papel aluminio: (1 mil x 10 mil x λ/2)
+• RCS media por dipolo: σ = 1350 w /f • w es el peso en kg; f es la frecuencia en GHz • En banda S (3 GHz), 200 kg generan σ = 50 dBm2
+AN/ALE-38 Chaff-Dispensing System
+Clutter por aves
+Introducci´on
+Efectos de la propagaci´on
+• La RCS es pequen˜a, pero puede fluctuar a niveles importantes, resonando en Banda S y Banda L
+• Las densidades de aves en migraciones son grandes y las bandadas pueden generar falsas alarmas.
+• Pueden generar problemas significativos al intentar detectar con baja RCS • Como las aves se mueven t´ıpicamente a bajas velocidades, se pueden filtrar si se
+mide su velocidad.
+Clutter por insectos
+• Los grupos de insectos pueden generar suficiente clutter para impedir detecci´on de blancos
+• La densidad de los insectos puede ser varios ordenes de magnitud mayor a la densidad de aves
+• La direcci´on de movimiento coincide con el viento, generalmente
+• La RCS est´a modelada como una gota de agua de masa equivalente
+• La orientaci´on de los insectos puede incrementar la RCS
+Contenidos
+Introducci´on
+Efectos de la propagaci´on
+1 Introducci´on 2 Conceptos previos 3 Ecuaci´on del Radar 4 Efectos de la propagaci´on 5 Radar Cross Section 6 Detecci´on de blancos 7 Compresi´on de pulsos 8 Clutter y Chaff 9 Rechazo de Clutter 10 Antenas 11 Estimaci´on de par´ametros y seguimiento 12 Transmisores y receptores 13 Bibliograf´ıa
+Rechazar ruido y clutter
+Introducci´on
+Efectos de la propagaci´on
+• Los procesamientos Moving Target Indicator (MTI) y Pulse Doppler (PD) usan el efecto Doppler para rechazar la sen˜al del clutter y mejorar la detecci´on de targets en movimiento
+• Los targets m´as pequen˜os requieren mayor supresi´on de clutter
+• T´ecnicas MTI:
+• Solo separan los blancos mo´viles del clutter fijo (High Pass techniques)
+• Usa formas de onda cortas (dos o tres pulsos)
+• No permite la estimaci´on de la velocidad del blanco
+• T´enicas PD: • Separa targets en diferentes r´egimenes de velocidad, adem´as de cancelar el clutter (filtros complejos) • Usa formas de onda largas (decenas de miles de pulsos) • Provee buenas estimaciones de la velocidad del blanco
+Frecuencia Doppler
+2v fD = λ En Banda S (3 GHz), para un blanco a 40 m/s (144 km/h): fd ≈ 1 kHz
+Espectro Doppler del clutter
+• El clutter puede provenir del mismo rango o celda que el blanco
+• La RCS del clutter puede ser mucho mayor a la del target (> 50 dB)
+• Las caracter´ısticas del clutter var´ıan con el terreno, el clima, etc.
+Formas de Onda de MTI y PD
+Introducci´on
+Efectos de la propagaci´on
+• Para MTI: M = 2, 3 o´ 4 • Para PD: M > 20
+• Longitud de pulso: T • Ancho de banda: B = 1/T • Intervalo de repetici´on de pulsos: PRI = Tr • Frecuencia de repetici´on de pulsos: PRF = 1/Tr • Ciclo de trabajo (duty cycle): δ = T /Tr • Intervalo de procesamiento coherente (CPI): Tc = MTr • Cantidad de pulsos en el CPI: M
+Recoleccio´n de datos para MTI y PD
+Introducci´on
+Efectos de la propagaci´on
+• Se llena una matriz I y una matriz Q de (LxM), donde L es la cantidad de muestras (en rango) y M el nu´mero de pulsos
+Procesamiento MTI
+Introducci´on
+Efectos de la propagaci´on
+• El objetivo es suprimir (Notch out) el espectro Doppler ocupado por el clutter • Adem´as, el filtro debe ser pasabanda de banda ancha en el resto del espectro
+Doppler • Hay velocidades que no son procesadas en mu´ltiplos de la PRF.
+Cancelador MTI de dos pulsos
+Introducci´on
+Efectos de la propagaci´on
+• Si se restan dos pulsos consecutivos, los ecos de clutter fijo se cancelaran y no ser´an detectados
+• Los targets en movimiento cambian de amplitud entre pulsos por el Doppler Shift. Al restar pulsos consecutivos, existir´a un residuo no cancelado.
+Factor de mejora de MTI
+Introducci´on
+Efectos de la propagaci´on
+• Criterio de evaluaci´on de desempen˜o de un detector MTI
+• Sin y Cin: potencia de sen˜al de entrada de target y de clutter por pulso • Sout (fd ) y Cout (fd ): potencia de salida del procesador Doppler de target y de
+clutter por pulso, en la frecuencia Doppler fd • MTI Improvement Factor I (fd ): es el producto de la atenuaci´on de clutter y
+de la ganancia de sen˜al en la frecuencia Doppler fd
+IMTI (fd ) = Sout (fd )/Cout (fd ) = Cin · Sout (fd )
+Sin/Cin
+Cout (fd ) Sin
+Factor de mejora de MTI
+Introducci´on
+Efectos de la propagaci´on
+• 2-Pulse MTI
+Vout = Vi − Vi−1 • 3-Pulse MTI:
+Vout = Vi − 2Vi−1 + Vi−2 • El cancelador de 3 pulsos provee un
+notch cancelador de clutter m´as ancho y con mayor atenuaci´on
+• Spread Clutter a 1 m/s, σc = 10 Hz
+PRF alternada para incrementar la velocidad ciega
+Introducci´on
+Efectos de la propagaci´on
+• Alternar la PRF implica cambiar el tiempo entre pulsos, para incrementar la velocidad ciega.
+• Esta t´ecnica puede remover velocidades ciegas con PRF fijas, pero siempre existir´a una velocidad ciega mayor.
+Procesamiento de Pulse Doppler
+Introducci´on
+Efectos de la propagaci´on
+• Cada filtro tiene una serie de pesos (fn, vn) para obtener diferentes respuestas para cada velocidad Doppler
+• Se integran todos los pulsos de un CPI
+• Se rechaza el clutter • Resolver cada blanco en diferentes
+segmentos de velocidad permite estimaci´on fina de la velocidad del target.
+Ambigu¨edades de Doppler
+• La forma de onda de un radar PD
+muestrea blancos a PRF
+• Este muestreo produce aliasing en
+multiplos de la PRF
+• Dos blancos con frecuencias Doppler
+separados por un multiplo entero de
+la PRF son indistinguibles
+•
+Velocidad
+sin
+ambigu¨edades
+vu
+=
+λfr 2
+Ambigu¨edades de rango
+Introducci´on
+Efectos de la propagaci´on
+• Las ambigu¨edades de rango ocurren cuando ecos de un pulso anterior continu´an
+siendo recibidos en el tiempo de procesamiento del pulso actual.
+• Blancos cercanos con altos niveles de eco (clutter) pueden enmascarar blancos
+lejanos con ecos d´ebiles
+•
+El
+rango
+sin
+ambigu¨edades
+es
+Ru
+=
+cTr 2
+Ambigu¨edades de rango y de doppler
+vu = λfr 2
+Ru = cTr = c 2 2fr
+Sensitivity Time Control (STC)
+Introducci´on
+Efectos de la propagaci´on
+• Se debe reducir deliberadamente la sensitividad del radar en rangos cortos (en el ejemplo la SNR del eco es la misma).
+• STC es una t´ecnica que atenu´a el retorno del radar en un factor R−4, para tener una SNR constante para un target con la misma RCS
+• STC no se puede usar si existen ambiguedades en rango: los targets fuera del rango no ambiguo ser´an atenuados porque ser´ıan detectados demasiado cerca (folding over )
+Clases de radar MTI y PD
+Introducci´on
+Efectos de la propagaci´on
+Medici´on de Rango Medici´on de velocidad
+Problemas
+PRF Baja No ambigua Muy ambigua
+- Wind Blown Clutter es un problema - Se puede utilizar STC
+PRF Media Ambigua Ambigua
+- Wind Blown Clutter es un problema - Range eclipsing losses - Targets lejanos compiten con clutter cercano - No se puede usar STC - Las ambigu¨edades son dificil de resolver
+PRF Alta Muy Ambigua No ambigua
+- Range eclipsing losses (el rango est´a limitado la cantidad de tiempo que el Tx funciona) - Targets lejanos compiten con clutter cercano - No se puede usar STC
+Resolucio´n de ambiguedad de velocidad
+Introducci´on
+Efectos de la propagaci´on
+• Se separa el tiempo de procesamiento en mu´ltiples Coherent Processing Intervals a diferentes PRF. Se puede cambiar entre scans o entre pulsos
+• Esto permite diferenciar velocidades ciegas para asegurar la detecci´on de blancos m´oviles
+• La velocidad real del blanco ser´a donde exista mayor correlaci´on entre los CPI
+• Se eligen las PRF para que el m´ınimo comu´n mu´ltiplo ocurra por encima de la m´axima velocidad no ambigua
+Contenidos
+Introducci´on
+Efectos de la propagaci´on
+1 Introducci´on 2 Conceptos previos 3 Ecuaci´on del Radar 4 Efectos de la propagaci´on 5 Radar Cross Section 6 Detecci´on de blancos 7 Compresi´on de pulsos 8 Clutter y Chaff 9 Rechazo de Clutter 10 Antenas 11 Estimaci´on de par´ametros y seguimiento 12 Transmisores y receptores 13 Bibliograf´ıa
+Definicio´n de antena
+Introducci´on
+Efectos de la propagaci´on
+• Una antena es un dispositivo normalmente conductor met´alico, disen˜ado con el objetivo de emitir y/o recibir ondas electromagn´eticas hacia el espacio libre. Una antena es una estructura de transici´on entre un dispositivo y el espacio libre
+• Una antena es un medio para radiar o recibir ondas electromagn´eticas. Una antena transmisora transforma energ´ıa el´ectrica en ondas electromagn´eticas, y una receptora realiza la funci´on inversa.
+La energ´ıa electromagn´etica radiada consiste de un campo el´ectrico y magn´etico que en conjunto satisfacen las ecuaciones de Maxwell.
+Ganancia de antena
+Introducci´on
+Efectos de la propagaci´on
+• Se irradia la misma potencia • La intensidad de radiaci´on es la
+densidad de potencia en la esfera (medida en Watt por Esteroradian [W /strad] • La ganancia (o directividad) de antena es la intensidad de radiaci´on con respecto a la de una fuente isotr´opica
+G = λ2 4πAe = λ2 4πηA
+Patro´n de radiacio´n de antena
+Introducci´on
+Efectos de la propagaci´on
+• El patr´on de antena es una representacio´n tridimensional, polar o lineal de la ganancia en funci´on del ´angulo
+cos2
+π 2
+cos
+θ
+G (θ)dipolo = 1,643
+2
+sin θ
+Antena con reflector parabo´lico
+Introducci´on
+Efectos de la propagaci´on
+• Los reflectores parab´olicos tienen la electr´onica en el foco de la par´abola, donde se suman todos los haces con la misma fase (relativa en la par´abola)
+• Diametro de la apertura D = 5 m • Frecuencia f = 300 MHz (λ = 1 m) • Ganancia (main lobe): G = 24 dBi • Isotropic sidelobe level: 6 dBi • Sidelobe level 18 dB • Half-Power Beamwidth 12◦
+Ganancia y Di´ametro de la antena
+Introducci´on
+Efectos de la propagaci´on
+• La ganancia de antena:
+G = λ2 4πAe = λ2 4πηA • Con η = 1
+4πA πD G = λ2 = λ
+• La ganancia incrementa a medida que la apertura es electricamente mayor (el di´ametro es una mayor cantidad de longitudes de onda, D = nλ)
+Polarizacio´n
+Introducci´on
+Efectos de la propagaci´on
+• La polarizaci´on est´a definida por el comportamiento del vector de campo electrico →− E a medida que se propaga con respecto a un plano de referencia.
+• Polarizaci´on lineal (vertical u horizontal), circular o el´ıptica (dextr´ogira o lev´ogira).
+• La polarizaci´on circular se usa para diversidad de polarizaci´on, discriminaci´on, mitigaci´on de efectos atmosf´ericas, etc.
+• La polarizacio´n cruzada (en ingl´es crosspol o X-pol) no es una polarizacio´n, si no un modo de adquisici´on.
+Regiones de campo
+Introducci´on
+Efectos de la propagaci´on
+• La regi´on de campo depende del di´ametro de la antena con respecto a la longitud de onda de trabajo.
+• Campo cercano (Regi´on reactiva): R < 0,62 D3/λ
+• La energ´ıa est´a concentrada en la proximidad de la antena
+• Se utilizan par´ametros de campo cercano: impedancia de entrada y acoplamiento mutuo
+• Campo Lejano (Regi´on de Fraunhofer): R > 2D2/λ
+• Toda la energ´ıa es radiada fuera de la antena en forma de una onda plana
+• Se utilizan par´ametros de campo lejano: patro´n de antena, ganancia (directividad), polarizacio´n y RCS.
+Impedancia de entrada de antena
+Introducci´on
+Efectos de la propagaci´on
+• La antena se puede modelizar como una impedancia, una relaci´on de tensi´on a corriente en el puerto de alimentaci´on.
+• Se disen˜a la antena para maximizar la transferencia de potencia desde la l´ınea de transmisi´on. Las reflexiones crean ondas estacionarias. Γ = 0 implica que toda la potencia es entregada a la antena, Γ = 1 produce que toda la potencia se refleje
+• La impedancia de entrada de define el ancho de banda de la antena
+Reflector Parabo´lico
+Introducci´on
+Efectos de la propagaci´on
+• Hay una relaci´on de compromiso entre la iluminaci´on del reflector parab´olico y el derramamiento (spillover )
+• La posici´on del foco y el feeder es cr´ıtica.
+Reflector Cassegrain
+Arreglos de antenas
+Introducci´on
+Efectos de la propagaci´on
+• Mu´ltiples antenas combinadas para mejorar el patr´on de antena y permitir apuntamiento con cambios de fase
+Arreglos de antenas
+Introducci´on
+Efectos de la propagaci´on
+Par´ametros de disen˜o: • Configuraci´on geom´etrica: lineal, rectangular, circular, arreglos circulares • Separaci´on de los elementos • Fase de excitaci´on de cada elemento • Amplitud de excitaci´on de cada elemento (para control de sidelobes) • Patrones de elementos individuales (dipolos, patches, etc.)
+Arreglos de antenas: cantidad de elementos
+• G = 2N(d/λ)
+Arreglos de antenas: separacio´n de elementos
+Introducci´on
+Efectos de la propagaci´on
+• Evitar grating lobes manteniendo la separaci´on entre elementos d < λ/2
+Arreglos de antenas: endfire
+Introducci´on
+Efectos de la propagaci´on
+• G = 4N(d/λ) para arreglos endfire de muchos elementos sin grating lobes
+Arreglos de antenas: endfire scan
+Introducci´on
+Efectos de la propagaci´on
+Scan cada 30°, con N = 15, d = λ/4
+Arreglos de antena: arreglo plano
+Introducci´on
+Efectos de la propagaci´on
+• A medida que el ´angulo de scan θ0 se aleja del broadside, el beamwidth se ensancha por 1/cos(θ0) y la ganancia decrece en cos(θ0)
+Arreglos de antena: acoplamiento mutuo
+Introducci´on
+Efectos de la propagaci´on
+• El acoplamiento mutuo es una pedida del efecto de un elemento de un arreglo de antenas sobre otro, se mide en el modelo de campo cercano
+• Complica enormemente el disen˜o del arreglo • Hace que la impedancia de entrada dependa del ´angulo de scan • Entregar potencia a todas las antenas en todos los ´angulos de scan es complejo, lo que puede producir scan blindness • Puede limitar el volumen del scan y el ancho de banda del arreglo
+Arreglos de antena vs Reflectores
+Introducci´on
+Efectos de la propagaci´on
+• Los arreglos de antena proveen gran flexibilidad en el disen˜o de haces • Permiten mejorar el uso de los recursos del radar haciendo el cambio de apuntamiento pr´acticamente instant´aneo • Permite tomar adquisiciones casi simultaneas en un campo visual muy extenso
+• Los arreglos de antena son significativamente m´as complejos y costosos que los reflectores de apertura similar. • Una cobertura de 360° puede requerir varios arreglos independientes • Los componentes son m´as costosos • El tiempo de disen˜o es mayor • La complejidad de operaci´on es mayor
+Contenidos
+Introducci´on
+Efectos de la propagaci´on
+1 Introducci´on 2 Conceptos previos 3 Ecuaci´on del Radar 4 Efectos de la propagaci´on 5 Radar Cross Section 6 Detecci´on de blancos 7 Compresi´on de pulsos 8 Clutter y Chaff 9 Rechazo de Clutter 10 Antenas 11 Estimaci´on de par´ametros y seguimiento 12 Transmisores y receptores 13 Bibliograf´ıa
+Procesamiento
+Introducci´on
+Efectos de la propagaci´on
+• Estimaci´on de par´ametros: Se debe obtener las mejores estimaciones de las magnitudes observables y medibles (rango, acimut, velocidad doppler, etc)
+• Seguimiento (tracking ): Un track se forma al correlacionar entre scans los par´ametros y relacionarlos con los diferentes objetos en el espacio • A medida que el track length crece, las estimaciones de par´ametros mejoran
+• El tracking se hace con barridos del espacio: pueden ser electr´onicos o mec´anicos
+Procesamiento
+Introducci´on
+Efectos de la propagaci´on
+Al detectar un target, el radar debe: • Continuar la detecci´on: seguimiento • Estimar los par´ametros del target: posici´on, taman˜o, velocidad, etc. • Asociar detecciones con targets espec´ıficos: detecciones muy cercanas deber´ıan ser el mismo target • Predecir a d´onde estar´a el target: approach vector • Utilizar mu´ltiples observaciones para generar una estimaci´on filtrada del target track
+Estimaci´on
+Introducci´on
+Efectos de la propagaci´on
+Cuando se recibe un eco se sabe: • Localizaci´on: ´angulo de acimut, de elevaci´on y rango • Taman˜o: Amplitud de sen˜al (RCS), Extensio´n along-range (longitud), Extensio´n cross-range (ancho) • Movimiento: Velocidad radial, aceleracio´n radial, rotacio´n, precesio´n, coeficiente bal´ıstico (arrastre y masa).
+Estimaci´on
+Introducci´on
+Efectos de la propagaci´on
+Par´ametros del radar para mejorar la estimaci´on: • Pulse Bandwidth: M´as BW en el chirp mejora la resoluci´on en rango. R ∝ 1/BW • Antenna Beamwidth: Un patro´n de antena con un lo´bulo principal m´as directivo mejora la resoluci´on angular, la dimensi´on de la antena D es muy importante. ψ ∝ λ/D • Doppler Velocity: Mayor tiempo de integraci´on coherente mejora la capacidad de medici´on del espectro doppler. v ∝ λ/∆t • La exac√titud de cada medici´on incrementa su resoluci´on δ y la SNR σ = δ/ SNR
+Estimaci´on
+Introducci´on
+Efectos de la propagaci´on
+Se utilizan mediciones levemente solapadas (en celdas de resoluci´on), y a trav´es de las diferencias de las mediciones se estiman los par´ametros. Algunas t´ecnicas:
+• Rangle Splitting • Monopulse techniques • Doppler bin splitting
+Estimaci´on de rango
+• El muestreo de tensiones de la salida del filtro apareado puede generar errores
+• Se usan mu´ltiples muestras temporales para generar peak fitting
+• La estimacio´n en rango mejora si se incrementa el BW: Racc ∝ BW √1SNR
+Estimaci´on de ´angulo
+• La capacidad de resolver el blanco influye en la capacidad de estimar su localizaci´on
+• BeamWidth ≈ λ/D
+Estimaci´on de ´angulo
+• Un u´nico haz da una detecci´on gruesa (coarse): 1 deg en 100 km son 1745 m
+• Con m´as haces se usan medidas para mejorar la exactitud
+Secuenciamiento temporal de haces
+Introducci´on
+Efectos de la propagaci´on
+• Se puede realizar un Secuenciamiento temporal de haces • Se usa el mismo hardware para mu´ltiples haces • Un sistema de control sigue la posici´on y ecualiza la respuesta de los ecos
+Escaneo C´onico
+Introducci´on
+Efectos de la propagaci´on
+• La amplitud recibida est´a modulada en fase: esto es el error de ´angulo • La amplitud recibida est´a modulada en amplitud: Esto da el desplazamiento de
+haz
+Estimaci´on monopulso de ´angulo
+Introducci´on
+Efectos de la propagaci´on
+• Las estimaciones monopulso comparan dos o m´as recepciones simultaneas
+• La suma y diferencia de dos haces ‘bizcos’ (squinted beams) genera la sen˜al de error.
+• Cada canal necesita su receptor • Estas t´ecnicas son mejores que las multipulso
+si los ecos var´ıan con el tiempo • Se realizan con dos m´etodos: comparacio´n de
+amplitud o de fase
+Estimaci´on monopulso - Comparaci´on de amplitud
+Introducci´on
+Efectos de la propagaci´on
+• Target en el centro • Se reciben dos haces con diferentes ´angulo
+(dos direcciones). T´ıpicamente 0,3 · BeamWidth • Conexi´on H´ıbrida de Microondas genera la suma Σ y diferencia ∆ de las recepciones
+Estimaci´on monopulso - Comparaci´on de amplitud
+Hybrid Junctions
+Estimaci´on monopulso - Comparaci´on de amplitud
+Introducci´on
+Efectos de la propagaci´on
+Hybrid Junction - Rat Race
+• Una sen˜al en A llega a ∆ por dos caminos de 3λ/4: Interf. Constructiva
+• Una sen˜al en B llega a ∆ por un camino de 5λ/4 y por uno de λ/4: Interf. Constructiva
+• Una sen˜al de A a ∆ difiere en λ/4 de la sen˜al de B a ∆ = A − B
+• Si A y B tienen sen˜ales con la misma fase, se genera suma y diferencia
+Estimaci´on monopulso - Comparaci´on de amplitud
+Introducci´on
+Efectos de la propagaci´on
+• Σ: Canal Sum
+• ∆: Canal Difference
+• ϕ: Offset de fase entre Sum y Difference • Sen˜al de error e = |Σ| |∆| cos(ϕ) • La sen˜al de error es qu´e tan lejos est´a el target del ´angulo de mirada de la
+antena (antenna boresight)
+Estimaci´on monopulso - Comparaci´on de amplitud
+Introducci´on
+Efectos de la propagaci´on
+• 4 Feeds • 3 canales de recepci´on • Suma: A+B+C+D • Diferencia de Elevaci´on: B+D-(A+C) • Diferencia de Acimut: A+B-(C+D)
+Estimaci´on monopulso - Comparaci´on de fase
+Introducci´on
+Efectos de la propagaci´on
+• Radar Interferom´etrico • Dos antenas reciben de la misma direcci´on
+del target • Los ecos recibidos var´ıan en fase
+∆ϕ = 2π(d/λ) sin(θ) • ϕ: fase • θ: ´angulo respecto al antenna boresight
+Estimaci´on monopulso - Comparaci´on de fase
+Introducci´on
+Efectos de la propagaci´on
+• Un target est´atico y una antena que escanea en una direcci´on (acimut t´ıpicamente)
+• Cada punto es una detecci´on • El ´angulo del target est´a en el retorno mayor • Se interpola el ´angulo del target usando el
+patr´on de antena conocido
+Estimaci´on de ´angulo con arreglos de antena
+Introducci´on
+Efectos de la propagaci´on
+• Los arreglos de fase son ideales para hacer estimaciones • De amplitud: se pueden combinar los elementos del arreglo para generar los canales de sumas y diferencias necesarios • De fase: Usar mitades del arreglo (arriba/abajo para elevacio´n; izquierda/derecha para acimut)
+Exactitud de la estimaci´on de ´angulo
+Introducci´on
+Efectos de la propagaci´on
+• Una estimaci´on de ´angulo con una SNR de 13 dB es de 1/10 de BeamWidth de la antena
+• La exactitud de la estimaci´on de ´angulo es pro√porcional a BeamWidth/ SNR
+• La estimaci´on puede tener: • Exactitud: qu´e tan cercano es al valor real • Precisi´on: que tan repetible es la medida • Resoluci´on: Offset (de ´angulo o rango) requerido para que dos targets sean separables
+Estimaci´on de Velocidad Doppler
+Introducci´on
+Efectos de la propagaci´on
+• fD = 2vr /λ • Si se utilizan dos filtros doppler con
+un pequen˜o offset del centro, ambos filtros detectan el blanco • La estimaci´on de velocidad es similar a la estimaci´on de ´angulo • La exactitud de la estimaci´on de velocidad doppler es proporcional a
+√λ ∆t SNR
+• ∆t: tiempo de integraci´on coherente
+Limitaciones de la exactitud de las estimaciones
+Introducci´on
+Efectos de la propagaci´on
+• Ruido del receptor: an˜ade varianza a las mediciones y estimaciones • Calibraci´on del radar: si es mala, afecta a las estimaciones negativamente • Fluctuaciones de amplitud: Se puede mitigar con arreglos de antenas • Ruido angular: destellos (glints) y centelleos (scintillation) provocados por
+perfiles complejos de targets reales • Multipath: reflecciones de la superficie terrestre combinadas con la Line-of-sight
+generan sesgos de estimaci´on
+Tracking
+Introducci´on
+Efectos de la propagaci´on
+• En azul se muestran trackings existentes
+• En rojo se muestran trackings nuevos generados en cada escaneo, generados por:
+• Nuevos blancos o movilizaci´on de blancos pre-existentes • Falsas alarmas
+• Se actualizan los trackings existentes en cada escaneo
+• Los trackings obsoletos deben descartarse
+T´ecnicas de Tracking
+Introducci´on
+Efectos de la propagaci´on
+• Se utilizan algoritmos computacionalmente exigentes para implementar t´ecnicas
+de rechazo de clutter
+• Para deteccio´n de blancos se utiliza CFAR adaptativo aplicado a cada celda de
+rango, ´angulo y doppler
+• Para asociaci´on de blancos se utilizan umbrales adaptativos de asociaci´on
+adyacente de rango, ´angulo y doppler.
+• Para la actualizaci´on de tracking se intenta usar correlaci´on de detecciones
+nuevas con trackin existentes. Se pueden determinar umbrales de maniobra,
+escaneo y predicci´on. Se usan t´ecnicas como filtros de Kalman o α − β
+• Para la iniciaci´on de tracking se utilizan mu´ltiples algoritmos
+computacionalmente intensivos
+• La finalizaci´on de tracking se basa en decisiones din´amicas
+• Los arreglos de antenas tienen gran capacidad de actualizaci´on y gran
+resoluci´on, son ideales para tracking
+Contenidos
+Introducci´on
+Efectos de la propagaci´on
+1 Introducci´on 2 Conceptos previos 3 Ecuaci´on del Radar 4 Efectos de la propagaci´on 5 Radar Cross Section 6 Detecci´on de blancos 7 Compresi´on de pulsos 8 Clutter y Chaff 9 Rechazo de Clutter 10 Antenas 11 Estimaci´on de par´ametros y seguimiento 12 Transmisores y receptores 13 Bibliograf´ıa
+Diagrama en bloques de un radar
+Introducci´on
+Efectos de la propagaci´on
+Antenna
+Target
+Propagation Medium
+Pulse Modulator
+Duplexer RF Pulse
+Power Amplifier
+IF Pulse
+Waveform Generator
+Video Pulse
+Low-Noise RF Amplifier
+Mixer
+IF Amplifier & Matched
+Filter
+2nd Detector (Demodulator)
+Video Amplifier
+Threshold Detection
+Output
+Local Oscillator
+• El Transciever se divide en secciones de: y de baja potencia • Alta potencia: Amplificadores de potencia, del kW o MW • Baja potencia
+• Generador, del orden de mW a W • Receptor, del orden de los µW a mW
+Par´ametros que dependen del Tx/Rx
+Introducci´on
+Efectos de la propagaci´on
+SNR = 4πΩR4 Pav Ae ts σ kTs L
+• La SNR (de bu´squeda) del radar se puede mejorar disen˜ando correctamente el Tx y Rx: • Aumentando la potencia media transmitida Pav • Bajando las p´erdidas del sistema L • Minimizando la temperatura del sistema Ts
+Proceso de amplificacio´n
+Introducci´on
+Efectos de la propagaci´on
+• Se amplifica en mu´ltiples etapas con amplificadores Drivers y de Alta potencia • Se usan mu´ltiples etapas para minimizar el ruido y la distorsi´on de la sen˜al
+Topolog´ıas de proceso de amplificacio´n
+Introducci´on
+Efectos de la propagaci´on
+• Si la potencia necesaria es muy alta, se pueden utilizar amplificadores en paralelo • Esto tiene mayores p´erdidas por el combinador (menos eficiencia) e incrementa
+significativamente la complejidad
+Tipos de amplificador
+Introducci´on
+Efectos de la propagaci´on
+Output Power Costo unitario Costo por watt
+Taman˜o
+Aplicaciones
+Vaccum Tubes 10 kW a 1 MW USD 10k a 300k
+$1 a 3 Grande y Pesado Antenas de plato Arreglos pasivos
+Solid State 10 W a 100 W
+>USD 100 Variado
+Montable en PCB Arreglos activos Arreglos Digitales
+Varian X780 Klystron
+• USD 400k por tubo • 2.1 m de alto, 30 cm de di´ametro • 270 kg • Duty Cycle: 3 % a 5 % • G = 42 dB • 600 W peak input drive • 2 MW output Power • Refrigeraci´on por agua
+VTS-5753 Traveling Wave Tube
+Introducci´on
+Efectos de la propagaci´on
+• f = 3.3 GHz, BW = 400 MHz • 160 kW Peak Power • Duty Cycle: 8 % • G = 43 dB • 2.7 metros de alto
+Duplexer
+Introducci´on
+Efectos de la propagaci´on
+El receptor es demasiado sensible para la alta potencia del transmisor, debe aislare con un Duplexer (Switch de RF).
+Duplexer
+• Cuando el Tx se enciende se conecta la antena con el Tx a trav´es de un camino de bajar p´erdidas
+• El protector se activa para el Rx en el intervalo de transmisi´on
+• Se apaga el Tx y se enciende el Rx para escuchar los ecos a trav´es de un camino de bajas p´erdidas
+• Se agrega un limitador o switch en el duplexer para proteger el receptor contra interferencias
+TR Cell
+Contenidos
+Introducci´on
+Efectos de la propagaci´on
+1 Introducci´on 2 Conceptos previos 3 Ecuaci´on del Radar 4 Efectos de la propagaci´on 5 Radar Cross Section 6 Detecci´on de blancos 7 Compresi´on de pulsos 8 Clutter y Chaff 9 Rechazo de Clutter 10 Antenas 11 Estimaci´on de par´ametros y seguimiento 12 Transmisores y receptores 13 Bibliograf´ıa
+Bibliograf´ıa
+Introducci´on
+Efectos de la propagaci´on
+• Merrill I. Skolnik. Introduction to Radar Systems. McGraw Hill (Third Edition, 2001). • Merrill I. Skolnik. Radar Hardbook. McGraw Gill (Third Edition, 2008) • Charles Elachi, Jakob Van Zyl. Introduction to the Physics and Techniques of Remote Sensing.
+Wiley Series in Remote Sensing and Image Processing (Third Edition, 2021). • Mark A. Richards. Fundamentals of Radar Signal Processing (Second Edition, 2014). • Billingsley, J. B. Ground Clutter Measurements for Surface-Sited Radar. MASSACHUSETTS
+INST OF TECH LEXINGTON LINCOLN LAB. • Robert M. O’Donnell. Introduction to Radar Systems
+https://www.youtube.com/playlist?list=PLUJAYadtuizA8RC2Qk8LfmiWA56HZsk9y • Robert M. O’Donnell. Radar System Engineering
+https://www.youtube.com/playlist?list=PLNKgf4Cv_NZ1_fZt0bAJXAro6MlaTAEAU • Radar Tutorial
+https://www.radartutorial.eu/

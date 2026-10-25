@@ -1,0 +1,278 @@
+\section{Parte teórica}
+\label{sec:teorico}
+
+% =====================================================================
+\subsection{El radar: definición, usos, parámetros y diagrama en bloques}
+\label{sec:radar}
+
+\textbf{Definición.} RADAR es el acrónimo de \textit{RAdio Detection And Ranging}: un sistema que irradia ondas electromagnéticas y analiza los ecos que devuelven los objetos (blancos) para detectarlos y estimar su posición y su movimiento \cite{skolnik, apunte}. La distancia, o rango, se obtiene del tiempo de ida y vuelta $\Delta t$ del eco, $R = c \, \Delta t / 2$. La dirección surge del apuntamiento de la antena, y la velocidad radial, del corrimiento Doppler $f_D = 2 v_r / \lambda$. Como usa su propia iluminación, el radar funciona de día y de noche y a través de nubes, niebla y lluvia, a distancias mucho mayores que los sensores ópticos.
+
+\textbf{Usos.} Se emplea en aplicaciones civiles y militares \cite{skolnik}:
+\begin{itemize}
+    \item \underline{Control de tránsito aéreo:} vigilancia de ruta y de aproximación, radar secundario y de superficie de aeropuertos.
+    \item \underline{Meteorología:} detección de precipitaciones y medición de vientos por Doppler.
+    \item \underline{Navegación:} radares marítimos anticolisión, altímetros y radares de navegación de aeronaves.
+    \item \underline{Defensa:} vigilancia, seguimiento de misiles, control de tiro y guiado.
+    \item \underline{Observación de la Tierra:} radares de apertura sintética (SAR) satelitales, como los SAOCOM de la CONAE, en banda L.
+    \item \underline{Otros:} radares automotrices de asistencia a la conducción, cinemómetros, radar de penetración terrestre y radioastronomía.
+\end{itemize}
+
+\textbf{Parámetros típicos de trabajo.} La frecuencia, la potencia, la forma de onda y la PRF dependen de la aplicación. Las frecuencias bajas (bandas L y S) tienen menos atenuación atmosférica y permiten antenas grandes y alcances largos; las altas (X, Ku, Ka) dan mayor resolución angular con antenas chicas, pero sufren más atenuación por lluvia \cite{skolnik, apunte}. La \autoref{tab:radares} resume valores representativos.
+
+\begin{table}[H]
+    \centering
+    \footnotesize
+    \caption{Parámetros típicos de radares según la aplicación \cite{skolnik, richards}.}
+    \label{tab:radares}
+    \begin{tabular}{|p{3.4cm}|p{2.6cm}|p{2.8cm}|p{2.4cm}|p{3.0cm}|}
+        \hline
+        \textbf{Aplicación} & \textbf{Banda / frecuencia} & \textbf{Potencia} & \textbf{PRF} & \textbf{Alcance} \\
+        \hline
+        Vigilancia aérea de ruta & L (1,2--1,4 GHz) & Pico de 1 a 5 MW & 300 a 400 Hz & 200 a 400 km \\
+        \hline
+        Vigilancia de aproximación (ASR) & S (2,7--2,9 GHz) & Pico $\approx$ 1 MW & $\approx$ 1 kHz & $\approx$ 100 km \\
+        \hline
+        Meteorológico (WSR-88D) & S (2,7--3,0 GHz) & Pico de 750 kW & 318 a 1304 Hz & Hasta 460 km \\
+        \hline
+        Navegación marítima & X (9,4 GHz) y S & Pico de 10 a 25 kW & 1 a 3 kHz & 50 a 100 km \\
+        \hline
+        Control de tiro y seguimiento & X, Ku & Pico de decenas a cientos de kW & Media a alta (10--200 kHz) & 10 a 100 km \\
+        \hline
+        Automotriz (FMCW) & W (76--81 GHz) & Del orden de 10 mW & Barrido continuo & Hasta 250 m \\
+        \hline
+        SAR satelital & L (SAOCOM), C, X & Pico de kW & 1 a 5 kHz & Cientos de km (franjas de decenas de km) \\
+        \hline
+        Este trabajo práctico & L (1,3 GHz) & -- & 1500 Hz & Ventana de 30 km \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\textbf{Diagrama en bloques.} La \autoref{fig:bloques} muestra el diagrama de un radar pulsado típico, basado en el del apunte de la cátedra \cite{apunte} y en Skolnik \cite{skolnik}.
+
+\begin{figure}[H]
+    \centering
+    \resizebox{\textwidth}{!}{%
+    \begin{tikzpicture}[font=\footnotesize, node distance=0.6cm and 0.9cm,
+        bloque/.style={draw, thick, rounded corners=2pt, fill=blue!8, minimum height=1.0cm, text width=2.3cm, align=center},
+        flecha/.style={-{Stealth}, thick}]
+        \node[bloque] (gen) {Generador de forma de onda};
+        \node[bloque, right=of gen] (mod) {Modulador de pulsos};
+        \node[bloque, right=of mod] (pa) {Amplificador de potencia};
+        \node[bloque, right=of pa, fill=orange!15] (dup) {Duplexor};
+        \node[right=1.2cm of dup] (ant) {\Large$\Psi$};
+        \node[above=0.05cm of ant, font=\scriptsize] {Antena};
+        \node[bloque, below=1.3cm of dup] (lna) {Amplificador de bajo ruido};
+        \node[bloque, left=of lna] (mix) {Mezclador};
+        \node[bloque, above=0.5cm of mix, fill=green!10] (ol) {Oscilador local};
+        \node[bloque, left=of mix] (fi) {Amplificador de FI y filtro apareado};
+        \node[bloque, left=of fi] (det) {Detector (demodulador I/Q)};
+        \node[bloque, below=1.0cm of det, fill=purple!10] (proc) {Procesador de señal: MTI, Doppler, CFAR};
+        \node[bloque, right=of proc, fill=purple!10] (datos) {Procesador de datos: detección y seguimiento};
+        \node[bloque, right=of datos] (disp) {Presentación (display)};
+        \node[bloque, below=0.4cm of gen, fill=yellow!20] (sinc) {Sincronizador (PRF)};
+        \draw[flecha] (gen) -- (mod); \draw[flecha] (mod) -- (pa); \draw[flecha] (pa) -- (dup);
+        \draw[{Stealth}-{Stealth}, thick] (dup) -- (ant);
+        \draw[flecha] (dup) -- (lna); \draw[flecha] (lna) -- (mix); \draw[flecha] (ol) -- (mix);
+        \draw[flecha] (mix) -- (fi); \draw[flecha] (fi) -- (det); \draw[flecha] (det) -- (proc);
+        \draw[flecha] (proc) -- (datos); \draw[flecha] (datos) -- (disp);
+        \draw[flecha, dashed] (sinc) -- (gen);
+        \draw[flecha, dashed] (sinc.south) |- (proc.west);
+    \end{tikzpicture}}
+    \caption{Diagrama en bloques de un radar pulsado típico. Elaboración propia a partir de \cite{apunte, skolnik}.}
+    \label{fig:bloques}
+\end{figure}
+
+\begin{itemize}
+    \item \underline{Sincronizador:} genera la temporización de todo el sistema, es decir, la PRF y las ventanas de recepción.
+    \item \underline{Generador de forma de onda y modulador:} generan el pulso a transmitir (por ejemplo, un chirp) y lo encienden y apagan según la PRF.
+    \item \underline{Amplificador de potencia:} eleva el pulso a la potencia pico de transmisión (magnetrón, klistrón, tubo de onda progresiva o amplificadores de estado sólido).
+    \item \underline{Duplexor:} conmuta la antena entre el transmisor y el receptor y protege al receptor durante la transmisión. Por eso existe un rango mínimo, con el receptor ciego mientras dura el pulso y el tiempo de recuperación.
+    \item \underline{Antena:} concentra la energía en un haz angosto, que da la ganancia y la resolución angular, y capta los ecos.
+    \item \underline{Amplificador de bajo ruido (LNA):} fija la figura de ruido del sistema.
+    \item \underline{Mezclador y oscilador local:} trasladan la señal a frecuencia intermedia o a banda base.
+    \item \underline{Amplificador de FI y filtro apareado:} amplifican y maximizan la relación señal a ruido. Con formas de onda moduladas, el filtro apareado realiza la compresión del pulso.
+    \item \underline{Detector:} obtiene la envolvente o las componentes en fase y cuadratura (I/Q), que conservan la fase para el procesamiento Doppler.
+    \item \underline{Procesador de señal:} cancela el clutter (MTI), separa los blancos por velocidad (filtrado Doppler), integra pulsos y decide la presencia de blancos con un umbral adaptativo (CFAR).
+    \item \underline{Procesador de datos y presentación:} asocian detecciones, estiman trayectorias y muestran la situación al operador.
+\end{itemize}
+
+% =====================================================================
+\subsection{Ecuación del radar, ruido y detección}
+\label{sec:ecuacion}
+
+\textbf{Ecuación del radar.} Un radar monoestático que transmite una potencia pico $P_t$ con una antena de ganancia $G$ produce sobre un blanco a distancia $R$ una densidad de potencia $P_t G / (4\pi R^2)$. El blanco intercepta y reirradia isotrópicamente la potencia que incide sobre su sección radar $\sigma$; el eco vuelve a dispersarse en $4\pi R^2$ y lo capta la apertura efectiva $A_e = G\lambda^2/(4\pi)$ \cite{skolnik, apunte}:
+\begin{equation}
+    P_r = \frac{P_t \, G}{4\pi R^2} \cdot \frac{\sigma}{4\pi R^2} \cdot \frac{G \lambda^2}{4\pi} \cdot \frac{1}{L} = \frac{P_t \, G^2 \lambda^2 \sigma}{(4\pi)^3 R^4 L}
+    \label{eq:radar}
+\end{equation}
+\begin{itemize}
+    \item $P_t$: potencia pico transmitida [W]; $G$: ganancia de la antena; $\lambda$: longitud de onda [m].
+    \item $\sigma$: sección radar (RCS) del blanco [m$^2$] (\autoref{sec:rcs}).
+    \item $R$: distancia al blanco [m]. El factor $R^{-4}$ refleja la doble dispersión esférica: duplicar el alcance exige 16 veces más potencia.
+    \item $L \geq 1$: pérdidas totales (líneas, radomo, forma del haz, procesamiento, propagación atmosférica).
+\end{itemize}
+
+\textbf{Efecto del ruido.} El eco compite con el ruido del receptor, de potencia $N = k T_s B_n$, con $k$ la constante de Boltzmann, $T_s$ la temperatura de ruido del sistema (antena, línea y receptor) y $B_n$ el ancho de banda de ruido. La relación señal a ruido es
+\begin{equation}
+    SNR = \frac{P_t \, G^2 \lambda^2 \sigma}{(4\pi)^3 R^4 \, k T_s B_n L},
+    \qquad
+    R_{max} = \left[ \frac{P_t \, G^2 \lambda^2 \sigma}{(4\pi)^3 \, k T_s B_n L \, SNR_{min}} \right]^{1/4}
+    \label{eq:snr}
+\end{equation}
+donde $SNR_{min}$ es la relación mínima para detectar con las probabilidades exigidas. El ruido es aleatorio: el detector compara la envolvente de la señal con un umbral $V_T$, y tanto el ruido solo como el blanco más ruido pueden quedar de uno u otro lado. Por eso la detección es un problema estadístico \cite{richards}.
+
+\textbf{Probabilidad de falsa alarma y de detección.} Con ruido gaussiano complejo de potencia $\psi_0$, la envolvente del ruido tiene distribución de Rayleigh y la probabilidad de que supere el umbral sin que haya blanco es \cite{skolnik, richards}
+\begin{equation}
+    P_{fa} = \int_{V_T}^{\infty} \frac{r}{\psi_0} e^{-r^2/2\psi_0} \, dr = e^{-V_T^2 / 2\psi_0}
+\end{equation}
+La \textbf{probabilidad de falsa alarma} $P_{fa}$ es, entonces, la probabilidad de declarar un blanco donde solo hay ruido; fija el umbral, y se expresa también como tiempo medio entre falsas alarmas $T_{fa} \approx 1/(P_{fa} B_n)$. La \textbf{probabilidad de detección} $P_d$ es la probabilidad de que la envolvente del blanco más ruido (distribución de Rice) supere ese umbral; aumenta con la SNR. Para un blanco no fluctuante, $P_d = 0{,}9$ con $P_{fa} = 10^{-6}$ requiere una SNR de unos $13{,}2 \, [dB]$ en un solo pulso \cite{apunte}, valor que reproduce la aproximación de Albersheim. Si la RCS fluctúa (modelos de Swerling), la SNR necesaria es mayor.
+
+\textbf{Integración de pulsos.} El radar recibe varios ecos del mismo blanco durante el tiempo de iluminación, y combinarlos reduce la SNR necesaria por pulso \cite{apunte, richards}:
+\begin{itemize}
+    \item \underline{Integración coherente:} suma las muestras complejas (amplitud y fase) de $n$ pulsos. Las señales se suman en fase y el ruido, independiente entre pulsos, en potencia, por lo que la SNR crece $n$ veces: $SNR_n = n \cdot SNR_1$. Requiere conocer la fase, es decir, compensar el Doppler (por ejemplo, con la FFT del procesamiento Doppler).
+    \item \underline{Integración no coherente:} suma las envolventes, después del detector. Pierde la fase, pero es más simple; su ganancia es menor que $n$, del orden de $n^{0{,}7}$ a $n^{0{,}8}$ para $n$ grande, y se expresa con una eficiencia de integración $E_i(n) < 1$.
+\end{itemize}
+En la ecuación del radar, la integración de $n$ pulsos divide por $n E_i(n)$ la SNR mínima de un pulso (con $E_i = 1$ para la integración coherente):
+\begin{equation}
+    R_{max} = \left[ \frac{P_t \, G^2 \lambda^2 \sigma \, n E_i(n)}{(4\pi)^3 \, k T_s B_n L \, SNR_1} \right]^{1/4}
+\end{equation}
+por lo que el alcance aumenta en $(n E_i)^{1/4}$.
+
+% =====================================================================
+\subsection{Sección radar (RCS)}
+\label{sec:rcs}
+
+\textbf{Definición.} La sección radar $\sigma$ es el área ficticia que, interceptando la potencia incidente y reirradiándola isotrópicamente, produciría en el radar el mismo eco que el blanco real \cite{apunte, skolnik}:
+\begin{equation}
+    \sigma = \lim_{R \to \infty} 4\pi R^2 \frac{|E_s|^2}{|E_i|^2} \quad [m^2]
+\end{equation}
+donde $E_i$ es el campo incidente en el blanco y $E_s$ el campo dispersado hacia el radar. No coincide con el área física: depende de la frecuencia, la polarización, la forma, el material, la orientación y la geometría monoestática o biestática. Se expresa también en dBsm (dB respecto de 1 m$^2$). Valores típicos van de $10^{-5}$ m$^2$ (insectos) a 1 m$^2$ (un avión liviano), 100 m$^2$ (un avión de pasajeros grande) y $10^4$ m$^2$ (un buque) \cite{apunte}.
+
+\textbf{Esfera conductora.} Es el blanco de referencia, porque su RCS no depende del ángulo de observación. Su comportamiento con la frecuencia, que se obtiene con la serie de Mie, tiene tres regiones (\autoref{fig:rcs_esfera}) \cite{skolnik}:
+\begin{itemize}
+    \item \underline{Región de Rayleigh} ($ka = 2\pi a/\lambda \ll 1$): $\sigma \approx 9\pi a^2 (ka)^4$, proporcional a $f^4$. Por eso las gotas de lluvia y los insectos reflejan mucho más en frecuencias altas.
+    \item \underline{Región de resonancia o de Mie} ($ka \approx 1$ a $10$): la RCS oscila por la interferencia entre la reflexión especular y la onda que rodea la esfera (onda de arrastre). El máximo, cerca de $ka = 1$, es unas 3,6 veces el área geométrica.
+    \item \underline{Región óptica} ($ka \gg 1$): $\sigma \to \pi a^2$, el área de la sección transversal.
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{teoria/rcs_esfera.png}
+    \caption{RCS normalizada de una esfera conductora en función de su tamaño eléctrico, calculada con la serie de Mie. Elaboración propia.}
+    \label{fig:rcs_esfera}
+\end{figure}
+
+\textbf{Placa plana.} Como segundo blanco simple se elige una placa plana conductora de área $A$. Con incidencia normal se comporta como un espejo y su RCS es muy grande, $\sigma_{max} = 4\pi A^2/\lambda^2$. Fuera de la normal, la reflexión especular se aleja del radar y la RCS cae según un diagrama del tipo $\left[\sin(kL\sin\theta)/(kL\sin\theta)\right]^2$, con un lóbulo principal angosto ($\approx \lambda/L$) \cite{skolnik}. La \autoref{fig:rcs_placa} muestra una placa de $1 \times 1$ m a 10 GHz: en la normal alcanza $41{,}4$ dBsm (unos $14.000$ m$^2$), pero a pocos grados cae más de 30 dB. Este es el principio de las aeronaves de baja observabilidad, que orientan sus superficies planas lejos de las direcciones de los radares.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{teoria/rcs_placa.png}
+    \caption{RCS de una placa plana cuadrada en función del ángulo de incidencia (aproximación de óptica física). Elaboración propia.}
+    \label{fig:rcs_placa}
+\end{figure}
+
+\textbf{Blancos complejos.} Un avión o un barco se comportan como un conjunto de dispersores (bordes, cavidades, superficies, motores) cuyos ecos se suman con fases que cambian con el ángulo, por lo que su RCS varía decenas de dB con pequeñas rotaciones. Sus perfiles de RCS en función del ángulo de aspecto se obtienen \cite{apunte, skolnik}:
+\begin{itemize}
+    \item \underline{Por medición:} en polígonos al aire libre con el blanco en escala real montado sobre columnas de espuma o de metal de baja reflexión; en cámaras anecoicas de campo compacto; o con modelos a escala, escalando la longitud de onda en el mismo factor que las dimensiones ($\sigma' = \sigma/S^2$).
+    \item \underline{Por cálculo electromagnético:} métodos de alta frecuencia (óptica física y teoría física de la difracción), eficientes para geometrías grandes y suaves, o métodos numéricos exactos como el método de los momentos, de mayor costo computacional. También se descompone el blanco en formas simples de RCS conocida.
+\end{itemize}
+Como la RCS de un blanco real fluctúa, para el diseño se describe estadísticamente con los modelos de Swerling, que definen su función de densidad y la rapidez de su variación (de exploración a exploración o de pulso a pulso) \cite{apunte}.
+
+% =====================================================================
+\subsection{Filtro apareado}
+\label{sec:filtro_apareado}
+
+\textbf{Definición.} El filtro apareado es el filtro lineal que maximiza la relación señal a ruido en un instante de muestreo $t_0$ cuando a la señal conocida $s(t)$ se le suma ruido \cite{skolnik, richards}.
+
+\textbf{Derivación con ruido blanco gaussiano (AWGN).} Sea $x(t) = s(t) + n(t)$, con $n(t)$ de densidad espectral bilateral $N_0/2$, aplicada a un filtro $H(f)$. La señal de salida en $t_0$ y la potencia media del ruido de salida son
+\begin{equation}
+    y_s(t_0) = \int_{-\infty}^{\infty} H(f) S(f) e^{j2\pi f t_0} \, df,
+    \qquad
+    \overline{n_o^2} = \frac{N_0}{2} \int_{-\infty}^{\infty} |H(f)|^2 \, df
+\end{equation}
+Por la desigualdad de Schwarz, $\left| \int H S e^{j2\pi f t_0} df \right|^2 \leq \int |H|^2 df \cdot \int |S|^2 df$, de modo que
+\begin{equation}
+    SNR(t_0) = \frac{|y_s(t_0)|^2}{\overline{n_o^2}} \leq \frac{\int |S(f)|^2 df}{N_0/2} = \frac{2E}{N_0}
+\end{equation}
+donde $E$ es la energía de la señal. La igualdad se cumple cuando el filtro es
+\begin{equation}
+    H(f) = K \, S^*(f) \, e^{-j2\pi f t_0}
+    \qquad \Longleftrightarrow \qquad
+    h(t) = K \, s^*(t_0 - t)
+    \label{eq:matched}
+\end{equation}
+Su respuesta en frecuencia tiene el mismo módulo que el espectro de la señal y la fase opuesta, más un retardo; su respuesta al impulso es la señal invertida en el tiempo y conjugada. La salida es la autocorrelación de la señal centrada en $t_0$:
+\begin{equation}
+    y(t) = K \int_{-\infty}^{\infty} s(\tau) \, s^*(\tau - t + t_0) \, d\tau = K \, R_{ss}(t - t_0)
+\end{equation}
+
+\textbf{Propiedades principales} \cite{apunte, richards}:
+\begin{itemize}
+    \item La SNR máxima, $2E/N_0$, depende solo de la energía de la señal y no de su forma. Un pulso largo modulado puede tener la misma SNR que uno corto de mayor potencia pico.
+    \item $|H(f)| = |S(f)|$: el filtro da más peso a las frecuencias donde la señal tiene más energía.
+    \item El ancho del pico de salida es del orden de $1/B$, la inversa del ancho de banda de la señal, y no de su duración. Esto es la base de la compresión de pulsos (\autoref{sec:chirp}).
+    \item Con un pulso rectangular simple, el filtro apareado equivale a un filtro pasabanda con $B\tau \approx 1$.
+\end{itemize}
+En radar es importante porque maximiza la detectabilidad para un umbral dado (máxima $P_d$ para una $P_{fa}$ fija) y, con formas de onda moduladas, combina la energía de un pulso largo con la resolución de uno corto. Es además el procesamiento que se realiza en la práctica de este trabajo.
+
+\textbf{Ruido no blanco.} Si el ruido tiene densidad espectral $N_i(f)$ no constante, el filtro óptimo es \cite{apunte, skolnik}
+\begin{equation}
+    H(f) = K \, \frac{S^*(f)}{N_i(f)} \, e^{-j2\pi f t_0}
+\end{equation}
+que equivale a un filtro blanqueador $1/\sqrt{N_i(f)}$ seguido del filtro apareado a la señal blanqueada. Un filtro apareado diseñado para AWGN pierde SNR en estos casos, y cuánto pierde depende de cuánto se superpone el espectro del ruido con el de la señal. Ejemplos:
+\begin{itemize}
+    \item \underline{Clutter:} su espectro Doppler se concentra cerca de cero (tierra) o alrededor de la velocidad del viento (lluvia, chaff). Los canceladores MTI y el filtrado Doppler actúan como el blanqueamiento en tiempo lento.
+    \item \underline{Interferencia de banda angosta o \textit{jamming}:} concentra la potencia en parte de la banda. El filtro óptimo atenúa esas frecuencias (filtro de ranura o \textit{notch}).
+    \item \underline{Ruido de fase y ruido no gaussiano:} por ejemplo, los picos de clutter de mar, que hacen que la estadística del umbral deje de ser de Rayleigh y aumenten las falsas alarmas.
+\end{itemize}
+En la práctica también se usan desajustes deliberados: ponderar el filtro con una ventana (Hamming, Taylor) baja los lóbulos laterales en rango a costa de 1 a 1,5 dB de pérdida de SNR y de un pico más ancho \cite{richards}.
+
+% =====================================================================
+\subsection{Clutter}
+\label{sec:clutter}
+
+\textbf{Definición.} El clutter es el conjunto de ecos no deseados que el radar recibe de objetos que no son los blancos de interés: el suelo, el mar, la lluvia, las aves o el chaff \cite{skolnik, apunte}. A diferencia del ruido térmico, es un eco de la propia señal transmitida: crece con la potencia transmitida y suele estar correlacionado entre pulsos. Su nivel puede superar en 50 o 60 dB al del blanco. Se caracteriza por su coeficiente de retrodispersión, por unidad de área ($\sigma^0$, para superficies) o de volumen ($\eta$), y por su espectro Doppler.
+
+\textbf{Tipos y ejemplos} \cite{apunte, skolnik}:
+\begin{itemize}
+    \item \underline{Clutter de superficie terrestre:} terreno, edificios, árboles y montañas. Su valor medio es grande ($\sigma^0 \approx -20$ dB es típico) y su espectro Doppler es angosto y centrado en cero para un radar fijo, ensanchado por la vegetación movida por el viento. Por ejemplo, para un radar de vigilancia aérea con celda de 100 m, haz de $1{,}5^\circ$ y $R = 60$ km resulta $\sigma_{clutter} \approx 1500$ m$^2$, y para detectar un avión de 1 m$^2$ hace falta suprimirlo unos 45 dB \cite{apunte}.
+    \item \underline{Clutter de mar:} unas 100 veces menor que el de tierra, depende del estado del mar, el viento, la polarización y el ángulo rasante. Con ángulos rasantes bajos aparecen picos (\textit{sea spikes}) que generan falsas alarmas.
+    \item \underline{Clutter volumétrico meteorológico:} lluvia, nieve y granizo. Su reflectividad crece con $f^4$, por lo que es un problema en banda S y crítico en X y bandas superiores, y casi no afecta en banda L. Se mueve con el viento, por lo que tiene corrimiento y dispersión Doppler.
+    \item \underline{Chaff:} nubes de dipolos metálicos de $\lambda/2$ lanzadas como contramedida; producen ecos intensos ($\sigma \approx 0{,}18\lambda^2$ por dipolo) que se desplazan con el viento.
+    \item \underline{Clutter biológico (``ángeles''):} aves e insectos. Tienen RCS pequeña pero, en bandadas o enjambres, generan falsas alarmas; como son lentos, se filtran por velocidad.
+    \item \underline{Clutter puntual o discreto:} torres, edificios altos, aerogeneradores (con Doppler por el giro de las palas) y vehículos en rutas.
+\end{itemize}
+Según la geometría se clasifica también en clutter de lóbulo principal, de lóbulos laterales y de altitud (el suelo justo debajo de un radar aerotransportado). En la señal del trabajo práctico se observa clutter a corta distancia, en torno a 1,8 km, que aparece en todas las señales y se elimina con el cancelador MTI.
+
+% =====================================================================
+\subsection{Señal chirp y compresión de pulsos}
+\label{sec:chirp}
+
+\textbf{Definición.} Un chirp es un pulso de duración $T$ con modulación lineal de frecuencia (LFM): su frecuencia instantánea recorre linealmente un ancho de banda $B$ durante el pulso \cite{richards, cumming}. En banda base,
+\begin{equation}
+    s(t) = \mathrm{rect}\left(\frac{t}{T}\right) e^{j\pi \frac{B}{T} t^2},
+    \qquad
+    f_i(t) = \frac{1}{2\pi}\frac{d\phi}{dt} = \frac{B}{T} \, t
+\end{equation}
+La sigla \textit{Compressed High Intensity Radar Pulse} resume su propósito: transmitir un pulso largo y de potencia moderada que, al recibirlo, se comprime en un pico angosto e intenso.
+
+\textbf{Por qué interesa en radar.} En un pulso simple hay un compromiso: la energía, y con ella el alcance (\autoref{eq:snr}), crece con la duración del pulso, pero la resolución en rango empeora, $\Delta R = c T/2$. Los transmisores tienen una potencia pico limitada, por lo que no se puede acortar el pulso sin perder energía. El chirp desacopla ambas cosas: la energía depende de $T$ y la resolución, de $B$ \cite{apunte, richards}. Además, el chirp es tolerante al Doppler, aunque con un acoplamiento rango-Doppler: un corrimiento Doppler desplaza levemente el pico comprimido.
+
+\textbf{Proceso de compresión.} El receptor aplica el filtro apareado $h(t) = s^*(-t)$ (\autoref{eq:matched}), que en frecuencia multiplica por $S^*(f)$ y compensa la fase cuadrática del chirp: todas las componentes de frecuencia se alinean en el mismo instante. Para $BT \gg 1$ la salida es aproximadamente \cite{richards, cumming}
+\begin{equation}
+    y(t) \approx T \, \mathrm{sinc}(B t) = T \, \frac{\sin(\pi B t)}{\pi B t}
+\end{equation}
+un pico de ancho $\approx 1/B$ (entre ceros, $2/B$). La relación entre la duración del pulso transmitido y la del comprimido es la \textbf{relación de compresión}, igual al producto tiempo-ancho de banda $BT$. En amplitud, el pico crece en $\sqrt{BT}$ y la SNR en $BT$ veces respecto del pulso sin comprimir. Los lóbulos laterales de la sinc quedan a $-13{,}2$ dB, y se reducen ponderando el filtro con una ventana a costa de ensanchar el pico \cite{richards}.
+
+\textbf{Relación con la resolución.} Dos blancos se distinguen si sus picos comprimidos no se superponen, es decir, si están separados más que
+\begin{equation}
+    \Delta R = \frac{c}{2B}
+\end{equation}
+que depende solo del ancho de banda. En este trabajo, $T = 10 \, [\mu s]$ y $B = 2 \, [MHz]$, con $BT = 20$ (13 dB de ganancia de compresión): sin comprimir, la resolución sería de $cT/2 = 1500 \, [m]$, y comprimido es de $c/(2B) = 75 \, [m]$, 20 veces mejor (\autoref{fig:chirp}). Gracias a esto, en la práctica se separan blancos a 300 m de distancia, como los de 15,21 y 15,51 km de la señal 1.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{teoria/chirp_compresion.png}
+    \caption{Chirp del trabajo práctico ($T = 10 \, [\mu s]$, $B = 2 \, [MHz]$), su frecuencia instantánea y la salida del filtro apareado. Con $BT = 20$ el primer lóbulo lateral queda en $-14{,}0$ dB, próximo al valor de $-13{,}2$ dB de la sinc ideal. Elaboración propia.}
+    \label{fig:chirp}
+\end{figure}

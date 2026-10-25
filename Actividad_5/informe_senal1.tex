@@ -1,0 +1,40 @@
+% Informe del TP5 del equipo de la señal 1.
+\input{preambulo}
+\newcommand{\senal}{1}
+\newcommand{\figdir}{senal_1}
+
+\begin{document}
+\renewcommand{\figureautorefname}{Fig.}
+\renewcommand{\tableautorefname}{Tab.}
+\renewcommand{\equationautorefname}{Ec.}
+
+\portada{Arteaga Barrera, Cristian Eduardo & 95.159.096 \\ Baccino, Luca & 45.328.380 \\}{1}
+\newpage
+\tableofcontents
+\newpage
+\listoffigures
+\newpage
+
+\input{secciones/introduccion}
+\input{secciones/teorico}
+\newpage
+\input{secciones/practico_metodo}
+\input{secciones/resultados_senal1}
+
+\section{Conclusiones}
+\begin{itemize}
+    \item En la señal 1 se identificaron \textbf{ocho blancos}:
+    \begin{itemize}
+        \item \underline{Cinco móviles:} 10,02 km a $-85{,}7$ m/s, 15,21 km a $+40{,}2$ m/s, 15,51 km a $-22{,}7$ m/s, 20,01 km a $-43{,}7$ m/s y 22,23 km a $-31{,}5$ m/s.
+        \item \underline{Tres fijos:} 12,02, 17,61 y 21,02 km.
+    \end{itemize}
+    \item La compresión con filtro apareado fue imprescindible: en la señal cruda los ecos quedan ocultos en el ruido y extendidos sobre 1,5 km, mientras que comprimidos ganan 13 dB y se resuelven con 75 m de resolución. Así se separan los blancos de 15,21 y 15,51 km, a 300 m.
+    \item Los canceladores cumplen funciones complementarias. El MTI elimina el clutter cercano y los ecos fijos y deja los blancos móviles; el STI hace lo contrario; el MTI doble ensancha el nulo de velocidad cero. Sus nulos producen velocidades ciegas: el blanco de 10,02 km, con $f_D$ cerca de $PRF/2$, desaparece en el STI.
+    \item El CA-CFAR mantiene la tasa de falsas alarmas adaptando el umbral al ruido local, pero un blanco intenso enmascara a los vecinos que caen en su ventana de referencia. Aquí ocurrió con el blanco de 15,51 km, a 300 m de otro. La elección de la ventana es un compromiso: 64 celdas de referencia y 8 de guarda por lado dieron mejores resultados que las 200 del ejemplo.
+    \item El filtrado Doppler aporta la velocidad de cada blanco y la integración coherente de 99 pulsos (unos 20 dB). Además separa blancos cercanos en rango con distinta velocidad. La detección CFAR sobre el mapa rango-Doppler, con ventana de Hamming, fue la más robusta.
+    \item La PRF de 1500 Hz limita las velocidades no ambiguas a $\pm 86{,}5$ m/s: el blanco de 10,02 km está en el borde y su velocidad podría estar replegada. Para resolverlo haría falta una segunda PRF (PRF escalonada), como indica el apunte de la cátedra \cite{apunte}.
+\end{itemize}
+
+\newpage
+\printbibliography[heading=bibintoc, title={Bibliografía y Referencias}]
+\end{document}

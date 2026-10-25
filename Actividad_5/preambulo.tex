@@ -1,0 +1,69 @@
+% Preámbulo común de los informes del TP5 (señal 1 y señal 2), con el estilo de los trabajos anteriores.
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage[spanish,es-tabla]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{subcaption}
+\usepackage{mathtools}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage[style=ieee, backend=bibtex]{biblatex}
+\usepackage{enumitem}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{csquotes}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta, positioning, shapes.geometric, babel}
+\usepackage[hidelinks]{hyperref}
+\usepackage{float}
+\usepackage{setspace}
+\onehalfspacing
+\graphicspath{{Figuras/}}
+
+\addbibresource{bibliografia.bib}
+\hypersetup{colorlinks=true, linkcolor=blue, citecolor=blue, urlcolor=blue, filecolor=blue}
+
+% Portada: \portada{integrantes (tabla)}{señal}
+\newcommand{\portada}[2]{%
+\begin{titlepage}
+\thispagestyle{empty}
+\begin{tikzpicture}[remember picture,overlay]
+    \node[opacity=0.2,anchor=center] at (current page.center)
+        {\includegraphics[width=0.9\paperwidth]{decoracion_a.png}};
+\end{tikzpicture}
+\begin{center}
+    \includegraphics[width=15cm]{unc_fcefyn_logo.png} \\ [0.5cm]
+    \LARGE Universidad Nacional de Córdoba \\ [0.5cm]
+    \large Facultad de Ciencias Exactas, Físicas y Naturales \\
+    \vspace{40pt}
+    \large Sistemas de Radiocomunicación \\ [0.2cm]
+    \large Trabajo Práctico N.° 5 \\
+    \vspace{50pt}
+    \LARGE Radar \\[0.3cm]
+    \large Procesamiento de la señal #2 \\
+    \vspace{50pt}
+    \begin{table}[!h]
+        \centering
+        \begin{tabular}{ll}
+            \multicolumn{1}{c}{Nombre} & \multicolumn{1}{c}{DNI} \\
+            #1
+        \end{tabular}
+    \end{table}
+    \vspace{20pt}
+    \begin{table}[!h]
+        \centering
+        \begin{tabular}{ll}
+            \multicolumn{1}{c}{Docentes} & Esp. Ing. Liendo, Carlos Guillermo \\
+                                         & Ing. Dadam, Federico Tomás \\
+        \end{tabular}
+    \end{table}
+    \vfill
+        {\small Córdoba, República Argentina\\ Año 2026}
+\end{center}
+\end{titlepage}
+}

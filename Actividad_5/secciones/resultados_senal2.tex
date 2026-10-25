@@ -1,0 +1,126 @@
+\subsection{Resultados de la señal 2}
+\label{sec:resultados}
+
+\subsubsection{Señal recibida y compresión}
+La \autoref{fig:recibida} muestra un momento de muestreo (el pulso $t_0$). Hasta el rango mínimo de 1,5 km la señal es nula, porque el receptor está bloqueado durante la transmisión y la recuperación. Entre 1,5 y 2,5 km aparece un eco intenso, de hasta $8{,}0 \times 10^{-6}$, que corresponde a clutter cercano. Más allá, los ecos de los blancos quedan casi ocultos en el ruido. Solo se insinúa un aumento de nivel en torno a 20 km, donde se superponen varios ecos intensos, porque un chirp de 10 $\mu$s extiende cada eco sobre 1,5 km.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{\figdir/01_senal_recibida.png}
+    \caption{Señal 2: un momento de muestreo de la señal recibida. Arriba, partes real e imaginaria; abajo, módulo, en función del rango.}
+    \label{fig:recibida}
+\end{figure}
+
+Después del filtro apareado (\autoref{fig:compresion}), la energía de cada eco se concentra en un pico de unos 75 m y emergen los blancos, entre 8 y 26,2 km. La zona de 20 km se resuelve en picos a 19,82 km y a 20,2--20,3 km. Los ecos de 20,22 y 20,31 km están a solo 90 m, apenas por encima de la resolución de 75 m. En la señal comprimida se ven como un pico ensanchado, y es el procesamiento en tiempo lento el que los separa: uno se mueve y el otro está fijo.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{\figdir/02_compresion.png}
+    \caption{Señal 2: módulo de la señal sin comprimir (arriba) y comprimida con el filtro apareado (abajo) para el mismo momento de muestreo.}
+    \label{fig:compresion}
+\end{figure}
+
+\subsubsection{Canceladores y CFAR}
+Las figuras \ref{fig:cfar_mti} a \ref{fig:cfar_mtidc} muestran, para cada cancelador:
+\begin{itemize}
+    \item las señales sin comprimir de los momentos de muestreo que usa;
+    \item las señales comprimidas;
+    \item la salida del cancelador con el umbral CFAR (ganancia 3,93);
+    \item los cruces por cero que marcan el inicio ($+2$) y el fin ($-2$) de cada detección.
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.88\textwidth]{\figdir/04_cfar_mti_sc.png}
+    \caption{Señal 2: CFAR del MTI simple cancelador ($x_1 - x_0$).}
+    \label{fig:cfar_mti}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.88\textwidth]{\figdir/05_cfar_sti_sc.png}
+    \caption{Señal 2: CFAR del STI simple cancelador ($x_1 + x_0$).}
+    \label{fig:cfar_sti}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.88\textwidth]{\figdir/06_cfar_mti_dc.png}
+    \caption{Señal 2: CFAR del MTI doble cancelador ($x_2 - 2x_1 + x_0$).}
+    \label{fig:cfar_mtidc}
+\end{figure}
+
+\begin{table}[H]
+    \centering
+    \footnotesize
+    \caption{Señal 2: rangos detectados por cada cancelador [km].}
+    \label{tab:det_canceladores}
+    \begin{tabular}{|l|p{6.2cm}|p{5.2cm}|}
+        \hline
+        \textbf{Cancelador} & \textbf{Un momento de muestreo ($t_0$, $t_1$, $t_2$)} & \textbf{Integrado sobre todos los pulsos} \\
+        \hline
+        MTI simple & 8,01 -- 12,02 -- 20,22 -- 26,23 & 8,01 -- 12,02 -- 20,22 -- 26,23 \\
+        \hline
+        STI simple & 8,01 -- 12,02 -- 15,62 -- 20,32 -- 22,02 & 8,01 -- 12,02 -- 15,62 -- 20,31 -- 22,02 \\
+        \hline
+        MTI doble & 8,03 -- 12,02 -- 20,20 -- 26,23 & 8,01 -- 12,02 -- 20,22 -- 26,23 \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\textbf{Análisis:}
+\begin{itemize}
+    \item \underline{MTI simple y doble:} detectan cuatro blancos móviles (8,01, 12,02, 20,22 y 26,23 km). Cancelan el clutter cercano y los ecos fijos de 15,62, 20,31 y 22,02 km.
+    \item \underline{STI simple:} refuerza los ecos fijos y detecta los tres blancos fijos, además de los móviles de 8,01 y 12,02 km. No detecta el de 26,23 km: su frecuencia Doppler ($+742$ Hz) está a menos de 8 Hz de $PRF/2$, donde el STI tiene su nulo (unos 30 dB de atenuación, \autoref{fig:canceladores}).
+    \item \underline{Enmascaramiento:} el blanco de 19,82 km tiene una de las mayores SNR de la escena, pero ningún cancelador lo detecta. Está a 400 m de los ecos de 20,2--20,3 km, que caen dentro de su ventana de referencia y elevan el umbral CFAR (se ve el pico bajo el umbral en la \autoref{fig:cfar_sti}). Con la ventana de 200 celdas del ejemplo de la consigna el efecto era mayor: además se perdía el blanco fijo de 22,02 km. El procesamiento Doppler lo separa, porque tiene otra velocidad.
+\end{itemize}
+
+\subsubsection{Procesamiento Doppler}
+La \autoref{fig:doppler3d} es el gráfico 3D del producto Doppler de la señal MTI: cada pico es un blanco móvil ubicado en su rango y su velocidad. La \autoref{fig:mapa} muestra la vista superior en dB con los blancos detectados. Allí se ve que los ecos de 19,82 y 20,22 km, cercanos en rango, quedan en velocidades distintas ($-24{,}5$ y $-43{,}7$ m/s).
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{\figdir/07_doppler_3d.png}
+    \caption{Señal 2: procesamiento Doppler de la señal del MTI simple cancelador (módulo en función de la velocidad y el rango).}
+    \label{fig:doppler3d}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{\figdir/08_mapa_rango_velocidad.png}
+    \caption{Señal 2: mapa rango-velocidad en dB con los blancos móviles (cruces) y los blancos fijos, ubicados en velocidad nula (cuadrados).}
+    \label{fig:mapa}
+\end{figure}
+
+\subsubsection{Blancos detectados}
+La \autoref{tab:blancos} reúne el resultado final: \textbf{ocho blancos, cinco móviles y tres fijos}.
+
+\begin{table}[H]
+    \centering
+    \footnotesize
+    \caption{Señal 2: blancos detectados. La velocidad positiva indica acercamiento y la negativa, alejamiento. Las ganancias del MTI y el STI corresponden a la frecuencia Doppler de cada blanco.}
+    \label{tab:blancos}
+    \begin{tabular}{|c|r|r|r|r|r|r|r|l|}
+        \hline
+        \textbf{N.°} & \textbf{Rango [km]} & \textbf{$v_r$ [m/s]} & \textbf{$v_r$ [km/h]} & \textbf{$f_D$ [Hz]} & \textbf{SNR [dB]} & \textbf{MTI [dB]} & \textbf{STI [dB]} & \textbf{Tipo} \\
+        \hline
+        1 & 8,01 & $-31{,}5$ & $-113$ & $-273$ & 39,5 & $+0{,}7$ & $+4{,}5$ & Móvil \\
+        2 & 12,02 & $-59{,}4$ & $-214$ & $-515$ & 40,6 & $+4{,}9$ & $-0{,}5$ & Móvil \\
+        3 & 15,62 & 0 & 0 & 0 & -- & $-\infty$ & $+6{,}0$ & Fijo \\
+        4 & 19,82 & $-24{,}5$ & $-88$ & $-212$ & 42,7 & $-1{,}3$ & $+5{,}1$ & Móvil \\
+        5 & 20,22 & $-43{,}7$ & $-157$ & $-379$ & 42,1 & $+3{,}1$ & $+2{,}9$ & Móvil \\
+        6 & 20,31 & 0 & 0 & 0 & -- & $-\infty$ & $+6{,}0$ & Fijo \\
+        7 & 22,02 & 0 & 0 & 0 & -- & $-\infty$ & $+6{,}0$ & Fijo \\
+        8 & 26,24 & $+85{,}7$ & $+308$ & $+742$ & 33,2 & $+6{,}0$ & $-29{,}9$ & Móvil (*) \\
+        \hline
+    \end{tabular}
+
+    \vspace{0.1cm}
+    \raggedright \scriptsize (*) Velocidad en el borde del intervalo no ambiguo ($\pm 86{,}5$ m/s): podría ser una velocidad replegada, por ejemplo $-87{,}4$ m/s, que difiere en $\lambda \, PRF/2 = 173$ m/s.
+\end{table}
+
+\begin{itemize}
+    \item \underline{Blancos fijos:} los de 15,62, 20,31 y 22,02 km tienen una salida del STI entre 22 y 24 dB mayor que la del MTI. Son ecos sin Doppler, como blancos detenidos o reflectores fijos, que el MTI cancela. El de 20,31 km comparte casi la misma celda con el blanco móvil de 20,22 km: los distingue que el STI tiene su máximo en 20,31 km y el MTI en 20,22 km, con 24 dB más de salida en el STI.
+    \item \underline{Residuos y falsas alarmas:} el mapa rango-Doppler tiene detecciones débiles en velocidad nula o casi nula a 8,03, 12,0 y 19,82 km. Son más de 20 dB menores que los blancos de esas celdas y corresponden a la dispersión Doppler por la fluctuación de su RCS. Además hay tres detecciones aisladas (1,5, 6,2 y 13,7 km) de unos 10 dB de SNR que ningún cancelador confirma. Todas se descartaron con los criterios de la \autoref{sec:operaciones}.
+    \item \underline{Resolución en velocidad:} es de 1,75 m/s. Las velocidades informadas tienen una incertidumbre de media celda Doppler ($\pm 0{,}9$ m/s).
+\end{itemize}

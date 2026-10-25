@@ -1,0 +1,41 @@
+% Informe del TP5 del equipo de la señal 2.
+\input{preambulo}
+\newcommand{\senal}{2}
+\newcommand{\figdir}{senal_2}
+
+\begin{document}
+\renewcommand{\figureautorefname}{Fig.}
+\renewcommand{\tableautorefname}{Tab.}
+\renewcommand{\equationautorefname}{Ec.}
+
+\portada{Mendes Rosa, Agustín & 44.517.201 \\ Monja, Ernesto Joaquín & 43.873.728 \\}{2}
+\newpage
+\tableofcontents
+\newpage
+\listoffigures
+\newpage
+
+\input{secciones/introduccion}
+\input{secciones/teorico}
+\newpage
+\input{secciones/practico_metodo}
+\input{secciones/resultados_senal2}
+
+\section{Conclusiones}
+\begin{itemize}
+    \item En la señal 2 se identificaron \textbf{ocho blancos}:
+    \begin{itemize}
+        \item \underline{Cinco móviles:} 8,01 km a $-31{,}5$ m/s, 12,02 km a $-59{,}4$ m/s, 19,82 km a $-24{,}5$ m/s, 20,22 km a $-43{,}7$ m/s y 26,24 km a $+85{,}7$ m/s.
+        \item \underline{Tres fijos:} 15,62, 20,31 y 22,02 km.
+    \end{itemize}
+    \item La compresión con filtro apareado fue imprescindible: en la señal cruda los ecos quedan ocultos en el ruido y extendidos sobre 1,5 km, mientras que comprimidos ganan 13 dB y se resuelven con 75 m de resolución.
+    \item La zona de 20 km concentra tres blancos en 500 m: 19,82 km (móvil), 20,22 km (móvil) y 20,31 km (fijo). Los dos últimos, a 90 m, se distinguen porque uno sobrevive al MTI y el otro al STI. El de 19,82 km, enmascarado en el CFAR de todos los canceladores, solo se detecta en el mapa rango-Doppler, donde su velocidad lo separa de los vecinos.
+    \item Los canceladores cumplen funciones complementarias. El MTI elimina el clutter cercano y los ecos fijos y deja los blancos móviles; el STI hace lo contrario; el MTI doble ensancha el nulo de velocidad cero. Sus nulos producen velocidades ciegas: el blanco de 26,24 km, con $f_D$ cerca de $PRF/2$, desaparece en el STI.
+    \item El CA-CFAR mantiene la tasa de falsas alarmas adaptando el umbral al ruido local, pero los blancos intensos enmascaran a sus vecinos. Con la ventana de 200 celdas del ejemplo se perdía también el blanco fijo de 22,02 km; con 64 celdas de referencia y 8 de guarda por lado se recupera.
+    \item El filtrado Doppler aporta la velocidad de cada blanco y la integración coherente de 99 pulsos (unos 20 dB), y fue el método de detección más robusto en esta escena congestionada.
+    \item La PRF de 1500 Hz limita las velocidades no ambiguas a $\pm 86{,}5$ m/s: el blanco de 26,24 km está en el borde y su velocidad podría estar replegada. Para resolverlo haría falta una segunda PRF (PRF escalonada), como indica el apunte de la cátedra \cite{apunte}.
+\end{itemize}
+
+\newpage
+\printbibliography[heading=bibintoc, title={Bibliografía y Referencias}]
+\end{document}
