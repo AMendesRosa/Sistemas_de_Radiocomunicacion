@@ -22,31 +22,36 @@ La \autoref{fig:continuidad} muestra la continuidad óptica completa de un abona
 
 \begin{figure}[H]
     \centering
-    \resizebox{\textwidth}{!}{%
-    \begin{tikzpicture}[font=\scriptsize,
-        eq/.style={draw, thick, rounded corners=2pt, fill=blue!10, minimum height=1.3cm, align=center, text width=1.75cm},
-        cj/.style={draw, thick, rounded corners=4pt, fill=orange!15, minimum height=1.3cm, align=center, text width=1.75cm},
-        cb/.style={midway, align=center, font=\tiny}]
+    \begin{tikzpicture}[font=\footnotesize,
+        eq/.style={draw, thick, rounded corners=2pt, fill=blue!10, minimum height=1.85cm, minimum width=2.7cm, align=center, text width=2.5cm},
+        cj/.style={draw, thick, rounded corners=4pt, fill=orange!15, minimum height=1.85cm, minimum width=2.7cm, align=center, text width=2.5cm},
+        cb/.style={midway, above=1.05cm, align=center, font=\scriptsize, fill=white, inner sep=1pt}]
+        % Fila 1: hub y alimentación
         \node[eq] (olt) at (0,0) {\textbf{OLT-E2}\\PON 6\\(SFP C+)};
-        \node[cj] (odf) at (2.6,0) {\textbf{ODF-E1}\\posición 54\\(C3-F6)};
-        \node[cj] (d1) at (5.2,0) {\textbf{D1}\\9 de Julio y\\P. Maipú};
-        \node[cj] (ceo) at (7.8,0) {\textbf{CEO-C3 / CD-28}\\9 de Julio y\\Av. San Martín};
-        \node[cj, fill=red!10] (sp4) at (10.4,0) {\textbf{Splitter 1:4}\\entrada: C3-F6\\salidas 1 a 4};
-        \node[cj] (cto) at (13.0,0) {\textbf{CTO-28.$j$}\\splitter 1:16\\salidas 1 a 16};
-        \node[cj] (ros) at (15.6,0) {\textbf{Roseta}\\SC/APC};
-        \node[eq] (ont) at (18.2,0) {\textbf{ONT}\\V2802RH};
-        \draw[-{Stealth}, thick] (olt) -- node[cb, above=6pt]{patch cord\\SC/UPC-APC} (odf);
-        \draw[-{Stealth}, thick] (odf) -- node[cb, above=6pt]{CT-01\\2 $\times$ 144 F} (d1);
-        \draw[-{Stealth}, thick] (d1) -- node[cb, above=6pt]{CT-03\\48 F} (ceo);
-        \draw[-{Stealth}, thick] (ceo) -- node[cb, above=6pt]{empalme} (sp4);
-        \draw[-{Stealth}, thick] (sp4) -- node[cb, above=6pt]{DS-28 (12 F)\\F$j$ $\rightarrow$ CTO-28.$j$} (cto);
-        \draw[-{Stealth}, thick] (cto) -- node[cb, above=6pt]{drop\\1 F} (ros);
-        \draw[-{Stealth}, thick] (ros) -- node[cb, above=6pt]{patch cord} (ont);
-        \draw[decorate, decoration={brace, amplitude=5pt, mirror}, thick] (-0.9,-0.95) -- (6.1,-0.95) node[midway, below=6pt]{Alimentación (troncal)};
-        \draw[decorate, decoration={brace, amplitude=5pt, mirror}, thick] (6.9,-0.95) -- (13.9,-0.95) node[midway, below=6pt]{Distribución};
-        \draw[decorate, decoration={brace, amplitude=5pt, mirror}, thick] (14.1,-0.95) -- (19.1,-0.95) node[midway, below=6pt]{Acceso al abonado};
-    \end{tikzpicture}%
-    }
+        \node[cj] (odf) at (4.1,0) {\textbf{ODF-E1}\\posición 54\\(C3-F6)};
+        \node[cj] (d1) at (8.2,0) {\textbf{D1}\\9 de Julio y\\P. Maipú};
+        \node[cj] (ceo) at (12.3,0) {\textbf{CEO-C3}\\\textbf{y CD-28}\\9 de Julio y\\Av. San Martín};
+        \draw[-{Stealth}, thick] (olt) -- node[cb]{patch cord\\SC/UPC--APC} (odf);
+        \draw[-{Stealth}, thick] (odf) -- node[cb]{CT-01\\2 $\times$ 144 F} (d1);
+        \draw[-{Stealth}, thick] (d1) -- node[cb]{CT-03\\48 F} (ceo);
+        \draw[decorate, decoration={brace, amplitude=5pt, mirror}, thick] (-1.35,-1.05) -- (13.65,-1.05)
+            node[midway, below=6pt]{Hub y alimentación (troncal)};
+        % Fila 2: distribución y acceso
+        \node[cj, fill=red!10] (sp4) at (0,-4.6) {\textbf{Splitter 1:4}\\entrada C3-F6\\salidas 1 a 4};
+        \node[cj] (cto) at (4.1,-4.6) {\textbf{CTO-28.$j$}\\splitter 1:16\\salidas 1 a 16};
+        \node[cj] (ros) at (8.2,-4.6) {\textbf{Roseta}\\SC/APC};
+        \node[eq] (ont) at (12.3,-4.6) {\textbf{ONT}\\V2802RH};
+        \draw[-{Stealth}, thick] (sp4) -- node[cb]{DS-28 (12 F)\\F$j$ a la CTO-28.$j$} (cto);
+        \draw[-{Stealth}, thick] (cto) -- node[cb]{drop\\1 F} (ros);
+        \draw[-{Stealth}, thick] (ros) -- node[cb]{patch cord} (ont);
+        \draw[decorate, decoration={brace, amplitude=5pt, mirror}, thick] (-1.35,-5.65) -- (5.45,-5.65)
+            node[midway, below=6pt]{Distribución};
+        \draw[decorate, decoration={brace, amplitude=5pt, mirror}, thick] (6.85,-5.65) -- (13.65,-5.65)
+            node[midway, below=6pt]{Acceso al abonado};
+        % Paso de la fila 1 a la fila 2: empalme dentro de la misma caja
+        \draw[-{Stealth}, thick] (ceo.east) -- ++(0.4,0) |- (6.15,-2.5) -| (-1.75,-4.6) -- (sp4.west);
+        \node[font=\scriptsize, fill=white, inner sep=2pt] at (6.15,-2.5) {empalme en la misma caja FK-CEO-4M};
+    \end{tikzpicture}
     \caption{Continuidad óptica de un abonado del sector 28: del puerto PON 6 de la OLT-E2 a la ONT, pasando por la fibra C3-F6.}
     \label{fig:continuidad}
 \end{figure}
