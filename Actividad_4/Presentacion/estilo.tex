@@ -59,11 +59,9 @@
   \ifnum\pdfstrcmp{#1}{Grupo Oeste}=0 \gdef\oradorcolor{grupo oeste}\else\gdef\oradorcolor{grupo este}\fi}
 
 \setbeamertemplate{navigation symbols}{}
+% El orador no se muestra en las diapositivas: figura solo en el guion (guion.tex).
 \setbeamertemplate{footline}{%
-  \ifx\oradornombre\empty\else
-  \hfill\colorbox{\oradorcolor}{\color{white}\scriptsize\bfseries \oradorgrupo\ --\ Expone: \oradornombre}%
-  \fi
-  \hspace{2mm}{\scriptsize\color{unc verde}\insertframenumber}\hspace{2mm}\vspace{1.5mm}}
+  \hfill{\scriptsize\color{unc verde}\insertframenumber}\hspace{2mm}\vspace{1.5mm}}
 
 % Notas del guion: tipografía legible
 \setbeamerfont{note page}{size=\small}
