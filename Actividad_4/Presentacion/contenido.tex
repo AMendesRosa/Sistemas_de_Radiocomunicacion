@@ -588,14 +588,14 @@
       \small
       \begin{itemize}
         \item Contrato: \textbf{2$\times$100 GbE} (51\,\%), luego \textbf{3$\times$100 GbE} (68\,\%)
-        \item Enlace \textbf{100GBASE-LR4}: 2,92 dB + 3 dB $\leq$ 6,3 dB
+        \item Nodo REFEFO en Timoteo Gordillo 665: enlace \textbf{100GBASE-LR4} de 2,1 km, 2,19 dB + 3 dB $\leq$ 6,3 dB
         \item Uplinks: \textbf{4$\times$10 GE por OLT} (con 2 llegaba al 96\,\%)
         \item Puertos PON: 45\,\% de uso en la cobertura final
       \end{itemize}
       \footnotesize Contraste OpenVault (5 Mbps por abonado): 34 Gbps. Permite contratar por etapas.
     \end{column}
   \end{columns}
-  \note{\textbf{Joaquín Monja:} Estos son los resultados. Con la simultaneidad de diseño, la red necesita 102,5 Gbps en la primera etapa y unos 205 en la cobertura final; en el escenario conservador, el doble. Por eso proponemos contratar dos interfaces de 100 Gbps al principio, con un uso del 51 por ciento, y pasar a tres en la cobertura final. El enlace al nodo REFEFO es 100GBASE-LR4, que admite 6,3 dB y en nuestro caso tiene 2,92 más los 3 de margen. La calculadora también mostró que con dos uplinks por OLT llegábamos al 96 por ciento, así que usamos los cuatro. Como contraste, con el consumo medio de OpenVault la demanda sería tres veces menor, lo que permite contratar por etapas y ajustar con mediciones.}
+  \note{\textbf{Joaquín Monja:} Estos son los resultados. Con la simultaneidad de diseño, la red necesita 102,5 Gbps en la primera etapa y unos 205 en la cobertura final; en el escenario conservador, el doble. Por eso proponemos contratar dos interfaces de 100 Gbps al principio, con un uso del 51 por ciento, y pasar a tres en la cobertura final. El nodo REFEFO está en Timoteo Gordillo 665; llegamos con un cable de unos 2,1 km que va por los postes del troncal del Este hasta la caja del cluster C11 y sigue dos cuadras derecho por Timoteo Gordillo. El enlace es 100GBASE-LR4, que admite 6,3 dB, y en nuestro caso pierde 2,19 dB, más los 3 de margen. La calculadora también mostró que con dos uplinks por OLT llegábamos al 96 por ciento, así que usamos los cuatro. Como contraste, con el consumo medio de OpenVault la demanda sería tres veces menor, lo que permite contratar por etapas y ajustar con mediciones.}
 \end{frame}
 
 \section[P2: Verificación]{Verificación}

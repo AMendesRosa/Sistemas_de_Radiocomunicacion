@@ -123,6 +123,60 @@ Como contraste, se estima también el consumo medio a partir del informado por O
     \end{tabular}
 \end{table}
 
+\subsubsection{Carga de los puertos según el factor de simultaneidad y límite de saturación}
+\label{sec:carga_puertos}
+La carga de bajada de un puerto crece linealmente con el factor de simultaneidad. Con el mismo modelo de la calculadora \cite{calc_catedra},
+\begin{equation}
+    D_{puerto}(F_s) = C_{com} \cdot F_s + D_{IPTV}
+    \label{eq:carga_puerto}
+\end{equation}
+donde $C_{com}$ es la suma de los planes de bajada de los abonados del puerto y $D_{IPTV}$ es la IPTV multicast del puerto (40\,\% de los abonados, hasta 30 canales distintos de $8 \, [Mbps]$). El puerto se satura cuando la demanda alcanza la capacidad nominal GPON de $2{,}488 \, [Gbps]$, por lo que el \textbf{factor de simultaneidad límite} es
+\begin{equation}
+    F_{s,sat} = \frac{2{,}488 \, [Gbps] - D_{IPTV}}{C_{com}}
+    \label{eq:fs_sat}
+\end{equation}
+La calculadora, además, marca ``Revisar margen'' a partir del 80\,\% de la capacidad ($1{,}99 \, [Gbps]$). La \autoref{tab:carga_puertos} y la \autoref{fig:carga_puertos} muestran ambos límites para un puerto de la primera etapa, uno de la cobertura final y un puerto lleno, con las 64 ONT que admite la división 1:64.
+
+\begin{table}[H]
+    \centering
+    \footnotesize
+    \caption{Carga de bajada de un puerto GPON según el factor de simultaneidad y límites antes de la saturación ($2{,}488 \, [Gbps]$).}
+    \label{tab:carga_puertos}
+    \begin{tabular}{|l|c|c|c|}
+        \hline
+        \textbf{Concepto} & \textbf{Primera etapa} & \textbf{Cobertura final} & \textbf{Puerto lleno} \\
+        \hline
+        Abonados por puerto & 31 & 61 & 64 \\
+        Suma de planes de bajada $C_{com}$ & $9{,}30 \, [Gbps]$ & $18{,}30 \, [Gbps]$ & $19{,}30 \, [Gbps]$ \\
+        IPTV multicast $D_{IPTV}$ & $0{,}10 \, [Gbps]$ & $0{,}19 \, [Gbps]$ & $0{,}21 \, [Gbps]$ \\
+        \hline
+        Carga con $F_s = 5$\,\% (diseño) & $0{,}56 \, [Gbps]$ (23\,\%) & $1{,}11 \, [Gbps]$ (44\,\%) & $1{,}17 \, [Gbps]$ (47\,\%) \\
+        Carga con $F_s = 10$\,\% (conservador) & $1{,}03 \, [Gbps]$ (41\,\%) & $2{,}02 \, [Gbps]$ (81\,\%) & $2{,}14 \, [Gbps]$ (86\,\%) \\
+        \hline
+        $F_s$ en el umbral de revisión (80\,\%) & 20,4\,\% & 9,8\,\% & 9,2\,\% \\
+        \textbf{$F_s$ de saturación ($2{,}488 \, [Gbps]$)} & \textbf{25,7\,\%} & \textbf{12,5\,\%} & \textbf{11,8\,\%} \\
+        Tráfico por abonado en la saturación & $77 \, [Mbps]$ & $38 \, [Mbps]$ & $36 \, [Mbps]$ \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{carga_puertos.png}
+    \caption{Carga de bajada de un puerto GPON en función del factor de simultaneidad, con la capacidad nominal y el umbral de revisión del 80\,\%. Las líneas verticales marcan los escenarios de diseño ($F_s = 5$\,\%) y conservador ($10$\,\%). Elaboración propia con el modelo de la calculadora de la cátedra.}
+    \label{fig:carga_puertos}
+\end{figure}
+
+De estos resultados surge:
+\begin{itemize}
+    \item \underline{Primera etapa:} con unos 30 abonados por puerto, el puerto recién se satura con una simultaneidad del 25,7\,\%, cinco veces la de diseño. No hay riesgo de congestión.
+    \item \underline{Cobertura final:} el límite es $F_s = 12{,}5$\,\%, es decir, unos $38 \, [Mbps]$ simultáneos por abonado en la hora pico. El escenario de diseño (5\,\%) deja un 56\,\% de capacidad libre. El conservador (10\,\%) queda por encima del umbral de revisión, pero todavía un 19\,\% por debajo de la saturación.
+    \item \underline{Puerto lleno:} aun con las 64 ONT que admite la división física, la saturación ocurre recién con $F_s = 11{,}8$\,\%. La división 1:64 no es, por lo tanto, la restricción de capacidad en los escenarios evaluados.
+    \item \underline{Subida:} los planes suben el 10\,\% de la bajada, pero la capacidad de subida de GPON ($1{,}244 \, [Gbps]$) es la mitad de la de bajada. Aun así, el puerto de la cobertura final se saturaría en subida recién con $F_s = 68$\,\%, por lo que la bajada es el sentido crítico.
+    \item \underline{Capacidad útil:} el límite de $2{,}488 \, [Gbps]$ es la velocidad nominal de línea. La capacidad útil es algo menor por la sobrecarga de los protocolos \cite{doc_backhaul}, por lo que en la práctica la saturación llega un poco antes. Por eso conviene tomar el umbral del 80\,\% como límite operativo: $F_s \approx 10$\,\% en la cobertura final.
+\end{itemize}
+Si las mediciones de la red mostraran una simultaneidad cercana a ese límite, la capacidad se amplía sin modificar la ODN. Una opción es usar la fibra de crecimiento del sector para conectarlo a un segundo puerto PON, lo que reparte sus CTO y deja unos 30 abonados por puerto, con un límite del 25,7\,\%. La otra es incorporar XGS-PON ($10 \, [Gbps]$) sobre la misma red.
+
 \subsubsection{Relación de división frente a sobrecontratación}
 Se trata de dos conceptos distintos:
 \begin{itemize}
