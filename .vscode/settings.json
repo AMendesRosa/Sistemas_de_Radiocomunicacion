@@ -1,0 +1,20 @@
+{
+  "latex-workshop.latex.tools": [
+    {
+      "name": "latexmk-ambos",
+      "command": "latexmk",
+      "args": [
+        "-pdf",
+        "-synctex=1",
+        "-interaction=nonstopmode",
+        "-file-line-error",
+        "-cd",
+        "%DIR%/informe_senal1.tex",
+        "%DIR%/informe_senal2.tex"
+      ]
+    }
+  ],
+  "latex-workshop.latex.recipes": [
+    { "name": "Ambos informes", "tools": ["latexmk-ambos"] }
+  ]
+}

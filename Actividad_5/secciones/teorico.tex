@@ -1,3 +1,4 @@
+% !TEX root = ../informe_senal1.tex
 \section{Parte teórica}
 \label{sec:teorico}
 
@@ -5,7 +6,14 @@
 \subsection{El radar: definición, usos, parámetros y diagrama en bloques}
 \label{sec:radar}
 
-\textbf{Definición.} RADAR es el acrónimo de \textit{RAdio Detection And Ranging}: un sistema que irradia ondas electromagnéticas y analiza los ecos que devuelven los objetos (blancos) para detectarlos y estimar su posición y su movimiento \cite{skolnik, apunte}. La distancia, o rango, se obtiene del tiempo de ida y vuelta $\Delta t$ del eco, $R = c \, \Delta t / 2$. La dirección surge del apuntamiento de la antena, y la velocidad radial, del corrimiento Doppler $f_D = 2 v_r / \lambda$. Como usa su propia iluminación, el radar funciona de día y de noche y a través de nubes, niebla y lluvia, a distancias mucho mayores que los sensores ópticos.
+RADAR es el acrónimo de \textit{RAdio Detection And Ranging}: un sistema que irradia ondas electromagnéticas y analiza los ecos que devuelven los objetos (blancos) para detectarlos y estimar su posición y su movimiento \cite{skolnik, apunte}. La distancia $R$ se obtiene del tiempo de ida y vuelta $\Delta t$ del eco, según la ecuación \ref{eq:dist}:
+
+\begin{equation}
+    R = \frac{c \, \Delta t}{2}
+    \label{eq:dist}
+\end{equation}
+
+$R = c \, \Delta t / 2$. La dirección surge del apuntamiento de la antena, y la velocidad radial, del corrimiento Doppler $f_D = 2 v_r / \lambda$. Como usa su propia iluminación, el radar funciona de día y de noche y a través de nubes, niebla y lluvia, a distancias mucho mayores que los sensores ópticos.
 
 \textbf{Usos.} Se emplea en aplicaciones civiles y militares \cite{skolnik}:
 \begin{itemize}
