@@ -1,0 +1,113 @@
+% Informe del TP6: Mediciones en medios de comunicación analógicos y digitales.
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage[spanish,es-tabla,es-nodecimaldot]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{subcaption}
+\usepackage{mathtools}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage[style=ieee, backend=bibtex]{biblatex}
+\usepackage{enumitem}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{csquotes}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta, positioning, shapes.geometric, fit, babel}
+\usepackage[hidelinks]{hyperref}
+\usepackage{float}
+\usepackage{setspace}
+\onehalfspacing
+\graphicspath{{Figuras/}}
+
+\addbibresource{bibliografia.bib}
+\hypersetup{colorlinks=true, linkcolor=blue, citecolor=blue, urlcolor=blue, filecolor=blue}
+
+% Datos que se completan después de las mediciones de laboratorio (se ven en rojo).
+\newcommand{\pendiente}[1]{\textcolor{red}{[#1]}}
+
+\begin{document}
+\renewcommand{\figureautorefname}{Fig.}
+\renewcommand{\tableautorefname}{Tab.}
+\renewcommand{\equationautorefname}{Ec.}
+
+\begin{titlepage}
+\thispagestyle{empty}
+\begin{tikzpicture}[remember picture,overlay]
+    \node[opacity=0.2,anchor=center] at (current page.center)
+        {\includegraphics[width=0.9\paperwidth]{decoracion_a.png}};
+\end{tikzpicture}
+\begin{center}
+    \includegraphics[width=15cm]{unc_fcefyn_logo.png} \\ [0.5cm]
+    \LARGE Universidad Nacional de Córdoba \\ [0.5cm]
+    \large Facultad de Ciencias Exactas, Físicas y Naturales \\
+    \vspace{40pt}
+    \large Sistemas de Radiocomunicación \\ [0.2cm]
+    \large Trabajo Práctico N.° 6 \\
+    \vspace{50pt}
+    \LARGE Medios \\[0.3cm]
+    \large Mediciones en medios de comunicación analógicos y digitales \\
+    \vspace{40pt}
+    \begin{table}[!h]
+        \centering
+        \begin{tabular}{ll}
+            \multicolumn{1}{c}{Nombre} & \multicolumn{1}{c}{DNI} \\
+            Arteaga Barrera, Cristian Eduardo & 95.159.096 \\
+            Baccino, Luca & 45.328.380 \\
+            Mendes Rosa, Agustín & 44.517.201 \\
+            Monja, Ernesto Joaquín & 43.873.728 \\
+        \end{tabular}
+    \end{table}
+    \vspace{20pt}
+    \begin{table}[!h]
+        \centering
+        \begin{tabular}{ll}
+            \multicolumn{1}{c}{Docentes} & Esp. Ing. Liendo, Carlos Guillermo \\
+                                         & Ing. Dadam, Federico Tomás \\
+        \end{tabular}
+    \end{table}
+    \vfill
+        {\small Comisión: \pendiente{completar} \quad Fecha de las mediciones: \pendiente{completar}\\[0.2cm]
+         Córdoba, República Argentina\\ Año 2026}
+\end{center}
+\end{titlepage}
+
+\newpage
+\tableofcontents
+\newpage
+\listoffigures
+\listoftables
+\newpage
+
+\input{secciones/01_introduccion}
+\input{secciones/02_equipamiento}
+\newpage
+\part*{Parte 1: Mediciones con analizador de espectro}
+\addcontentsline{toc}{part}{Parte 1: Mediciones con analizador de espectro}
+\input{secciones/03_am}
+\input{secciones/04_fm}
+\input{secciones/05_tv_analogica}
+\input{secciones/06_tda}
+\newpage
+\part*{Parte 2: Interpretación de niveles}
+\addcontentsline{toc}{part}{Parte 2: Interpretación de niveles}
+\input{secciones/07_niveles}
+\newpage
+\part*{Parte 3: Investigación y desarrollo conceptual}
+\addcontentsline{toc}{part}{Parte 3: Investigación y desarrollo conceptual}
+\input{secciones/08_dvbc}
+\input{secciones/09_docsis}
+\input{secciones/10_rf_overlay}
+\input{secciones/11_isdbtb}
+\input{secciones/12_isdbtb_cable}
+\newpage
+\input{secciones/13_conclusiones}
+
+\newpage
+\printbibliography[heading=bibintoc, title={Fuentes consultadas}]
+\end{document}

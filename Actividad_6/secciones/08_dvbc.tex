@@ -1,0 +1,34 @@
+\section{DVB-C}
+\label{sec:dvbc}
+
+DVB-C (\textit{Digital Video Broadcasting -- Cable}) es la norma del consorcio DVB para la transmisión de televisión digital por redes de cable, publicada por ETSI como EN 300 429 \cite{etsi_dvbc} y recogida por la UIT como Anexo A de la Recomendación J.83 \cite{itu_j83}.
+
+\subsection{Tipo de red}
+Se usa en redes de televisión por cable coaxial y en las redes híbridas fibra-coaxial (HFC): la señal sale de la cabecera por fibra hasta un nodo óptico, que la convierte a RF y la distribuye por coaxial de $75 \, [\Omega]$, con amplificadores y derivadores, hasta el abonado. El canal coaxial es mucho más benigno que el terrestre: no hay multitrayecto severo, la relación señal a ruido es alta (más de $30 \, [dB]$) y los niveles están controlados. Por eso DVB-C puede usar una modulación de un solo portador de alto orden, sin los mecanismos de robustez de la televisión terrestre.
+
+\subsection{Modulación y codificación}
+\begin{itemize}
+    \item \underline{Modulación:} QAM de portadora única, con 16, 32, 64, 128 o 256 estados. Los más usados son 64-QAM y 256-QAM. Los símbolos se filtran con un coseno elevado de factor de \textit{roll-off} $\alpha = 0{,}15$.
+    \item \underline{Codificación de canal:} aleatorización para dispersar la energía, código Reed-Solomon RS(204,188), que corrige hasta 8 bytes erróneos por paquete, y un entrelazador convolucional de profundidad 12. A diferencia de la norma terrestre, no hay código convolucional interno, porque el canal no lo requiere.
+    \item \underline{Canal:} DVB-C se diseñó para canales de $8 \, [MHz]$ en Europa, pero la velocidad de símbolo es configurable, así que se adapta a canales de $6 \, [MHz]$.
+\end{itemize}
+
+La tasa útil de un canal es
+\begin{equation}
+    R_b = R_s \cdot \log_2 M \cdot \frac{188}{204}, \qquad R_s = \frac{B_{canal}}{1 + \alpha}
+    \label{eq:dvbc}
+\end{equation}
+En un canal de $6 \, [MHz]$, $R_s = 6/1{,}15 = 5{,}22 \, [Mbaud]$. Con 256-QAM se obtienen $5{,}22 \cdot 8 \cdot 0{,}922 = 38{,}5 \, [Mbps]$ y con 64-QAM, $28{,}8 \, [Mbps]$. Con compresión H.264, un canal analógico de $6 \, [MHz]$ convertido a digital transporta entre 8 y 12 programas de definición estándar o 3 a 4 de alta definición.
+
+La segunda generación, DVB-C2 (EN 302 769) \cite{etsi_dvbc2}, reemplaza la portadora única por OFDM y la codificación por LDPC con BCH, y admite constelaciones de hasta 4096-QAM. Con ello mejora la eficiencia en alrededor de un $30 \,\text{\%}$, aunque su adopción fue limitada porque los operadores migraron en paralelo hacia IPTV y DOCSIS.
+
+\subsection{Transporte de los servicios de televisión}
+DVB-C transporta un flujo de transporte MPEG-2 (\textit{Transport Stream}, TS) por canal: paquetes de 188 bytes que multiplexan el video y el audio comprimidos de varios programas, junto con las tablas de información de servicio:
+\begin{itemize}
+    \item \underline{PSI:} las tablas PAT y PMT, que indican qué paquetes forman cada programa.
+    \item \underline{SI:} las tablas NIT, SDT y EIT, con los datos de la red, los nombres de los servicios y la guía de programación.
+\end{itemize}
+En la cabecera, los programas recibidos por satélite, por fibra o generados localmente se codifican, se multiplexan en varios TS y se modulan en canales QAM contiguos. Los servicios pagos se cifran con un sistema de acceso condicional (\textit{DVB Common Scrambling}): el abonado necesita un decodificador o un módulo de acceso condicional con su tarjeta. El receptor sintoniza el canal QAM, demodula el TS y extrae el programa elegido.
+
+\subsection{Aplicación en Argentina}
+Los grandes cableoperadores argentinos digitalizaron sus redes HFC con canales QAM, que conviven con los canales analógicos en la misma red y se reciben con un decodificador. Por ejemplo, Cablevisión desplegó en 2017 para su servicio Flow el decodificador ARRIS DCX4220, de diseño híbrido, que recibe tanto los canales QAM de la red de cable como contenido por IP \cite{lightwave_flow}. Las fuentes encontradas mencionan la recepción QAM, pero no detallan la norma ni la configuración de cada operador, por lo que la elección de DVB-C (frente al Anexo B de J.83, la norma norteamericana) debería confirmarse con la documentación técnica de cada uno.

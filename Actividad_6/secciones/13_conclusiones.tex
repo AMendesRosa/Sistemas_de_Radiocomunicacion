@@ -1,0 +1,28 @@
+\section{Conclusiones}
+\label{sec:conclusiones}
+
+\subsection{Principales resultados}
+\begin{itemize}
+    \item \underline{AM:} \pendiente{emisora, frecuencia y ancho de banda medido}. El espectro muestra la portadora fija y las dos bandas laterales simétricas, dentro del canal de $10 \, [kHz]$. Con una señal de programa no se puede medir el índice de modulación con los niveles de portadora y banda lateral, porque no hay un tono único.
+    \item \underline{FM:} \pendiente{emisora, frecuencia y ancho de banda medido}. La emisión ocupa del orden del canal de $200 \, [kHz]$, de acuerdo con la regla de Carson para una desviación de $75 \, [kHz]$. La relación entre la portadora y $J_0(\beta)$ solo permite medir el índice con un tono conocido.
+    \item \underline{Televisión analógica:} \pendiente{resultado o indicar que se desarrolló conceptualmente}. Cada componente del canal PAL-N usa una modulación distinta: AM con banda lateral vestigial para el video, QAM sobre una subportadora para el color y FM para el audio.
+    \item \underline{TDA:} \pendiente{canales observados y decodificados}. Los canales ISDB-Tb se reconocen por su meseta plana de $5{,}57 \, [MHz]$, típica de OFDM. Que una señal aparezca en el analizador no garantiza que se decodifique.
+    \item \underline{Niveles:} la conversión entre dBm y dBµV depende de la impedancia ($+107{,}0 \, [dB]$ en $50 \, [\Omega]$ y $+108{,}8 \, [dB]$ en $75 \, [\Omega]$), mientras que los niveles en dBc no dependen de ella. En el ejercicio, una banda lateral de $-40 \, [dBc]$ corresponde a un índice de modulación del $2 \,\text{\%}$.
+    \item \underline{Distribución por cable y fibra:}
+    \begin{itemize}
+        \item DVB-C aprovecha la alta relación señal a ruido del cable con QAM de portadora única, y transporta unos $38 \, [Mbps]$ por canal de $6 \, [MHz]$ con 256-QAM.
+        \item DOCSIS convierte la red HFC en una red de datos bidireccional, y es la base del acceso a Internet y de la migración del video a IP.
+        \item El RF Overlay lleva todo el espectro de una red de cable en $1.550 \, [nm]$ sobre la ODN de una red FTTH, sin consumir capacidad de datos y sin decodificadores, a costa de equipamiento óptico de video y sin interactividad. La IPTV, en cambio, integra el video en la red de datos.
+        \item ISDB-Tb usa OFDM en 13 segmentos y capas jerárquicas, que permiten combinar en un canal servicios fijos en HD y servicios móviles.
+        \item ISDB-Tb sobre cable aprovecha que los televisores argentinos ya traen sintonizador ISDB-Tb para digitalizar las redes de cable sin decodificadores.
+    \end{itemize}
+\end{itemize}
+
+\subsection{Dificultades y limitaciones de las mediciones}
+\begin{itemize}
+    \item \underline{Señales de programa:} su espectro varía todo el tiempo, por lo que los anchos de banda medidos dependen del tiempo de observación, de la retención de máximos y del criterio de nivel adoptado.
+    \item \underline{Resolución del instrumento:} el RBW recomendado de $9 \, [kHz]$ es comparable con el canal de AM y no resuelve su estructura, mientras que un RBW menor hace más lento el barrido.
+    \item \underline{Impedancia:} el analizador mide en $50 \, [\Omega]$ y las antenas y redes de televisión son de $75 \, [\Omega]$. La desadaptación o el adaptador agregan un error o una atenuación que hay que considerar.
+    \item \underline{Condiciones del lugar:} los niveles medidos dependen de la antena, de su orientación y de la ubicación del laboratorio, por lo que no representan la cobertura de las emisoras.
+    \item \pendiente{Agregar las dificultades encontradas durante las mediciones, por ejemplo falta de señal analógica, interferencias o limitaciones del equipamiento.}
+\end{itemize}

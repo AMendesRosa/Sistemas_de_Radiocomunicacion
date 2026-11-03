@@ -1,0 +1,98 @@
+\section{Radiodifusión en FM}
+\label{sec:fm}
+
+\subsection{Modulación FM}
+En la modulación de frecuencia, la frecuencia instantánea de la portadora se desvía en proporción a la señal modulante. Para un tono de frecuencia $f_m$ que produce una desviación máxima $\Delta f$, el índice de modulación es $\beta = \Delta f / f_m$ y la señal se desarrolla en funciones de Bessel de primera especie \cite{haykin}:
+\begin{equation}
+    s(t) = E_c \cos\left[2\pi f_c t + \beta \sin(2\pi f_m t)\right]
+    = E_c \sum_{n=-\infty}^{\infty} J_n(\beta) \cos\left[2\pi (f_c + n f_m) t\right]
+    \label{eq:fm}
+\end{equation}
+
+El espectro tiene infinitas componentes separadas $f_m$ entre sí, con amplitud $E_c J_n(\beta)$. La amplitud total de la señal no cambia con la modulación: lo que cambia es cómo se reparte la potencia entre la portadora y las bandas laterales. Casi toda la potencia queda en el ancho de banda que da la regla de Carson:
+\begin{equation}
+    B_T \approx 2 \left(\Delta f + f_m\right)
+    \label{eq:carson}
+\end{equation}
+
+En la radiodifusión en FM la desviación máxima es de $\pm 75 \, [kHz]$ \cite{itu_bs450}. La señal modulante es la señal múltiplex estéreo, que ocupa hasta $53 \, [kHz]$:
+\begin{itemize}
+    \item \underline{De $30 \, [Hz]$ a $15 \, [kHz]$:} la suma $L+R$, que es la que reproduce un receptor monofónico.
+    \item \underline{En $19 \, [kHz]$:} el tono piloto.
+    \item \underline{De $23$ a $53 \, [kHz]$:} la diferencia $L-R$, en doble banda lateral con portadora suprimida en $38 \, [kHz]$.
+    \item \underline{En $57 \, [kHz]$:} los datos RDS, si la emisora los transmite.
+\end{itemize}
+Con la regla de Carson, la señal monofónica ocupa $2(75 + 15) = 180 \, [kHz]$ y la estéreo $2(75 + 53) = 256 \, [kHz]$. Este último valor es mayor que la separación de $200 \, [kHz]$ entre canales, porque la regla es conservadora: la desviación pico solo se alcanza en los momentos de mayor nivel del programa.
+
+\subsection{Mediciones}
+
+\begin{table}[H]
+    \centering
+    \caption{Configuración del analizador y resultados en la banda de FM.}
+    \label{tab:fm_resultados}
+    \begin{tabular}{p{6.5cm} p{4cm} p{4cm}}
+        \toprule
+        \textbf{Parámetro} & \textbf{Exploración de banda} & \textbf{Detalle de la emisora} \\
+        \midrule
+        Frecuencias de inicio y fin / central & $88$ a $108 \, [MHz]$ & \pendiente{} \\
+        \textit{Span} & $20 \, [MHz]$ & \pendiente{$1$ a $2 \, [MHz]$} \\
+        Nivel de referencia & \pendiente{} & \pendiente{} \\
+        RBW / VBW & \pendiente{} & \pendiente{$\approx 10 \, [kHz]$} \\
+        Atenuación / preamplificación & \pendiente{} & \pendiente{} \\
+        Unidad / impedancia & \pendiente{} & \pendiente{} \\
+        \midrule
+        Frecuencia central y canal & \multicolumn{2}{l}{\pendiente{$f_c$ [MHz], canal $N$ según la \autoref{eq:canal_fm}}} \\
+        Emisora identificada & \multicolumn{2}{l}{\pendiente{nombre y localidad}} \\
+        Nivel de la señal & \multicolumn{2}{l}{\pendiente{dBm}} \\
+        Ancho de banda ocupado estimado & \multicolumn{2}{l}{\pendiente{kHz}} \\
+        Emisoras en canales cercanos & \multicolumn{2}{l}{\pendiente{frecuencias y separación}} \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+\begin{figure}[H]
+    \centering
+    \pendiente{Captura de la banda de FM completa (\texttt{Figuras/mediciones/fm\_banda.png})}
+    \caption{Exploración de la banda de radiodifusión en FM.}
+    \label{fig:fm_banda}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \pendiente{Captura de la emisora de mayor nivel y sus canales adyacentes (\texttt{Figuras/mediciones/fm\_emisora.png})}
+    \caption{Espectro de la emisora de FM de mayor nivel.}
+    \label{fig:fm_emisora}
+\end{figure}
+
+\subsection{Análisis}
+
+\subsubsection*{Ancho de banda ocupado}
+A diferencia de la AM, la FM no tiene una portadora fija y bandas laterales separadas: con un programa, la energía se mueve dentro de un ``bloque'' de ancho variable alrededor de $f_c$. El ancho de banda se estimó con la traza de retención de máximos durante \pendiente{tiempo}, entre los puntos que caen \pendiente{26} dB por debajo del máximo \cite{itu_sm328}. Se obtuvo \pendiente{$B$ [kHz]}, que se compara con:
+\begin{itemize}
+    \item La separación entre canales de $200 \, [kHz]$ del CABFRA \cite{cabfra}.
+    \item La regla de Carson, de $180 \, [kHz]$ para una emisión monofónica y de $256 \, [kHz]$ para una estéreo con la desviación máxima.
+\end{itemize}
+
+\subsubsection*{Canales adyacentes}
+\pendiente{Describir la distribución de las emisoras vecinas: frecuencias y separación en canales.} Como la emisión ocupa del orden de un canal, dos emisoras en canales contiguos se solaparían en los flancos. Por eso la norma técnica fija relaciones de protección para el primer y el segundo canal adyacente, y en una misma localidad las emisoras suelen quedar separadas por $400 \, [kHz]$ o más. El analizador muestra si los espectros se tocan, pero no alcanza para confirmar una interferencia. Con un programa, los espectros cambian en el tiempo, y lo que se ve como superposición puede ser el piso de ruido del instrumento o la retención de máximos. Además, el efecto de una superposición depende de la selectividad y del umbral de captura del receptor.
+
+\subsubsection*{Índice de modulación y funciones de Bessel}
+La componente de la frecuencia de la portadora tiene amplitud $E_c J_0(\beta)$ (\autoref{fig:fm_bessel}). Como $J_0$ se anula en $\beta = 2{,}405$, $5{,}520$, $8{,}654$, etc., con un tono conocido se puede subir la desviación hasta que la portadora desaparece del analizador y obtener $\Delta f = \beta f_m$ con gran precisión. Es el método de la portadora nula de Bessel, usado para calibrar moduladores de FM.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{teoria/fm_bessel.png}
+    \caption{Coeficientes de Bessel en función de $\beta$ y espectro de FM con portadora nula (esquemas propios).}
+    \label{fig:fm_bessel}
+\end{figure}
+
+Esta relación no permite medir el índice de modulación de una emisión de programa habitual, por tres razones:
+\begin{itemize}
+    \item La señal modulante es compleja: tiene muchas componentes de frecuencia y amplitud variables. El índice $\beta = \Delta f / f_m$ solo está definido para un tono, y con varios tonos aparecen productos de intermodulación con coeficientes $J_n(\beta_1) J_k(\beta_2) \cdots$.
+    \item El espectro cambia continuamente con el contenido del programa, de modo que la línea de la portadora sube y baja todo el tiempo.
+    \item La señal estéreo incluye el piloto y la subportadora de $38 \, [kHz]$, que también modulan la portadora.
+\end{itemize}
+Lo que sí se puede medir sobre una emisión real es la desviación máxima, con un demodulador o un medidor de desviación, y comprobar que no supere $75 \, [kHz]$.
+
+\subsection{Síntesis}
+La FM transmite la información en la frecuencia instantánea de la portadora, con amplitud constante. Esto la hace robusta frente al ruido y a las variaciones de amplitud del canal, y permite usar amplificadores no lineales. A cambio, ocupa un ancho de banda mucho mayor que la AM: unos $200 \, [kHz]$ contra $10 \, [kHz]$. En el analizador se ve como un bloque de energía de ancho variable alrededor de la frecuencia del canal, con potencia total constante y una distribución que cambia con el programa.

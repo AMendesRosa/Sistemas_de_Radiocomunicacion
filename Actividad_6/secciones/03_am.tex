@@ -1,0 +1,100 @@
+\section{Radiodifusión en AM}
+\label{sec:am}
+
+\subsection{Modulación AM}
+En la modulación de amplitud con doble banda lateral y portadora completa, la envolvente de la portadora sigue a la señal modulante. Para un tono de frecuencia $f_m$ y un índice de modulación $m$:
+\begin{equation}
+    s(t) = E_c \left[1 + m \cos(2\pi f_m t)\right] \cos(2\pi f_c t)
+    = E_c \cos(2\pi f_c t) + \frac{m E_c}{2} \cos\left[2\pi (f_c \pm f_m) t\right]
+    \label{eq:am}
+\end{equation}
+
+El espectro tiene tres componentes (\autoref{fig:am_teoria}, izquierda):
+\begin{itemize}
+    \item \underline{La portadora}, en $f_c$, con amplitud $E_c$. No depende de la modulación y concentra al menos dos tercios de la potencia, aun con $m = 1$.
+    \item \underline{Las bandas laterales inferior y superior}, en $f_c - f_m$ y $f_c + f_m$, con amplitud $m E_c / 2$ cada una. Llevan la información y son imágenes especulares una de la otra.
+\end{itemize}
+En dBc, cada banda lateral queda $20 \log(2/m)$ por debajo de la portadora: $6 \, [dB]$ con $m = 1$ y $12 \, [dB]$ con $m = 0{,}5$. Con una señal de programa, cada componente del audio genera su par de bandas laterales, y el resultado es un espectro continuo y simétrico alrededor de la portadora, que ocupa $2 f_{m,max}$ (\autoref{fig:am_teoria}, derecha).
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{teoria/am_espectro.png}
+    \caption{Espectro de AM con un tono y con señal de programa (esquemas propios).}
+    \label{fig:am_teoria}
+\end{figure}
+
+\subsection{Mediciones}
+
+\subsubsection*{Exploración de la banda e identificación de la emisora}
+Se exploró la banda de $535$ a $1.705 \, [kHz]$ y se identificó la señal de mayor nivel recibido. Con el CABFRA y el listado de emisoras de ENACOM se determinó la emisora (\autoref{tab:am_resultados}).
+
+\begin{table}[H]
+    \centering
+    \caption{Configuración del analizador y resultados en la banda de AM.}
+    \label{tab:am_resultados}
+    \begin{tabular}{p{6.5cm} p{4cm} p{4cm}}
+        \toprule
+        \textbf{Parámetro} & \textbf{Exploración de banda} & \textbf{Detalle de la emisora} \\
+        \midrule
+        Frecuencias de inicio y fin / central & $535$ a $1.705 \, [kHz]$ & \pendiente{} \\
+        \textit{Span} & $1{,}17 \, [MHz]$ & \pendiente{$20$ a $30 \, [kHz]$} \\
+        Nivel de referencia & \pendiente{} & \pendiente{} \\
+        RBW / VBW & \pendiente{$9 \, [kHz]$ / $100 \, [kHz]$} & \pendiente{$\leq 1 \, [kHz]$} \\
+        Atenuación / preamplificación & \pendiente{} & \pendiente{} \\
+        Unidad / impedancia & \pendiente{dBm / $50 \, \Omega$} & \pendiente{} \\
+        \midrule
+        Frecuencia de la portadora & \multicolumn{2}{l}{\pendiente{$f_c$ [kHz]}} \\
+        Emisora identificada & \multicolumn{2}{l}{\pendiente{nombre y localidad}} \\
+        Nivel de la portadora & \multicolumn{2}{l}{\pendiente{dBm}} \\
+        Ancho de banda ocupado estimado & \multicolumn{2}{l}{\pendiente{kHz, con el criterio indicado abajo}} \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+\begin{figure}[H]
+    \centering
+    \pendiente{Captura de la banda de AM completa (\texttt{Figuras/mediciones/am\_banda.png})}
+    \caption{Exploración de la banda de radiodifusión en AM.}
+    \label{fig:am_banda}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \pendiente{Captura de la emisora con portadora y bandas laterales (\texttt{Figuras/mediciones/am\_emisora.png})}
+    \caption{Portadora y bandas laterales de la emisora de AM de mayor nivel.}
+    \label{fig:am_emisora}
+\end{figure}
+
+\subsection{Análisis}
+
+\subsubsection*{Componentes del espectro}
+En la \autoref{fig:am_emisora}, la línea central es la portadora, en la frecuencia asignada a la emisora, y a ambos lados aparecen las bandas laterales inferior y superior. Estas son simétricas y su nivel varía en el tiempo con el contenido del programa: en silencio queda solo la portadora y con música o voz las bandas laterales se llenan.
+
+\subsubsection*{Ancho de banda ocupado}
+El ancho de banda se estimó entre las frecuencias donde las bandas laterales caen \pendiente{26} dB por debajo de la portadora, el criterio de ``$x$ dB'' de la Recomendación UIT-R SM.328 \cite{itu_sm328, itu_sm443}. Con el analizador también puede medirse el ancho de banda que contiene el $99 \,\text{\%}$ de la potencia, si el instrumento tiene esa función. Como el espectro de programa cambia en todo momento, conviene usar la traza de retención de máximos (\textit{max hold}) durante unos segundos. Así se obtuvo un ancho de banda de \pendiente{$B$ [kHz]}, frente a la separación de $10 \, [kHz]$ entre canales del CABFRA \cite{cabfra}.
+
+\subsubsection*{Canales adyacentes}
+\pendiente{Describir si se ven emisoras en los canales a $\pm 10$, $\pm 20 \, [kHz]$.} La planificación evita asignar canales adyacentes a emisoras de una misma zona, de modo que las señales cercanas suelen estar separadas varios canales. Hay dos limitaciones en la observación:
+\begin{itemize}
+    \item Con un RBW de $9 \, [kHz]$, cercano al ancho del canal, el filtro del analizador mezcla la emisión estudiada con lo que haya a pocos kHz. Para separar componentes cercanas hace falta un RBW menor, a costa de un barrido más lento.
+    \item Las bandas laterales de la emisora pueden confundirse con señales de un canal adyacente. Se distinguen porque son simétricas respecto de la portadora y porque varían con el programa, mientras que una emisora adyacente tiene su propia portadora.
+\end{itemize}
+
+\subsubsection*{Máxima frecuencia modulante}
+Como cada componente del audio de frecuencia $f_m$ produce bandas laterales en $f_c \pm f_m$, el ancho de banda ocupado da la máxima frecuencia modulante:
+\begin{equation}
+    f_{m,max} = \frac{B}{2} = \pendiente{} \, [kHz]
+\end{equation}
+La estimación es válida si la emisión es de doble banda lateral sin filtrado asimétrico, si el ancho se mide sobre un tiempo suficiente para que aparezcan las frecuencias altas del programa y si el criterio de nivel es adecuado: lo que queda debajo del ruido del instrumento no se ve. Con un canal de $10 \, [kHz]$ el audio queda limitado a unos $5 \, [kHz]$.
+
+\subsubsection*{Índice de modulación}
+\pendiente{Si se dispuso de un generador: medir portadora y banda lateral con un tono y calcular $m$ con la \autoref{eq:indice_am}. Si no, dejar el siguiente párrafo.}
+Con un único tono sinusoidal, el índice de modulación sale directamente de los niveles de portadora y de una banda lateral:
+\begin{equation}
+    m = \frac{2 E_{BL}}{E_c} = 2 \cdot 10^{(N_{BL} - N_c)/20}
+    \label{eq:indice_am}
+\end{equation}
+donde $N_{BL} - N_c$ es la diferencia de niveles en dB (\autoref{sec:ejercicio_am}). Con una emisión de programa habitual este procedimiento no se puede aplicar, porque la modulante no es un tono: tiene muchas componentes de frecuencia y amplitud variables, que reparten la potencia de las bandas laterales en un espectro continuo. No hay una única línea de banda lateral para medir, y su nivel depende del RBW y del momento. Tampoco puede suponerse que una emisora comercial module con $m = 1$: los procesadores de audio limitan los picos por debajo de la sobremodulación, y el índice cambia todo el tiempo con el programa.
+
+\subsection{Síntesis}
+La AM imprime la información en la amplitud de la portadora. En el espectro esto se ve como una portadora fija y dos bandas laterales simétricas, cuyo ancho es el doble de la máxima frecuencia modulante y cuyo nivel depende del índice de modulación. Es una modulación sencilla de demodular, con un detector de envolvente, pero ineficiente: la portadora lleva la mayor parte de la potencia sin información, y las dos bandas laterales repiten el mismo contenido.
