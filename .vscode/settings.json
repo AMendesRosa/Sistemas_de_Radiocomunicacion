@@ -1,6 +1,20 @@
 {
   "latex-workshop.latex.tools": [
     {
+      // Compila el archivo raíz que se esté editando (sirve para todos los TP)
+      "name": "latexmk",
+      "command": "latexmk",
+      "args": [
+        "-pdf",
+        "-synctex=1",
+        "-interaction=nonstopmode",
+        "-file-line-error",
+        "-cd",
+        "%DOC%"
+      ]
+    },
+    {
+      // Sólo para el TP5: compila los dos informes juntos
       "name": "latexmk-ambos",
       "command": "latexmk",
       "args": [
@@ -15,6 +29,8 @@
     }
   ],
   "latex-workshop.latex.recipes": [
+    { "name": "latexmk (general)", "tools": ["latexmk"] },
     { "name": "Ambos informes", "tools": ["latexmk-ambos"] }
-  ]
+  ],
+  "latex-workshop.latex.recipe.default": "first"
 }
