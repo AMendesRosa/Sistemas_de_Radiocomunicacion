@@ -352,22 +352,29 @@
 \begin{frame}{Cadena de procesamiento}
   \centering
   \resizebox{\textwidth}{!}{%
-  \begin{tikzpicture}[font=\footnotesize, node distance=0.5cm and 0.6cm,
-      b/.style={draw, thick, rounded corners=2pt, fill=blue!8, minimum height=0.9cm, text width=2.1cm, align=center},
-      f/.style={-{Stealth}, thick}]
-      \node[b] (raw) {Datos crudos $100 \times 2000$};
-      \node[b, right=of raw] (mf) {Filtro apareado (compresión)};
-      \node[b, right=1.0cm of mf, fill=orange!12] (sti) {STI SC $1 + z^{-1}$};
-      \node[b, above=of sti, fill=orange!12] (mti) {MTI SC $1 - z^{-1}$};
-      \node[b, below=of sti, fill=orange!12] (dc) {MTI DC $1 - 2z^{-1} + z^{-2}$};
-      \node[b, right=of mti, fill=green!10] (dop) {Filtrado Doppler (DFT en tiempo lento)};
-      \node[b, right=of sti, fill=green!10] (cfar) {CFAR y cruces por cero};
-      \node[b, right=of dop, fill=purple!10] (vel) {Rango y velocidad de blancos móviles};
-      \node[b, right=of cfar, fill=purple!10] (rng) {Rango de los blancos (móviles y fijos)};
-      \draw[f] (raw) -- (mf); \draw[f] (mf) -- (sti); \draw[f] (mf.east) -- ++(0.4,0) |- (mti); \draw[f] (mf.east) -- ++(0.4,0) |- (dc);
-      \draw[f] (mti) -- (dop); \draw[f] (dop) -- (vel); \draw[f] (sti) -- (cfar); \draw[f] (cfar) -- (rng);
-      \draw[f] (mti.east) -- ++(0.25,0) |- (cfar); \draw[f] (dc.east) -- ++(0.25,0) |- (cfar);
-  \end{tikzpicture}}
+  \begin{tikzpicture}[font=\footnotesize,
+        b/.style={draw, thick, rounded corners=2pt, fill=blue!8, minimum height=1.0cm, text width=2.4cm, align=center},
+        f/.style={-{Stealth}, thick}]
+        \node[b] (raw) at (0, 0) {Datos crudos\\$100 \times 2000$};
+        \node[b] (mf) at (3.3, 0) {Filtro apareado\\(compresión)};
+        \node[b, fill=orange!12] (mti) at (6.9, 1.7) {MTI SC\\$1 - z^{-1}$};
+        \node[b, fill=orange!12] (sti) at (6.9, 0) {STI SC\\$1 + z^{-1}$};
+        \node[b, fill=orange!12] (dc) at (6.9, -1.7) {MTI DC\\$1 - 2z^{-1} + z^{-2}$};
+        \node[b, fill=green!10] (dop) at (10.5, 1.7) {Filtrado Doppler\\(DFT en tiempo lento)};
+        \node[b, fill=green!10] (cfar) at (10.5, -0.85) {CFAR y\\cruces por cero};
+        \node[b, fill=purple!10] (vel) at (14.0, 1.7) {Rango y velocidad\\de blancos móviles};
+        \node[b, fill=purple!10] (rng) at (14.0, -0.85) {Rango de blancos\\móviles y fijos};
+        \draw[f] (raw) -- (mf);
+        \draw[f] (mf) -- (sti);
+        \draw[f] (mf.east) -- ++(0.45,0) |- (mti.west);
+        \draw[f] (mf.east) -- ++(0.45,0) |- (dc.west);
+        \draw[f] (mti) -- (dop);
+        \draw[f] (dop) -- (vel);
+        \draw[f] (cfar) -- (rng);
+        \draw[f] (mti.east) -- ++(0.4,0) |- ([yshift=0.25cm]cfar.west);
+        \draw[f] (sti.east) -- ++(0.4,0) |- (cfar.west);
+        \draw[f] (dc.east) -- ++(0.4,0) |- ([yshift=-0.25cm]cfar.west);
+    \end{tikzpicture}}
   \vspace{0.3cm}
 
   \raggedright\small

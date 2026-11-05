@@ -4,7 +4,8 @@ Procesamiento de la señal de radar del TP5: compresión con filtro apareado, ve
 canceladores MTI simple, STI simple y MTI doble, y filtrado Doppler.
 
 Basado en cfar_doppler_processing_alumnos.py (fdadam). Uso:
-    python tp5_radar.py 1      # procesa signal_1.csv
+    python tp5_radar.py 1        # procesa signal_1.csv
+    python tp5_radar.py example  # procesa signal_example.csv (validación con la Figura 5 de la consigna)
 Las figuras se guardan en ../Figuras/senal_<n>/ y los resultados en ../Figuras/senal_<n>/resultados.json
 """
 
@@ -33,7 +34,7 @@ def fastconv(A, B):
 
 #%% Parameters (los de la cátedra)
 
-SENAL = int(sys.argv[1]) if len(sys.argv) > 1 else 1
+SENAL = sys.argv[1] if len(sys.argv) > 1 else '1'   # 1, 2, 3, 4 o example
 c = 3e8                 # speed of light [m/s]
 fc = 1.3e9              # Carrier freq
 fs = 10e6               # Sampling freq

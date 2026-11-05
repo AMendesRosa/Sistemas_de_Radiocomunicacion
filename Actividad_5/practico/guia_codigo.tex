@@ -1,0 +1,293 @@
+% Guía del código del TP5: qué hace cada fragmento de tp5_radar.py, su justificación teórica y cómo reproducir los resultados.
+% Los fragmentos se leen directamente del script (\lstinputlisting), con su numeración de línea real.
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish,es-tabla,es-nodecimaldot]{babel}
+\usepackage[a4paper,margin=2.2cm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs,array}
+\usepackage{enumitem}
+\usepackage[table]{xcolor}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage[hidelinks]{hyperref}
+\usepackage{float}
+\graphicspath{{../Figuras/}}
+\setlist{itemsep=2pt}
+\setlength{\parskip}{4pt}
+\setlength{\parindent}{0pt}
+
+\definecolor{fondo}{RGB}{245,247,246}
+\definecolor{verde}{RGB}{27,58,48}
+\lstset{
+  language=Python, basicstyle=\ttfamily\footnotesize, backgroundcolor=\color{fondo},
+  keywordstyle=\color{blue!60!black}\bfseries, commentstyle=\color{green!40!black}\itshape,
+  stringstyle=\color{red!60!black}, numbers=left, numberstyle=\tiny\color{gray}, numbersep=6pt,
+  frame=single, rulecolor=\color{gray!40}, breaklines=true, columns=fullflexible, keepspaces=true,
+  showstringspaces=false, xleftmargin=1.6em, framexleftmargin=1.4em,
+  literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1 {ñ}{{\~n}}1 {Á}{{\'A}}1 {É}{{\'E}}1
+           {Ó}{{\'O}}1 {ü}{{\"u}}1 {°}{{$^\circ$}}1 {—}{{---}}1 {–}{{--}}1
+}
+\newcommand{\codigo}[2]{\lstinputlisting[firstline=#1, lastline=#2, firstnumber=#1]{tp5_radar.py}}
+\newcommand{\teoria}{\par\textcolor{verde}{\textbf{Justificación teórica.}}\ }
+\newcommand{\hace}{\par\textcolor{verde}{\textbf{Qué hace.}}\ }
+\newcommand{\archivo}[1]{\texttt{#1}}
+
+\begin{document}
+
+{\LARGE\bfseries TP5 Radar -- Guía del código}\\[4pt]
+Sistemas de Radiocomunicación -- FCEFyN, UNC \hfill Script: \archivo{Actividad\_5/practico/tp5\_radar.py}
+
+\vspace{6pt}
+Esta guía recorre los puntos del código que pide la consigna. Para cada uno muestra el fragmento del script, explica qué hace y da la justificación teórica. Al principio está el paso a paso para correrlo y reproducir los resultados de los informes. Los números de línea son los del archivo.
+
+\tableofcontents
+
+% =====================================================================
+\section{Paso a paso para reproducir los resultados}
+
+\subsection{Requisitos}
+\begin{itemize}
+  \item Python 3.10 o posterior (se probó con Python 3.14).
+  \item Bibliotecas: \archivo{numpy}, \archivo{scipy}, \archivo{pandas} y \archivo{matplotlib}.
+  \item Los archivos \archivo{signal\_1.csv}, \archivo{signal\_2.csv} y \archivo{signal\_example.csv}, en la misma carpeta que el script (\archivo{Actividad\_5/practico/}).
+\end{itemize}
+
+\subsection{Opción A: desde una terminal (recomendada)}
+\begin{enumerate}
+  \item Instalar las bibliotecas (una sola vez):
+\begin{lstlisting}[language=bash, numbers=none]
+pip install numpy scipy pandas matplotlib
+\end{lstlisting}
+  \item Ir a la carpeta del script:
+\begin{lstlisting}[language=bash, numbers=none]
+cd Actividad_5/practico
+\end{lstlisting}
+  \item Validar primero con la señal de ejemplo de la consigna:
+\begin{lstlisting}[language=bash, numbers=none]
+python tp5_radar.py example
+\end{lstlisting}
+  Tiene que detectar tres blancos móviles en 10,02, 15,02 y 20,01 km (la Figura 5 de la consigna los muestra en 9,95, 14,97 y 19,93 km) y uno fijo en 18,02 km.
+  \item Procesar la señal de cada grupo:
+\begin{lstlisting}[language=bash, numbers=none]
+python tp5_radar.py 1
+python tp5_radar.py 2
+\end{lstlisting}
+  \item Revisar la salida. El script imprime los parámetros, los rangos detectados por cada cancelador y la lista final de blancos, y guarda en \archivo{Actividad\_5/Figuras/senal\_<n>/}:
+  \begin{itemize}
+    \item \archivo{01\_senal\_recibida.png} a \archivo{08\_mapa\_rango\_velocidad.png}: los gráficos que pide la consigna.
+    \item \archivo{resultados.json}: todas las detecciones, las descartadas con su motivo y los blancos finales.
+  \end{itemize}
+  Cada corrida tarda unos segundos y sobrescribe las figuras de esa señal.
+\end{enumerate}
+
+\subsection{Opción B: con Anaconda y Spyder (sugerida por la consigna)}
+\begin{enumerate}
+  \item Abrir \archivo{tp5\_radar.py} en Spyder. Anaconda ya trae las cuatro bibliotecas.
+  \item Para elegir la señal: \textit{Run} $\rightarrow$ \textit{Configuration per file} $\rightarrow$ \textit{Command line options}, y escribir \archivo{1}, \archivo{2} o \archivo{example}. Sin argumento procesa la señal 1.
+  \item Ejecutar con F5. Las celdas \archivo{\#\%\%} también se pueden correr de a una con Ctrl+Enter para ver cada etapa.
+  \item Las figuras se guardan como PNG en la carpeta \archivo{Figuras}; el script no abre ventanas.
+\end{enumerate}
+
+\subsection{Resultados esperados}
+\begin{table}[H]
+  \centering
+  \small
+  \begin{tabular}{l p{7.2cm} l}
+    \toprule
+    \textbf{Señal} & \textbf{Blancos móviles [km; m/s]} & \textbf{Blancos fijos [km]} \\
+    \midrule
+    1 & 10,02 ($-85{,}7$); 15,21 ($+40{,}2$); 15,51 ($-22{,}7$); 20,01 ($-43{,}7$); 22,23 ($-31{,}5$) & 12,02; 17,61; 21,02 \\
+    2 & 8,01 ($-31{,}5$); 12,02 ($-59{,}4$); 19,82 ($-24{,}5$); 20,22 ($-43{,}7$); 26,24 ($+85{,}7$) & 15,62; 20,31; 22,02 \\
+    example & 10,02 ($-50{,}7$); 15,02 ($+40{,}2$); 20,01 ($-29{,}7$) & 18,02 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+Si los números coinciden, el procesamiento está reproducido. Velocidad positiva: el blanco se acerca; negativa: se aleja.
+
+\subsection{Dónde está cada punto de la consigna}
+\begin{table}[H]
+  \centering
+  \small
+  \begin{tabular}{p{5.8cm} p{4.6cm} l}
+    \toprule
+    \textbf{Consigna} & \textbf{Código} & \textbf{Figura} \\
+    \midrule
+    Compresión con filtro apareado & \archivo{matched\_filter}, \archivo{comprimir()} & \archivo{02\_compresion} \\
+    Ventana CFAR & \archivo{ventana\_cfar()}, \archivo{umbral\_cfar()} & \archivo{03\_ventana\_cfar} \\
+    MTI simple, STI simple, MTI doble & \archivo{mti\_sc}, \archivo{sti\_sc}, \archivo{mti\_dc} & \archivo{04}, \archivo{05}, \archivo{06} \\
+    CFAR plot y cruces por cero & \archivo{detectar()}, \archivo{cfar\_plot()} & \archivo{04} a \archivo{06} \\
+    Filtro Doppler & \archivo{FD}, \archivo{doppler} & \archivo{07\_doppler\_3d}, \archivo{08} \\
+    Señal recibida (un momento de muestreo) & Plot 1 & \archivo{01\_senal\_recibida} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+% =====================================================================
+\section{Lectura de la señal: tiempo lento y tiempo rápido}
+\codigo{69}{71}
+\hace El CSV trae 200.000 muestras en dos columnas, la parte real y la imaginaria. Se arman como números complejos y se ordenan en una matriz de $100 \times 2000$: cada fila es un pulso y cada columna, una distancia.
+
+\teoria El receptor entrega las componentes en fase y en cuadratura (I/Q) de la señal en banda base. Se necesitan las dos porque la fase del eco lleva la información de velocidad. Después de cada pulso transmitido, el receptor muestrea el eco a $f_s = 10$ MHz:
+\begin{itemize}
+  \item \textbf{Tiempo rápido} (columnas): las muestras dentro de un mismo pulso. La muestra $n$ llega $n\,t_s$ después de transmitir, que corresponde a la distancia $R = c\,n\,t_s/2$. El paso en rango es $c/(2f_s) = 15$ m, y 2000 muestras cubren 30 km.
+  \item \textbf{Tiempo lento} (filas): el mismo rango de un pulso al siguiente, separados una PRI $= 1/PRF = 666{,}7\ \mu$s. A lo largo de las filas se ve cómo cambia la fase de un blanco que se mueve.
+\end{itemize}
+El procesamiento en rango (compresión, CFAR) se hace a lo largo de las columnas, y el procesamiento de velocidad (canceladores, Doppler) a lo largo de las filas.
+
+% =====================================================================
+\section{Parámetros derivados y del CFAR}
+\codigo{49}{64}
+\hace Calcula las magnitudes que limitan al radar y fija los parámetros del detector CFAR.
+
+\teoria
+\begin{itemize}
+  \item $\lambda = c/f_c = 23{,}1$ cm. Con ella se convierte frecuencia Doppler en velocidad.
+  \item \textbf{Rango no ambiguo} $R_u = c\,(PRI - T_p - T_e)/2 = 97{,}75$ km: un eco más lejano llegaría después del pulso siguiente y se confundiría con uno cercano.
+  \item \textbf{Velocidad no ambigua} $v_u = \lambda\,PRF/2 = 173$ m/s (\archivo{vu\_ms}): es el ancho total del intervalo de velocidades que se pueden medir. La DFT en tiempo lento solo distingue frecuencias Doppler entre $-PRF/2$ y $+PRF/2$, es decir velocidades entre $\pm\lambda\,PRF/4 = \pm 86{,}5$ m/s. Una más rápida aparece replegada (aliasing).
+  \item \textbf{Rango mínimo} $(T_p/2 + T_e)\,c/2 = 1{,}5$ km: mientras se transmite y el receptor se recupera, el duplexor lo mantiene bloqueado.
+  \item \textbf{Resolución en rango} $c/(2B) = 75$ m: la que da el chirp comprimido (sección \ref{sec:compresion}).
+  \item \textbf{Factor del CFAR} $\alpha = N(P_{fa}^{-1/N} - 1) = 15{,}4$ y su raíz $3{,}93$ (sección \ref{sec:cfar}).
+\end{itemize}
+
+% =====================================================================
+\section{Compresión con filtro apareado}
+\label{sec:compresion}
+\subsection{El chirp y el filtro apareado}
+\codigo{80}{89}
+\hace Genera el chirp que transmite el radar (10 $\mu$s, 2 MHz) y, a partir de él, el filtro apareado: el mismo chirp invertido en el tiempo (\archivo{flip}) y conjugado (\archivo{conj}).
+
+\teoria El chirp es un pulso con modulación lineal de frecuencia:
+\[ s(t) = \mathrm{rect}(t/T)\,e^{j\pi (B/T) t^2}, \qquad f_i(t) = \frac{1}{2\pi}\frac{d\phi}{dt} = \frac{B}{T}\,t \]
+La fase es cuadrática, así que la frecuencia instantánea recorre linealmente el ancho de banda $B$. El filtro que maximiza la relación señal a ruido en ruido blanco es el apareado, $h(t) = s^*(-t)$: por la desigualdad de Schwarz la SNR de salida es como máximo $2E/N_0$, y la igualdad se alcanza con $H(f) = S^*(f)$. En frecuencia, $S^*(f)$ cancela la fase cuadrática del chirp: todas sus componentes salen alineadas en el mismo instante y forman un pico angosto.
+
+\subsection{Convolución por FFT y recorte}
+\codigo{25}{32}
+\codigo{92}{99}
+\hace \archivo{fastconv} (de la cátedra) convoluciona en frecuencia: rellena con ceros las dos señales hasta la potencia de 2 siguiente, multiplica sus FFT y antitransforma. \archivo{comprimir} aplica eso a un pulso y se queda con las 2000 muestras centrales; la última línea lo repite para los 100 pulsos.
+
+\teoria
+\begin{itemize}
+  \item Convolucionar en el tiempo es multiplicar en frecuencia: $y = x * h \Leftrightarrow Y(f) = X(f)\,H(f) = X(f)\,S^*(f)$. Con FFT el costo baja de $N^2$ a $N\log N$ operaciones.
+  \item El relleno con ceros hasta al menos $N_x + N_h - 1$ muestras evita la convolución circular: sin él, el final de la salida se mezclaría con el principio.
+  \item La convolución completa tiene $2000 + 2000 - 1 = 3999$ muestras. El filtro está centrado en $t = 0$ (el chirp se generó en $[-t_{max}/2,\ t_{max}/2]$), así que el pico de un eco aparece desplazado $(N_h - 1)/2$ muestras. Recortar desde ese índice deja cada pico en su rango (se verificó con un eco sintético a 10 km).
+  \item Resultado: un eco que ocupaba $cT/2 = 1500$ m se concentra en un pico de $c/(2B) = 75$ m, con una ganancia de $BT = 20$ (13 dB). Por eso en la Figura \archivo{02} los blancos, ocultos en la señal cruda, aparecen como picos.
+\end{itemize}
+
+% =====================================================================
+\section{Ventana CFAR y umbral}
+\label{sec:cfar}
+\codigo{104}{122}
+\hace
+\begin{itemize}
+  \item \archivo{ventana\_cfar}: arma la ventana: 32 unos, 17 ceros (8 de guarda, la celda bajo prueba y 8 de guarda) y 32 unos, dividido por 64. Es la que se grafica en \archivo{03\_ventana\_cfar}.
+  \item \archivo{ruido\_cfar}: convoluciona la potencia con la ventana, lo que da para cada celda el promedio de sus 64 vecinas. La segunda convolución cuenta cuántas celdas hay realmente, para corregir los bordes del vector.
+  \item \archivo{umbral\_cfar}: multiplica ese ruido por $\alpha$ y pasa a amplitud con la raíz.
+\end{itemize}
+
+\teoria Un umbral fijo no sirve, porque el nivel de ruido y de clutter cambia con el rango, el clima o la dirección. El CA-CFAR (\textit{cell averaging}) estima el ruido localmente:
+\[ \hat P[n] = \frac{1}{N}\sum_{k\,\in\,\text{referencia}} |y[n-k]|^2, \qquad \text{detección si } |y[n]|^2 > \alpha\,\hat P[n] \]
+\begin{itemize}
+  \item Las \textbf{celdas de guarda} quedan fuera del promedio porque el propio blanco ocupa varias celdas (el pico comprimido y sus lóbulos, $\pm 110$ m); si entraran, el blanco elevaría su propio umbral.
+  \item Con ruido gaussiano complejo detectado en potencia, $\hat P$ promedia $N$ variables exponenciales y la probabilidad de falsa alarma queda $P_{fa} = (1 + \alpha/N)^{-N}$, independiente del nivel de ruido (de ahí ``tasa de falsa alarma constante''). Despejando:
+  \[ \alpha = N\left(P_{fa}^{-1/N} - 1\right) = 64\left(10^{6/64} - 1\right) = 15{,}4 \;\Rightarrow\; \sqrt{\alpha} = 3{,}93 \]
+  \item \textbf{Elección de $N$}: con más celdas la estimación es mejor (menos pérdida CFAR), pero un blanco fuerte dentro de la ventana de otro le eleva el umbral y lo oculta (enmascaramiento). Con las 200 celdas del ejemplo de la cátedra se perdían blancos; con 64 el efecto se reduce.
+\end{itemize}
+
+% =====================================================================
+\section{Detección por cruces por cero}
+\codigo{125}{148}
+\hace Resta el umbral a la señal y toma el signo (+1 arriba, $-1$ abajo). Fuerza $-1$ antes del rango mínimo. La diferencia entre muestras consecutivas vale $+2$ donde empieza una detección y $-2$ donde termina. Dentro de cada intervalo se queda con el máximo, y une picos a menos de 150 m.
+
+\teoria Es lo que pide la consigna con \archivo{numpy.sign} y \archivo{numpy.diff}: los cruces por cero de $|y[n]| - V_T[n]$ marcan los bordes de cada zona sobre el umbral. El rango del blanco es el del máximo de esa zona, porque el filtro apareado concentra allí la energía. Los picos a menos de dos celdas de resolución (150 m) se unen porque corresponden al mismo eco y a sus lóbulos laterales.
+
+% =====================================================================
+\section{Canceladores MTI simple, STI simple y MTI doble}
+\codigo{153}{155}
+\hace Opera entre pulsos consecutivos, celda de rango por celda de rango. \archivo{compressed[1:]} son los pulsos 1 a 99 y \archivo{compressed[:-1]} los pulsos 0 a 98: restarlos es ``cada pulso menos el anterior'' para todas las distancias a la vez.
+
+\teoria Un blanco a distancia $R$ que se mueve con velocidad radial $v$ cambia su fase entre pulsos en $\Delta\phi = 2\pi f_D\,PRI$, con $f_D = 2v/\lambda$. Los canceladores son filtros FIR en tiempo lento:
+\begin{align*}
+  \text{MTI simple:}\ & H(z) = 1 - z^{-1}, & |H(f_D)| &= 2\,|\sin(\pi f_D/PRF)| \\
+  \text{STI simple:}\ & H(z) = 1 + z^{-1}, & |H(f_D)| &= 2\,|\cos(\pi f_D/PRF)| \\
+  \text{MTI doble:}\ & H(z) = (1 - z^{-1})^2, & |H(f_D)| &= 4\sin^2(\pi f_D/PRF)
+\end{align*}
+\begin{itemize}
+  \item \textbf{MTI}: pasaaltos en Doppler. Un eco fijo ($f_D = 0$) es igual en todos los pulsos y la resta lo anula: elimina el clutter y los blancos detenidos.
+  \item \textbf{STI}: pasabajos. Refuerza lo fijo y anula los blancos con $f_D$ cerca de $\pm PRF/2$, como el de 10,02 km de la señal 1 o el de 26,24 km de la señal 2.
+  \item \textbf{MTI doble}: dos MTI en cascada. Su nulo en $f_D = 0$ es más ancho y profundo, mejor para clutter con algo de dispersión Doppler, pero atenúa más a los blancos lentos.
+  \item Las respuestas son periódicas con período $PRF$: un blanco con $v = k\,\lambda\,PRF/2 = k \cdot 173$ m/s es cancelado como si estuviera quieto (\textbf{velocidad ciega}).
+\end{itemize}
+
+% =====================================================================
+\section{CFAR plot de cada cancelador}
+\codigo{193}{201}
+\codigo{226}{228}
+\hace Para cada cancelador calcula el umbral y las detecciones sobre su primera salida, que usa los pulsos $t_0$ y $t_1$ (o $t_0$, $t_1$ y $t_2$ para el doble), como pide la consigna para el gráfico. Además repite la detección sobre la potencia promediada de todas las salidas. El resto de la función arma los cuatro paneles de las figuras \archivo{04} a \archivo{06}: señales sin comprimir, comprimidas, salida con umbral y cruces por cero.
+
+\teoria Detectar con un solo par de pulsos es lo que pide el gráfico, pero es sensible a la fluctuación del blanco y del ruido. Promediar $|y|^2$ sobre los 99 (o 98) pulsos es una \textbf{integración no coherente}: no usa la fase, pero reduce la varianza del ruido y da una lista de detecciones más estable. Se usa para confirmar blancos y para clasificar los fijos.
+
+% =====================================================================
+\section{Filtrado Doppler}
+\codigo{234}{240}
+\hace
+\begin{itemize}
+  \item Arma la matriz de la DFT de $m = 99$ puntos, $F_D[r,c] = e^{-j2\pi rc/m}$, como en el diagrama de la consigna.
+  \item \archivo{mti\_sc.T @ FD}: transpone la salida del MTI (cada fila pasa a ser una distancia con sus 99 valores en el tiempo) y la multiplica por la matriz. Eso es la DFT de cada fila: el espectro Doppler de cada celda de rango.
+  \item \archivo{fftshift} lleva la frecuencia cero al centro, y \archivo{fd} y \archivo{vel} dan la frecuencia y la velocidad de cada columna.
+\end{itemize}
+
+\teoria Para un blanco en la celda $n$, la secuencia en tiempo lento es $x_p = A\,e^{j2\pi f_D\,p\,PRI}$: una exponencial compleja cuya frecuencia es la Doppler. La DFT la concentra en la columna $k$ con $f_D = (k - m/2)\,PRF/m$, y la velocidad es
+\[ v_r = \frac{f_D\,\lambda}{2}, \qquad \Delta v = \frac{\lambda\,PRF}{2m} = 1{,}75\ \text{m/s} \]
+\begin{itemize}
+  \item La DFT suma los 99 pulsos con su fase corregida: es una \textbf{integración coherente}, con una ganancia de hasta $10\log_{10} 99 \approx 20$ dB.
+  \item Blancos cercanos en rango pero con distinta velocidad quedan en columnas distintas. Así se recuperan el de 15,51 km (señal 1) y el de 19,82 km (señal 2), que el CFAR de los canceladores no separaba.
+  \item Se usa la salida del MTI para que el clutter de velocidad cero ya esté atenuado.
+  \item El signo: con la convención de fase del simulador, $v > 0$ es acercamiento y $v < 0$ alejamiento.
+\end{itemize}
+
+\subsection{Detección sobre el mapa rango-velocidad}
+\codigo{247}{252}
+\hace Repite la DFT ponderando el tiempo lento con una ventana de Hamming y aplica el mismo CA-CFAR en rango para cada columna de velocidad.
+
+\teoria La DFT con ventana rectangular tiene lóbulos laterales de $-13$ dB: alrededor de un blanco de 40 dB de SNR aparecerían detecciones falsas en otras velocidades. La ventana de Hamming los baja a $-43$ dB, a costa de un pico algo más ancho. La figura \archivo{07} (3D) se hace con la DFT sin ventana, como pide la consigna; la ventana solo se usa para detectar.
+
+% =====================================================================
+\section{Clasificación de los blancos}
+\codigo{272}{289}
+\hace Junta las detecciones del mapa Doppler y de los canceladores y decide qué es cada una:
+\begin{itemize}
+  \item \textbf{Residuo}: hay otra detección en la misma celda de rango más de 20 dB más fuerte. Se descarta.
+  \item \textbf{Falsa alarma}: SNR menor que 20 dB y ningún cancelador la confirma a menos de 150 m. Se descarta.
+  \item \textbf{Móvil}: lo que queda, con su velocidad del mapa Doppler.
+  \item \textbf{Fijo}: detectado por el STI integrado, donde el STI supera al MTI en más de 10 dB.
+\end{itemize}
+
+\teoria
+\begin{itemize}
+  \item Un blanco real fluctúa en amplitud de pulso a pulso (modelos de Swerling); esa modulación ensancha su espectro Doppler y deja energía en otras velocidades, sobre todo en cero. Esos residuos están mucho más abajo que el pico del blanco.
+  \item Con $P_{fa} = 10^{-6}$ y unas $2000 \times 99$ celdas en el mapa se esperan del orden de 0,2 falsas alarmas por mapa; las tres detecciones débiles en 1,5, 6,2 y 13,7 km aparecen en todas las señales, lo que indica que comparten la realización del ruido. Por eso se exige confirmación.
+  \item Un blanco fijo tiene $f_D = 0$: el STI lo duplica (+6 dB) y el MTI lo anula. Una diferencia de más de 10 dB entre ambos indica velocidad nula.
+\end{itemize}
+
+% =====================================================================
+\section{Gráficos que pide la consigna}
+\begin{table}[H]
+  \centering
+  \small
+  \begin{tabular}{l p{6cm} l}
+    \toprule
+    \textbf{Archivo} & \textbf{Contenido} & \textbf{Líneas} \\
+    \midrule
+    \archivo{01\_senal\_recibida} & Un momento de muestreo: real, imaginaria y módulo vs. rango & 159--170 \\
+    \archivo{02\_compresion} & Módulo sin comprimir y comprimido vs. rango & 172--180 \\
+    \archivo{03\_ventana\_cfar} & Ventana CFAR con la cantidad de celdas & 182--189 \\
+    \archivo{04/05/06\_cfar\_*} & CFAR plot de MTI SC, STI SC y MTI DC & 193--228 \\
+    \archivo{07\_doppler\_3d} & Superficie 3D del producto Doppler (velocidad, rango) & 296--306 \\
+    \archivo{08\_mapa\_rango\_velocidad} & Vista superior en dB con los blancos marcados & 308--321 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\end{document}
