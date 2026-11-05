@@ -29,7 +29,7 @@
     };
   \end{tikzpicture}
   \orador{Grupo Este}{Cristian Arteaga Barrera}
-  \note{\textbf{Cristian Arteaga Barrera (apertura):} Buenas. Somos Cristian Arteaga Barrera, Luca Baccino, Agustín Mendes Rosa y Joaquín Monja, y vamos a presentar la Actividad 5 de radar. Primero repasamos la teoría que pide la consigna y después mostramos el procesamiento de dos señales simuladas: la señal 1, que resolvió el Grupo Este, y la señal 2, que resolvió el Grupo Oeste.}
+  \note{\textbf{Cristian Arteaga Barrera (apertura):} Buenas. Somos Cristian Arteaga Barrera, Luca Baccino, Agustín Mendes Rosa y Joaquín Monja, y vamos a presentar la Actividad 5 de radar. Primero repasamos la teoría que pide la consigna y después mostramos el procesamiento de dos señales simuladas: la señal 1, que resolvimos Luca y yo, y la señal 2, que resolvieron Agustín y Joaquín.}
 \end{frame}
 
 % =====================================================
@@ -38,7 +38,7 @@
 \begin{frame}{Organización de la exposición}
   \begin{columns}[T]
     \begin{column}{0.5\textwidth}
-      \begin{block}{Grupo Este -- señal 1}
+      \begin{block}{Señal 1}
         \small
         \textbf{Arteaga Barrera}
         \begin{itemize}
@@ -55,7 +55,7 @@
     \begin{column}{0.5\textwidth}
       \setbeamercolor{block title}{bg=grupo oeste,fg=white}
       \setbeamercolor{block body}{bg=grupo oeste!8}
-      \begin{block}{Grupo Oeste -- señal 2}
+      \begin{block}{Señal 2}
         \small
         \textbf{Mendes Rosa}
         \begin{itemize}
@@ -353,27 +353,28 @@
   \centering
   \resizebox{\textwidth}{!}{%
   \begin{tikzpicture}[font=\footnotesize,
-        b/.style={draw, thick, rounded corners=2pt, fill=blue!8, minimum height=1.0cm, text width=2.4cm, align=center},
+        b/.style={draw, thick, rounded corners=2pt, fill=blue!8, minimum height=1.0cm, text width=2.5cm, align=center},
         f/.style={-{Stealth}, thick}]
         \node[b] (raw) at (0, 0) {Datos crudos\\$100 \times 2000$};
-        \node[b] (mf) at (3.3, 0) {Filtro apareado\\(compresión)};
-        \node[b, fill=orange!12] (mti) at (6.9, 1.7) {MTI SC\\$1 - z^{-1}$};
-        \node[b, fill=orange!12] (sti) at (6.9, 0) {STI SC\\$1 + z^{-1}$};
-        \node[b, fill=orange!12] (dc) at (6.9, -1.7) {MTI DC\\$1 - 2z^{-1} + z^{-2}$};
-        \node[b, fill=green!10] (dop) at (10.5, 1.7) {Filtrado Doppler\\(DFT en tiempo lento)};
-        \node[b, fill=green!10] (cfar) at (10.5, -0.85) {CFAR y\\cruces por cero};
-        \node[b, fill=purple!10] (vel) at (14.0, 1.7) {Rango y velocidad\\de blancos móviles};
-        \node[b, fill=purple!10] (rng) at (14.0, -0.85) {Rango de blancos\\móviles y fijos};
+        \node[b] (mf) at (3.4, 0) {Filtro apareado\\(compresión)};
+        \node[b, fill=orange!12] (mti) at (7.0, 1.8) {MTI SC\\$1 - z^{-1}$};
+        \node[b, fill=orange!12] (sti) at (7.0, 0) {STI SC\\$1 + z^{-1}$};
+        \node[b, fill=orange!12] (dc) at (7.0, -1.8) {MTI DC\\$1 - 2z^{-1} + z^{-2}$};
+        \node[b, fill=green!10] (dop) at (10.6, 3.6) {Filtrado Doppler\\(DFT en tiempo lento)};
+        \node[b, fill=green!10] (c1) at (10.6, 1.8) {CFAR y\\cruces por cero};
+        \node[b, fill=green!10] (c2) at (10.6, 0) {CFAR y\\cruces por cero};
+        \node[b, fill=green!10] (c3) at (10.6, -1.8) {CFAR y\\cruces por cero};
+        \node[b, fill=purple!10] (vel) at (14.2, 3.6) {Velocidad de\\blancos móviles};
+        \node[b, fill=purple!10] (r1) at (14.2, 1.8) {Rango de\\blancos móviles};
+        \node[b, fill=purple!10] (r2) at (14.2, 0) {Rango de\\blancos fijos};
+        \node[b, fill=purple!10] (r3) at (14.2, -1.8) {Rango de\\blancos móviles};
         \draw[f] (raw) -- (mf);
         \draw[f] (mf) -- (sti);
         \draw[f] (mf.east) -- ++(0.45,0) |- (mti.west);
         \draw[f] (mf.east) -- ++(0.45,0) |- (dc.west);
-        \draw[f] (mti) -- (dop);
-        \draw[f] (dop) -- (vel);
-        \draw[f] (cfar) -- (rng);
-        \draw[f] (mti.east) -- ++(0.4,0) |- ([yshift=0.25cm]cfar.west);
-        \draw[f] (sti.east) -- ++(0.4,0) |- (cfar.west);
-        \draw[f] (dc.east) -- ++(0.4,0) |- ([yshift=-0.25cm]cfar.west);
+        \draw[f] (mti.north) |- (dop.west);
+        \draw[f] (mti) -- (c1); \draw[f] (sti) -- (c2); \draw[f] (dc) -- (c3);
+        \draw[f] (dop) -- (vel); \draw[f] (c1) -- (r1); \draw[f] (c2) -- (r2); \draw[f] (c3) -- (r3);
     \end{tikzpicture}}
   \vspace{0.3cm}
 
@@ -596,7 +597,7 @@
   \renewcommand{\arraystretch}{1.2}
   \begin{tabular}{p{4.2cm}p{3.6cm}p{3.6cm}}
     \toprule
-    & \textbf{Señal 1 (Grupo Este)} & \textbf{Señal 2 (Grupo Oeste)} \\
+    & \textbf{Señal 1} & \textbf{Señal 2} \\
     \midrule
     Blancos & 5 móviles, 3 fijos & 5 móviles, 3 fijos \\
     Fijos [km] & 12,02 -- 17,61 -- 21,02 & 15,62 -- 20,31 -- 22,02 \\

@@ -1,0 +1,140 @@
+{
+ "senal": "example",
+ "ganancia_cfar": 3.926832908096556,
+ "alfa": 15.420016688110053,
+ "pfa": 1e-06,
+ "n_ref": 64,
+ "n_gap": 8,
+ "mti_sc": [
+  10020.0,
+  15015.0,
+  20010.0
+ ],
+ "sti_sc": [
+  10020.0,
+  15015.0,
+  18015.0,
+  20010.0
+ ],
+ "mti_dc": [
+  10020.0,
+  20010.0
+ ],
+ "mti_sc_integrado": [
+  10020.0,
+  15015.0,
+  20010.0
+ ],
+ "sti_sc_integrado": [
+  10020.0,
+  15015.0,
+  18015.0,
+  20010.0
+ ],
+ "mti_dc_integrado": [
+  10020.0,
+  20010.0
+ ],
+ "detecciones_rango_doppler": [
+  {
+   "rango_km": 1.515,
+   "velocidad_ms": 73.43,
+   "velocidad_kmh": 264.3,
+   "snr_db": 8.9
+  },
+  {
+   "rango_km": 6.18,
+   "velocidad_ms": 66.43,
+   "velocidad_kmh": 239.2,
+   "snr_db": 10.8
+  },
+  {
+   "rango_km": 10.02,
+   "velocidad_ms": -50.7,
+   "velocidad_kmh": -182.5,
+   "snr_db": 35.5
+  },
+  {
+   "rango_km": 13.71,
+   "velocidad_ms": 73.43,
+   "velocidad_kmh": 264.3,
+   "snr_db": 9.2
+  },
+  {
+   "rango_km": 15.015,
+   "velocidad_ms": 40.21,
+   "velocidad_kmh": 144.8,
+   "snr_db": 34.8
+  },
+  {
+   "rango_km": 20.01,
+   "velocidad_ms": -29.72,
+   "velocidad_kmh": -107.0,
+   "snr_db": 41.9
+  },
+  {
+   "rango_km": 20.01,
+   "velocidad_ms": 0.0,
+   "velocidad_kmh": 0.0,
+   "snr_db": 15.0
+  }
+ ],
+ "descartes": [
+  {
+   "rango_km": 1.515,
+   "velocidad_ms": 73.43,
+   "velocidad_kmh": 264.3,
+   "snr_db": 8.9,
+   "motivo": "falsa alarma (d\u00e9bil y sin confirmar)"
+  },
+  {
+   "rango_km": 6.18,
+   "velocidad_ms": 66.43,
+   "velocidad_kmh": 239.2,
+   "snr_db": 10.8,
+   "motivo": "falsa alarma (d\u00e9bil y sin confirmar)"
+  },
+  {
+   "rango_km": 13.71,
+   "velocidad_ms": 73.43,
+   "velocidad_kmh": 264.3,
+   "snr_db": 9.2,
+   "motivo": "falsa alarma (d\u00e9bil y sin confirmar)"
+  },
+  {
+   "rango_km": 20.01,
+   "velocidad_ms": 0.0,
+   "velocidad_kmh": 0.0,
+   "snr_db": 15.0,
+   "motivo": "residuo de un blanco m\u00e1s fuerte"
+  }
+ ],
+ "blancos_moviles": [
+  {
+   "rango_km": 10.02,
+   "velocidad_ms": -50.7,
+   "velocidad_kmh": -182.5,
+   "snr_db": 35.5
+  },
+  {
+   "rango_km": 15.015,
+   "velocidad_ms": 40.21,
+   "velocidad_kmh": 144.8,
+   "snr_db": 34.8
+  },
+  {
+   "rango_km": 20.01,
+   "velocidad_ms": -29.72,
+   "velocidad_kmh": -107.0,
+   "snr_db": 41.9
+  }
+ ],
+ "blancos_fijos": [
+  {
+   "rango_km": 18.015,
+   "sti_sobre_mti_db": 27.8
+  }
+ ],
+ "resolucion_velocidad_ms": 1.7482517482517483,
+ "velocidad_max_no_ambigua_ms": 86.53846153846155
+}

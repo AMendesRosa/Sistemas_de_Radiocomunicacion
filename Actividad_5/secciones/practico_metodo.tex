@@ -34,27 +34,28 @@ La \autoref{fig:flujo} resume la cadena de procesamiento, que sigue el diagrama 
     \centering
     \resizebox{\textwidth}{!}{%
     \begin{tikzpicture}[font=\footnotesize,
-        b/.style={draw, thick, rounded corners=2pt, fill=blue!8, minimum height=1.0cm, text width=2.4cm, align=center},
+        b/.style={draw, thick, rounded corners=2pt, fill=blue!8, minimum height=1.0cm, text width=2.5cm, align=center},
         f/.style={-{Stealth}, thick}]
         \node[b] (raw) at (0, 0) {Datos crudos\\$100 \times 2000$};
-        \node[b] (mf) at (3.3, 0) {Filtro apareado\\(compresión)};
-        \node[b, fill=orange!12] (mti) at (6.9, 1.7) {MTI SC\\$1 - z^{-1}$};
-        \node[b, fill=orange!12] (sti) at (6.9, 0) {STI SC\\$1 + z^{-1}$};
-        \node[b, fill=orange!12] (dc) at (6.9, -1.7) {MTI DC\\$1 - 2z^{-1} + z^{-2}$};
-        \node[b, fill=green!10] (dop) at (10.5, 1.7) {Filtrado Doppler\\(DFT en tiempo lento)};
-        \node[b, fill=green!10] (cfar) at (10.5, -0.85) {CFAR y\\cruces por cero};
-        \node[b, fill=purple!10] (vel) at (14.0, 1.7) {Rango y velocidad\\de blancos móviles};
-        \node[b, fill=purple!10] (rng) at (14.0, -0.85) {Rango de blancos\\móviles y fijos};
+        \node[b] (mf) at (3.4, 0) {Filtro apareado\\(compresión)};
+        \node[b, fill=orange!12] (mti) at (7.0, 1.8) {MTI SC\\$1 - z^{-1}$};
+        \node[b, fill=orange!12] (sti) at (7.0, 0) {STI SC\\$1 + z^{-1}$};
+        \node[b, fill=orange!12] (dc) at (7.0, -1.8) {MTI DC\\$1 - 2z^{-1} + z^{-2}$};
+        \node[b, fill=green!10] (dop) at (10.6, 3.6) {Filtrado Doppler\\(DFT en tiempo lento)};
+        \node[b, fill=green!10] (c1) at (10.6, 1.8) {CFAR y\\cruces por cero};
+        \node[b, fill=green!10] (c2) at (10.6, 0) {CFAR y\\cruces por cero};
+        \node[b, fill=green!10] (c3) at (10.6, -1.8) {CFAR y\\cruces por cero};
+        \node[b, fill=purple!10] (vel) at (14.2, 3.6) {Velocidad de\\blancos móviles};
+        \node[b, fill=purple!10] (r1) at (14.2, 1.8) {Rango de\\blancos móviles};
+        \node[b, fill=purple!10] (r2) at (14.2, 0) {Rango de\\blancos fijos};
+        \node[b, fill=purple!10] (r3) at (14.2, -1.8) {Rango de\\blancos móviles};
         \draw[f] (raw) -- (mf);
         \draw[f] (mf) -- (sti);
         \draw[f] (mf.east) -- ++(0.45,0) |- (mti.west);
         \draw[f] (mf.east) -- ++(0.45,0) |- (dc.west);
-        \draw[f] (mti) -- (dop);
-        \draw[f] (dop) -- (vel);
-        \draw[f] (cfar) -- (rng);
-        \draw[f] (mti.east) -- ++(0.4,0) |- ([yshift=0.25cm]cfar.west);
-        \draw[f] (sti.east) -- ++(0.4,0) |- (cfar.west);
-        \draw[f] (dc.east) -- ++(0.4,0) |- ([yshift=-0.25cm]cfar.west);
+        \draw[f] (mti.north) |- (dop.west);
+        \draw[f] (mti) -- (c1); \draw[f] (sti) -- (c2); \draw[f] (dc) -- (c3);
+        \draw[f] (dop) -- (vel); \draw[f] (c1) -- (r1); \draw[f] (c2) -- (r2); \draw[f] (c3) -- (r3);
     \end{tikzpicture}}
     \caption{Cadena de procesamiento implementada.}
     \label{fig:flujo}
