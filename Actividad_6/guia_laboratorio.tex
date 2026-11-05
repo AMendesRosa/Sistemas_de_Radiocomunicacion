@@ -1,0 +1,156 @@
+% Guía de mediciones para llevar al laboratorio (Parte 1 del TP6).
+\documentclass[10pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish,es-tabla,es-nodecimaldot]{babel}
+\usepackage[a4paper,margin=1.5cm]{geometry}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage[table]{xcolor}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{pdflscape}
+\setlist{itemsep=2pt, topsep=2pt, leftmargin=*}
+\setlength{\parindent}{0pt}
+\pagestyle{empty}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcommand{\archivo}[1]{\texttt{\small #1}}
+
+\begin{document}
+
+{\Large\textbf{TP6 Medios -- Guía de mediciones de la Parte 1}}\\[2pt]
+Sistemas de Radiocomunicación -- FCEFyN, UNC \hfill Fecha: \underline{\hspace{3cm}} \quad Comisión: \underline{\hspace{2cm}}
+
+\vspace{6pt}
+\textbf{Antes de empezar}
+\begin{enumerate}
+    \item Fotografiar la antena, el analizador, el bloqueador de continua, los cables y el adaptador (\archivo{montaje.jpg}). Anotar marca y modelo de cada equipo.
+    \item Conexión: \textbf{antena $\rightarrow$ (adaptador 75/50 $\Omega$) $\rightarrow$ bloqueador de continua $\rightarrow$ analizador}. Solo señales de recepción: \textbf{nunca} conectar un transmisor.
+    \item ¿Se usó adaptador 75/50 $\Omega$? \quad $\square$ Sí \quad $\square$ No
+    \item En cada captura deben leerse: inicio/fin o centro, \textit{span}, nivel de referencia, RBW, VBW, atenuación y unidad. Si no aparecen en pantalla, anotarlos en la planilla.
+    \item Punto de partida: nivel de referencia $-30$ dBm (ajustar para que la señal no salga de pantalla), ganancia 5--10 dB.
+\end{enumerate}
+
+\vspace{6pt}
+\textbf{Cuadro de mediciones}\\[3pt]
+{\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}c L{2.2cm} L{2.4cm} L{1.3cm} L{1.4cm} L{1.2cm} L{4.2cm} L{2.0cm}@{}}
+    \toprule
+    \textbf{\#} & \textbf{Medición} & \textbf{Inicio--fin / centro} & \textbf{Span} & \textbf{RBW} & \textbf{VBW} & \textbf{Qué anotar} & \textbf{Captura} \\
+    \midrule
+    1 & Banda AM completa & 535--1705 kHz & 1,17 MHz & 9 kHz & 100 kHz & f y nivel de la emisora más fuerte & \archivo{am\_banda} \\
+    \rowcolor{gray!10} 2 & Emisora AM en detalle & Centro = f emisora & 20--30 kHz & \textbf{$\leq$ 1 kHz} & 3--10 kHz & f y nivel de portadora, ancho a $-26$ dB, emisoras a $\pm$10 y $\pm$20 kHz & \archivo{am\_emisora} \\
+    3 & Banda FM completa & 88--108 MHz & 20 MHz & 100 kHz & 300 kHz & f y nivel de la emisora más fuerte & \archivo{fm\_banda} \\
+    \rowcolor{gray!10} 4 & Emisora FM en detalle & Centro = f emisora & 1--2 MHz & 10 kHz & 30--100 kHz & f, nivel, ancho a $-26$ dB (max hold), emisoras vecinas y separación & \archivo{fm\_emisora} \\
+    5 & TV analógica (si hay) & Centro del canal & 8 MHz & 30--100 kHz & 300 kHz & Canal; f y nivel de video, color y audio; ancho; canales vecinos & \archivo{tv\_analogica} \\
+    \rowcolor{gray!10} 6 & Banda UHF (TDA) & 470--698 MHz & 228 MHz & 100--300 kHz & 1 MHz & Canales visibles: f y nivel aproximado & \archivo{tda\_banda} \\
+    7 & Canal ISDB-Tb en detalle & $473 + 6(N-14)$ MHz & 10 MHz & 30--100 kHz & 300 kHz & Nivel de meseta, ancho a $-3$ dB, potencia de canal, forma de la meseta & \archivo{tda\_canal} \\
+    \rowcolor{gray!10} 8 & Búsqueda en el TV & -- & -- & -- & -- & Canales y servicios encontrados & foto de la lista \\
+    9 & AM con generador (opcional) & Centro = f generador & 5--10 kHz & 100--300 Hz & 1 kHz & Nivel de portadora y de una banda lateral, f del tono & \archivo{am\_generador} \\
+    \bottomrule
+\end{tabular}}
+
+\newpage
+\textbf{Paso a paso}
+
+\vspace{3pt}
+\begin{minipage}[t]{0.49\textwidth}
+\textbf{1. AM}
+\begin{enumerate}
+    \item Banda completa (fila 1) y captura.
+    \item Marcador en el pico más alto: anotar f y nivel.
+    \item Centrar, \textit{span} 20--30 kHz y \textbf{RBW $\leq$ 1 kHz} (con 9 kHz no se ven las bandas laterales).
+    \item \textit{Max hold} 10--20 s.
+    \item Con marcadores, medir el ancho donde cae 26 dB bajo la portadora.
+    \item Ver si hay emisoras a $\pm$10 y $\pm$20 kHz. Captura.
+    \item Identificar la emisora (CABFRA / listado ENACOM).
+\end{enumerate}
+
+\vspace{4pt}
+\textbf{2. FM}
+\begin{enumerate}
+    \item Banda completa (fila 3) y captura.
+    \item Marcador en la más fuerte: f y nivel. Canal: $N = 201 + (f - 88{,}1)/0{,}2$.
+    \item Centrar, \textit{span} 1--2 MHz, RBW 10 kHz.
+    \item \textit{Max hold} 20--30 s; ancho a $-26$ dB del máximo.
+    \item Anotar emisoras vecinas y su separación en kHz. Captura.
+\end{enumerate}
+
+\vspace{4pt}
+\textbf{3. TV analógica (solo si hay señal)}
+\begin{enumerate}
+    \item Buscar un canal con portadoras en línea (no meseta plana).
+    \item Centrar, \textit{span} 8 MHz.
+    \item Marcadores: video ($\approx$ borde + 1,25 MHz), color (video + 3,58 MHz), audio (video + 4,5 MHz).
+    \item Diferencia audio/video con \textit{max hold}. Captura.
+    \item Si no hay: anotar ``no se dispuso de señal analógica''.
+\end{enumerate}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.49\textwidth}
+\textbf{4. TDA}
+\begin{enumerate}
+    \item Banda UHF completa (fila 6) y captura: los canales digitales son bloques planos de $\approx$ 5,6 MHz.
+    \item Anotar cada canal: f central y nivel de meseta.
+    \item Elegir 1 o 2 canales (fila 7): ancho entre flancos a $-3$ dB y potencia de canal con 5,57 MHz (si el equipo la tiene; si no, anotar nivel de meseta y RBW). Captura.
+    \item Antena al televisor, búsqueda automática, foto de la lista de canales.
+    \item Comparar analizador vs. televisor: canales que se ven pero no se decodifican, y al revés.
+\end{enumerate}
+
+\vspace{4pt}
+\textbf{5. AM con generador (si el docente lo habilita)}
+\begin{enumerate}
+    \item AM con un tono de 1 kHz e índice cercano a 1.
+    \item Medir nivel de portadora y de una banda lateral.
+    \item $m = 2 \cdot 10^{\Delta dB/20}$. Con $m = 1$ la banda lateral queda $\approx -6$ dBc.
+\end{enumerate}
+
+\vspace{4pt}
+\textbf{Recordatorios}
+\begin{itemize}
+    \item Fotografiar también la pantalla del televisor con los canales.
+    \item Anotar cualquier dificultad (falta de señal, interferencias, limitaciones del equipo): va en las conclusiones.
+    \item Las capturas van en \archivo{Figuras/mediciones/} con los nombres del cuadro.
+\end{itemize}
+\end{minipage}
+
+\newpage
+\begin{landscape}
+{\Large\textbf{Planilla de registro}}\\[6pt]
+\renewcommand{\arraystretch}{1.85}
+\begin{tabular}{|L{3.0cm}|L{2.4cm}|L{2.0cm}|L{2.2cm}|L{1.6cm}|L{1.5cm}|L{1.5cm}|L{1.6cm}|L{6.8cm}|}
+    \hline
+    \textbf{Medición} & \textbf{f [kHz / MHz]} & \textbf{Nivel [dBm]} & \textbf{Ancho [kHz / MHz]} & \textbf{Ref. lvl} & \textbf{RBW} & \textbf{VBW} & \textbf{Aten.} & \textbf{Observaciones} \\
+    \hline
+    AM banda & & & -- & & & & & \\ \hline
+    AM emisora & & & & & & & & Emisora: \\ \hline
+    FM banda & & & -- & & & & & \\ \hline
+    FM emisora & & & & & & & & Emisora / canal: \\ \hline
+    FM vecinas & & & & & & & & \\ \hline
+    TV analógica & & & & & & & & Canal: \quad A/V [dB]: \\ \hline
+    TDA banda & -- & & -- & & & & & Canales vistos: \\ \hline
+    TDA canal 1 & & & & & & & & Canal: \quad Pot. canal: \\ \hline
+    TDA canal 2 & & & & & & & & Canal: \quad Pot. canal: \\ \hline
+    TDA canal 3 & & & & & & & & Canal: \quad Pot. canal: \\ \hline
+    AM generador & & & & & & & & Portadora: \quad BL: \quad $m$: \\ \hline
+\end{tabular}
+
+\vspace{10pt}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{|L{4cm}|L{6.5cm}|L{3cm}|L{9.2cm}|}
+    \hline
+    \multicolumn{4}{|l|}{\textbf{Búsqueda de canales en el televisor}} \\ \hline
+    \textbf{Canal físico} & \textbf{Servicios encontrados} & \textbf{¿Se ve bien?} & \textbf{Observaciones} \\ \hline
+    & & & \\ \hline
+    & & & \\ \hline
+    & & & \\ \hline
+    & & & \\ \hline
+    & & & \\ \hline
+\end{tabular}
+
+\vspace{8pt}
+\textbf{Equipos:} Analizador \underline{\hspace{4.5cm}} \quad Antena AM \underline{\hspace{3.5cm}} \quad Antena FM/TV \underline{\hspace{3.5cm}} \quad Televisor \underline{\hspace{3.5cm}}
+\end{landscape}
+
+\end{document}

@@ -57,7 +57,7 @@ $R = c \, \Delta t / 2$. La dirección surge del apuntamiento de la antena, y la
 
 \textbf{Diagrama en bloques.} La \autoref{fig:bloques} muestra el diagrama de un radar pulsado típico, basado en el del apunte de la cátedra \cite{apunte} y en Skolnik \cite{skolnik}.
 
-\begin{figure}[H]
+\begin{figure}[!htbp]
     \centering
     \resizebox{\textwidth}{!}{%
     \begin{tikzpicture}[font=\footnotesize, node distance=0.6cm and 0.9cm,
@@ -69,22 +69,22 @@ $R = c \, \Delta t / 2$. La dirección surge del apuntamiento de la antena, y la
         \node[bloque, right=of pa, fill=orange!15] (dup) {Duplexor};
         \node[right=1.2cm of dup] (ant) {\Large$\Psi$};
         \node[above=0.05cm of ant, font=\scriptsize] {Antena};
-        \node[bloque, below=1.3cm of dup] (lna) {Amplificador de bajo ruido};
+        \node[bloque, below=2.6cm of dup] (lna) {Amplificador de bajo ruido};
         \node[bloque, left=of lna] (mix) {Mezclador};
-        \node[bloque, above=0.5cm of mix, fill=green!10] (ol) {Oscilador local};
+        \node[bloque, above=0.6cm of mix, fill=green!10] (ol) {Oscilador local};
         \node[bloque, left=of mix] (fi) {Amplificador de FI y filtro apareado};
         \node[bloque, left=of fi] (det) {Detector (demodulador I/Q)};
         \node[bloque, below=1.0cm of det, fill=purple!10] (proc) {Procesador de señal: MTI, Doppler, CFAR};
         \node[bloque, right=of proc, fill=purple!10] (datos) {Procesador de datos: detección y seguimiento};
         \node[bloque, right=of datos] (disp) {Presentación (display)};
-        \node[bloque, below=0.4cm of gen, fill=yellow!20] (sinc) {Sincronizador (PRF)};
+        \node[bloque, below=0.7cm of gen, fill=yellow!20] (sinc) {Sincronizador (PRF)};
         \draw[flecha] (gen) -- (mod); \draw[flecha] (mod) -- (pa); \draw[flecha] (pa) -- (dup);
         \draw[{Stealth}-{Stealth}, thick] (dup) -- (ant);
         \draw[flecha] (dup) -- (lna); \draw[flecha] (lna) -- (mix); \draw[flecha] (ol) -- (mix);
         \draw[flecha] (mix) -- (fi); \draw[flecha] (fi) -- (det); \draw[flecha] (det) -- (proc);
         \draw[flecha] (proc) -- (datos); \draw[flecha] (datos) -- (disp);
         \draw[flecha, dashed] (sinc) -- (gen);
-        \draw[flecha, dashed] (sinc.south) |- (proc.west);
+        \draw[flecha, dashed] (sinc.west) -- ++(-0.35,0) |- (proc.west);
     \end{tikzpicture}}
     \caption{Diagrama en bloques de un radar pulsado típico. Elaboración propia a partir de \cite{apunte, skolnik}.}
     \label{fig:bloques}
