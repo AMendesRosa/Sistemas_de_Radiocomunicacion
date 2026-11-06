@@ -1,5 +1,5 @@
 {
- "senal": 2,
+ "senal": "2",
  "ganancia_cfar": 3.926832908096556,
  "alfa": 15.420016688110053,
  "pfa": 1e-06,
@@ -46,20 +46,20 @@
  "detecciones_rango_doppler": [
   {
    "rango_km": 1.515,
-   "velocidad_ms": 73.43,
-   "velocidad_kmh": 264.3,
+   "velocidad_ms": -73.43,
+   "velocidad_kmh": -264.3,
    "snr_db": 8.9
   },
   {
    "rango_km": 6.18,
-   "velocidad_ms": 66.43,
-   "velocidad_kmh": 239.2,
+   "velocidad_ms": -66.43,
+   "velocidad_kmh": -239.2,
    "snr_db": 10.8
   },
   {
    "rango_km": 8.01,
-   "velocidad_ms": -31.47,
-   "velocidad_kmh": -113.3,
+   "velocidad_ms": 31.47,
+   "velocidad_kmh": 113.3,
    "snr_db": 39.5
   },
   {
@@ -70,26 +70,26 @@
   },
   {
    "rango_km": 12.0,
-   "velocidad_ms": 1.75,
-   "velocidad_kmh": 6.3,
+   "velocidad_ms": -1.75,
+   "velocidad_kmh": -6.3,
    "snr_db": 14.8
   },
   {
    "rango_km": 12.015,
-   "velocidad_ms": -59.44,
-   "velocidad_kmh": -214.0,
+   "velocidad_ms": 59.44,
+   "velocidad_kmh": 214.0,
    "snr_db": 40.6
   },
   {
    "rango_km": 13.71,
-   "velocidad_ms": 73.43,
-   "velocidad_kmh": 264.3,
+   "velocidad_ms": -73.43,
+   "velocidad_kmh": -264.3,
    "snr_db": 9.2
   },
   {
    "rango_km": 19.815,
-   "velocidad_ms": -24.48,
-   "velocidad_kmh": -88.1,
+   "velocidad_ms": 24.48,
+   "velocidad_kmh": 88.1,
    "snr_db": 42.7
   },
   {
@@ -100,8 +100,8 @@
   },
   {
    "rango_km": 20.22,
-   "velocidad_ms": -43.71,
-   "velocidad_kmh": -157.3,
+   "velocidad_ms": 43.71,
+   "velocidad_kmh": 157.3,
    "snr_db": 42.1
   },
   {
@@ -112,23 +112,23 @@
   },
   {
    "rango_km": 26.235,
-   "velocidad_ms": 85.66,
-   "velocidad_kmh": 308.4,
+   "velocidad_ms": -85.66,
+   "velocidad_kmh": -308.4,
    "snr_db": 33.2
   }
  ],
  "descartes": [
   {
    "rango_km": 1.515,
-   "velocidad_ms": 73.43,
-   "velocidad_kmh": 264.3,
+   "velocidad_ms": -73.43,
+   "velocidad_kmh": -264.3,
    "snr_db": 8.9,
    "motivo": "falsa alarma (d\u00e9bil y sin confirmar)"
   },
   {
    "rango_km": 6.18,
-   "velocidad_ms": 66.43,
-   "velocidad_kmh": 239.2,
+   "velocidad_ms": -66.43,
+   "velocidad_kmh": -239.2,
    "snr_db": 10.8,
    "motivo": "falsa alarma (d\u00e9bil y sin confirmar)"
   },
@@ -141,15 +141,15 @@
   },
   {
    "rango_km": 12.0,
-   "velocidad_ms": 1.75,
-   "velocidad_kmh": 6.3,
+   "velocidad_ms": -1.75,
+   "velocidad_kmh": -6.3,
    "snr_db": 14.8,
    "motivo": "residuo de un blanco m\u00e1s fuerte"
   },
   {
    "rango_km": 13.71,
-   "velocidad_ms": 73.43,
-   "velocidad_kmh": 264.3,
+   "velocidad_ms": -73.43,
+   "velocidad_kmh": -264.3,
    "snr_db": 9.2,
    "motivo": "falsa alarma (d\u00e9bil y sin confirmar)"
   },
@@ -164,32 +164,32 @@
  "blancos_moviles": [
   {
    "rango_km": 8.01,
-   "velocidad_ms": -31.47,
-   "velocidad_kmh": -113.3,
+   "velocidad_ms": 31.47,
+   "velocidad_kmh": 113.3,
    "snr_db": 39.5
   },
   {
    "rango_km": 12.015,
-   "velocidad_ms": -59.44,
-   "velocidad_kmh": -214.0,
+   "velocidad_ms": 59.44,
+   "velocidad_kmh": 214.0,
    "snr_db": 40.6
   },
   {
    "rango_km": 19.815,
-   "velocidad_ms": -24.48,
-   "velocidad_kmh": -88.1,
+   "velocidad_ms": 24.48,
+   "velocidad_kmh": 88.1,
    "snr_db": 42.7
   },
   {
    "rango_km": 20.22,
-   "velocidad_ms": -43.71,
-   "velocidad_kmh": -157.3,
+   "velocidad_ms": 43.71,
+   "velocidad_kmh": 157.3,
    "snr_db": 42.1
   },
   {
    "rango_km": 26.235,
-   "velocidad_ms": 85.66,
-   "velocidad_kmh": 308.4,
+   "velocidad_ms": -85.66,
+   "velocidad_kmh": -308.4,
    "snr_db": 33.2
   }
  ],

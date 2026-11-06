@@ -71,12 +71,12 @@ Las figuras \ref{fig:cfar_mti} a \ref{fig:cfar_mtidc} muestran, para cada cancel
 \textbf{Análisis:}
 \begin{itemize}
     \item \underline{MTI simple y doble:} detectan cuatro blancos móviles (8,01, 12,02, 20,22 y 26,23 km). Cancelan el clutter cercano y los ecos fijos de 15,62, 20,31 y 22,02 km.
-    \item \underline{STI simple:} refuerza los ecos fijos y detecta los tres blancos fijos, además de los móviles de 8,01 y 12,02 km. No detecta el de 26,23 km: su frecuencia Doppler ($+742$ Hz) está a menos de 8 Hz de $PRF/2$, donde el STI tiene su nulo (unos 30 dB de atenuación, \autoref{fig:canceladores}).
+    \item \underline{STI simple:} refuerza los ecos fijos y detecta los tres blancos fijos, además de los móviles de 8,01 y 12,02 km. No detecta el de 26,23 km: su frecuencia Doppler ($-742$ Hz) está a menos de 8 Hz de $-PRF/2$, donde el STI tiene su nulo (unos 30 dB de atenuación, \autoref{fig:canceladores}).
     \item \underline{Enmascaramiento:} el blanco de 19,82 km tiene una de las mayores SNR de la escena, pero ningún cancelador lo detecta. Está a 400 m de los ecos de 20,2--20,3 km, que caen dentro de su ventana de referencia y elevan el umbral CFAR (se ve el pico bajo el umbral en la \autoref{fig:cfar_sti}). Con la ventana de 200 celdas del ejemplo de la consigna el efecto era mayor: además se perdía el blanco fijo de 22,02 km. El procesamiento Doppler lo separa, porque tiene otra velocidad.
 \end{itemize}
 
 \subsubsection{Procesamiento Doppler}
-La \autoref{fig:doppler3d} es el gráfico 3D del producto Doppler de la señal MTI: cada pico es un blanco móvil ubicado en su rango y su velocidad. La \autoref{fig:mapa} muestra la vista superior en dB con los blancos detectados. Allí se ve que los ecos de 19,82 y 20,22 km, cercanos en rango, quedan en velocidades distintas ($-24{,}5$ y $-43{,}7$ m/s).
+La \autoref{fig:doppler3d} es el gráfico 3D del producto Doppler de la señal MTI: cada pico es un blanco móvil ubicado en su rango y su velocidad. La \autoref{fig:mapa} muestra la vista superior en dB con los blancos detectados. Allí se ve que los ecos de 19,82 y 20,22 km, cercanos en rango, quedan en velocidades distintas ($+24{,}5$ y $+43{,}7$ m/s).
 
 \begin{figure}[H]
     \centering
@@ -104,19 +104,19 @@ La \autoref{tab:blancos} reúne el resultado final: \textbf{ocho blancos, cinco 
         \hline
         \textbf{N.°} & \textbf{Rango [km]} & \textbf{$v_r$ [m/s]} & \textbf{$v_r$ [km/h]} & \textbf{$f_D$ [Hz]} & \textbf{SNR [dB]} & \textbf{MTI [dB]} & \textbf{STI [dB]} & \textbf{Tipo} \\
         \hline
-        1 & 8,01 & $-31{,}5$ & $-113$ & $-273$ & 39,5 & $+0{,}7$ & $+4{,}5$ & Móvil \\
-        2 & 12,02 & $-59{,}4$ & $-214$ & $-515$ & 40,6 & $+4{,}9$ & $-0{,}5$ & Móvil \\
+        1 & 8,01 & $+31{,}5$ & $+113$ & $+273$ & 39,5 & $+0{,}7$ & $+4{,}5$ & Móvil \\
+        2 & 12,02 & $+59{,}4$ & $+214$ & $+515$ & 40,6 & $+4{,}9$ & $-0{,}5$ & Móvil \\
         3 & 15,62 & 0 & 0 & 0 & -- & $-\infty$ & $+6{,}0$ & Fijo \\
-        4 & 19,82 & $-24{,}5$ & $-88$ & $-212$ & 42,7 & $-1{,}3$ & $+5{,}1$ & Móvil \\
-        5 & 20,22 & $-43{,}7$ & $-157$ & $-379$ & 42,1 & $+3{,}1$ & $+2{,}9$ & Móvil \\
+        4 & 19,82 & $+24{,}5$ & $+88$ & $+212$ & 42,7 & $-1{,}3$ & $+5{,}1$ & Móvil \\
+        5 & 20,22 & $+43{,}7$ & $+157$ & $+379$ & 42,1 & $+3{,}1$ & $+2{,}9$ & Móvil \\
         6 & 20,31 & 0 & 0 & 0 & -- & $-\infty$ & $+6{,}0$ & Fijo \\
         7 & 22,02 & 0 & 0 & 0 & -- & $-\infty$ & $+6{,}0$ & Fijo \\
-        8 & 26,24 & $+85{,}7$ & $+308$ & $+742$ & 33,2 & $+6{,}0$ & $-29{,}9$ & Móvil (*) \\
+        8 & 26,24 & $-85{,}7$ & $-308$ & $-742$ & 33,2 & $+6{,}0$ & $-29{,}9$ & Móvil (*) \\
         \hline
     \end{tabular}
 
     \vspace{0.1cm}
-    \raggedright \scriptsize (*) Velocidad en el borde del intervalo no ambiguo ($\pm 86{,}5$ m/s): podría ser una velocidad replegada, por ejemplo $-87{,}4$ m/s, que difiere en $\lambda \, PRF/2 = 173$ m/s.
+    \raggedright \scriptsize (*) Velocidad en el borde del intervalo no ambiguo ($\pm 86{,}5$ m/s): podría ser una velocidad replegada, por ejemplo $+87{,}4$ m/s, que difiere en $\lambda \, PRF/2 = 173$ m/s.
 \end{table}
 
 \begin{itemize}

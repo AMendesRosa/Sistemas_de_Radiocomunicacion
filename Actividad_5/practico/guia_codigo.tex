@@ -98,9 +98,9 @@ python tp5_radar.py 2
     \toprule
     \textbf{Señal} & \textbf{Blancos móviles [km; m/s]} & \textbf{Blancos fijos [km]} \\
     \midrule
-    1 & 10,02 ($-85{,}7$); 15,21 ($+40{,}2$); 15,51 ($-22{,}7$); 20,01 ($-43{,}7$); 22,23 ($-31{,}5$) & 12,02; 17,61; 21,02 \\
-    2 & 8,01 ($-31{,}5$); 12,02 ($-59{,}4$); 19,82 ($-24{,}5$); 20,22 ($-43{,}7$); 26,24 ($+85{,}7$) & 15,62; 20,31; 22,02 \\
-    example & 10,02 ($-50{,}7$); 15,02 ($+40{,}2$); 20,01 ($-29{,}7$) & 18,02 \\
+    1 & 10,02 ($+85{,}7$); 15,21 ($-40{,}2$); 15,51 ($+22{,}7$); 20,01 ($+43{,}7$); 22,23 ($+31{,}5$) & 12,02; 17,61; 21,02 \\
+    2 & 8,01 ($+31{,}5$); 12,02 ($+59{,}4$); 19,82 ($+24{,}5$); 20,22 ($+43{,}7$); 26,24 ($-85{,}7$) & 15,62; 20,31; 22,02 \\
+    example & 10,02 ($+50{,}7$); 15,02 ($-40{,}2$); 20,01 ($+29{,}7$) & 18,02 \\
     \bottomrule
   \end{tabular}
 \end{table}
@@ -230,7 +230,7 @@ La fase es cuadrática, así que la frecuencia instantánea recorre linealmente 
 
 % =====================================================================
 \section{Filtrado Doppler}
-\codigo{234}{240}
+\codigo{234}{244}
 \hace
 \begin{itemize}
   \item Arma la matriz de la DFT de $m = 99$ puntos, $F_D[r,c] = e^{-j2\pi rc/m}$, como en el diagrama de la consigna.
@@ -244,18 +244,18 @@ La fase es cuadrática, así que la frecuencia instantánea recorre linealmente 
   \item La DFT suma los 99 pulsos con su fase corregida: es una \textbf{integración coherente}, con una ganancia de hasta $10\log_{10} 99 \approx 20$ dB.
   \item Blancos cercanos en rango pero con distinta velocidad quedan en columnas distintas. Así se recuperan el de 15,51 km (señal 1) y el de 19,82 km (señal 2), que el CFAR de los canceladores no separaba.
   \item Se usa la salida del MTI para que el clutter de velocidad cero ya esté atenuado.
-  \item El signo: con la convención de fase del simulador, $v > 0$ es acercamiento y $v < 0$ alejamiento.
+  \item El signo sigue la convención de la cátedra: $v > 0$ es acercamiento ($f_D = 2v/\lambda > 0$) y $v < 0$ alejamiento. En las señales simuladas, un blanco que se acerca cae en las frecuencias negativas de la DFT, por eso el código invierte el eje Doppler con \archivo{doppler[:, ::-1]}; como $m = 99$ es impar, el eje es simétrico y la inversión es exacta.
 \end{itemize}
 
 \subsection{Detección sobre el mapa rango-velocidad}
-\codigo{247}{252}
+\codigo{251}{256}
 \hace Repite la DFT ponderando el tiempo lento con una ventana de Hamming y aplica el mismo CA-CFAR en rango para cada columna de velocidad.
 
 \teoria La DFT con ventana rectangular tiene lóbulos laterales de $-13$ dB: alrededor de un blanco de 40 dB de SNR aparecerían detecciones falsas en otras velocidades. La ventana de Hamming los baja a $-43$ dB, a costa de un pico algo más ancho. La figura \archivo{07} (3D) se hace con la DFT sin ventana, como pide la consigna; la ventana solo se usa para detectar.
 
 % =====================================================================
 \section{Clasificación de los blancos}
-\codigo{272}{289}
+\codigo{276}{293}
 \hace Junta las detecciones del mapa Doppler y de los canceladores y decide qué es cada una:
 \begin{itemize}
   \item \textbf{Residuo}: hay otra detección en la misma celda de rango más de 20 dB más fuerte. Se descarta.
@@ -284,8 +284,8 @@ La fase es cuadrática, así que la frecuencia instantánea recorre linealmente 
     \archivo{02\_compresion} & Módulo sin comprimir y comprimido vs. rango & 172--180 \\
     \archivo{03\_ventana\_cfar} & Ventana CFAR con la cantidad de celdas & 182--189 \\
     \archivo{04/05/06\_cfar\_*} & CFAR plot de MTI SC, STI SC y MTI DC & 193--228 \\
-    \archivo{07\_doppler\_3d} & Superficie 3D del producto Doppler (velocidad, rango) & 296--306 \\
-    \archivo{08\_mapa\_rango\_velocidad} & Vista superior en dB con los blancos marcados & 308--321 \\
+    \archivo{07\_doppler\_3d} & Superficie 3D del producto Doppler (velocidad, rango) & 300--310 \\
+    \archivo{08\_mapa\_rango\_velocidad} & Vista superior en dB con los blancos marcados & 312--325 \\
     \bottomrule
   \end{tabular}
 \end{table}

@@ -490,7 +490,7 @@
       \end{itemize}
       \begin{itemize}
         \item El MTI cancela el clutter y los ecos fijos de 12,02, 17,61 y 21,02 km.
-        \item El STI no ve el de 10,02 km: $f_D = -742$ Hz, cerca de $-PRF/2$ (nulo de $\approx 30$ dB).
+        \item El STI no ve el de 10,02 km: $f_D = +742$ Hz, cerca de $PRF/2$ (nulo de $\approx 30$ dB).
         \item 15,51 km queda enmascarado por el de 15,21 km (a 300 m).
       \end{itemize}
     \end{column}
@@ -501,7 +501,7 @@
 \begin{frame}{Señal 1: mapa rango-velocidad}
   \centering
   \includegraphics[height=0.82\textheight]{senal_1/08_mapa_rango_velocidad.png}
-  \note{\textbf{Luca Baccino:} Este es el mapa rango-velocidad de la señal 1, en dB. Cada cruz roja es un blanco móvil en su distancia y su velocidad, y los cuadrados naranjas son los fijos, en velocidad cero. Se ve que el blanco de 15,51 km, que los canceladores no separaban, tiene otra velocidad que el de 15,21: uno se aleja a 22,7 metros por segundo y el otro se acerca a 40. El de 10 km está en el borde izquierdo, a menos 85,7, justo en el límite de la velocidad no ambigua.}
+  \note{\textbf{Luca Baccino:} Este es el mapa rango-velocidad de la señal 1, en dB. Cada cruz roja es un blanco móvil en su distancia y su velocidad, y los cuadrados naranjas son los fijos, en velocidad cero. Se ve que el blanco de 15,51 km, que los canceladores no separaban, tiene otra velocidad que el de 15,21: uno se acerca a 22,7 metros por segundo y el otro se aleja a 40. El de 10 km está en el borde derecho, a más 85,7, justo en el límite de la velocidad no ambigua.}
 \end{frame}
 
 \begin{frame}{Señal 1: blancos detectados}
@@ -512,22 +512,22 @@
     \toprule
     \textbf{N.°} & \textbf{Rango [km]} & \textbf{$v_r$ [m/s]} & \textbf{$v_r$ [km/h]} & \textbf{SNR [dB]} & \textbf{Tipo} \\
     \midrule
-    1 & 10,02 & $-85{,}7$ & $-308$ & 32,8 & Móvil (*) \\
+    1 & 10,02 & $+85{,}7$ & $+308$ & 32,8 & Móvil (*) \\
     2 & 12,02 & 0 & 0 & -- & Fijo \\
-    3 & 15,21 & $+40{,}2$ & $+145$ & 38,9 & Móvil \\
-    4 & 15,51 & $-22{,}7$ & $-82$ & 37,9 & Móvil \\
+    3 & 15,21 & $-40{,}2$ & $-145$ & 38,9 & Móvil \\
+    4 & 15,51 & $+22{,}7$ & $+82$ & 37,9 & Móvil \\
     5 & 17,61 & 0 & 0 & -- & Fijo \\
-    6 & 20,01 & $-43{,}7$ & $-157$ & 42,2 & Móvil \\
+    6 & 20,01 & $+43{,}7$ & $+157$ & 42,2 & Móvil \\
     7 & 21,02 & 0 & 0 & -- & Fijo \\
-    8 & 22,23 & $-31{,}5$ & $-113$ & 39,2 & Móvil \\
+    8 & 22,23 & $+31{,}5$ & $+113$ & 39,2 & Móvil \\
     \bottomrule
   \end{tabular}
   \vspace{0.2cm}
 
   \raggedright\footnotesize
   \textbf{8 blancos: 5 móviles y 3 fijos.} $v_r > 0$: se acerca; $v_r < 0$: se aleja. \\
-  (*) En el borde de $\pm 86{,}5$ m/s: podría estar replegada ($+87{,}4$ m/s).
-  \note{\textbf{Luca Baccino:} El resultado de la señal 1 son ocho blancos: cinco móviles y tres fijos. La velocidad positiva es de acercamiento y la negativa de alejamiento. El blanco de 10 km tiene una velocidad en el borde del intervalo no ambiguo, así que podría ser en realidad uno que se acerca a 87 metros por segundo; para saberlo haría falta una segunda PRF. Descartamos además tres detecciones débiles en 1,5, 6,2 y 13,7 km que ningún cancelador confirmaba. Le paso a Joaquín con la señal 2.}
+  (*) En el borde de $\pm 86{,}5$ m/s: podría estar replegada ($-87{,}4$ m/s).
+  \note{\textbf{Luca Baccino:} El resultado de la señal 1 son ocho blancos: cinco móviles y tres fijos. La velocidad positiva es de acercamiento y la negativa de alejamiento. El blanco de 10 km tiene una velocidad en el borde del intervalo no ambiguo, así que podría ser en realidad uno que se aleja a 87 metros por segundo; para saberlo haría falta una segunda PRF. Descartamos además tres detecciones débiles en 1,5, 6,2 y 13,7 km que ningún cancelador confirmaba. Le paso a Joaquín con la señal 2.}
 \end{frame}
 
 % =====================================================
@@ -547,7 +547,7 @@
         \item STI simple: 8,01 -- 12,02 -- 15,62 -- 20,31 -- 22,02
       \end{itemize}
       \begin{itemize}
-        \item El STI no ve el de 26,23 km: $f_D = +742$ Hz, en su nulo.
+        \item El STI no ve el de 26,23 km: $f_D = -742$ Hz, en su nulo.
         \item 19,82 km tiene de las mayores SNR, pero \textbf{ningún cancelador lo detecta}: los ecos de 20,2--20,3 km le elevan el umbral.
         \item Con 200 celdas también se perdía el fijo de 22,02 km.
       \end{itemize}
@@ -559,7 +559,7 @@
 \begin{frame}{Señal 2: mapa rango-velocidad}
   \centering
   \includegraphics[height=0.82\textheight]{senal_2/08_mapa_rango_velocidad.png}
-  \note{\textbf{Joaquín Monja:} En el mapa rango-velocidad de la señal 2 el blanco de 19,82 km aparece claramente, separado del de 20,22 porque tienen velocidades distintas: menos 24,5 y menos 43,7 metros por segundo. Es el mismo efecto que en la señal 1: el Doppler separa blancos que en rango están demasiado cerca para el CFAR. También se ve que en 20,2 y 20,3 km conviven un móvil y un fijo casi en la misma celda; los distinguimos porque el STI tiene su máximo en 20,31 y el MTI en 20,22.}
+  \note{\textbf{Joaquín Monja:} En el mapa rango-velocidad de la señal 2 el blanco de 19,82 km aparece claramente, separado del de 20,22 porque tienen velocidades distintas: 24,5 y 43,7 metros por segundo, los dos acercándose. Es el mismo efecto que en la señal 1: el Doppler separa blancos que en rango están demasiado cerca para el CFAR. También se ve que en 20,2 y 20,3 km conviven un móvil y un fijo casi en la misma celda; los distinguimos porque el STI tiene su máximo en 20,31 y el MTI en 20,22.}
 \end{frame}
 
 \begin{frame}{Señal 2: blancos detectados}
@@ -570,21 +570,21 @@
     \toprule
     \textbf{N.°} & \textbf{Rango [km]} & \textbf{$v_r$ [m/s]} & \textbf{$v_r$ [km/h]} & \textbf{SNR [dB]} & \textbf{Tipo} \\
     \midrule
-    1 & 8,01 & $-31{,}5$ & $-113$ & 39,5 & Móvil \\
-    2 & 12,02 & $-59{,}4$ & $-214$ & 40,6 & Móvil \\
+    1 & 8,01 & $+31{,}5$ & $+113$ & 39,5 & Móvil \\
+    2 & 12,02 & $+59{,}4$ & $+214$ & 40,6 & Móvil \\
     3 & 15,62 & 0 & 0 & -- & Fijo \\
-    4 & 19,82 & $-24{,}5$ & $-88$ & 42,7 & Móvil \\
-    5 & 20,22 & $-43{,}7$ & $-157$ & 42,1 & Móvil \\
+    4 & 19,82 & $+24{,}5$ & $+88$ & 42,7 & Móvil \\
+    5 & 20,22 & $+43{,}7$ & $+157$ & 42,1 & Móvil \\
     6 & 20,31 & 0 & 0 & -- & Fijo \\
     7 & 22,02 & 0 & 0 & -- & Fijo \\
-    8 & 26,24 & $+85{,}7$ & $+308$ & 33,2 & Móvil (*) \\
+    8 & 26,24 & $-85{,}7$ & $-308$ & 33,2 & Móvil (*) \\
     \bottomrule
   \end{tabular}
   \vspace{0.2cm}
 
   \raggedright\footnotesize
   \textbf{8 blancos: 5 móviles y 3 fijos.} $v_r > 0$: se acerca; $v_r < 0$: se aleja. \\
-  (*) En el borde de $\pm 86{,}5$ m/s: podría estar replegada ($-87{,}4$ m/s).
+  (*) En el borde de $\pm 86{,}5$ m/s: podría estar replegada ($+87{,}4$ m/s).
   \note{\textbf{Joaquín Monja:} La señal 2 también tiene ocho blancos, cinco móviles y tres fijos. El de 26,24 km está en el borde del intervalo no ambiguo, igual que el de 10 km de la señal 1 pero con el signo contrario, así que también podría estar replegado.}
 \end{frame}
 
@@ -601,7 +601,7 @@
     \midrule
     Blancos & 5 móviles, 3 fijos & 5 móviles, 3 fijos \\
     Fijos [km] & 12,02 -- 17,61 -- 21,02 & 15,62 -- 20,31 -- 22,02 \\
-    Velocidad en el nulo del STI & 10,02 km ($-85{,}7$ m/s) & 26,24 km ($+85{,}7$ m/s) \\
+    Velocidad en el nulo del STI & 10,02 km ($+85{,}7$ m/s) & 26,24 km ($-85{,}7$ m/s) \\
     Enmascarado en CFAR & 15,51 km (a 300 m) & 19,82 km (a 400 m) \\
     Recuperado por & Doppler & Doppler \\
     \bottomrule

@@ -236,15 +236,19 @@ row = np.arange(m).reshape(-1, 1); col = np.arange(m).reshape(1, -1)
 FD = np.exp(-1j*2*np.pi*row*col/m)                     # matriz de la DFT [m x m]
 doppler = mti_sc.T @ FD                                # [rango x frecuencia Doppler]
 doppler = fftshift(doppler, axes=1)/m
+# Convención de la cátedra: velocidad positiva = el blanco se acerca (f_D = 2v/lambda > 0). En las señales
+# simuladas, un blanco que se acerca cae en las frecuencias negativas de esta DFT, por lo que se invierte el
+# eje Doppler (con m impar el eje es simétrico y la inversión es exacta).
+doppler = doppler[:, ::-1]
 fd = (np.arange(m) - m//2)*PRF/m                       # frecuencias Doppler [Hz]
-vel = fd*wlen/2                                        # velocidades radiales [m/s]
+vel = fd*wlen/2                                        # velocidades radiales [m/s], positiva = se acerca
 
 # Detección en el mapa rango-Doppler: CA-CFAR en rango para cada frecuencia Doppler. La integración
 # coherente de los pulsos mejora la relación señal a ruido, y blancos de distinta velocidad quedan en
 # columnas distintas, por lo que un blanco fuerte no enmascara a otro cercano en rango.
 # Para detectar se aplica una ventana de Hamming en tiempo lento: baja los lóbulos laterales Doppler de
 # -13 dB (DFT rectangular) a -43 dB, que de otro modo superarían el umbral junto a blancos de 40 dB.
-doppler_w = fftshift((mti_sc*np.hamming(m)[:, None]).T @ FD, axes=1)/m
+doppler_w = fftshift((mti_sc*np.hamming(m)[:, None]).T @ FD, axes=1)[:, ::-1]/m   # mismo eje que doppler
 P_rd = np.abs(doppler_w)**2
 det_rd = np.zeros_like(P_rd, dtype=bool)
 for k in range(m):

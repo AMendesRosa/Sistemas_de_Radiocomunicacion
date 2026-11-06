@@ -38,38 +38,38 @@
  "detecciones_rango_doppler": [
   {
    "rango_km": 1.515,
-   "velocidad_ms": 73.43,
-   "velocidad_kmh": 264.3,
+   "velocidad_ms": -73.43,
+   "velocidad_kmh": -264.3,
    "snr_db": 8.9
   },
   {
    "rango_km": 6.18,
-   "velocidad_ms": 66.43,
-   "velocidad_kmh": 239.2,
+   "velocidad_ms": -66.43,
+   "velocidad_kmh": -239.2,
    "snr_db": 10.8
   },
   {
    "rango_km": 10.02,
-   "velocidad_ms": -50.7,
-   "velocidad_kmh": -182.5,
+   "velocidad_ms": 50.7,
+   "velocidad_kmh": 182.5,
    "snr_db": 35.5
   },
   {
    "rango_km": 13.71,
-   "velocidad_ms": 73.43,
-   "velocidad_kmh": 264.3,
+   "velocidad_ms": -73.43,
+   "velocidad_kmh": -264.3,
    "snr_db": 9.2
   },
   {
    "rango_km": 15.015,
-   "velocidad_ms": 40.21,
-   "velocidad_kmh": 144.8,
+   "velocidad_ms": -40.21,
+   "velocidad_kmh": -144.8,
    "snr_db": 34.8
   },
   {
    "rango_km": 20.01,
-   "velocidad_ms": -29.72,
-   "velocidad_kmh": -107.0,
+   "velocidad_ms": 29.72,
+   "velocidad_kmh": 107.0,
    "snr_db": 41.9
   },
   {
@@ -82,22 +82,22 @@
  "descartes": [
   {
    "rango_km": 1.515,
-   "velocidad_ms": 73.43,
-   "velocidad_kmh": 264.3,
+   "velocidad_ms": -73.43,
+   "velocidad_kmh": -264.3,
    "snr_db": 8.9,
    "motivo": "falsa alarma (d\u00e9bil y sin confirmar)"
   },
   {
    "rango_km": 6.18,
-   "velocidad_ms": 66.43,
-   "velocidad_kmh": 239.2,
+   "velocidad_ms": -66.43,
+   "velocidad_kmh": -239.2,
    "snr_db": 10.8,
    "motivo": "falsa alarma (d\u00e9bil y sin confirmar)"
   },
   {
    "rango_km": 13.71,
-   "velocidad_ms": 73.43,
-   "velocidad_kmh": 264.3,
+   "velocidad_ms": -73.43,
+   "velocidad_kmh": -264.3,
    "snr_db": 9.2,
    "motivo": "falsa alarma (d\u00e9bil y sin confirmar)"
   },
@@ -112,20 +112,20 @@
  "blancos_moviles": [
   {
    "rango_km": 10.02,
-   "velocidad_ms": -50.7,
-   "velocidad_kmh": -182.5,
+   "velocidad_ms": 50.7,
+   "velocidad_kmh": 182.5,
    "snr_db": 35.5
   },
   {
    "rango_km": 15.015,
-   "velocidad_ms": 40.21,
-   "velocidad_kmh": 144.8,
+   "velocidad_ms": -40.21,
+   "velocidad_kmh": -144.8,
    "snr_db": 34.8
   },
   {
    "rango_km": 20.01,
-   "velocidad_ms": -29.72,
-   "velocidad_kmh": -107.0,
+   "velocidad_ms": 29.72,
+   "velocidad_kmh": 107.0,
    "snr_db": 41.9
   }
  ],
