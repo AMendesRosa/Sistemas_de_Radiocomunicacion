@@ -2,7 +2,7 @@
 \label{sec:am}
 
 \subsection{Modulación AM}
-En la modulación de amplitud con doble banda lateral y portadora completa, la envolvente de la portadora sigue a la señal modulante. Para un tono de frecuencia $f_m$ y un índice de modulación $m$, se cumple:
+En la modulación de amplitud con doble banda lateral (DBL) y portadora completa, la envolvente de la portadora sigue a la señal modulante. Para un tono de frecuencia $f_m$ y un índice de modulación $m$, se cumple:
 \begin{equation}
     v_{AM} = E_c \left[1 + m \cos(2\pi f_m t)\right] \cos(2\pi f_c t)
     = E_c \cos(2\pi f_c t) + \frac{m E_c}{2} \cos\left[2\pi (f_c \pm f_m) t\right]
@@ -179,7 +179,7 @@ En las capturas con \textit{span} de $20 \, [kHz]$, los bordes de la pantalla co
 Se tuvo como limitación al piso de ruido: una emisora adyacente que llegue con menos de unos $-104 \, [dBm]$ no puede distinguirse, de modo que la ausencia de portadoras sólo indica que no hay señales por encima de ese nivel con la antena utilizada.
 
 \subsubsection*{Máxima frecuencia modulante}
-Con la separación de $10 \, [kHz]$ entre canales del CABFRA \cite{cabfra}, una emisión de doble banda lateral que no invada los canales adyacentes debe limitarse a unos $5 \, [kHz]$. Para verificarlo experimentalmente, la portadora debería superar el piso de ruido en varias decenas de dB, y el ancho debería medirse en retención de máximos durante el tiempo suficiente para que aparezcan las frecuencias altas del programa.
+Con la separación de $10 \, [kHz]$ entre canales del CABFRA \cite{cabfra}, una emisión en DBL que no invada los canales adyacentes debe limitarse a unos $5 \, [kHz]$. Para verificarlo experimentalmente, la portadora debería superar el piso de ruido en varias decenas de dB, y el ancho debería medirse en retención de máximos durante el tiempo suficiente para que aparezcan las frecuencias altas del programa.
 
 \subsubsection*{Señal AM generada: modulante senoidal y cuadrada}
 Con una modulante senoidal, la \autoref{eq:am} predice una portadora y dos bandas laterales en $f_c \pm f_m = 570$ y $590 \, [kHz]$, con un nivel de $20 \log \frac{0{,}8}{2} \approx -8 \, [dBc]$ y un ancho de banda de $2 f_m = 20 \, [kHz]$. 

@@ -1,16 +1,32 @@
 \section{Televisión analógica}
 \label{sec:tv_analogica}
 
-\pendiente{Si en el laboratorio se recibió o generó una señal analógica, completar las mediciones de esta sección; si no, dejar el desarrollo conceptual e indicar que no se dispuso de señal.}
+En Argentina, la TV analógica usa la norma PAL-N: 625 líneas, 50 campos por segundo y canales de $6 \, [MHz]$ \cite{itu_bt470}. El CABFRA asigna los canales según la \autoref{tab:canalizacion} \cite{cabfra}.
 
-En Argentina, la televisión analógica usa la norma PAL-N: 625 líneas, 50 campos por segundo y canales de $6 \, [MHz]$ \cite{itu_bt470}. El CABFRA asigna a la televisión los canales 2 a 13 en VHF y 14 a 51 en UHF \cite{cabfra} (\autoref{tab:canalizacion}).
+\begin{table}[H]
+    \centering
+    \caption{Canalización de televisión en VHF y UHF ($N$: número de canal) \cite{enacom_canalizacion_tv}.}
+    \label{tab:canalizacion}
+    \begin{tabular}{l l l}
+        \toprule
+        \textbf{Banda} & \textbf{Canales} & \textbf{Límite inferior del canal $[MHz]$} \\
+        \midrule
+        VHF baja & 2 a 4 & $54 + 6 (N - 2)$ \\
+        VHF baja & 5 y 6 & $76 + 6 (N - 5)$ \\
+        VHF alta & 7 a 13 & $174 + 6 (N - 7)$ \\
+        UHF & 21 a 69 & $512 + 6 (N - 21)$ \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+Los canales 52 a 69 ($698$ a $806 \, [MHz]$) dejaron de estar atribuidos a la radiodifusión por la Resolución SC 18/2014, que asignó esa banda al servicio móvil terrestre \cite{res_sc18_2014}, y el canal 37 ($608$ a $614 \, [MHz]$) no se asigna a televisión por estar reservado a la radioastronomía \cite{enacom_canalizacion_tv}. En la práctica, la televisión en UHF ocupa los canales 21 a 51.
 
 \subsection{Componentes del canal}
-La \autoref{fig:tv_pal_n} muestra un esquema propio del espectro de un canal PAL-N, construido a partir de los parámetros de la norma \cite{itu_bt470}. Las frecuencias se miden desde el borde inferior del canal:
+La \autoref{fig:tv_pal_n} es un esquema del espectro de un canal PAL-N, construido a partir de los parámetros de la norma \cite{itu_bt470}, con sus frecuencias relativas al borde inferior del canal:
 \begin{itemize}
-    \item \underline{Portadora de video:} en $1{,}25 \, [MHz]$. Está modulada en amplitud por la señal de luminancia, con modulación negativa: el blanco corresponde a la menor amplitud y los pulsos de sincronismo a la máxima. La banda lateral superior se transmite completa, hasta $4{,}2 \, [MHz]$ por encima de la portadora, y de la inferior solo queda un vestigio de $0{,}75 \, [MHz]$.
-    \item \underline{Subportadora de color:} en $1{,}25 + 3{,}582 = 4{,}83 \, [MHz]$. Las dos señales de diferencia de color, $U$ y $V$, la modulan en cuadratura (QAM) con portadora suprimida, y la fase de $V$ se invierte en cada línea, de donde viene el nombre PAL (\textit{Phase Alternating Line}). Al receptor se le envía una ráfaga (\textit{burst}) de la subportadora en cada línea, como referencia de fase.
-    \item \underline{Portadora de audio:} en $1{,}25 + 4{,}5 = 5{,}75 \, [MHz]$, modulada en frecuencia con una desviación de $\pm 25 \, [kHz]$. Queda $0{,}25 \, [MHz]$ por debajo del borde superior del canal.
+    \item \underline{Portadora de video:} en $1{,}25 \, [MHz]$. Está modulada en amplitud por la señal de luminancia, con modulación negativa: el blanco corresponde a la menor amplitud y los pulsos de sincronismo a la máxima. La BL superior se transmite completa ($4{,}2 \, [MHz]$ arriba de la portadora), y de la BL inferior solo queda un vestigio ($0{,}75 \, [MHz]$).
+    \item \underline{Subportadora de color:} en $1{,}25 + 3{,}582 = 4{,}83 \, [MHz]$. Las dos señales de diferencia de color, $U$ y $V$, la modulan en cuadratura (QAM) con portadora suprimida, y la fase de $V$ se invierte en cada línea, por eso el nombre de PAL (\textit{Phase Alternating Line}). Al receptor se le envía una ráfaga de la subportadora en cada línea, como referencia de fase.
+    \item \underline{Portadora de audio:} en $1{,}25 + 4{,}5 = 5{,}75 \, [MHz]$. Está modulada en frecuencia con una desviación de $\pm 25 \, [kHz]$. Queda $0{,}25 \, [MHz]$ por debajo del borde superior del canal.
 \end{itemize}
 
 \begin{figure}[H]
@@ -21,51 +37,73 @@ La \autoref{fig:tv_pal_n} muestra un esquema propio del espectro de un canal PAL
 \end{figure}
 
 \subsection{Mediciones}
+
+\subsubsection*{Exploración de la banda VHF alta}
+Se exploró el tramo de $180$ a $210 \, [MHz]$ (\autoref{fig:tva_vhf}). Se identifican tres canales, cada uno por su par de portadoras de video y de audio: los canales 8, 10 y 12.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{tva_vhf.png}
+    \caption{Exploración de $180$ a $210 \, [MHz]$: canales analógicos 8, 10 y 12.}
+    \label{fig:tva_vhf}
+\end{figure}
+
 \begin{table}[H]
     \centering
-    \caption{Configuración del analizador y resultados para la señal de televisión analógica.}
+    \caption{Configuración del analizador y resultados para la televisión analógica.}
     \label{tab:tv_resultados}
-    \begin{tabular}{p{6.8cm} p{7.4cm}}
+    \begin{tabular}{>{\raggedright\arraybackslash}p{6cm} >{\raggedright\arraybackslash}p{4cm} >{\raggedright\arraybackslash}p{4cm}}
         \toprule
-        \textbf{Parámetro} & \textbf{Valor} \\
+        \textbf{Parámetro} & \textbf{Canal 10} & \textbf{Canal 12} \\
         \midrule
-        Canal y límites del canal & \pendiente{canal $N$, de $f_1$ a $f_2$ [MHz]} \\
-        Frecuencia central / \textit{span} & \pendiente{} / \pendiente{$\approx 8 \, [MHz]$} \\
-        Nivel de referencia / RBW / VBW & \pendiente{} \\
-        Atenuación / preamplificación / unidad & \pendiente{} \\
+        Límites del canal & $192$ a $198 \, [MHz]$ & $204$ a $210 \, [MHz]$ \\
+        Frecuencia central & $195 \, [MHz]$ & $207 \, [MHz]$ \\
+        \textit{Span} & $6 \, [MHz]$ & $6 \, [MHz]$ \\
+        Nivel de referencia & $-60 \, [dBm]$ & $-40 \, [dBm]$ \\
+        RBW / VBW & $3 \, [kHz]$ / $100 \, [kHz]$ & $3 \, [kHz]$ / $100 \, [kHz]$ \\
         \midrule
-        Portadora de video: frecuencia y nivel & \pendiente{} \\
-        Subportadora de color: frecuencia y nivel & \pendiente{} \\
-        Portadora de audio: frecuencia y nivel & \pendiente{} \\
-        Relación audio/video & \pendiente{dB} \\
-        Ancho de banda ocupado & \pendiente{MHz} \\
+        Portadora de video: frecuencia y nivel & $\approx 193{,}2 \, [MHz]$, $\approx -75 \, [dBm]$ & $\approx 205{,}2 \, [MHz]$, $\approx -60 \, [dBm]$ \\
+        Subportadora de color: frecuencia y nivel & No distinguible del ruido & $\approx 208{,}8 \, [MHz]$, $\approx -93 \, [dBm]$ \\
+        Portadora de audio: frecuencia y nivel & $\approx 197{,}7 \, [MHz]$, $\approx -85 \, [dBm]$ & $\approx 209{,}7 \, [MHz]$, $\approx -70 \, [dBm]$ \\
+        Nivel del audio respecto a video & $\approx -10 \, [dB]$ & $\approx -10 \, [dB]$ \\
         \bottomrule
     \end{tabular}
 \end{table}
 
 \begin{figure}[H]
     \centering
-    \pendiente{Captura del canal analógico (\texttt{Figuras/mediciones/tv\_analogica.png})}
-    \caption{Espectro medido del canal de televisión analógica.}
+    \begin{subfigure}[b]{0.49\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{tva_canal10.png}
+        \caption{Canal 10 ($192$ a $198 \, [MHz]$).}
+        \label{fig:tva_canal10}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.49\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{tva_canal12.png}
+        \caption{Canal 12 ($204$ a $210 \, [MHz]$).}
+        \label{fig:tva_canal12}
+    \end{subfigure}
+    \caption{Espectro de los canales analógicos 10 y 12 con un \textit{span} de $6 \, [MHz]$.}
     \label{fig:tv_medida}
 \end{figure}
 
 \subsection{Análisis}
 
+\subsubsection*{Componentes del espectro}
+En ambos canales la componente de mayor nivel es la portadora de video, a unos $1{,}25 \, [MHz]$ del borde inferior, y la portadora de audio aparece cerca del borde superior. La separación medida entre ambas es coherente con los $4{,}5 \, [MHz]$ de la norma. En el canal 12 se distingue además una componente de unos $-93 \, [dBm]$ cerca de $208{,}8 \, [MHz]$, unos $3{,}6 \, [MHz]$ por encima de la portadora de video, que corresponde a la subportadora de color. Como esta subportadora está suprimida, lo que se ve es la energía de las señales de color y de la ráfaga de referencia, por eso tiene un nivel bajo; en el canal 10, que llega con unos $16 \, [dB]$ menos, queda en el piso de ruido.
+
 \subsubsection*{Ancho de banda y banda lateral vestigial}
-La señal ocupa unos $0{,}75 + 4{,}2 = 4{,}95 \, [MHz]$ de video, más el audio, dentro del canal de $6 \, [MHz]$. Con doble banda lateral, el video ocuparía $2 \times 4{,}2 = 8{,}4 \, [MHz]$ y no entraría en el canal. Con banda lateral única, en cambio, haría falta un filtro de corte abrupto justo en la portadora, imposible de construir sin distorsionar las bajas frecuencias del video, que son las de mayor energía (el nivel medio de la imagen y los sincronismos). La banda lateral vestigial es el compromiso entre ambas:
-\begin{itemize}
-    \item Se transmite la banda superior completa y un vestigio de la inferior, lo que permite un filtro de transmisión con una pendiente realizable.
-    \item El receptor tiene un filtro de Nyquist, con una pendiente simétrica alrededor de la portadora: la suma de las dos bandas en la zona del vestigio reconstruye una respuesta plana.
-    \item El receptor puede seguir usando un detector de envolvente.
-\end{itemize}
-\pendiente{Comparar con el ancho medido en la \autoref{fig:tv_medida}.}
+La señal ocupa unos $0{,}75 + 4{,}2 = 4{,}95 \, [MHz]$ de video, más el audio, dentro del canal de $6 \, [MHz]$. Con DBL, el video ocuparía $2 \times 4{,}2 = 8{,}4 \, [MHz]$ y no entraría en el canal. Con banda lateral única (BLU), en cambio, haría falta un filtro de corte abrupto justo en la portadora, imposible de construir sin distorsionar las bajas frecuencias del video. La banda lateral vestigial es el compromiso entre ambas, ya que se transmite la banda superior completa y un vestigio de la inferior, lo que permite un filtro de transmisión con una pendiente realizable.
+
+En las capturas, el ancho de banda ocupado no pudo medirse. La energía de las bandas laterales de video está repartida en más de $4 \, [MHz]$, y en cada ancho de $3 \, [kHz]$ del RBW queda por debajo del piso de ruido, de unos $-100 \, [dBm]$. Sólo en el canal 12, el de mayor nivel, se ve un ensanchamiento alrededor de la portadora de video, que llega hasta unos $-90 \, [dBm]$ y se extiende unos cientos de kHz. Lo que sí se verificó es la ubicación de las portadoras dentro de cada canal de $6 \, [MHz]$.
 
 \subsubsection*{Nivel del audio respecto del video}
-La portadora de audio se transmite normalmente unos $10 \, [dB]$ por debajo del pico de la portadora de video. En la medición, el nivel de la portadora de video depende del contenido de la imagen, porque con modulación negativa una imagen clara reduce la amplitud media. Por eso la relación debe medirse con retención de máximos, para captar el nivel de los pulsos de sincronismo, que corresponden al pico de la envolvente, y con un RBW que contenga la portadora completa pero no las bandas laterales. \pendiente{Indicar la relación medida y las condiciones.}
+La portadora de audio se transmite normalmente unos $10 \, [dB]$ por debajo de la portadora de video. En las capturas de detalle, se cumple ese valor en los dos canales (\autoref{tab:tv_resultados}).
 
 \subsubsection*{Canales adyacentes}
-\pendiente{Describir las señales detectadas en los canales vecinos.} El audio de un canal está a $0{,}25 \, [MHz]$ del borde superior y el vestigio del canal siguiente empieza $0{,}5 \, [MHz]$ por encima de ese borde, de modo que en una misma zona no se asignan canales adyacentes por aire. En las redes de cable, en cambio, se usan todos los canales contiguos, con niveles controlados.
+En el tramo explorado sólo se reciben los canales 8, 10 y 12: los canales 9 y 11, intermedios, están libres. El audio de un canal está a $0{,}25 \, [MHz]$ del borde superior y el vestigio del canal siguiente empieza $0{,}5 \, [MHz]$ por encima de ese borde, de modo que en una misma zona no se asignan canales adyacentes por aire. La medición coincide con esa planificación. 
 
 \subsection{Síntesis}
 En la televisión analógica PAL-N cada componente usa una modulación distinta dentro del mismo canal de $6 \, [MHz]$:
@@ -74,3 +112,4 @@ En la televisión analógica PAL-N cada componente usa una modulación distinta 
     \item \underline{Color:} modulación en cuadratura de una subportadora en $3{,}58 \, [MHz]$, con alternancia de fase por línea, que ocupa la parte alta del espectro de luminancia sin interferirlo apreciablemente.
     \item \underline{Audio:} FM en una portadora $4{,}5 \, [MHz]$ por encima de la de video.
 \end{itemize}
+En la medición se recibieron los canales 8, 10 y 12, se ubicaron las portadoras de video y de audio de cada canal y la subportadora de color del canal 12, y se verificó la relación de nivel entre audio y video, mientras que el ancho de banda del video quedó por debajo del piso de ruido.

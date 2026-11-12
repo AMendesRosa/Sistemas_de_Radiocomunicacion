@@ -4,8 +4,8 @@
 \subsection{Decibeles absolutos y relativos}
 \begin{itemize}
     \item \underline{dBm:} potencia relativa a $1 \, [mW]$, $P_{dBm} = 10 \log\left(P / 1 \, [mW]\right)$. Es una medida absoluta: $0 \, [dBm] = 1 \, [mW]$, $-30 \, [dBm] = 1 \, [\mu W]$ y $-60 \, [dBm] = 1 \, [nW]$.
-    \item \underline{dB$\mu$V:} tensión relativa a $1 \, [\mu V]$. Como es un cociente de tensiones, se calcula como $V_{dB\mu V} = 20 \log\left(V / 1 \, [\mu V]\right)$. Es la unidad habitual en recepción de radiodifusión y en redes de cable, donde los niveles se especifican en tensión sobre $75 \, [\Omega]$.
-    \item \underline{dBc:} nivel de una componente relativo al de la portadora, $N_{dBc} = N_{comp} - N_{portadora}$. Es una medida relativa: no depende de la impedancia ni de la ganancia del sistema, y por eso se usa para expresar bandas laterales, espurias, armónicos o ruido de fase.
+    \item \underline{dB$\mu$V:} tensión relativa a $1 \, [\mu V]$. Como es un cociente de tensiones, se calcula como $V_{dB\mu V} = 20 \log\left(V / 1 \, [\mu V]\right)$.
+    \item \underline{dBc:} nivel de una componente relativo al de la portadora. Es una medida relativa: no depende de la impedancia ni de la ganancia.
 \end{itemize}
 
 \subsection{Relación entre potencia y tensión}
@@ -21,15 +21,6 @@ Expresando $P$ en mW y $V$ en µV:
     = P_{dBm} + 90 + 10 \log R
     \label{eq:dbm_dbuv}
 \end{equation}
-
-Para los dos valores de impedancia habituales:
-\begin{align}
-    R = 50 \, [\Omega]: & \quad V_{dB\mu V} = P_{dBm} + 107{,}0 \\
-    R = 75 \, [\Omega]: & \quad V_{dB\mu V} = P_{dBm} + 108{,}8
-\end{align}
-Por ejemplo, $-20 \, [dBm]$ equivalen a $87{,}0 \, [dB\mu V]$ ($22{,}36 \, [mV]$) sobre $50 \, [\Omega]$ y a $88{,}8 \, [dB\mu V]$ ($27{,}39 \, [mV]$) sobre $75 \, [\Omega]$. La diferencia entre ambos sistemas es $10 \log(75/50) = 1{,}76 \, [dB]$.
-
-La \autoref{tab:conversion} resume algunas equivalencias.
 
 \begin{table}[H]
     \centering
@@ -51,19 +42,19 @@ La \autoref{tab:conversion} resume algunas equivalencias.
 \end{table}
 
 \subsection{Por qué hay que especificar la impedancia}
-Un nivel en dBm indica una potencia y un nivel en dBµV, una tensión. Pasar de uno a otro requiere la \autoref{eq:p_v}, en la que interviene la resistencia sobre la que se desarrolla la tensión: la misma tensión de $1 \, [mV]$ entrega $20 \, [nW]$ ($-47 \, [dBm]$) sobre $50 \, [\Omega]$ y $13{,}3 \, [nW]$ ($-48{,}8 \, [dBm]$) sobre $75 \, [\Omega]$. Sin la impedancia, la conversión es ambigua en $1{,}76 \, [dB]$ entre los dos sistemas habituales.
+Un nivel en dBm indica una potencia y un nivel en dBµV, una tensión. Pasar de uno a otro requiere la \autoref{eq:p_v}, en la que interviene la resistencia sobre la que se desarrolla: la misma tensión de $1 \, [mV]$ entrega $20 \, [nW]$ ($-47 \, [dBm]$) sobre $50 \, [\Omega]$ y $13{,}3 \, [nW]$ ($-48{,}8 \, [dBm]$) sobre $75 \, [\Omega]$. Sin la impedancia, la conversión es ambigua en $1{,}76 \, [dB]$ entre los dos sistemas habituales.
 
 En la práctica esto aparece al medir con el analizador de espectro, que tiene una entrada de $50 \, [\Omega]$ y mide en dBm, una red de $75 \, [\Omega]$ cuyos niveles se especifican en dBµV. Se pueden presentar tres casos:
 \begin{itemize}
     \item \underline{Con adaptador de mínima pérdida:} a la lectura se le suma la atenuación del adaptador (unos $5{,}7 \, [dB]$) y se convierte con la ecuación de $75 \, [\Omega]$.
-    \item \underline{Conexión directa:} se comete el error de desadaptación de $0{,}18 \, [dB]$ (\autoref{sec:equipamiento}).
-    \item \underline{Analizador configurado en $75 \, [\Omega]$:} algunos instrumentos permiten indicar una impedancia de referencia de $75 \, [\Omega]$ y hacen la conversión internamente, pero eso no cambia la impedancia real de su entrada.
+    \item \underline{Conexión directa:} la desadaptación produce una reflexión de $|\Gamma| = \frac{75 - 50}{75 + 50} = 0{,}2$ y una pérdida de $-10 \log\left(1 - |\Gamma|^2\right) \approx 0{,}18 \, [dB]$.
+    \item \underline{Analizador configurado en $75 \, [\Omega]$:} algunos instrumentos permiten indicar una impedancia de $75 \, [\Omega]$ y hacen la conversión (sin cambiar su impedancia real de entrada).
 \end{itemize}
 
 \section{Ejercicio de aplicación: índice de modulación de una señal AM}
 \label{sec:ejercicio_am}
 
-\textbf{Enunciado:} una señal AM ingresa al analizador de espectro con un nivel de portadora de $-20 \, [dBm]$ y bandas laterales de $-60 \, [dBm]$. Se requiere el índice de modulación $m$.
+\textbf{Enunciado:} Determinar el índice de modulación $m$ para una señal AM con un nivel de portadora de $-20 \, [dBm]$ y bandas laterales de $-60 \, [dBm]$.
 
 \textbf{Resolución en tensión:} se convierte cada nivel a tensión sobre $50 \, [\Omega]$ con la \autoref{eq:p_v}.
 \begin{align}
@@ -85,19 +76,6 @@ De la \autoref{eq:am}, cada banda lateral tiene amplitud $E_{BL} = \frac{m}{2} E
 
 \textbf{Observaciones:}
 \begin{itemize}
-    \item El resultado no depende de la impedancia. Sobre $75 \, [\Omega]$ las tensiones son $27{,}39$ y $0{,}2739 \, [mV]$, pero su cociente es el mismo, porque la impedancia se cancela. Por eso el cálculo en dBc es el más directo.
-    \item Un índice del $2 \,\text{\%}$ es muy bajo: las bandas laterales llevan solo $2 \cdot (m/2)^2 = 0{,}02 \,\text{\%}$ de la potencia de la portadora. Para que el método funcione, las bandas laterales tienen que quedar por encima del piso de ruido del analizador. Con $-60 \, [dBm]$ y un RBW de $9 \, [kHz]$ el margen es amplio, pero para índices menores conviene reducir el RBW.
-    \item El cálculo supone modulación con un único tono sinusoidal, que es lo que permite identificar una única línea de banda lateral (\autoref{sec:am}).
+    \item El resultado no depende de la impedancia. Sobre $75 \, [\Omega]$ las tensiones son $27{,}39$ y $0{,}2739 \, [mV]$, pero su cociente es el mismo, porque la impedancia se cancela.
+    \item Un índice del $2 \,\text{\%}$ es muy bajo: las bandas laterales llevan solo $2 \cdot (m/2)^2 = 0{,}02 \,\text{\%}$ de la potencia de la portadora.
 \end{itemize}
-
-\subsection{Ajustes recomendados del analizador}
-Para las mediciones de la Parte 1, la cátedra recomienda:
-\begin{itemize}
-    \item Conector de desacople de continua, obligatorio.
-    \item Medir solo señales de recepción.
-    \item Nivel de referencia de $-30 \, [dBm]$, ajustable según la señal.
-    \item \textit{Span} y frecuencias de inicio y fin según la banda medida.
-    \item Ganancia de $5$ a $10 \, [dB]$.
-    \item RBW de $9 \, [kHz]$ y VBW de $100 \, [kHz]$.
-\end{itemize}
-El RBW de $9 \, [kHz]$ es adecuado para explorar las bandas y para la FM y la televisión, pero es comparable al canal de AM de $10 \, [kHz]$, por lo que para resolver las bandas laterales de una emisora de AM conviene bajarlo a $1 \, [kHz]$ o menos (\autoref{sec:am}). El VBW, mayor que el RBW, deja la traza sin promediar. Si se lo reduce, la traza se suaviza y se lee mejor el nivel medio de una señal ruidosa como la OFDM.

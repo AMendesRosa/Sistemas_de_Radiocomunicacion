@@ -1,17 +1,16 @@
 \section{Video RF Overlay en redes FTTH}
 \label{sec:rf_overlay}
 
-\subsection{En qué consiste}
-El RF Overlay distribuye televisión sobre una red FTTH superponiendo, en una longitud de onda propia, el mismo espectro de RF que circula por una red de cable: los canales de $6 \, [MHz]$ de $47$ a $1.000 \, [MHz]$, sean analógicos PAL-N, DVB-C en QAM o ISDB-Tb. El espectro completo de la cabecera modula en intensidad un láser de $1.550 \, [nm]$, viaja por la misma fibra y los mismos divisores ópticos que los datos de la red PON, y en la casa del abonado un receptor óptico lo convierte de nuevo en la señal de RF original, que se entrega por coaxial al televisor.
+El RF Overlay distribuye televisión sobre una red FTTH superponiendo, en una longitud de onda propia, el mismo espectro de RF que circula por una red de cable: los canales de $6 \, [MHz]$ de $47$ a $1.000 \, [MHz]$. El espectro completo de la cabecera modula en intensidad un láser de $1.550 \, [nm]$, viaja por la misma fibra y los mismos divisores ópticos que los datos de la red PON, y en la casa del abonado un receptor óptico lo convierte de nuevo en la señal de RF original, que se entrega por coaxial al televisor.
 
-Desde el punto de vista del televisor, el RF Overlay es indistinguible de una red de cable: recibe los mismos canales con los mismos niveles. Desde el punto de vista de la red, es un servicio de difusión pura, analógico en el sentido óptico, independiente del sistema PON de datos con el que comparte la fibra. Está previsto en las normas de PON: la Recomendación G.983.3 definió una banda de mejora de $1.550$ a $1.560 \, [nm]$ para servicios de video \cite{itu_g9833}, que G.984.5 conservó para GPON \cite{itu_g9845}.
+Desde el punto de vista del televisor, el RF Overlay es indistinguible de una red de cable, y desde el punto de vista de la red, es un servicio de difusión pura, independiente del sistema PON de datos con el que comparte la fibra. La Recomendación G.983.3 definió una banda de mejora de $1.550$ a $1.560 \, [nm]$ para servicios de video \cite{itu_g9833}, que G.984.5 conservó para GPON \cite{itu_g9845}.
 
 \subsection{Integración con los servicios de datos}
 La red PON de datos y el RF Overlay comparten toda la red de distribución óptica (ODN), pero se separan por longitud de onda (multiplexación WDM):
 \begin{itemize}
-    \item \underline{En la cabecera}, un combinador WDM une la salida del amplificador de video, en $1.550 \, [nm]$, con el puerto PON de la OLT, que transmite en $1.490 \, [nm]$ y recibe en $1.310 \, [nm]$.
+    \item \underline{En la cabecera}, un combinador WDM une la salida de video, en $1.550 \, [nm]$, con el puerto PON de la OLT, que transmite en $1.490 \, [nm]$ y recibe en $1.310 \, [nm]$.
     \item \underline{En la ODN}, la fibra troncal, los divisores ópticos y las acometidas transportan las tres longitudes de onda sin distinción: los divisores son pasivos y de banda ancha.
-    \item \underline{En la casa del abonado}, un filtro WDM separa el $1.550 \, [nm]$ hacia el receptor de video y deja pasar $1.490/1.310 \, [nm]$ hacia la ONT de datos. Ambos suelen venir integrados en una ONT con puerto CATV.
+    \item \underline{En la casa del abonado}, un filtro WDM separa el $1.550 \, [nm]$ hacia el receptor de video y deja pasar $1.490/1.310 \, [nm]$ hacia la ONT de datos.
 \end{itemize}
 Los dos servicios son independientes: el video no consume capacidad de los puertos GPON, y una falla de la OLT no interrumpe la televisión ni viceversa. Lo único que comparten es la ODN, y con ella su atenuación.
 
@@ -70,11 +69,11 @@ Los dos servicios son independientes: el video no consume capacidad de los puert
 \subsection{Equipos y componentes principales}
 \begin{itemize}
     \item \underline{Cabecera de RF:} reúne los canales de televisión. Recibe señales satelitales y de fibra, las decodifica y las vuelve a modular en canales de $6 \, [MHz]$, en DVB-C, ISDB-Tb o PAL-N, y las combina en un único espectro de RF, igual al de una red de cable.
-    \item \underline{Transmisor óptico de $1.550 \, [nm]$:} convierte ese espectro de RF en una modulación de intensidad del láser. Como lleva muchos canales a la vez, debe ser muy lineal, para que no aparezcan productos de intermodulación de segundo y tercer orden (CSO y CTB) sobre otros canales. Por eso se usan láseres DFB con modulación externa (moduladores Mach-Zehnder) y técnicas para suprimir el esparcimiento Brillouin estimulado (SBS), que limita la potencia que se puede inyectar en la fibra.
-    \item \underline{Amplificador óptico EDFA:} amplifica directamente la señal óptica de $1.550 \, [nm]$, que es la banda de ganancia del erbio. Compensa la atenuación de la división: una ODN 1:64 como la del Trabajo Práctico 4 \cite{tp4} atenúa unos $25 \, [dB]$. Los EDFA de video tienen muchas salidas, con potencias del orden de $+18$ a $+22 \, [dBm]$ por salida, una por cada puerto PON.
+    \item \underline{Transmisor óptico de $1.550 \, [nm]$:} convierte ese espectro de RF en una modulación de intensidad del láser. Como lleva muchos canales a la vez, debe ser muy lineal, para que no aparezcan productos de intermodulación de segundo y tercer orden sobre otros canales.
+    \item \underline{Amplificador óptico EDFA:} amplifica directamente la señal óptica de $1.550 \, [nm]$. Compensa la atenuación de la división: una ODN 1:64 atenúa unos $25 \, [dB]$. Los EDFA de video tienen muchas salidas, una por cada puerto PON.
     \item \underline{Combinador WDM:} acopla el video de $1.550 \, [nm]$ con el puerto PON en una sola fibra, con bajas pérdidas de inserción y buen aislamiento entre longitudes de onda.
-    \item \underline{Red de distribución óptica:} la misma ODN de la red de datos, con la fibra troncal, los divisores y las acometidas. Su atenuación es el límite del sistema: la potencia que llega al receptor fija la relación portadora a ruido (CNR) de los canales.
-    \item \underline{Receptor de video:} un fotodiodo con un amplificador de RF de bajo ruido convierte la potencia óptica en la señal de RF original. Suele estar integrado en la ONT, con una salida coaxial de $75 \, [\Omega]$, y funciona con potencias ópticas de entrada del orden de $-8$ a $+2 \, [dBm]$. Muchos tienen control automático de ganancia, para entregar un nivel de RF constante.
+    \item \underline{Red de distribución óptica:} la misma ODN de la red de datos, con la fibra troncal, los divisores y las acometidas.
+    \item \underline{Receptor de video:} un fotodiodo con un amplificador de RF de bajo ruido convierte la potencia óptica en la señal de RF original.
 \end{itemize}
 
 \subsection{Longitudes de onda}
@@ -84,81 +83,64 @@ La \autoref{fig:longitudes} resume el plan de longitudes de onda habitual cuando
     \item \underline{Video RF Overlay:} $1.550$ a $1.560 \, [nm]$, en un solo sentido.
     \item \underline{XGS-PON:} $1.577 \, [nm]$ en bajada y $1.270 \, [nm]$ en subida.
 \end{itemize}
-Con las tres tecnologías la ventana alrededor de $1.550 \, [nm]$ queda muy ajustada entre GPON y XGS-PON, por lo que los filtros WDM de cada equipo deben ser adecuados para la combinación usada. Las longitudes de onda pueden variar según la arquitectura: algunas redes usan una fibra separada para el video, o llevan el $1.550 \, [nm]$ solo hasta un nodo, que lo convierte a RF para una red coaxial existente.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{teoria/longitudes_onda.png}
-    \caption{Longitudes de onda de GPON, XGS-PON y RF Overlay sobre una misma ODN (esquema propio).}
+    \caption{Longitudes de onda de GPON, XGS-PON y RF Overlay sobre una misma ODN.}
     \label{fig:longitudes}
 \end{figure}
 
-Hay un efecto de compartir la fibra que hay que considerar: la interacción Raman entre longitudes de onda. La señal de datos de $1.490 \, [nm]$ transfiere potencia, modulada con los datos, a la de $1.550 \, [nm]$, y degrada la CNR de los canales de video de frecuencias bajas. Se controla limitando las potencias y la longitud de la red.
-
 \subsection{Llegada de la señal al televisor}
-El receptor óptico entrega por su salida coaxial el mismo espectro que sale de la cabecera. Desde allí:
-\begin{itemize}
-    \item Un cable coaxial de $75 \, [\Omega]$, con divisores de RF si hay varios televisores, lleva la señal a cada aparato, como en una instalación de cable convencional.
-    \item El televisor sintoniza los canales con su propio sintonizador: analógico PAL-N, ISDB-Tb, si la cabecera modula en esa norma, o DVB-C, si el televisor lo admite.
-    \item Para canales cifrados o en normas que el televisor no admite hace falta un decodificador, pero en ningún caso hay un servidor o una conexión IP de por medio.
-\end{itemize}
+El receptor óptico entrega por su salida coaxial el mismo espectro que sale de la cabecera. Desde allí, un cable coaxial de $75 \, [\Omega]$ (con divisores de RF si hay varios televisores) lleva la señal a cada aparato, como en una instalación de cable convencional. El televisor sintoniza los canales con su propio sintonizador: analógico PAL-N, ISDB-Tb, si la cabecera modula en esa norma, o DVB-C, si el televisor lo admite (y, si hace falta, un decodificador para canales cifrados).
+
 
 \subsection{Diferencias entre RF Overlay e IPTV}
-En la IPTV, cada canal se codifica como un flujo IP multicast que viaja por la red de datos, junto con el resto del tráfico, en la longitud de onda de bajada de la PON. Cuando el abonado elige un canal, el decodificador (STB) se une al grupo multicast correspondiente mediante el protocolo IGMP. La OLT y la ONT replican el flujo solo hacia los abonados que lo pidieron, y el STB lo decodifica y lo entrega al televisor por HDMI. La \autoref{tab:overlay_iptv} compara ambas alternativas.
+La \autoref{tab:overlay_iptv} compara ambas alternativas, con sus ventajas y limitaciones.
 
 \begin{table}[H]
     \centering
+    \small
     \caption{Comparación entre RF Overlay e IPTV en una red FTTH.}
     \label{tab:overlay_iptv}
-    \begin{tabular}{p{3.2cm} p{5.6cm} p{5.6cm}}
+    \renewcommand{\arraystretch}{1.2}
+    \begin{tabular}{p{2.6cm} >{\raggedright\arraybackslash}p{5.9cm} >{\raggedright\arraybackslash}p{5.9cm}}
         \toprule
-        \textbf{Aspecto} & \textbf{RF Overlay} & \textbf{IPTV} \\
+          & \textbf{RF Overlay} & \textbf{IPTV} \\
         \midrule
-        Transporte & Espectro de RF completo, en modulación de intensidad a $1.550 \, [nm]$ & Paquetes IP multicast dentro del canal de datos de la PON \\
-        Distribución & Difusión: todos los canales llegan siempre a todos los abonados & Bajo demanda: solo viajan los canales que se están mirando \\
-        Recepción & Sintonizador del televisor, por coaxial & Decodificador IP (STB) o aplicación, por HDMI o Wi-Fi \\
-        Capacidad de datos & No consume capacidad de la PON & Consume capacidad del puerto (en el TP4, hasta $240 \, [Mbps]$ por puerto) \\
-        Interactividad & Ninguna: no hay canal de retorno & Video a pedido, programación diferida, guía interactiva \\
-        Equipos & Cabecera de RF, transmisor de $1.550 \, [nm]$, EDFA, WDM y ONT con CATV & Cabecera IPTV, red IP con multicast, STB por televisor \\
+        \textbf{Transporte} & Espectro de RF completo, en modulación de intensidad a $1.550 \, [nm]$ & Paquetes IP multicast dentro del canal de datos de la PON \\
+        \midrule
+        \textbf{Distribución} & Difusión: los canales llegan siempre a todos los abonados & Bajo demanda: solo viajan los canales que se están mirando \\
+        \midrule
+        \textbf{Recepción} & Sintonizador del televisor, por coaxial & Decodificador IP (STB) o aplicación, por HDMI o Wi-Fi \\
+        \midrule
+        \textbf{Ventajas} &
+        \begin{itemize}[nosep, leftmargin=*, before=\vspace{-0.6\baselineskip}, after=\vspace{-\baselineskip}]
+            \item Los televisores existentes funcionan sin decodificador.
+            \item Cada televisor de la casa sintoniza por su cuenta, sin equipos adicionales.
+            \item No carga la red de datos, y el cambio de canal es tan rápido como el del sintonizador.
+            \item Fácil migrar de una red HFC.
+        \end{itemize} &
+        \begin{itemize}[nosep, leftmargin=*, before=\vspace{-0.6\baselineskip}, after=\vspace{-\baselineskip}]
+            \item Una sola red IP para todos los servicios, sin equipamiento óptico de video.
+            \item Servicios interactivos: video a pedido, programación diferida y grabación en red.
+            \item Cantidad de canales casi ilimitada, porque solo se transportan los que se miran.
+        \end{itemize} \\
+        \vspace{1pt}\\
+        \midrule
+        \textbf{Limitaciones} &
+        \begin{itemize}[nosep, leftmargin=*, before=\vspace{-0.6\baselineskip}, after=\vspace{-\baselineskip}]
+            \item Requiere equipamiento óptico de alta linealidad y potencia (transmisores, EDFA), costoso y específico para video.
+            \item La CNR depende de la potencia óptica recibida, lo que exige un presupuesto óptico propio, más ajustado con canales analógicos que con digitales.
+            \item Los canales pagos requieren acceso condicional en un decodificador.
+        \end{itemize} &
+        \begin{itemize}[nosep, leftmargin=*, before=\vspace{-0.6\baselineskip}, after=\vspace{-\baselineskip}]
+            \item Necesita un STB o un televisor inteligente con aplicación por cada pantalla.
+            \item Consume capacidad de los puertos PON y del enlace mayorista.
+            \item Requiere una red con multicast, IGMP y calidad de servicio bien configurados.
+            \item Es sensible a la congestión y a la pérdida de paquetes.
+        \end{itemize} \\
+        \vspace{1pt}\\
         \bottomrule
     \end{tabular}
 \end{table}
-
-\subsection{Ventajas, limitaciones y condiciones de aplicación}
-
-\subsubsection*{RF Overlay}
-\begin{itemize}
-    \item \underline{Ventajas:}
-    \begin{itemize}
-        \item Los televisores existentes funcionan sin decodificador.
-        \item La cantidad de televisores por casa es ilimitada.
-        \item No carga la red de datos, y el retardo de cambio de canal es el del sintonizador.
-        \item Facilita la migración de abonados de una red HFC: se reutilizan la cabecera de RF, la programación y la instalación coaxial interna.
-    \end{itemize}
-    \item \underline{Limitaciones:}
-    \begin{itemize}
-        \item Requiere equipamiento óptico de alta linealidad y potencia (transmisores, EDFA), costoso y específico para video.
-        \item La CNR depende de la potencia óptica recibida, lo que exige un presupuesto óptico propio, más ajustado con canales analógicos que con digitales.
-        \item No tiene interactividad, y los canales pagos requieren acceso condicional en un decodificador.
-    \end{itemize}
-    \item \underline{Condiciones de aplicación:} conviene cuando hay una base grande de abonados de cable con televisores sin decodificador, cuando se quiere ofrecer una grilla lineal amplia con bajo costo por abonado o cuando la capacidad de datos de la PON es escasa.
-\end{itemize}
-
-\subsubsection*{IPTV}
-\begin{itemize}
-    \item \underline{Ventajas:}
-    \begin{itemize}
-        \item Una sola red IP para todos los servicios, sin equipamiento óptico de video.
-        \item Servicios interactivos: video a pedido, programación diferida y grabación en red.
-        \item Cantidad de canales casi ilimitada, porque solo se transportan los que se miran.
-        \item Integración con plataformas OTT.
-    \end{itemize}
-    \item \underline{Limitaciones:}
-    \begin{itemize}
-        \item Necesita un STB o un televisor inteligente con aplicación por cada pantalla.
-        \item Consume capacidad de los puertos PON y del enlace mayorista.
-        \item Requiere una red con multicast, IGMP y calidad de servicio bien configurados.
-        \item Es sensible a la congestión y a la pérdida de paquetes.
-    \end{itemize}
-    \item \underline{Condiciones de aplicación:} es la opción natural para una red nueva diseñada con margen de capacidad, como la del Trabajo Práctico 4. Allí se recomendó IPTV multicast con cabecera local, y el RF Overlay quedó como alternativa viable sobre la misma ODN si se priorizaba migrar abonados de la red HFC sin decodificadores \cite{tp4}.
-\end{itemize}

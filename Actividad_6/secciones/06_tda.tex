@@ -1,87 +1,64 @@
 \section{Televisión digital terrestre (TDA)}
 \label{sec:tda}
 
-La Televisión Digital Abierta usa la norma ISDB-Tb \cite{decreto1148}, con canales de $6 \, [MHz]$ en la banda UHF, canales 14 a 51 \cite{cabfra}. El sistema se describe en detalle en la \autoref{sec:isdbtb}. Lo que importa para la medición es que la señal es OFDM: miles de subportadoras de igual nivel que ocupan $5{,}57 \, [MHz]$ del canal y que, en el analizador, forman una meseta plana con flancos abruptos (\autoref{fig:isdbtb_segmentos}).
+La Televisión Digital Abierta usa la norma ISDB-Tb \cite{decreto1148}, con canales de $6 \, [MHz]$ en la banda UHF, canales 21 a 51 (\autoref{tab:canalizacion}). El sistema se describe en detalle en la \autoref{sec:isdbtb}. Lo que importa para la medición es que la señal es OFDM: miles de subportadoras de igual nivel que ocupan $5{,}57 \, [MHz]$ del canal y que, en el analizador, forman una meseta plana con flancos abruptos (\autoref{fig:isdbtb_segmentos}). Los límites de cada canal de UHF se obtienen de su número $N$:
+\begin{equation}
+    f_{inf} = 512 + 6 \, (N - 21) \, [MHz], \qquad f_{central} = f_{inf} + 3 \, [MHz]
+    \label{eq:canal_isdb}
+\end{equation}
 
 \subsection{Mediciones}
 
 \subsubsection*{Señales recibidas en el analizador}
-Se exploró la banda de $470$ a $698 \, [MHz]$ con la antena de recepción y se registraron las señales de la \autoref{tab:tda_resultados}. La frecuencia central de cada canal se calculó con la \autoref{eq:canal_isdb}.
-
-\begin{table}[H]
-    \centering
-    \caption{Señales de TDA observadas en el analizador y servicios decodificados por el receptor.}
-    \label{tab:tda_resultados}
-    \begin{tabular}{c c c c c p{4.6cm}}
-        \toprule
-        \textbf{Canal} & \textbf{$f_{central}$} & \textbf{Nivel} & \textbf{$B_{ocup}$} & \textbf{¿Decodifica?} & \textbf{Servicios} \\
-        & \textbf{[MHz]} & \textbf{[dBm]} & \textbf{[MHz]} & & \\
-        \midrule
-        \pendiente{} & \pendiente{} & \pendiente{} & \pendiente{} & \pendiente{} & \pendiente{} \\
-        \pendiente{} & \pendiente{} & \pendiente{} & \pendiente{} & \pendiente{} & \pendiente{} \\
-        \pendiente{} & \pendiente{} & \pendiente{} & \pendiente{} & \pendiente{} & \pendiente{} \\
-        \bottomrule
-    \end{tabular}
-\end{table}
+Se exploró el tramo de $518$ a $590 \, [MHz]$ de la banda UHF, que abarca los canales 22 a 33 (\autoref{fig:tda_canal}, \autoref{tab:tda_config}). Se observó un único canal digital con un nivel claramente superior al piso de ruido, entre unos $549{,}5$ y $555 \, [MHz]$. Según la \autoref{eq:canal_isdb}, corresponde al canal 27 ($548$ a $554 \, [MHz]$, $f_{central} = 551 \, [MHz]$); el corrimiento de alrededor de $1 \, [MHz]$ está dentro del error de lectura sobre la grilla, con divisiones de $7{,}2 \, [MHz]$. A ambos lados del canal, entre unos $525$ y $535 \, [MHz]$ y entre unos $560$ y $575 \, [MHz]$, el piso de ruido se eleva $2$ a $3 \, [dB]$, lo que podría corresponder a otros canales digitales recibidos con un nivel demasiado bajo para distinguirlos.
 
 \begin{table}[H]
     \centering
     \caption{Configuración del analizador para la TDA.}
     \label{tab:tda_config}
-    \begin{tabular}{p{6.5cm} p{4cm} p{4cm}}
+    \begin{tabular}{p{8.5cm} >{\raggedright\arraybackslash}p{5.8cm}}
         \toprule
-        \textbf{Parámetro} & \textbf{Exploración de banda} & \textbf{Detalle de un canal} \\
+        \textbf{Parámetro} & \textbf{Valor} \\
         \midrule
-        Frecuencias de inicio y fin / central & $470$ a $698 \, [MHz]$ & \pendiente{} \\
-        \textit{Span} & $228 \, [MHz]$ & \pendiente{$10 \, [MHz]$} \\
-        Nivel de referencia & \pendiente{} & \pendiente{} \\
-        RBW / VBW & \pendiente{} & \pendiente{$30$ a $100 \, [kHz]$} \\
-        Atenuación / preamplificación / unidad & \pendiente{} & \pendiente{} \\
+        Frecuencias de inicio y fin & $518$ a $590 \, [MHz]$ \\
+        Frecuencia central & $554 \, [MHz]$\\
+        \textit{Span} & $72 \, [MHz]$ \\
+        Nivel de referencia & $-80 \, [dBm]$ \\
+        Escala &  $5 \, [dB/div]$ \\
+        RBW / VBW & $9 \, [kHz]$ / $100 \, [kHz]$ \\
         \bottomrule
     \end{tabular}
 \end{table}
 
 \begin{figure}[H]
     \centering
-    \pendiente{Captura de la banda UHF completa (\texttt{Figuras/mediciones/tda\_banda.png})}
-    \caption{Exploración de la banda UHF de televisión digital.}
-    \label{fig:tda_banda}
-\end{figure}
-
-\begin{figure}[H]
-    \centering
-    \pendiente{Captura de un canal ISDB-Tb en detalle (\texttt{Figuras/mediciones/tda\_canal.png})}
-    \caption{Espectro de un canal ISDB-Tb.}
+    \includegraphics[width=0.85\textwidth]{tda_canal.png}
+    \caption{Exploración de $518$ a $590 \, [MHz]$: canal ISDB-Tb 27 ($548$ a $554 \, [MHz]$).}
     \label{fig:tda_canal}
 \end{figure}
-
-\subsubsection*{Servicios decodificados por el receptor}
-Se conectó la antena al televisor del laboratorio, se hizo una búsqueda automática de canales y se registraron los servicios recibidos (última columna de la \autoref{tab:tda_resultados}). \pendiente{Agregar fotografía de la lista de canales del televisor.}
 
 \subsection{Análisis}
 
 \subsubsection*{Ancho de banda ocupado}
-En una señal OFDM, el ancho de banda ocupado se mide entre los flancos de la meseta: por ejemplo, donde el nivel cae $3 \, [dB]$ por debajo de la meseta, o como el ancho que contiene el $99 \,\text{\%}$ de la potencia \cite{itu_sm328}. El valor teórico es $5{,}57 \, [MHz]$ (13 segmentos de $428{,}57 \, [kHz]$), que deja unos $213 \, [kHz]$ de guarda a cada lado dentro del canal de $6 \, [MHz]$. \pendiente{Comparar con lo medido.}
+En una señal OFDM, el ancho de banda ocupado se mide entre los flancos de la meseta, por ejemplo donde el nivel cae $3 \, [dB]$ por debajo de ella. El valor teórico es $5{,}57 \, [MHz]$ (13 segmentos de $428{,}57 \, [kHz]$), que deja unos $213 \, [kHz]$ de guarda a cada lado dentro del canal de $6 \, [MHz]$. En la \autoref{fig:tda_canal} la meseta ocupa unos $5{,}5 \, [MHz]$, coherente con el valor teórico.
 
-Para medir el nivel de un canal digital no sirve la lectura de pico del analizador, porque la potencia está repartida en todo el ancho. El nivel del canal se obtiene integrando la densidad espectral:
+El nivel del canal se obtiene integrando la densidad espectral:
 \begin{equation}
-    P_{canal} \, [dBm] = N_{meseta} \, [dBm] + 10 \log\left(\frac{5{,}57 \, [MHz]}{RBW}\right)
+    P_{canal} \, [dBm] = N_{techo} \, [dBm] + 10 \log\left(\frac{5{,}57 \, [MHz]}{RBW}\right)
     \label{eq:potencia_canal}
 \end{equation}
-donde $N_{meseta}$ es el nivel leído sobre la meseta con un RBW dado. Muchos analizadores lo calculan directamente con la función de potencia de canal.
+donde $N_{techo}$ es el nivel leído del techo con un RBW dado. Con $N_{techo} \approx -89 \, [dBm]$ y un RBW de $9 \, [kHz]$, resulta
+\begin{equation}
+    P_{canal} \approx -89 + 10 \log\left(\frac{5{,}57 \, [MHz]}{9 \, [kHz]}\right) \approx -89 + 27{,}9 \approx -61 \, [dBm]
+\end{equation}
 
 \subsubsection*{Forma del espectro y OFDM}
-La meseta plana se explica porque las subportadoras tienen todas el mismo nivel medio y están tan juntas (de $1$ a $4 \, [kHz]$ de separación) que, con un RBW de decenas de kHz, el analizador no las resuelve y muestra su suma. Los flancos son abruptos porque el espectro de cada subportadora decae rápido fuera de la banda y porque el transmisor filtra la señal. En el centro de la meseta no aparece ninguna portadora destacada, porque no hay una portadora de referencia como en la televisión analógica. \pendiente{Señalar si se ven irregularidades en la meseta, que indicarían multitrayecto o ecos.}
+El techo o meseta plana se explica porque las subportadoras tienen todas el mismo nivel medio y están tan juntas (de $1$ a $4 \, [kHz]$ de separación) que, con un RBW de $9 \, [kHz]$, el analizador no las resuelve y muestra su suma. En el centro de la meseta no aparece ninguna portadora destacada, porque no hay una portadora de referencia como en la televisión analógica: es la diferencia más visible con los canales de la \autoref{sec:tv_analogica}, donde casi toda la potencia se concentra en la portadora de video.
 
-\subsubsection*{Comparación con los servicios decodificados}
-\pendiente{Comparar los canales vistos en el analizador con los que decodificó el receptor.} La presencia de una señal en el analizador no garantiza que se decodifique. El receptor necesita:
-\begin{itemize}
-    \item Un nivel por encima de su sensibilidad.
-    \item Una relación señal a ruido mayor que la que pide la modulación de cada capa, que es mayor para 64-QAM que para QPSK.
-    \item Que los ecos queden dentro del intervalo de guarda.
-    \item Que no haya interferencias en el canal.
-\end{itemize}
-A la inversa, el receptor puede decodificar el segmento central (\textit{one-seg}, en QPSK) aunque no logre decodificar la capa HD, en 64-QAM.
+\subsubsection*{Recepción con un televisor}
+En el laboratorio no se realizaron la búsqueda de canales con un televisor ni la comparación entre las señales observadas en el analizador y los servicios decodificados.
+
+La presencia de una señal en el analizador no garantiza su recepción. El receptor necesita un nivel por encima de su sensibilidad y una relación portadora a ruido suficiente para la modulación de cada capa, que es mayor para las modulaciones de mayor orden, como 64-QAM, que para las robustas, como QPSK. La meseta del canal 27 supera el piso de ruido del analizador en unos $11 \, [dB]$; como ese piso es el ruido propio del instrumento y no el del receptor, el valor sólo indica que la señal llegó con un margen reducido, en el que es más probable perder la capa de alta definición que la de recepción móvil.
 
 \subsection{Síntesis}
-La TDA argentina usa ISDB-Tb: OFDM en canales de $6 \, [MHz]$ divididos en 13 segmentos, que pueden agruparse en hasta tres capas jerárquicas con distinta modulación (DQPSK, QPSK, 16-QAM o 64-QAM) y distinta tasa de código. Así, un mismo canal transporta un servicio en alta definición para recepción fija y uno robusto para receptores móviles. El desarrollo completo está en la \autoref{sec:isdbtb}.
+La TDA argentina usa ISDB-Tb: OFDM en canales de $6 \, [MHz]$ divididos en 13 segmentos, que pueden agruparse en hasta tres capas jerárquicas con distinta modulación (DQPSK, QPSK, 16-QAM o 64-QAM) y distinta tasa de código. Así, un mismo canal puede transportar un servicio en alta definición para recepción fija y uno robusto para receptores móviles, como el \textit{one-seg}, que ocupa sólo el segmento central. En la medición, el canal 27 apareció como una meseta de unos $5{,}5 \, [MHz]$ de ancho, sin portadora destacada y con una potencia de canal estimada en unos $-61 \, [dBm]$, en contraste con los canales analógicos, cuya potencia se concentra en la portadora de video. El desarrollo completo del sistema está en la \autoref{sec:isdbtb}.

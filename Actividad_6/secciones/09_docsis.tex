@@ -1,16 +1,16 @@
 \section{DOCSIS}
 \label{sec:docsis}
 
-DOCSIS (\textit{Data Over Cable Service Interface Specification}) es la familia de especificaciones de CableLabs para transmitir datos bidireccionales sobre redes de cable HFC \cite{docsis31, docsis40}, adoptada también por la UIT \cite{itu_j222}. Existe una variante europea, EuroDOCSIS, adaptada a canales de $8 \, [MHz]$.
+DOCSIS (\textit{Data Over Cable Service Interface Specification}) es la familia de especificaciones de CableLabs para transmitir datos bidireccionales sobre redes de cable HFC \cite{docsis31, docsis40}, adoptada también por la UIT \cite{itu_j222}.
 
 \subsection{Función dentro de la red de cable}
-Una red de cable se construyó para distribuir televisión en un solo sentido. DOCSIS le agrega un canal de datos bidireccional: reserva canales de RF del espectro descendente para los datos hacia el abonado y una banda baja del espectro para el sentido ascendente. Así, la misma red que lleva la televisión ofrece acceso a Internet, telefonía IP y video sobre IP, sin un cableado nuevo hasta el hogar.
+Una red de cable distribuye televisión en un solo sentido. DOCSIS le agrega un canal de datos bidireccional: reserva canales de RF del espectro descendente para los datos hacia el abonado y una banda baja para el sentido ascendente. Así, la misma red que lleva la TV ofrece acceso a Internet, telefonía IP y video sobre IP, sin un cableado nuevo.
 
 \subsection{Equipos principales}
 \begin{itemize}
-    \item \underline{CMTS} (\textit{Cable Modem Termination System}): en la cabecera. Modula los canales descendentes, recibe los ascendentes y administra el acceso al medio: asigna a cada módem los intervalos en que puede transmitir. Conecta la red de cable con la red IP del operador. En las arquitecturas modernas, el CMTS y los moduladores de video se integran en una plataforma CCAP, y la capa física se lleva al nodo óptico (\textit{Remote PHY}).
+    \item \underline{CMTS} (\textit{Cable Modem Termination System}): en la cabecera. Modula los canales descendentes, recibe los ascendentes y administra el acceso al medio: asigna a cada módem los intervalos en que puede transmitir.
     \item \underline{Red HFC:} fibra desde la cabecera hasta los nodos ópticos y, desde allí, coaxial con amplificadores bidireccionales, derivadores (\textit{taps}) y la acometida al abonado.
-    \item \underline{Cable módem} (CM): en la casa del abonado. Sintoniza los canales DOCSIS, entrega la conexión por Ethernet o Wi-Fi y transmite en el sentido ascendente. Con frecuencia se integra en un mismo equipo con un router o un adaptador telefónico (eMTA).
+    \item \underline{Cable módem} (CM): en la casa del abonado. Sintoniza los canales DOCSIS, entrega la conexión por Ethernet o Wi-Fi y transmite en el sentido ascendente.
 \end{itemize}
 
 \begin{figure}[H]
@@ -19,7 +19,7 @@ Una red de cable se construyó para distribuir televisión en un solo sentido. D
     \begin{tikzpicture}[node distance=1.1cm, every node/.style={font=\small},
         caja/.style={draw, rounded corners, minimum height=1cm, minimum width=2.2cm, align=center, fill=blue!6}]
         \node[caja, fill=orange!12] (inet) {Internet /\\red IP};
-        \node[caja, right=of inet] (cmts) {CMTS / CCAP};
+        \node[caja, right=of inet] (cmts) {CMTS};
         \node[caja, below=0.6cm of cmts] (video) {Cabecera de\\video (QAM)};
         \node[caja, right=1.3cm of cmts] (comb) {Combinador\\RF};
         \node[caja, right=1.3cm of comb] (tx) {Transmisor y\\receptor óptico};
@@ -43,10 +43,9 @@ Una red de cable se construyó para distribuir televisión en un solo sentido. D
 
 \subsection{Sentidos de transmisión}
 \begin{itemize}
-    \item \underline{Descendente} (de la cabecera al abonado): el CMTS difunde a todos los módems del nodo. En DOCSIS 3.0 se usan canales QAM de $6 \, [MHz]$ con 64-QAM o 256-QAM, de unos $38 \, [Mbps]$ cada uno, iguales a los de video digital. La capacidad se aumenta con la agregación de canales (\textit{channel bonding}): 32 canales dan del orden de $1{,}2 \, [Gbps]$. DOCSIS 3.1 introduce bloques OFDM de hasta $192 \, [MHz]$ con constelaciones de hasta 4096-QAM y codificación LDPC, y alcanza unos $10 \, [Gbps]$.
-    \item \underline{Ascendente} (del abonado a la cabecera): el medio es compartido, así que los módems transmiten por turnos, en intervalos que asigna el CMTS (TDMA), con modulaciones de QPSK a 64-QAM. DOCSIS 3.1 usa OFDMA. Ocupa la parte baja del espectro: de $5$ a $42 \, [MHz]$ en la versión norteamericana y de $5$ a $65 \, [MHz]$ en EuroDOCSIS, con extensiones hasta $85$ o $204 \, [MHz]$ (\textit{mid-split} y \textit{high-split}) en DOCSIS 3.1.
+    \item \underline{Descendente} (de la cabecera al abonado): el CMTS difunde a todos los módems del nodo. En DOCSIS 3.0 se usan canales QAM de $6 \, [MHz]$, de unos $38 \, [Mbps]$ cada uno, iguales a los de video digital. DOCSIS 3.1 introduce bloques OFDM de hasta $192 \, [MHz]$ con constelaciones de hasta 4096-QAM y codificación LDPC, y alcanza unos $10 \, [Gbps]$.
+    \item \underline{Ascendente} (del abonado a la cabecera): el medio es compartido, así que los módems transmiten por turnos, en intervalos que asigna el CMTS (TDMA).
 \end{itemize}
-Los amplificadores de la red tienen filtros diplexores que separan ambos sentidos y amplifican cada banda en la dirección correspondiente. DOCSIS 4.0 extiende el espectro hasta $1{,}8 \, [GHz]$ y permite transmitir en ambos sentidos en la misma banda (\textit{Full Duplex}), con hasta $10 \, [Gbps]$ descendentes y $6 \, [Gbps]$ ascendentes \cite{docsis40}.
 
 La \autoref{tab:docsis} resume la evolución de la familia.
 
@@ -71,6 +70,6 @@ La \autoref{tab:docsis} resume la evolución de la familia.
 \subsection{DOCSIS, acceso a Internet y video sobre IP}
 DOCSIS es, ante todo, la tecnología de acceso a Internet de las redes de cable: el CMTS funciona como un router de acceso y cada módem recibe una dirección IP. Como transporta IP, también sirve para distribuir video:
 \begin{itemize}
-    \item \underline{IPTV gestionada y OTT:} el decodificador o el televisor recibe los programas como flujos IP por el módem, en lugar de sintonizar canales QAM. Es lo que hacen los decodificadores híbridos como el usado por Flow \cite{lightwave_flow}, que combinan la recepción QAM de los canales lineales con contenido IP a pedido.
-    \item \underline{Migración a todo IP:} a medida que los operadores retiran los canales analógicos y QAM de video, ese espectro pasa a DOCSIS, y toda la televisión se entrega por IP. El video deja de ser difusión en canales fijos y pasa a ser tráfico de datos, unicast para el video a pedido y multicast para los canales en vivo.
+    \item \underline{IPTV gestionada y OTT:} el decodificador recibe los programas como flujos IP por el módem. Es lo que hacen los decodificadores híbridos como el usado por Flow \cite{lightwave_flow}, que combinan la recepción QAM de los canales lineales con contenido IP a pedido.
+    \item \underline{Migración a todo IP:} a medida que los operadores retiran los canales analógicos y QAM de video, ese espectro pasa a DOCSIS, y toda la televisión se entrega por IP.
 \end{itemize}

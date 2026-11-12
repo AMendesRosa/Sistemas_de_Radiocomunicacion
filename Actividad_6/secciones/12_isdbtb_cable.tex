@@ -1,35 +1,18 @@
 \section{ISDB-Tb sobre cable}
 \label{sec:isdbtb_cable}
 
-\subsection{En qué consiste la propuesta}
 La propuesta es distribuir por una red de cable canales modulados en ISDB-Tb, la misma norma de la TDA, en lugar de canales analógicos PAL-N o digitales DVB-C. Cada canal de $6 \, [MHz]$ de la grilla de cable lleva una señal OFDM idéntica a la de una emisora terrestre, con uno o varios programas. Se usa sobre redes coaxiales o HFC de $75 \, [\Omega]$, tanto en cableoperadores como en instalaciones cerradas de edificios, hoteles o clínicas, y también puede entregarse por RF Overlay en una red FTTH (\autoref{sec:rf_overlay}).
 
 La ventaja principal es que los televisores vendidos en Argentina en los últimos años traen un sintonizador ISDB-Tb incorporado, porque es la norma de la TDA. Al recibir los canales en esa norma, el televisor los sintoniza y los decodifica directamente, sin decodificador externo, y el operador puede reemplazar los canales analógicos por canales digitales en alta definición sin instalar un decodificador por televisor. Además, en un canal de $6 \, [MHz]$ entran varios programas digitales donde antes había uno analógico, lo que libera espectro para DOCSIS.
 
-Hay que distinguir esta propuesta de ISDB-C, la norma japonesa de cable, que usa 64-QAM de portadora única, similar a DVB-C, y que los televisores argentinos no reciben. ISDB-Tb sobre cable usa la modulación terrestre sin cambios, con un canal mucho más benigno que el aire: la alta relación señal a ruido del cable permite usar siempre 64-QAM en todos los segmentos.
-
-\subsection{Equipos de cabecera y de recepción}
-\begin{itemize}
-    \item \underline{En la cabecera:}
-    \begin{itemize}
-        \item Receptores de las señales de origen: satélite, fibra o IP.
-        \item Codificadores H.264, para las señales que llegan sin comprimir o en otro formato.
-        \item Un multiplexor-modulador ISDB-Tb, que arma los flujos de transporte con las tablas de señalización (PAT, PMT, NIT, SDT, BIT, TOT) y genera las portadoras OFDM en los canales elegidos.
-        \item El combinador de RF que las suma al resto de la grilla.
-    \end{itemize}
-    \item \underline{En la red:} la misma red de cable, con sus amplificadores y derivadores. Hay que respetar los niveles y la planicidad, porque OFDM es sensible a la inclinación del espectro dentro del canal.
-    \item \underline{En el abonado:} el televisor con sintonizador ISDB-Tb, conectado al coaxial. El usuario realiza una búsqueda de canales y el televisor los presenta con sus nombres y su guía, gracias a las tablas de señalización. En televisores antiguos sin sintonizador digital hace falta un decodificador ISDB-Tb.
-\end{itemize}
+\subsection{Equipos}
+En la cabecera, los receptores toman las señales de origen (satélite, fibra o IP), los codificadores H.264 comprimen las que llegan sin comprimir o en otro formato, y un multiplexor-modulador ISDB-Tb arma los flujos de transporte y genera las portadoras OFDM en los canales elegidos; un combinador de RF las suma al resto de la grilla. La red es la misma red de cable, con sus amplificadores y derivadores, en la que hay que respetar los niveles y la planicidad de la respuesta, porque una inclinación del espectro dentro del canal deja algunas subportadoras con menor relación señal a ruido. En el abonado alcanza con un televisor con sintonizador ISDB-Tb conectado al coaxial.
 
 \subsection{Compatibilidad con los receptores}
-Los fabricantes declaran compatibilidad con cualquier receptor ISDB-Tb del mercado, porque la señal cumple con la norma terrestre. VideoSwitch indica que su equipo genera las portadoras según ARIB STD-B31 y ABNT NBR 15601 y que el uso de ISDB-Tb en redes cableadas ``permite la transmisión de televisión digital HD sin necesidad de agregar receptores externos al TV'' \cite{videoswitch_dmm}. Para la implementación conviene tener en cuenta dos aspectos, que no surgen de la documentación del fabricante sino del análisis propio:
-\begin{itemize}
-    \item El televisor debe poder sintonizar las frecuencias que use el operador. Algunos receptores podrían explorar solo los canales UHF 14 a 51 de la TDA, por lo que los canales en VHF o en las bandas de cable intermedias podrían no ser encontrados por la búsqueda automática.
-    \item Los televisores comunes no tienen módulo de acceso condicional, así que los programas se distribuyen sin cifrar. Para canales pagos, el control de acceso tiene que resolverse de otra forma.
-\end{itemize}
+Como la señal cumple la norma terrestre, los fabricantes declaran compatibilidad con cualquier receptor ISDB-Tb. VideoSwitch indica que su equipo genera las portadoras según ARIB STD-B31 y ABNT NBR 15601 y que el uso de ISDB-Tb en redes cableadas ``permite la transmisión de televisión digital HD sin necesidad de agregar receptores externos al TV'' \cite{videoswitch_dmm}. Del análisis propio, no de la documentación del fabricante, surgen dos condiciones: el televisor debe poder sintonizar las frecuencias que use el operador, ya que algunos receptores podrían explorar sólo los canales UHF 21 a 51 de la TDA, y como los televisores comunes no tienen módulo de acceso condicional, los programas deben distribuirse sin cifrar.
 
 \subsection{Ejemplo de solución comercial: VideoSwitch DMM-3100}
-VideoSwitch es una empresa argentina de Buenos Aires que desarrolla equipamiento para televisión digital. Su modulador-multiplexor DMM-3100, ``ISDB-Tb Over Cable'', está destinado a cableoperadores e instalaciones cerradas como hoteles y sanatorios \cite{videoswitch_dmm}. La \autoref{tab:dmm3100} resume sus características según la hoja de datos del fabricante.
+VideoSwitch, empresa argentina de Buenos Aires, fabrica el modulador-multiplexor DMM-3100, ``ISDB-Tb Over Cable'', destinado a cableoperadores e instalaciones cerradas como hoteles y sanatorios (\autoref{tab:dmm3100}). Según la prensa del sector, la empresa desarrolló esta tecnología para ofrecer HD y liberar ancho de banda en la red de cable, y su primera venta fue a Telecom \cite{prensario_videoswitch}. Otros fabricantes ofrecen soluciones equivalentes, como el módulo Luminato ISDB-T de Teleste \cite{teleste_isdbt}.
 
 \begin{table}[H]
     \centering
@@ -39,27 +22,17 @@ VideoSwitch es una empresa argentina de Buenos Aires que desarrolla equipamiento
         \toprule
         \textbf{Característica} & \textbf{Valor declarado} \\
         \midrule
-        Función & Modulador múltiple con multiplexor incorporado \\
         Modulación & COFDM según ARIB STD-B31 y ABNT NBR 15601 \\
-        Portadoras & Hasta 8 de $6 \, [MHz]$ por equipo \\
-        Salidas de RF & 2 salidas de $75 \, [\Omega]$ para CATV, cada una con hasta 4 portadoras adyacentes, ágiles de $50$ a $863 \, [MHz]$ \\
-        Potencia de salida & Configurable de $-18$ a $+3 \, [dBm]$ \\
-        Entradas & 4 ASI y 1 GbE (hasta 248 sockets UDP/IP unicast o multicast, IGMPv3), opcionalmente 2 GbE \\
-        Multiplexación & Hasta 32 servicios por portadora, remapeo de PID, servicios y transportes, corrección de PCR \\
-        Señalización & Generación automática de tablas PSI/SI (PAT, PMT, NIT, SDT, BIT, TOT) \\
-        Confiabilidad & Redundancia de entradas y servicios, fuentes redundantes \textit{hot-swap}, alarmas, monitoreo por SNMP \\
-        Formato & 1 unidad de rack de 19", consumo máximo $45 \, [W]$ \\
+        Portadoras y salidas & Hasta 8 portadoras de $6 \, [MHz]$, en 2 salidas de $75 \, [\Omega]$ con hasta 4 portadoras adyacentes cada una, ágiles de $50$ a $863 \, [MHz]$ \\
+        Potencia de salida & De $-18$ a $+3 \, [dBm]$ \\
+        Entradas & 4 ASI y 1 GbE (UDP/IP unicast o multicast) \\
+        Multiplexación & Hasta 32 servicios por portadora, con generación automática de tablas PSI/SI \\
+        Formato & 1 unidad de rack de 19", fuentes redundantes, monitoreo por SNMP \\
         \bottomrule
     \end{tabular}
 \end{table}
 
-Según la prensa del sector, VideoSwitch desarrolló esta tecnología con dos objetivos, ofrecer televisión en HD y liberar ancho de banda de la red de cable, y su primera venta de un modulador ISDB-T para cable fue a Telecom \cite{prensario_videoswitch}. Hay soluciones equivalentes de otros fabricantes, como el módulo Luminato ISDB-T de Teleste, presentado para la distribución de contenido por redes de cable \cite{teleste_isdbt}.
+No se encontró una norma específica de ISDB-Tb sobre cable: la propuesta aplica la norma terrestre al medio cableado.
 
 \subsection{Comparación con DVB-C}
-\begin{itemize}
-    \item \underline{Capacidad:} en un canal de $6 \, [MHz]$, ISDB-Tb con 64-QAM, $r = 7/8$ y guarda $1/32$ llega a $23{,}2 \, [Mbps]$, contra $38{,}5 \, [Mbps]$ de DVB-C con 256-QAM (\autoref{sec:dvbc}). Las herramientas de robustez de OFDM, como el intervalo de guarda, los pilotos y los códigos convolucionales, no son necesarias en el cable y consumen capacidad.
-    \item \underline{Receptores:} ISDB-Tb es compatible con el parque de televisores existente sin decodificador, mientras que DVB-C requiere decodificadores, salvo en televisores que lo incluyan.
-\end{itemize}
-Para un cableoperador argentino que quiere digitalizar los canales básicos sin entregar decodificadores, la compatibilidad pesa más que la eficiencia espectral.
-
-\textit{Nota sobre las fuentes:} las características de la \autoref{tab:dmm3100} y la compatibilidad sin receptores externos son declaraciones del fabricante en su hoja de datos \cite{videoswitch_dmm}. La información sobre clientes proviene de una nota periodística del sector \cite{prensario_videoswitch}. No se encontró una norma específica de ISDB-Tb sobre cable: la propuesta aplica la norma terrestre al medio cableado.
+En un canal de $6 \, [MHz]$, ISDB-Tb llega como máximo a $23{,}2 \, [Mbps]$, contra $38{,}5 \, [Mbps]$ de DVB-C con 256-QAM (\autoref{sec:dvbc}), porque las herramientas de robustez de OFDM (intervalo de guarda, pilotos y codificación convolucional) consumen capacidad y no son necesarias en el cable. A cambio, ISDB-Tb funciona con el parque de televisores existente, mientras que DVB-C requiere decodificadores salvo en los televisores que lo incluyen. Para un cableoperador argentino que quiere digitalizar los canales básicos sin entregar decodificadores, la compatibilidad pesa más que la eficiencia espectral.
