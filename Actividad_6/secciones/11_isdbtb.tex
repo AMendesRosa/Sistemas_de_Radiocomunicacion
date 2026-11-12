@@ -6,7 +6,6 @@ ISDB-Tb (\textit{Integrated Services Digital Broadcasting - Terrestrial, Brazili
     \item Compresión de video H.264 / MPEG-4 AVC, en lugar de MPEG-2.
     \item Audio AAC.
     \item Middleware de interactividad Ginga.
-    \item Canales de $6 \, [MHz]$.
 \end{itemize}
 
 \subsection{Principio de funcionamiento de OFDM}
@@ -15,7 +14,7 @@ OFDM (\textit{Orthogonal Frequency Division Multiplexing}) divide el flujo de da
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.7\textwidth]{teoria/ofdm_subportadoras.png}
-    \caption{Espectros de las subportadoras OFDM(esquema propio).}
+    \caption{Espectros de las subportadoras OFDM (esquema propio).}
     \label{fig:ofdm}
 \end{figure}
 
@@ -42,7 +41,7 @@ ISDB-Tb tiene tres modos, que difieren en el tamaño de la FFT (\autoref{tab:mod
 El ancho útil se divide en 13 segmentos OFDM de $6/14 \, [MHz] = 428{,}57 \, [kHz]$ cada uno, que en total ocupan $5{,}57 \, [MHz]$ del canal de $6 \, [MHz]$ (\autoref{fig:isdbtb_segmentos}). Cada segmento tiene subportadoras de datos, pilotos dispersos para estimar el canal y portadoras de control:
 \begin{itemize}
     \item \underline{TMCC}: llevan la configuración de la transmisión (modulación, tasa de código y cantidad de segmentos de cada capa), de modo que el receptor se configura solo.
-    \item \underline{AC}: llevan información auxiliar, como las alertas de emergencia EWBS.
+    \item \underline{AC}: llevan información auxiliar.
 \end{itemize}
 
 \begin{figure}[H]

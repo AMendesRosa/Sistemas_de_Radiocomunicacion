@@ -14,7 +14,7 @@ El espectro tiene tres componentes (\autoref{fig:am_teoria}, izquierda):
     \item \underline{La portadora}, en $f_c$, con amplitud $E_c$. No depende de la modulación y concentra al menos dos tercios de la potencia, aun con $m = 1$.
     \item \underline{Las bandas laterales inferior y superior}, en $f_c - f_m$ y $f_c + f_m$, con amplitud $m E_c / 2$ cada una. Llevan la información y son imágenes especulares una de la otra, es decir, hay una simetría exacta entre las dos bandas laterales.
 \end{itemize}
-En dBc (decibelios relativos a la portadora), cada banda lateral queda $20 \log(2/m)$ por debajo de la portadora: $6 \, [dB]$ con $m = 1$ y $12 \, [dB]$ con $m = 0{,}5$. Con una señal AM el resultado es un espectro continuo y simétrico alrededor de la portadora, que ocupa $2 f_{m,max}$ (\autoref{fig:am_teoria}, derecha).
+En dBc (decibelios relativos a la portadora), cada banda lateral queda $20 \log(2/m)$ por debajo de la portadora: $6 \, [dB]$ con $m = 1$ y $12 \, [dB]$ con $m = 0{,}5$. Con una señal de programa AM el resultado es un espectro continuo y simétrico alrededor de la portadora, que ocupa $2 f_{m,max}$ (\autoref{fig:am_teoria}, derecha).
 
 \begin{figure}[H]
     \centering
@@ -161,7 +161,7 @@ En las \autoref{fig:am_emisora1} y~\ref{fig:am_emisora2} se distingue la portado
 
 Se utilizó la retención de máximos (\textit{Peak Hold}), que conserva para cada frecuencia el mayor valor registrado en los barridos sucesivos. Esto permite acumular la envolvente de una emisión variable, pero también retiene los picos del ruido.
 
-El bajo nivel recibido se atribuye a la antena utilizada (\autoref{fig:am_antena}): una antena interior de dos varillas en V, que es un dipolo pensado para los canales de VHF, donde cada varilla mide de un cuarto de longitud de onda. En la banda de AM, en cambio, $\lambda \approx 430 \, [m]$ en $700 \, [kHz]$, y con las varillas extendidas hasta un largo total de $1 \, [m]$ resulta $L / \lambda \approx 0{,}002$. A esto se suma la atenuación de la recepción en el interior del edificio.
+El bajo nivel recibido se atribuye a la antena utilizada (\autoref{fig:am_antena}): una antena interior de dos varillas en V, que es un dipolo pensado para los canales de VHF, donde cada varilla es del orden de un cuarto de longitud de onda. En la banda de AM, en cambio, $\lambda \approx 430 \, [m]$ en $700 \, [kHz]$, y con las varillas extendidas hasta un largo total de $1 \, [m]$ resulta $L / \lambda \approx 0{,}002$. A esto se suma la atenuación de la recepción en el interior del edificio.
 
 \begin{figure}[H]
     \centering
@@ -184,7 +184,7 @@ Con la separación de $10 \, [kHz]$ entre canales del CABFRA \cite{cabfra}, una 
 \subsubsection*{Señal AM generada: modulante senoidal y cuadrada}
 Con una modulante senoidal, la \autoref{eq:am} predice una portadora y dos bandas laterales en $f_c \pm f_m = 570$ y $590 \, [kHz]$, con un nivel de $20 \log \frac{0{,}8}{2} \approx -8 \, [dBc]$ y un ancho de banda de $2 f_m = 20 \, [kHz]$. 
 
-En la \autoref{fig:am_gen_seno}, sin embargo, se observa un único pico: las bandas laterales están a $10 \, [kHz]$ de la portadora, separación comparable al RBW de $9 \, [kHz]$, y con un \textit{span} de $1 \, [MHz]$. 
+En la \autoref{fig:am_gen_seno}, sin embargo, se observa un único pico, las bandas laterales están a $10 \, [kHz]$ de la portadora, separación comparable al RBW de $9 \, [kHz]$, y el \textit{span} es de $1 \, [MHz]$. 
 
 Se asume que hubo una configuración incorrecta del analizador, ya que no pudieron observarse las bandas laterales, por lo que el índice de modulación no pudo verificarse.
 

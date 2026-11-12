@@ -14,7 +14,9 @@ Sobre una resistencia $R$, una tensión eficaz $V$ disipa una potencia
     P = \frac{V^2}{R} \quad \Rightarrow \quad V = \sqrt{P R}
     \label{eq:p_v}
 \end{equation}
-Expresando $P$ en mW y $V$ en µV:
+
+Con $P$ en W y $V$ en V, y tomando como referencias $1 \, [mW]$ y $1 \, [\mu V]$:
+
 \begin{equation}
     V_{dB\mu V} = 20 \log\frac{\sqrt{P R}}{10^{-6}}
     = 10 \log\frac{P}{10^{-3}} + 10 \log\frac{10^{-3} R}{10^{-12}}
@@ -44,7 +46,7 @@ Expresando $P$ en mW y $V$ en µV:
 \subsection{Por qué hay que especificar la impedancia}
 Un nivel en dBm indica una potencia y un nivel en dBµV, una tensión. Pasar de uno a otro requiere la \autoref{eq:p_v}, en la que interviene la resistencia sobre la que se desarrolla: la misma tensión de $1 \, [mV]$ entrega $20 \, [nW]$ ($-47 \, [dBm]$) sobre $50 \, [\Omega]$ y $13{,}3 \, [nW]$ ($-48{,}8 \, [dBm]$) sobre $75 \, [\Omega]$. Sin la impedancia, la conversión es ambigua en $1{,}76 \, [dB]$ entre los dos sistemas habituales.
 
-En la práctica esto aparece al medir con el analizador de espectro, que tiene una entrada de $50 \, [\Omega]$ y mide en dBm, una red de $75 \, [\Omega]$ cuyos niveles se especifican en dBµV. Se pueden presentar tres casos:
+En la práctica, esto aparece al medir una red de $75 \, [\Omega]$, cuyos niveles se especifican en dBµV, con el analizador de espectro, que tiene una entrada de $50 \, [\Omega]$ y mide en dBm. Se pueden presentar tres casos:
 \begin{itemize}
     \item \underline{Con adaptador de mínima pérdida:} a la lectura se le suma la atenuación del adaptador (unos $5{,}7 \, [dB]$) y se convierte con la ecuación de $75 \, [\Omega]$.
     \item \underline{Conexión directa:} la desadaptación produce una reflexión de $|\Gamma| = \frac{75 - 50}{75 + 50} = 0{,}2$ y una pérdida de $-10 \log\left(1 - |\Gamma|^2\right) \approx 0{,}18 \, [dB]$.
